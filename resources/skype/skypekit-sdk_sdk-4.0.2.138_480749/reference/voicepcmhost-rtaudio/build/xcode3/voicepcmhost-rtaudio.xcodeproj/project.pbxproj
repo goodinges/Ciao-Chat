@@ -1,0 +1,457 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		37F329D077195C5001E95554 /* RtAudioPCMInterface.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0D8C44A565454917099219C3 /* RtAudioPCMInterface.cpp */; };
+		54513B3D11427E1B60AD70D8 /* skype-thread-pthread.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D531A4471D46F2D7B137AC5 /* skype-thread-pthread.cpp */; };
+		4FBB12134DE8448C2B126EA4 /* skype-binary.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 6DBA61CC604E24D771E32359 /* skype-binary.cpp */; };
+		41402BE53F3A52832A001FE7 /* skype-int-list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 54A7686608E8467B579303FC /* skype-int-list.cpp */; };
+		47F557D677C028447CAE69A3 /* skype-string-list.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 435B5B783FC74BBB6A1C15F3 /* skype-string-list.cpp */; };
+		0829659D0F3011122C1866C3 /* skype-string.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 4B9D4C697BB7198510F626CA /* skype-string.cpp */; };
+		49EC16E85A1441AC3F2C56C2 /* SidPCMHostMain.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 74300337182133F84EF3023E /* SidPCMHostMain.cpp */; };
+		13191B1576452B3B4F0E4538 /* sidg_msg_pcmif.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 43C6529B3331566F26E4730D /* sidg_msg_pcmif.cpp */; };
+		35A17AD076E24F6257D3346F /* sidg_msg_pcmif_cb.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5E5105F72618017E2CFE4A68 /* sidg_msg_pcmif_cb.cpp */; };
+		76F85DD8310D531965670BB4 /* sidg_pcmif_cb_client.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B7A0523490531BF305F1813 /* sidg_pcmif_cb_client.cpp */; };
+		0A3A5F762CE8114527E31EF1 /* sidg_pcmif_server.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 5EE87AD9397B55CB4A3B114E /* sidg_pcmif_server.cpp */; };
+		440971815073681F79BC6591 /* SocketTransport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 782F210645322518324B6D15 /* SocketTransport.cpp */; };
+		069648771E6C620537330082 /* UnixSocket.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3C931A0A71A66EE16B6650D5 /* UnixSocket.cpp */; };
+		03E843AA7953491A68C22B9F /* SidAVDummyHelpers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02AB649941821E2C4B7B584D /* SidAVDummyHelpers.cpp */; };
+		6C35518030E75DDC40611C4E /* SidAVServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 36302CCC1D2006A414EC16DC /* SidAVServer.cpp */; };
+		4DA12BA900930F2349D54C0E /* SidAVTransportWrapper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 2EB246F864C54D1E28FD1BF9 /* SidAVTransportWrapper.cpp */; };
+		0C644D082549298553AD3A35 /* SidApi.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 67714DBD0FB960C516D8787C /* SidApi.cpp */; };
+		0D974C71130F725D198F3C0C /* SidField.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 40623FE20BB571491DBF4C17 /* SidField.cpp */; };
+		5AF95DC67F486AB23E8C1620 /* SidProtocolBinClient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 0E57673167B50EEA7655318B /* SidProtocolBinClient.cpp */; };
+		42AD34D976B94E6326221478 /* SidProtocolBinCommon.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 632E4AF163290878747636D6 /* SidProtocolBinCommon.cpp */; };
+		6997346F61AB514D435A5801 /* SidProtocolBinServer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 1A7B33BA60EA2D8A26187A7A /* SidProtocolBinServer.cpp */; };
+		18416C343F457B6B74AC33BC /* SidProtocolFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 02D81E5335C8022109057454 /* SidProtocolFactory.cpp */; };
+		18D9375A1CFB7A8508A86055 /* RtAudio.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3D74203842731E5E4DC3688B /* RtAudio.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0D8C44A565454917099219C3 /* RtAudioPCMInterface.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "RtAudioPCMInterface.cpp"; path = "../../RtAudioPCMInterface.cpp"; sourceTree = "<group>"; };
+		3D531A4471D46F2D7B137AC5 /* skype-thread-pthread.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "skype-thread-pthread.cpp"; path = "skype-thread-pthread.cpp"; sourceTree = "<group>"; };
+		6DBA61CC604E24D771E32359 /* skype-binary.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "skype-binary.cpp"; path = "skype-binary.cpp"; sourceTree = "<group>"; };
+		54A7686608E8467B579303FC /* skype-int-list.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "skype-int-list.cpp"; path = "skype-int-list.cpp"; sourceTree = "<group>"; };
+		435B5B783FC74BBB6A1C15F3 /* skype-string-list.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "skype-string-list.cpp"; path = "skype-string-list.cpp"; sourceTree = "<group>"; };
+		4B9D4C697BB7198510F626CA /* skype-string.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "skype-string.cpp"; path = "skype-string.cpp"; sourceTree = "<group>"; };
+		74300337182133F84EF3023E /* SidPCMHostMain.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "SidPCMHostMain.cpp"; path = "SidPCMHostMain.cpp"; sourceTree = "<group>"; };
+		2B500ACA232C270724503423 /* SidPCMInterface.hpp */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SidPCMInterface.hpp"; path = "SidPCMInterface.hpp"; sourceTree = "<group>"; };
+		4DD22C7919C05D023D8C45D8 /* SidPCMServerCommandProcessor.hpp */ = {isa = PBXFileReference; lastKnownFileType = text; name = "SidPCMServerCommandProcessor.hpp"; path = "SidPCMServerCommandProcessor.hpp"; sourceTree = "<group>"; };
+		43C6529B3331566F26E4730D /* sidg_msg_pcmif.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "sidg_msg_pcmif.cpp"; path = "sidg_msg_pcmif.cpp"; sourceTree = "<group>"; };
+		2D7918FA5C21078E5AA61B4E /* sidg_msg_pcmif.hpp */ = {isa = PBXFileReference; lastKnownFileType = text; name = "sidg_msg_pcmif.hpp"; path = "sidg_msg_pcmif.hpp"; sourceTree = "<group>"; };
+		5E5105F72618017E2CFE4A68 /* sidg_msg_pcmif_cb.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "sidg_msg_pcmif_cb.cpp"; path = "sidg_msg_pcmif_cb.cpp"; sourceTree = "<group>"; };
+		153A1B99070A486C72092DEF /* sidg_msg_pcmif_cb.hpp */ = {isa = PBXFileReference; lastKnownFileType = text; name = "sidg_msg_pcmif_cb.hpp"; path = "sidg_msg_pcmif_cb.hpp"; sourceTree = "<group>"; };
+		3B7A0523490531BF305F1813 /* sidg_pcmif_cb_client.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "sidg_pcmif_cb_client.cpp"; path = "sidg_pcmif_cb_client.cpp"; sourceTree = "<group>"; };
+		6E6743B911AB148045373EAA /* sidg_pcmif_cb_client.hpp */ = {isa = PBXFileReference; lastKnownFileType = text; name = "sidg_pcmif_cb_client.hpp"; path = "sidg_pcmif_cb_client.hpp"; sourceTree = "<group>"; };
+		5EE87AD9397B55CB4A3B114E /* sidg_pcmif_server.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "sidg_pcmif_server.cpp"; path = "sidg_pcmif_server.cpp"; sourceTree = "<group>"; };
+		3F35635D2415083A151D5474 /* sidg_pcmif_server.hpp */ = {isa = PBXFileReference; lastKnownFileType = text; name = "sidg_pcmif_server.hpp"; path = "sidg_pcmif_server.hpp"; sourceTree = "<group>"; };
+		782F210645322518324B6D15 /* SocketTransport.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "SocketTransport.cpp"; path = "SocketTransport.cpp"; sourceTree = "<group>"; };
+		3C931A0A71A66EE16B6650D5 /* UnixSocket.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "UnixSocket.cpp"; path = "UnixSocket.cpp"; sourceTree = "<group>"; };
+		02AB649941821E2C4B7B584D /* SidAVDummyHelpers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "SidAVDummyHelpers.cpp"; path = "SidAVDummyHelpers.cpp"; sourceTree = "<group>"; };
+		36302CCC1D2006A414EC16DC /* SidAVServer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "SidAVServer.cpp"; path = "SidAVServer.cpp"; sourceTree = "<group>"; };
+		2EB246F864C54D1E28FD1BF9 /* SidAVTransportWrapper.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "SidAVTransportWrapper.cpp"; path = "SidAVTransportWrapper.cpp"; sourceTree = "<group>"; };
+		67714DBD0FB960C516D8787C /* SidApi.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "SidApi.cpp"; path = "SidApi.cpp"; sourceTree = "<group>"; };
+		40623FE20BB571491DBF4C17 /* SidField.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "SidField.cpp"; path = "SidField.cpp"; sourceTree = "<group>"; };
+		0E57673167B50EEA7655318B /* SidProtocolBinClient.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "SidProtocolBinClient.cpp"; path = "SidProtocolBinClient.cpp"; sourceTree = "<group>"; };
+		632E4AF163290878747636D6 /* SidProtocolBinCommon.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "SidProtocolBinCommon.cpp"; path = "SidProtocolBinCommon.cpp"; sourceTree = "<group>"; };
+		1A7B33BA60EA2D8A26187A7A /* SidProtocolBinServer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "SidProtocolBinServer.cpp"; path = "SidProtocolBinServer.cpp"; sourceTree = "<group>"; };
+		02D81E5335C8022109057454 /* SidProtocolFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "SidProtocolFactory.cpp"; path = "SidProtocolFactory.cpp"; sourceTree = "<group>"; };
+		3D74203842731E5E4DC3688B /* RtAudio.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "RtAudio.cpp"; path = "RtAudio.cpp"; sourceTree = "<group>"; };
+		5D10061C7B3942D074B07511 /* voicepcmhost-rtaudio */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "voicepcmhost-rtaudio"; path = "voicepcmhost-rtaudio"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		11F271394AFD2EED6BBE53A5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		466F0D8667462737334A5F5A /* voicepcmhost-rtaudio */ = {
+			isa = PBXGroup;
+			children = (
+				0D8C44A565454917099219C3 /* RtAudioPCMInterface.cpp */,
+				703C580604755EF673C71019 /* interfaces */,
+				204E0C15324D515C5F2E17B5 /* ipc */,
+				3241375A689528FB05BD0EB8 /* rtaudio-4.0.6 */,
+				52860B807EA8084E0DA107AE /* Products */,
+			);
+			name = "voicepcmhost-rtaudio";
+			sourceTree = "<group>";
+		};
+		703C580604755EF673C71019 /* interfaces */ = {
+			isa = PBXGroup;
+			children = (
+				678349EC78CE762D1B4A2454 /* skype */,
+				150F6D5812A954493FDC3CA9 /* voicepcm */,
+			);
+			name = "interfaces";
+			path = ../../../../interfaces;
+			sourceTree = "<group>";
+		};
+		678349EC78CE762D1B4A2454 /* skype */ = {
+			isa = PBXGroup;
+			children = (
+				798861B931DA60CF08F16524 /* cpp_embedded */,
+			);
+			name = "skype";
+			path = skype;
+			sourceTree = "<group>";
+		};
+		798861B931DA60CF08F16524 /* cpp_embedded */ = {
+			isa = PBXGroup;
+			children = (
+				402A167D29C9256F5F95335C /* src */,
+			);
+			name = "cpp_embedded";
+			path = cpp_embedded;
+			sourceTree = "<group>";
+		};
+		402A167D29C9256F5F95335C /* src */ = {
+			isa = PBXGroup;
+			children = (
+				3F3217885D2C364C73D85F16 /* platform */,
+				31771FE008600EA4562C7C39 /* types */,
+			);
+			name = "src";
+			path = src;
+			sourceTree = "<group>";
+		};
+		3F3217885D2C364C73D85F16 /* platform */ = {
+			isa = PBXGroup;
+			children = (
+				0BA06414371C1016430B2AE4 /* threading */,
+			);
+			name = "platform";
+			path = platform;
+			sourceTree = "<group>";
+		};
+		0BA06414371C1016430B2AE4 /* threading */ = {
+			isa = PBXGroup;
+			children = (
+				20302A8E74D018FF20BC101A /* pthread */,
+			);
+			name = "threading";
+			path = threading;
+			sourceTree = "<group>";
+		};
+		20302A8E74D018FF20BC101A /* pthread */ = {
+			isa = PBXGroup;
+			children = (
+				3D531A4471D46F2D7B137AC5 /* skype-thread-pthread.cpp */,
+			);
+			name = "pthread";
+			path = pthread;
+			sourceTree = "<group>";
+		};
+		31771FE008600EA4562C7C39 /* types */ = {
+			isa = PBXGroup;
+			children = (
+				6DBA61CC604E24D771E32359 /* skype-binary.cpp */,
+				54A7686608E8467B579303FC /* skype-int-list.cpp */,
+				435B5B783FC74BBB6A1C15F3 /* skype-string-list.cpp */,
+				4B9D4C697BB7198510F626CA /* skype-string.cpp */,
+			);
+			name = "types";
+			path = types;
+			sourceTree = "<group>";
+		};
+		150F6D5812A954493FDC3CA9 /* voicepcm */ = {
+			isa = PBXGroup;
+			children = (
+				74300337182133F84EF3023E /* SidPCMHostMain.cpp */,
+				2B500ACA232C270724503423 /* SidPCMInterface.hpp */,
+				4DD22C7919C05D023D8C45D8 /* SidPCMServerCommandProcessor.hpp */,
+				43C6529B3331566F26E4730D /* sidg_msg_pcmif.cpp */,
+				2D7918FA5C21078E5AA61B4E /* sidg_msg_pcmif.hpp */,
+				5E5105F72618017E2CFE4A68 /* sidg_msg_pcmif_cb.cpp */,
+				153A1B99070A486C72092DEF /* sidg_msg_pcmif_cb.hpp */,
+				3B7A0523490531BF305F1813 /* sidg_pcmif_cb_client.cpp */,
+				6E6743B911AB148045373EAA /* sidg_pcmif_cb_client.hpp */,
+				5EE87AD9397B55CB4A3B114E /* sidg_pcmif_server.cpp */,
+				3F35635D2415083A151D5474 /* sidg_pcmif_server.hpp */,
+			);
+			name = "voicepcm";
+			path = voicepcm;
+			sourceTree = "<group>";
+		};
+		204E0C15324D515C5F2E17B5 /* ipc */ = {
+			isa = PBXGroup;
+			children = (
+				5D104D965B6E6EBC621620A6 /* cpp */,
+			);
+			name = "ipc";
+			path = ../../../../ipc;
+			sourceTree = "<group>";
+		};
+		5D104D965B6E6EBC621620A6 /* cpp */ = {
+			isa = PBXGroup;
+			children = (
+				2D6640FF1B8066E116CB65BB /* AVTransport */,
+				02AB649941821E2C4B7B584D /* SidAVDummyHelpers.cpp */,
+				36302CCC1D2006A414EC16DC /* SidAVServer.cpp */,
+				2EB246F864C54D1E28FD1BF9 /* SidAVTransportWrapper.cpp */,
+				67714DBD0FB960C516D8787C /* SidApi.cpp */,
+				40623FE20BB571491DBF4C17 /* SidField.cpp */,
+				0E57673167B50EEA7655318B /* SidProtocolBinClient.cpp */,
+				632E4AF163290878747636D6 /* SidProtocolBinCommon.cpp */,
+				1A7B33BA60EA2D8A26187A7A /* SidProtocolBinServer.cpp */,
+				02D81E5335C8022109057454 /* SidProtocolFactory.cpp */,
+			);
+			name = "cpp";
+			path = cpp;
+			sourceTree = "<group>";
+		};
+		2D6640FF1B8066E116CB65BB /* AVTransport */ = {
+			isa = PBXGroup;
+			children = (
+				782F210645322518324B6D15 /* SocketTransport.cpp */,
+				3C931A0A71A66EE16B6650D5 /* UnixSocket.cpp */,
+			);
+			name = "AVTransport";
+			path = AVTransport;
+			sourceTree = "<group>";
+		};
+		3241375A689528FB05BD0EB8 /* rtaudio-4.0.6 */ = {
+			isa = PBXGroup;
+			children = (
+				3D74203842731E5E4DC3688B /* RtAudio.cpp */,
+			);
+			name = "rtaudio-4.0.6";
+			path = ../../rtaudio-4.0.6;
+			sourceTree = "<group>";
+		};
+		52860B807EA8084E0DA107AE /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				5D10061C7B3942D074B07511 /* voicepcmhost-rtaudio */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		620063EC60C825C378136655 /* voicepcmhost-rtaudio */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7CA225E373E23BE8214F688F /* Build configuration list for PBXNativeTarget "voicepcmhost-rtaudio" */;
+			buildPhases = (
+				6FA553901FE9583A7C8C25A7 /* Resources */,
+				66F33A0045DF2966585F13A3 /* Sources */,
+				11F271394AFD2EED6BBE53A5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "voicepcmhost-rtaudio";
+			productInstallPath = "$(HOME)/bin";
+			productName = "voicepcmhost-rtaudio";
+			productReference = 5D10061C7B3942D074B07511 /* voicepcmhost-rtaudio */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "voicepcmhost-rtaudio" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 466F0D8667462737334A5F5A /* voicepcmhost-rtaudio */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				620063EC60C825C378136655 /* voicepcmhost-rtaudio */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6FA553901FE9583A7C8C25A7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		66F33A0045DF2966585F13A3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				37F329D077195C5001E95554 /* RtAudioPCMInterface.cpp in Sources */,
+				54513B3D11427E1B60AD70D8 /* skype-thread-pthread.cpp in Sources */,
+				4FBB12134DE8448C2B126EA4 /* skype-binary.cpp in Sources */,
+				41402BE53F3A52832A001FE7 /* skype-int-list.cpp in Sources */,
+				47F557D677C028447CAE69A3 /* skype-string-list.cpp in Sources */,
+				0829659D0F3011122C1866C3 /* skype-string.cpp in Sources */,
+				49EC16E85A1441AC3F2C56C2 /* SidPCMHostMain.cpp in Sources */,
+				13191B1576452B3B4F0E4538 /* sidg_msg_pcmif.cpp in Sources */,
+				35A17AD076E24F6257D3346F /* sidg_msg_pcmif_cb.cpp in Sources */,
+				76F85DD8310D531965670BB4 /* sidg_pcmif_cb_client.cpp in Sources */,
+				0A3A5F762CE8114527E31EF1 /* sidg_pcmif_server.cpp in Sources */,
+				440971815073681F79BC6591 /* SocketTransport.cpp in Sources */,
+				069648771E6C620537330082 /* UnixSocket.cpp in Sources */,
+				03E843AA7953491A68C22B9F /* SidAVDummyHelpers.cpp in Sources */,
+				6C35518030E75DDC40611C4E /* SidAVServer.cpp in Sources */,
+				4DA12BA900930F2349D54C0E /* SidAVTransportWrapper.cpp in Sources */,
+				0C644D082549298553AD3A35 /* SidApi.cpp in Sources */,
+				0D974C71130F725D198F3C0C /* SidField.cpp in Sources */,
+				5AF95DC67F486AB23E8C1620 /* SidProtocolBinClient.cpp in Sources */,
+				42AD34D976B94E6326221478 /* SidProtocolBinCommon.cpp in Sources */,
+				6997346F61AB514D435A5801 /* SidProtocolBinServer.cpp in Sources */,
+				18416C343F457B6B74AC33BC /* SidProtocolFactory.cpp in Sources */,
+				18D9375A1CFB7A8508A86055 /* RtAudio.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		115B05EA3B8A44ED347E6EDC /* Debug-universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ..;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "voicepcmhost-rtaudio";
+			};
+			name = "Debug-universal";
+		};
+		561D2F216EBA1BC00BA4088D /* Release-universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CONFIGURATION_BUILD_DIR = ..;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "voicepcmhost-rtaudio";
+			};
+			name = "Release-universal";
+		};
+		203D5D55245C58185E3B13EB /* Debug-universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_DEBUG",
+					"DEBUG",
+					"__LINUX_ALSA__",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../rtaudio-4.0.6",
+					"../../../../interfaces/voicepcm",
+					"../../../../interfaces/skype/cpp_embedded/src/types",
+					"../../../../ipc/cpp/platform/se",
+					"../../../../interfaces/skype/cpp_embedded/src/platform/threading",
+					"../../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread",
+					"../../../../ipc/cpp",
+					"../../../../ipc/cpp/AVTransport",
+				);
+				OBJROOT = "obj/Debug-universal";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lasound",
+				);
+				PREBINDING = NO;
+				SYMROOT = "..";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = "Debug-universal";
+		};
+		562468B40EAA515D2B85035A /* Release-universal */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG",
+					"__LINUX_ALSA__",
+				);
+				GCC_TREAT_WARNINGS_AS_ERRORS = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../rtaudio-4.0.6",
+					"../../../../interfaces/voicepcm",
+					"../../../../interfaces/skype/cpp_embedded/src/types",
+					"../../../../ipc/cpp/platform/se",
+					"../../../../interfaces/skype/cpp_embedded/src/platform/threading",
+					"../../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread",
+					"../../../../ipc/cpp",
+					"../../../../ipc/cpp/AVTransport",
+				);
+				OBJROOT = "obj/Release-universal";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lasound",
+				);
+				PREBINDING = NO;
+				SYMROOT = "..";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = "Release-universal";
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7CA225E373E23BE8214F688F /* Build configuration list for PBXNativeTarget "voicepcmhost-rtaudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				115B05EA3B8A44ED347E6EDC /* Debug-universal */,
+				561D2F216EBA1BC00BA4088D /* Release-universal */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug-universal";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "voicepcmhost-rtaudio" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				203D5D55245C58185E3B13EB /* Debug-universal */,
+				562468B40EAA515D2B85035A /* Release-universal */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug-universal";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="tutorial_3" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../../step3/tutorial_3" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Debug/tutorial_3" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-g" />
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DDEBUG" />
+					<Add option="-DSSL_LIB_CYASSL" />
+					<Add option="-DNO_FILESYSTEM" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/api" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/ipc" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/types" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/platform/threading" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/platform/transport" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/platform/transport/tcp" />
+					<Add directory="../../../../../ipc/cpp" />
+					<Add directory="../../../../../ipc/cpp/platform/se" />
+					<Add directory="../../../../../ipc/cpp/ssl/cyassl/include" />
+					<Add directory="../../../../../ipc/cpp/ssl/cyassl/ctaocrypt/include" />
+					<Add directory="../../../../../ipc/cpp/ssl/cyassl/include/openssl" />
+					<Add directory="../../keypair" />
+					<Add directory="../../common" />
+				</Compiler>
+				<Linker>
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/build" />
+					<Add directory="../../../../../bin/linux-x86" />
+					<Add library="pthread" />
+					<Add library="skypekit-cppwrapper_2_lib" />
+					<Add library="skypekit-cyassl_lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="../../step3/tutorial_3" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Release/tutorial_3" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-O2" />
+					<Add option="-fno-exceptions" />
+					<Add option="-fno-rtti" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DSSL_LIB_CYASSL" />
+					<Add option="-DNO_FILESYSTEM" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/api" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/ipc" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/types" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/platform/threading" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/platform/transport" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/src/platform/transport/tcp" />
+					<Add directory="../../../../../ipc/cpp" />
+					<Add directory="../../../../../ipc/cpp/platform/se" />
+					<Add directory="../../../../../ipc/cpp/ssl/cyassl/include" />
+					<Add directory="../../../../../ipc/cpp/ssl/cyassl/ctaocrypt/include" />
+					<Add directory="../../../../../ipc/cpp/ssl/cyassl/include/openssl" />
+					<Add directory="../../keypair" />
+					<Add directory="../../common" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add directory="../../../../../interfaces/skype/cpp_embedded/build" />
+					<Add directory="../../../../../bin/linux-x86" />
+					<Add library="pthread" />
+					<Add library="skypekit-cppwrapper_2_lib" />
+					<Add library="skypekit-cyassl_lib" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="../../step3/tutorial_3.cpp">
+		</Unit>
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
+

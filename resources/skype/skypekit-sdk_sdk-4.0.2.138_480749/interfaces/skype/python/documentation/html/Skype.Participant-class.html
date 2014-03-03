@@ -1,0 +1,1909 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Skype.Participant</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Skype-module.html">Module&nbsp;Skype</a> ::
+        Class&nbsp;Participant
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Participant</h1><p class="nomargin-top"><span class="codelink"><a href="Skype-pysrc.html#Participant">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+        
+              |        
+<a href="skypekit.Cached-class.html">skypekit.Cached</a> --+    
+                  |    
+    <a href="skypekit.Object-class.html">skypekit.Object</a> --+
+                      |
+                     <strong class="uidshort">Participant</strong>
+</pre>
+
+<hr />
+<p>Conversation participant class. Instances of this class represent 
+  contacts when in the context of conversations. Amongst others, this class
+  has a Ring method for requesting live status with the target contact. 
+  This class also holds typing indicator property and access rights for the
+  contact in context of public conversations.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_init_" class="summary-sig-name">_sk_init_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">object_id</span>,
+        <span class="summary-sig-arg">transport</span>)</span><br />
+      actual constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant._sk_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Participant-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnPropertyChange"></a><span class="summary-sig-name">OnPropertyChange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">property_name</span>)</span><br />
+      notifies from a property change</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.OnPropertyChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Participant-class.html#CanSetRankTo" class="summary-sig-name">CanSetRankTo</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">rank</span>)</span><br />
+      Checks whether the current user can set this Participant's 
+      conversation privileges to the specified RANK.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.CanSetRankTo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Participant-class.html#SetRankTo" class="summary-sig-name">SetRankTo</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">rank</span>)</span><br />
+      Sets Participant's conversation privileges to the given RANK</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.SetRankTo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Participant-class.html#Ring" class="summary-sig-name">Ring</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">identity_to_use</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">video_call</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">nrof_redials</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">redial_period</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">auto_start_vm</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">origin</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Initiates live conversation attempt with Participant.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.Ring">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RingIt"></a><span class="summary-sig-name">RingIt</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Rings this participant, using P_LIVE_IDENTITY property if set.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.RingIt">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Participant-class.html#SetLiveIdentityToUse" class="summary-sig-name">SetLiveIdentityToUse</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">identity_to_use</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Sets LIVE_IDENTITY property, an alternate identity to use when 
+      ringing, such as a PSTN.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.SetLiveIdentityToUse">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Participant-class.html#GetVideo" class="summary-sig-name">GetVideo</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Retrieves a reference to the Video object that corresponds to the 
+      Participant.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.GetVideo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Participant-class.html#Hangup" class="summary-sig-name">Hangup</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Removes this participant from the current live session.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.Hangup">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Participant-class.html#Retire" class="summary-sig-name">Retire</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Forcibly removes this participant from conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.Retire">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Participant-class.html#OnIncomingDTMF" class="summary-sig-name">OnIncomingDTMF</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dtmf</span>)</span><br />
+      This event gets fired on receiving a DTMF signal sent by Participant.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.OnIncomingDTMF">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#multiget">multiget</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__copy__">__copy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propid"></a><span class="summary-sig-name">propid</span>(<span class="summary-sig-arg">propname</span>)</span><br />
+      convert a property name to the enum of the property</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Participant.propid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__new__">__new__</a></code>,
+      <code><a href="skypekit.Cached-class.html#sk_exists">sk_exists</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="event_handlers"></a><span class="summary-name">event_handlers</span> = <code title="{1: '_sk_on_incoming_dtmf'}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk_on_incoming_dtmf</code><code class="variable-quote">'</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#propid2label" class="summary-name">propid2label</a> = <code title="{930: 'convo_id',
+ 931: 'identity',
+ 932: 'rank',
+ 933: 'requested_rank',
+ 934: 'text_status',
+ 935: 'voice_status',
+ 936: 'video_status',
+ 938: 'live_price_for_me',
+..."><code class="variable-group">{</code>930<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">convo_id</code><code class="variable-quote">'</code><code class="variable-op">, </code>931<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">identity</code><code class="variable-quote">'</code><code class="variable-op">, </code>932<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">rank</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="module_id"></a><span class="summary-name">module_id</span> = <code title="19">19</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#RANK" class="summary-name">RANK</a> = <code title="{1: 'CREATOR',
+ 2: 'ADMIN',
+ 3: 'SPEAKER',
+ 4: 'WRITER',
+ 5: 'SPECTATOR',
+ 6: 'APPLICANT',
+ 7: 'RETIRED',
+ 8: 'OUTLAW',
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CREATOR</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ADMIN</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SPEAKER</code><code class="variable-quote">'</code><code class="variable-op">, </code>4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">WRITER</code><code class="variable-quote">'</code><code class="variable-op">, </code>5<code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_RANK property.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#TEXT_STATUS" class="summary-name">TEXT_STATUS</a> = <code title="{0: 'TEXT_UNKNOWN',
+ 1: 'TEXT_NA',
+ 2: 'READING',
+ 3: 'WRITING',
+ 4: 'WRITING_AS_ANGRY',
+ 5: 'WRITING_AS_CAT',
+ 'READING': 2,
+ 'TEXT_NA': 1,
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TEXT_UNKNOWN</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TEXT_NA</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">READING</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_TEXT_STATUS property.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#VOICE_STATUS" class="summary-name">VOICE_STATUS</a> = <code title="{0: 'VOICE_UNKNOWN',
+ 1: 'VOICE_NA',
+ 2: 'VOICE_AVAILABLE',
+ 3: 'VOICE_CONNECTING',
+ 4: 'RINGING',
+ 5: 'EARLY_MEDIA',
+ 6: 'LISTENING',
+ 7: 'SPEAKING',
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VOICE_UNKNOWN</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VOICE_NA</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VOICE_A</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_VOICE_STATUS property.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#VIDEO_STATUS" class="summary-name">VIDEO_STATUS</a> = <code title="{0: 'VIDEO_UNKNOWN',
+ 1: 'VIDEO_NA',
+ 2: 'VIDEO_AVAILABLE',
+ 3: 'VIDEO_CONNECTING',
+ 4: 'STREAMING',
+ 5: 'VIDEO_ON_HOLD',
+ 'STREAMING': 4,
+ 'VIDEO_AVAILABLE': 2,
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEO_UNKNOWN</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEO_NA</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEO_A</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_VIDEO_STATUS property.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#DTMF" class="summary-name">DTMF</a> = <code title="{0: 'DTMF_0',
+ 1: 'DTMF_1',
+ 2: 'DTMF_2',
+ 3: 'DTMF_3',
+ 4: 'DTMF_4',
+ 5: 'DTMF_5',
+ 6: 'DTMF_6',
+ 7: 'DTMF_7',
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_0</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_1</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_2</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_3</code><code class="variable-quote">'</code><code class="variable-op">, </code>4<code class="variable-op">:</code><code class="variable-ellipsis">...</code></code><br />
+      DTMF_0
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CONVO_ID"></a><span class="summary-name">P_CONVO_ID</span> = <code title="930">930</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_IDENTITY"></a><span class="summary-name">P_IDENTITY</span> = <code title="931">931</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_RANK"></a><span class="summary-name">P_RANK</span> = <code title="932">932</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_REQUESTED_RANK"></a><span class="summary-name">P_REQUESTED_RANK</span> = <code title="933">933</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TEXT_STATUS"></a><span class="summary-name">P_TEXT_STATUS</span> = <code title="934">934</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_VOICE_STATUS"></a><span class="summary-name">P_VOICE_STATUS</span> = <code title="935">935</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_VIDEO_STATUS"></a><span class="summary-name">P_VIDEO_STATUS</span> = <code title="936">936</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LIVE_IDENTITY"></a><span class="summary-name">P_LIVE_IDENTITY</span> = <code title="943">943</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LIVE_PRICE_FOR_ME"></a><span class="summary-name">P_LIVE_PRICE_FOR_ME</span> = <code title="938">938</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LIVE_FWD_IDENTITIES"></a><span class="summary-name">P_LIVE_FWD_IDENTITIES</span> = <code title="948">948</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LIVE_START_TIMESTAMP"></a><span class="summary-name">P_LIVE_START_TIMESTAMP</span> = <code title="939">939</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SOUND_LEVEL"></a><span class="summary-name">P_SOUND_LEVEL</span> = <code title="941">941</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_DEBUGINFO"></a><span class="summary-name">P_DEBUGINFO</span> = <code title="942">942</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LAST_VOICE_ERROR"></a><span class="summary-name">P_LAST_VOICE_ERROR</span> = <code title="947">947</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_QUALITY_PROBLEMS"></a><span class="summary-name">P_QUALITY_PROBLEMS</span> = <code title="949">949</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LIVE_TYPE"></a><span class="summary-name">P_LIVE_TYPE</span> = <code title="950">950</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LIVE_COUNTRY"></a><span class="summary-name">P_LIVE_COUNTRY</span> = <code title="951">951</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TRANSFERRED_BY"></a><span class="summary-name">P_TRANSFERRED_BY</span> = <code title="952">952</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TRANSFERRED_TO"></a><span class="summary-name">P_TRANSFERRED_TO</span> = <code title="953">953</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ADDER"></a><span class="summary-name">P_ADDER</span> = <code title="954">954</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LAST_LEAVEREASON"></a><span class="summary-name">P_LAST_LEAVEREASON</span> = <code title="955">955</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#rwlock">rwlock</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#properties">properties</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#convo_id" class="summary-name">convo_id</a><br />
+      [ALL] ID of corresponding conversation.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#identity" class="summary-name">identity</a><br />
+      [ALL] skypename OR pstn_number OR namespace:identity
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#rank" class="summary-name">rank</a><br />
+      [ALL] Participant::RANK
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#requested_rank" class="summary-name">requested_rank</a><br />
+      Not set (should be: requested Participant::RANK, higher than the 
+      current one)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#text_status" class="summary-name">text_status</a><br />
+      [ALL] the typing indicator
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#voice_status" class="summary-name">voice_status</a><br />
+      [ALL] voice status
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#video_status" class="summary-name">video_status</a><br />
+      [ALL] video status
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#live_identity" class="summary-name">live_identity</a><br />
+      [ALL] identity that was used to establish current live session with 
+      that participant (can be different from participant identity)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#live_price_for_me" class="summary-name">live_price_for_me</a><br />
+      [OTHERS] 'price_per_minute_float currency' - eg '0.01 EUR'.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#live_fwd_identities" class="summary-name">live_fwd_identities</a><br />
+      [OTHERS] list of identities where the live session is being forwarded
+      (if they are disclosed), space separated
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#live_start_timestamp" class="summary-name">live_start_timestamp</a><br />
+      [ALL] time of joining the live session
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#sound_level" class="summary-name">sound_level</a><br />
+      [ALL] current 'loudness' level when SPEAKING (0..10)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#debuginfo" class="summary-name">debuginfo</a><br />
+      [OTHERS] call (audio and video) debug info
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#last_voice_error" class="summary-name">last_voice_error</a><br />
+      [OTHERS] DEPRECATED, use last_leavereason instead
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#quality_problems" class="summary-name">quality_problems</a><br />
+      [ALL] space separated tokens values: CPU_INUSE CPU_SLOW CPU_HIGH 
+      HIGH_ECHO HIGH_NOISE MUTED_INPUT LOW_INPUT MUTED_INPUT_ACTIVITY 
+      FW_STRONG FW_BAD NOT_UDP CALL_BW_LOW RECORD_ERROR + values in video 
+      debug info
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#live_type" class="summary-name">live_type</a><br />
+      [ALL] participant type during livesession as specified in 
+      IDENTITYTYPE
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#live_country" class="summary-name">live_country</a><br />
+      [OTHERS] participant livesession country code - used for emergency 
+      calls only atm
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#transferred_by" class="summary-name">transferred_by</a><br />
+      [OTHERS] Transferor identity (transferee side)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#transferred_to" class="summary-name">transferred_to</a><br />
+      [OTHERS] Identity of recipient of transfer (transferor side, caller 
+      side)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#adder" class="summary-name">adder</a><br />
+      [ALL] Identity of the user who added this participant to the 
+      conversation, type: Sid::String
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Participant-class.html#last_leavereason" class="summary-name">last_leavereason</a><br />
+      [OTHERS] Last reason for leaving conversation or live session.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="_sk_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_sk_init_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">object_id</span>,
+        <span class="sig-arg">transport</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Participant._sk_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>actual constructor</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="skypekit.Object-class.html#_sk_init_">skypekit.Object._sk_init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Participant.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CanSetRankTo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CanSetRankTo</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">rank</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Participant.CanSetRankTo">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks whether the current user can set this Participant's 
+  conversation privileges to the specified RANK. This enables you to gray 
+  out or disable in your UI all the unavailable options for 
+  Participant::SetRankTo method.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>rank</b> - Participant::RANK value to check for.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b> - Returns true if local user can set participant's rank
+      to the value given in rank argument.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetRankTo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetRankTo</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">rank</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Participant.SetRankTo">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets Participant's conversation privileges to the given RANK</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>rank</b> - Target Participant::RANK value.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Ring"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Ring</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">identity_to_use</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">video_call</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">nrof_redials</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">redial_period</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">auto_start_vm</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">origin</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Participant.Ring">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Initiates live conversation attempt with Participant.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>identity_to_use</b> - Ring an alternate identity, such as a PSTN 
+      number.
+    </li>
+    <li>
+      <b>video_call</b> - Enable video.
+    </li>
+    <li>
+      <b>nrof_redials</b> - Unused.
+    </li>
+    <li>
+      <b>redial_period</b> - Unused.
+    </li>
+    <li>
+      <b>auto_start_vm</b> - Unused. On dialog, if falling on VM, greeting 
+      and recording will be automatically started.
+    </li>
+    <li>
+      <b>origin</b> - When call is initiated from web link, must contain 
+      the URI that was used
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetLiveIdentityToUse"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetLiveIdentityToUse</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">identity_to_use</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Participant.SetLiveIdentityToUse">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets LIVE_IDENTITY property, an alternate identity to use when 
+  ringing, such as a PSTN.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>identity_to_use</b> - Empty string will reset it to default, i.e 
+      IDENTITY property value
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetVideo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetVideo</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Participant.GetVideo">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieves a reference to the Video object that corresponds to the 
+  Participant. It can be either local video - you can check if this 
+  participant's name (P_IDENTITY property) matches the name of the 
+  currently logged in account (P_SKYPENAME property) or incoming video from
+  a remote participant.</p>
+  <p>Note that for GetVideo to be successful, the video has to be available
+  for that participant. This can be checked for by examining Participant 
+  VIDEO_STATUS property - once it becomes VIDEO_AVAILABLE - you can use 
+  GetVideo to obtain the Video object.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>video</b> - Returns reference to a constructed video object.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Hangup"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Hangup</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Participant.Hangup">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Removes this participant from the current live session. Note that this
+  does not remove the participant from conversation (for this, use 
+  Participant::Retire). It only removes participant from live state.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Retire"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Retire</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Participant.Retire">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Forcibly removes this participant from conversation. This method is 
+  for removing other people from conversations (for example: as 
+  administrative punishment for flooding conversation with spam messages). 
+  For local user to leave a conversation, use Conversation::RetireFrom 
+  instead.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="OnIncomingDTMF"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OnIncomingDTMF</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dtmf</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Participant.OnIncomingDTMF">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This event gets fired on receiving a DTMF signal sent by Participant. 
+  Note that this event will only fire if the Participant is also using a 
+  Skype client. Skype audio library does not monitor incoming voice streams
+  for dial tones. DTMF events are propagated to remote participants via 
+  data channel. Incoming DTMF tones transmitted from, for example, mobile 
+  phones, will not cause this event to fire. In case of incoming DTMF 
+  signals from Skype clients, DTMF tones are also inserted into the audio 
+  stream. You don't have to inject those into local audio playback 
+  yourself.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>dtmf</b> - Returns Participant::DTMF value.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="propid2label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">propid2label</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>930<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">convo_id</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 931<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">identity</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 932<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">rank</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 933<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">requested_rank</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 934<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">text_status</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 935<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">voice_status</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 936<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">video_status</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 938<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">live_price_for_me</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="RANK"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">RANK</h3>
+  <p>Recognized values for the P_RANK property. The P_RANK controls 
+  participant's privileges in the conversation. See 
+  Participant::CanSetRankTo and Participant::SetRankTo methods.</p>
+  <ul>
+    <li>
+      CREATOR - Creator of the chat. There can be only one participant with
+      this type per conversation. Other participants cannot be promoted to 
+      Creator rank.
+    </li>
+    <li>
+      ADMIN - Participant who has administrator privileges
+    </li>
+    <li>
+      SPEAKER - Participant who can speak and write
+    </li>
+    <li>
+      WRITER - Participant who can write but not speak
+    </li>
+    <li>
+      SPECTATOR - Participant who can read but not write/speak
+    </li>
+    <li>
+      APPLICANT - Participant who is applying to join the conversation. 
+      Member cannot be demoted to applicants once they have been accepted.
+    </li>
+    <li>
+      RETIRED - Participant who has eft or has been kicked from the 
+      conversation
+    </li>
+    <li>
+      OUTLAW - Participant who has been banned from the chat
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CREATOR</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ADMIN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SPEAKER</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">WRITER</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SPECTATOR</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">APPLICANT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RETIRED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">OUTLAW</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TEXT_STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TEXT_STATUS</h3>
+  <p>Recognized values for the P_TEXT_STATUS property. The P_TEXT_STATUS 
+  property has two uses. Firstly, you can use it to implement typing 
+  indicators in your UI, to notify the local user that an incoming chat 
+  message from this Participant is imminent.</p>
+  <p>To set the P_TEXT_STATUS value, so that remote client UIs can display 
+  the local user's typing indicator in their UI, use 
+  Conversation::SetMyTextStatusTo method.</p>
+  <p>Transmission of P_TEXT_STATUS updates to remote participants of 
+  conversations is controlled via SETUPKEY_DISABLE_CHAT_ACTIVITY_INDICATION
+  setup key.</p>
+  <p>Secondly, the TEXT_NA value enables you to detect participants who are
+  running clients with no chat capability.</p>
+  <ul>
+    <li>
+      TEXT_UNKNOWN - Fallback state in case the text status is not (yet) 
+      deternmined.
+    </li>
+    <li>
+      TEXT_NA - Text status is not applicable as the participant is using a
+      Skype client that does not support chat (for example: voice-only USB 
+      phones).
+    </li>
+    <li>
+      READING - Participant is currently not typing.
+    </li>
+    <li>
+      WRITING - Participant is currently typing.
+    </li>
+    <li>
+      WRITING_AS_ANGRY - This state should be set when following two 
+      conditions are true:
+      <ul>
+        <li>
+          interval between keypresses are less than 20 ms;
+        </li>
+        <li>
+          at least one of the keys adjacent to current key are pressed 
+          down.
+        </li>
+      </ul>
+    </li>
+    <li>
+      WRITING_AS_CAT - The &quot;Cat on keyboard detection&quot; algorthm 
+      in Skype is implemented in the UI level, and as such is not present 
+      in the SkypeKit API. Should you wish to implement similar algorthm in
+      your own UI, you can get the basic logic from the PawSense FAQ - 
+      http://www.bitboost.com/pawsense/pawsense-faq.html
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TEXT_UNKNOWN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TEXT_NA</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">READING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">WRITING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">WRITING_AS_ANGRY</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">WRITING_AS_CAT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">READING</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">TEXT_NA</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="VOICE_STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">VOICE_STATUS</h3>
+  <p>Recognized values for the P_VOICE_STATUS property.</p>
+  <ul>
+    <li>
+      VOICE_UNKNOWN - Participant voice status is not (yet) determined.
+    </li>
+    <li>
+      VOICE_NA - Participant is using a Skype client with no audio 
+      capability.
+    </li>
+    <li>
+      VOICE_AVAILABLE - Participant is using a Skype client that supports 
+      audio.
+    </li>
+    <li>
+      VOICE_CONNECTING - Participant is in process of joining current live 
+      session. This is a transitional state.
+    </li>
+    <li>
+      RINGING - Participant has been invited to join the live session but 
+      has not yet accepted.
+    </li>
+    <li>
+      EARLY_MEDIA - Participant is in process of joining current live 
+      session. This is another transitional state.
+    </li>
+    <li>
+      LISTENING - Participant has joined the current live session but is 
+      currently not transmitting audio.
+    </li>
+    <li>
+      SPEAKING - Participant has joined the current live session and is 
+      transmitting audio. The UI can either use this state to display 
+      appropriate &quot;speaking&quot; notification, or alternatively use 
+      Participant::P_SOUND_LEVEL if you want your speaking indicator to 
+      also reflect audio volume coming from the Participant.
+    </li>
+    <li>
+      VOICE_ON_HOLD - Participant has joined the current live session but 
+      the audio is currently on hold.
+    </li>
+    <li>
+      VOICE_STOPPED - Participant will be placed in this state for some 
+      seconds after live session has finished. This is another transitional
+      state.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VOICE_UNKNOWN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VOICE_NA</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VOICE_AVAILABLE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VOICE_CONNECTING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RINGING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EARLY_MEDIA</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LISTENING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SPEAKING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="VIDEO_STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">VIDEO_STATUS</h3>
+  <p>Recognized values for the P_VIDEO_STATUS property. This property 
+  applies to Participant's video send capability, not capability to receive
+  video.</p>
+  <ul>
+    <li>
+      VIDEO_UNKNOWN - Video status is not (yet) determined.
+    </li>
+    <li>
+      VIDEO_NA - Indicates that this Participant does not have video 
+      available..
+    </li>
+    <li>
+      VIDEO_AVAILABLE - Indicates that video is available for this 
+      participant. When the Participant::P_VIDEO_STATUS obtains this state,
+      it is possible to retrieve the Video object, using 
+      Participant::GetVideo method. Further operations, such as starting or
+      stopping the video send/receive will then go through the Video 
+      object.
+    </li>
+    <li>
+      VIDEO_CONNECTING - Transitional state indicating that the Participant
+      is attempting to initiate video send.
+    </li>
+    <li>
+      STREAMING - Indicates that the participant is currently sending 
+      video.
+    </li>
+    <li>
+      VIDEO_ON_HOLD - Indicates that the participant video send is 
+      currently paused.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEO_UNKNOWN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEO_NA</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEO_AVAILABLE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEO_CONNECTING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">STREAMING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEO_ON_HOLD</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">STREAMING</code><code class="variable-quote">'</code><code class="variable-op">: </code>4<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">VIDEO_AVAILABLE</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="DTMF"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">DTMF</h3>
+  <ul>
+    <li>
+      DTMF_0
+    </li>
+    <li>
+      DTMF_1
+    </li>
+    <li>
+      DTMF_2
+    </li>
+    <li>
+      DTMF_3
+    </li>
+    <li>
+      DTMF_4
+    </li>
+    <li>
+      DTMF_5
+    </li>
+    <li>
+      DTMF_6
+    </li>
+    <li>
+      DTMF_7
+    </li>
+    <li>
+      DTMF_8
+    </li>
+    <li>
+      DTMF_9
+    </li>
+    <li>
+      DTMF_STAR
+    </li>
+    <li>
+      DTMF_POUND
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_0</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_1</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_2</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_3</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_4</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_5</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_6</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DTMF_7</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Property Details</span></td>
+</tr>
+</table>
+<a name="convo_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">convo_id</h3>
+  <p>[ALL] ID of corresponding conversation. Here and below, [ALL] tag 
+  indicates that the property has meaning and is set in context of all 
+  participants in the conversation. [OTHERS] tag has meaning only for 
+  participants who are not the local user.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_convo_id" class="summary-sig-name" onclick="show_private();">_sk_get_convo_id</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] ID of corresponding conversation.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="identity"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">identity</h3>
+  <p>[ALL] skypename OR pstn_number OR namespace:identity</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_identity" class="summary-sig-name" onclick="show_private();">_sk_get_identity</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] skypename OR pstn_number OR namespace:identity
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="rank"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">rank</h3>
+  <p>[ALL] Participant::RANK</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_rank" class="summary-sig-name" onclick="show_private();">_sk_get_rank</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] Participant::RANK
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="requested_rank"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">requested_rank</h3>
+  <p>Not set (should be: requested Participant::RANK, higher than the 
+  current one)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_requested_rank" class="summary-sig-name" onclick="show_private();">_sk_get_requested_rank</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Not set (should be: requested Participant::RANK, higher than the current 
+one)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="text_status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">text_status</h3>
+  <p>[ALL] the typing indicator</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_text_status" class="summary-sig-name" onclick="show_private();">_sk_get_text_status</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] the typing indicator
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="voice_status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">voice_status</h3>
+  <p>[ALL] voice status</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_voice_status" class="summary-sig-name" onclick="show_private();">_sk_get_voice_status</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] voice status
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="video_status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">video_status</h3>
+  <p>[ALL] video status</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_video_status" class="summary-sig-name" onclick="show_private();">_sk_get_video_status</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] video status
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="live_identity"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">live_identity</h3>
+  <p>[ALL] identity that was used to establish current live session with 
+  that participant (can be different from participant identity)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_live_identity" class="summary-sig-name" onclick="show_private();">_sk_get_live_identity</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] identity that was used to establish current live session with that 
+participant (can be different from participant identity)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="live_price_for_me"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">live_price_for_me</h3>
+  <p>[OTHERS] 'price_per_minute_float currency' - eg '0.01 EUR'. Note that 
+  this property obtains value only after the participant goes into live 
+  state. It cannot be used to display call rates before the call 
+  starts.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_live_price_for_me" class="summary-sig-name" onclick="show_private();">_sk_get_live_price_for_me</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [OTHERS] 'price_per_minute_float currency' - eg '0.01 EUR'.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="live_fwd_identities"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">live_fwd_identities</h3>
+  <p>[OTHERS] list of identities where the live session is being forwarded 
+  (if they are disclosed), space separated</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_live_fwd_identities" class="summary-sig-name" onclick="show_private();">_sk_get_live_fwd_identities</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [OTHERS] list of identities where the live session is being forwarded (if 
+they are disclosed), space separated
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="live_start_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">live_start_timestamp</h3>
+  <p>[ALL] time of joining the live session</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_live_start_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_live_start_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] time of joining the live session
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="sound_level"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">sound_level</h3>
+  <p>[ALL] current 'loudness' level when SPEAKING (0..10)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_sound_level" class="summary-sig-name" onclick="show_private();">_sk_get_sound_level</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] current 'loudness' level when SPEAKING (0..10)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="debuginfo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">debuginfo</h3>
+  <p>[OTHERS] call (audio and video) debug info</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_debuginfo" class="summary-sig-name" onclick="show_private();">_sk_get_debuginfo</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [OTHERS] call (audio and video) debug info
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="last_voice_error"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">last_voice_error</h3>
+  <p>[OTHERS] DEPRECATED, use last_leavereason instead</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_last_voice_error" class="summary-sig-name" onclick="show_private();">_sk_get_last_voice_error</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [OTHERS] DEPRECATED, use last_leavereason instead
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="quality_problems"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">quality_problems</h3>
+  <p>[ALL] space separated tokens values: CPU_INUSE CPU_SLOW CPU_HIGH 
+  HIGH_ECHO HIGH_NOISE MUTED_INPUT LOW_INPUT MUTED_INPUT_ACTIVITY FW_STRONG
+  FW_BAD NOT_UDP CALL_BW_LOW RECORD_ERROR + values in video debug info</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_quality_problems" class="summary-sig-name" onclick="show_private();">_sk_get_quality_problems</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] space separated tokens values: CPU_INUSE CPU_SLOW CPU_HIGH HIGH_ECHO 
+HIGH_NOISE MUTED_INPUT LOW_INPUT MUTED_INPUT_ACTIVITY FW_STRONG FW_BAD 
+NOT_UDP CALL_BW_LOW RECORD_ERROR + values in video debug info
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="live_type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">live_type</h3>
+  <p>[ALL] participant type during livesession as specified in 
+  IDENTITYTYPE</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_live_type" class="summary-sig-name" onclick="show_private();">_sk_get_live_type</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] participant type during livesession as specified in IDENTITYTYPE
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="live_country"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">live_country</h3>
+  <p>[OTHERS] participant livesession country code - used for emergency 
+  calls only atm</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_live_country" class="summary-sig-name" onclick="show_private();">_sk_get_live_country</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [OTHERS] participant livesession country code - used for emergency calls 
+only atm
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="transferred_by"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">transferred_by</h3>
+  <p>[OTHERS] Transferor identity (transferee side)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_transferred_by" class="summary-sig-name" onclick="show_private();">_sk_get_transferred_by</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [OTHERS] Transferor identity (transferee side)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="transferred_to"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">transferred_to</h3>
+  <p>[OTHERS] Identity of recipient of transfer (transferor side, caller 
+  side)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_transferred_to" class="summary-sig-name" onclick="show_private();">_sk_get_transferred_to</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [OTHERS] Identity of recipient of transfer (transferor side, caller side)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="adder"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">adder</h3>
+  <p>[ALL] Identity of the user who added this participant to the 
+  conversation, type: Sid::String</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_adder" class="summary-sig-name" onclick="show_private();">_sk_get_adder</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [ALL] Identity of the user who added this participant to the conversation, 
+type: Sid::String
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="last_leavereason"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">last_leavereason</h3>
+  <p>[OTHERS] Last reason for leaving conversation or live session. 
+  Provides an enum alternative to last_voice_error as well as the reason 
+  this participant RETIRED from the conversation.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Participant-class.html#_sk_get_last_leavereason" class="summary-sig-name" onclick="show_private();">_sk_get_last_leavereason</a>(<span class="summary-sig-arg">self</span>)</span>
+        - [OTHERS] Last reason for leaving conversation or live session.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:40 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

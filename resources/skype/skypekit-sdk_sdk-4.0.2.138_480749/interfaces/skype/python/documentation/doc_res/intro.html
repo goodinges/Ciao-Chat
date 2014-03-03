@@ -1,0 +1,71 @@
+
+<table cellpadding="10" cellspacing="0" border="0" bgcolor="#01ABF0" width="100%">
+<tr><td><p><h1>SkypeKit Python Wrapper Reference, version. 4.0</h1></p></td><td><img src="..\skypekit.png" align="right"></td></tr>
+</table>
+
+<br>
+<p><b><a href="Skype-module.html">Quick link to SkypeKit Classes</a></b></p>
+<br>
+
+<table border="0" width="99%">
+<tr>
+
+<td style="vertical-align:top">
+<h1>Online resources</h1>
+<hr>
+<ol>
+<li><a href="http://developer.skype.com/skypekit/releasenotes" target="_blank">SkypeKit Release Notes</a></li>
+<li><a href="http://developer.skype.com/skypekit/development-guide" target="_blank">SkypeKit overview</a></li>
+<li><a href="http://developer.skype.com/skypekit/runtimes" target="_blank">SkypeKit runtime versions</a></li>
+<li><a href="http://developer.skype.com/sso" target="_blank">Developer Forum</a></li>
+</ol>
+</td>
+
+<td style="vertical-align:top">
+<h1>Examples</h1>
+<hr>
+<ol>
+<li><a href="login-pysrc.html">Login</a></li>
+<li><a href="contacts-pysrc.html">Contact list</a></li>
+<li><a href="conversations-pysrc.html">Conversation list</a></li>
+<li><a href="chat-pysrc.html">Skype chat</a></li>
+<li><a href="call-pysrc.html">Making a call</a></li>
+<li><a href="autoanswer-pysrc.html">Answering a call</a></li>
+<li><a href="contactsearch-pysrc.html">Contact search</a></li>
+</ol>
+</td>
+
+</tr>
+</table>
+
+<h1>Overview</h1>
+<hr>
+
+<p>
+Welcome to the SkypeKit SDK Python wrapper. The Python wrapper is compatible and is tested with Python version 2.6.5 - Python versions 3.x are <b>not</b> supported at this time.
+</p>
+<p>
+This wrapper provides API for building client applications (client UI-s) that work with SkypeKit runtimes. The wrapper also contains UI-side methods for audio and video - i.e. you can initiate audio and video calls using SkypeKit wrapper. On desktop versions of SkypeKit runtime, corresponding functionality is built into runtime itself (unless stated otherwise, for example, runtimes with -novideo suffix do not include video capabilities. Using runtime with no video support has advantage of having smaller memory footprint. All runtimes include support for audio, in one form or another.
+</p>
+
+<p>
+The wrapper consists of two modules: Skype and SkypeKit. The Skype module contains SkypeKit classes that you will directly work with. The SkypeKit module contains implementation of transport layer, protocol codec and the rest of the inner workings of the wrapper.
+</p>
+
+<p>
+Small disclaimer: As the wrapper and a set of runtimes in the distribution package work in pairs - each version of wrapper is built and tested only against runtimes with the same version. We have taken great pains in our IPC protocol design to make newer versions of the wrapper backward compatible with runtimes released in earlier distro packs, and vice versa, but we can make no guarantees.
+</p>
+
+<p>
+<b>NB!</b> You will also need an application keypair file, to connect to the SkypeKit runtime. You can request and download keypair files on your <a href="http://developer.skype.com/applications" target="_blank">applications page</a> on the Skype Developer website (login needed).
+</p>
+
+<p>
+In runtimes with -pcmaudio, -rtpaudio or -rtpvideo tags in their names, the audio library is only partially built into runtime itself. Instead, the SkypeKit runtime has to be accompanied by additional runtimes that interact between SkypeKit runtime and system audio and/or video. This enables you to build SkypeKit applications that work on systems with uncommon audio-video subsystems, such as Skype UI implementations in consumer electronics. However, this subject is out of scope for both SkypeKit UI wrapper and this document. This wrapper only concerns itself with the UI side of things.
+</p>
+<p>
+Skype functionality is exposed through SkypeKit wrapper as an object oriented API. It consists of classes, class methods, events and properties. All the wrapper classes are reflections of equivalent object instances in the runtime.
+</p>
+<p>
+The wrapper communicates with runtime over a transport mechanism. Current transport mechanisms are Unix sockets (for Linux builds) and TCP sockets for Microsoft Windows builds. When the runtime launches, it creates a socket server, listening on a specified port (default port is 8963). The wrapper then creates a client socket that connects to the server. SkypeKit uses a binary communication protocol for remote procedure calls, events and property updates. The protocol is optimized to minimize IPC traffic. In that aspect, it is much more efficient than our previous Public and Embedded API protocols that used text-based messaging. Specification of the binary protocol is outside the scope of this document as the wrapper makes the protocol side transparent for UI developers.
+</p>

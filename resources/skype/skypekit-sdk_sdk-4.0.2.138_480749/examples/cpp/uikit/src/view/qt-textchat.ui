@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>TextChatView</class>
+ <widget class="QWidget" name="TextChatView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>812</width>
+    <height>409</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Chat</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="margin">
+    <number>3</number>
+   </property>
+   <item row="0" column="0">
+    <widget class="QTextEdit" name="messageHistory">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>6</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="undoRedoEnabled">
+      <bool>false</bool>
+     </property>
+     <property name="readOnly">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" rowspan="3">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
+     <item>
+      <widget class="Mvp::View::QtContactListWidget" name="participantList" native="true">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>2</horstretch>
+         <verstretch>1</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="maximumSize">
+        <size>
+         <width>300</width>
+         <height>16777215</height>
+        </size>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QPushButton" name="buttonManage">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Add/Remove people to the chat</string>
+         </property>
+         <property name="text">
+          <string>Add/Remove People</string>
+         </property>
+         <property name="icon">
+          <iconset resource="skypeicons.qrc">
+           <normaloff>:/icons/ConferenceAdd_24x24.png</normaloff>:/icons/ConferenceAdd_24x24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="messageTypeButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="toolTip">
+          <string>Switch between IM and SMS mode</string>
+         </property>
+         <property name="text">
+          <string>IM Mode </string>
+         </property>
+         <property name="icon">
+          <iconset resource="skypeicons.qrc">
+           <normaloff>:/icons/Message_24x24.png</normaloff>:/icons/Message_24x24.png</iconset>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>24</width>
+           <height>24</height>
+          </size>
+         </property>
+         <property name="flat">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <widget class="QPushButton" name="buttonLeave">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="toolTip">
+        <string>Add/Remove people to the chat</string>
+       </property>
+       <property name="text">
+        <string>Leave Chat</string>
+       </property>
+       <property name="iconSize">
+        <size>
+         <width>24</width>
+         <height>24</height>
+        </size>
+       </property>
+       <property name="flat">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="1" column="0">
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="modeLabel">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+         <horstretch>1</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>8</pointsize>
+         <italic>true</italic>
+        </font>
+       </property>
+       <property name="text">
+        <string/>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLineEdit" name="messageEdit">
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>33</height>
+      </size>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>Mvp::View::QtContactListWidget</class>
+   <extends>QWidget</extends>
+   <header>src/view/qtcontactlistwidget.h</header>
+  </customwidget>
+ </customwidgets>
+ <tabstops>
+  <tabstop>messageEdit</tabstop>
+  <tabstop>messageHistory</tabstop>
+  <tabstop>buttonManage</tabstop>
+  <tabstop>messageTypeButton</tabstop>
+ </tabstops>
+ <resources>
+  <include location="skypeicons.qrc"/>
+ </resources>
+ <connections/>
+</ui>

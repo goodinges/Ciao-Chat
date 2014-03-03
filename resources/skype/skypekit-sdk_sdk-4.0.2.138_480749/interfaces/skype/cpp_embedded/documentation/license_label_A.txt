@@ -1,0 +1,7 @@
+
+The content of this directory and its subdirectories (unless specified othwerise) is labelled as Documentation.
+
+As per Skype Platform SDK Licence Agreement, chapter 2. You have agreed to:
+
+"use the Documentation solely for internal use by you and your Permitted Users for purposes of developing and testing Platform Products on your behalf;"
+

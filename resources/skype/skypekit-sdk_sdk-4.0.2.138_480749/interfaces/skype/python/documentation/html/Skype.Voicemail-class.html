@@ -1,0 +1,1311 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Skype.Voicemail</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Skype-module.html">Module&nbsp;Skype</a> ::
+        Class&nbsp;Voicemail
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Voicemail</h1><p class="nomargin-top"><span class="codelink"><a href="Skype-pysrc.html#Voicemail">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+        
+              |        
+<a href="skypekit.Cached-class.html">skypekit.Cached</a> --+    
+                  |    
+    <a href="skypekit.Object-class.html">skypekit.Object</a> --+
+                      |
+                     <strong class="uidshort">Voicemail</strong>
+</pre>
+
+<hr />
+<p>Wrapper class that includes voicemail-specific methods and properties.
+  In the Skype Conversation API, Voicemail is actually something of a 
+  misnomer for what would be more accurately called Voice Message.</p>
+  <p>The traditional Voicemail use case involves recording a voice message 
+  when an incoming call does not get answered in a pre-determined amount of
+  time. In the Skype Conversation API, voicemail does not depend on a call 
+  going unanswered - you can post a voice message asynchronously into any 
+  dialog conversation at any time.</p>
+  <p>In fact, a high-level action flow directing unanswered incoming live 
+  sessions to voicemail is not something provided by the Conversation API -
+  implementation of this use case is largely up to your UI.</p>
+  <p>The fact that your UI must retrieve incoming Voicemails by monitoring 
+  changes to a Conversation instance's Messages illustrates this conceptual
+  difference between traditional voicemail and voice messages. The message 
+  type Message::POSTED_VOICE_MESSAGE indicates that a Message instance 
+  should be handled as a voice message instead of by displaying its body 
+  text in the Conversation UI. Message::GetVoiceMessage enables you to 
+  retrieve the associated Voicemail instance; Voicemail::StartPlayback 
+  enables you to listen to the message audio.</p>
+  <p>To put it another way, the object chain goes like this: :</p>
+<pre class="literalblock">
+ Contact-&gt;Conversation-&gt;Message-&gt;Voicemail 
+</pre>
+  <p>There are three basic types of Voicemail objects:</p>
+  <ul>
+    <li>
+      INCOMING - received voice messages that can be retrieved from Message
+      objects;
+    </li>
+    <li>
+      OUTGOING - outbound voice messages that can be created with 
+      Conversation::StartVoiceMessage;
+    </li>
+    <li>
+      GREETING - voice messages that represent auto-answer greetings, 
+      either recorded by the user (CUSTOM_GREETING) or included as part of 
+      SkypeKit (DEFAULT_GREETING). This is the audio that gets played back 
+      to sender of the voice message before he can start recording his 
+      voice message.
+    </li>
+  </ul>
+  <p>Before trying to send out a voicemail, you should ensure that target 
+  Contact has the capability to receive them. Use 
+  Contact::GetCapabilityStatus to check for 
+  Contact::CAPABILITY_CAN_BE_SENT_VM.</p>
+  <p>Recording and Sending a Voice Message</p>
+  <p>The first step is to obtain a dialog Conversation with the target 
+  Contact. In that conversation, you can initiate the outgoing voice 
+  message with Conversation::StartVoiceMessage</p>
+  <p>Note that this call does not return an actual Voicemail object. To 
+  catch when an object gets created, you will need to check 
+  Conversation::P_ACTIVE_VM_ID property updates.</p>
+  <p>After invoking Conversation::StartVoiceMessage, SkypeKit instantiates 
+  a Voicemail instance for the target Contact's greeting (with type 
+  CUSTOM_GREETING or DEFAULT_GREETING). At this point, the 
+  Conversation::P_ACTIVE_VM_ID property update fires, newVM contains a 
+  reference to the greeting, and playback of the greeting for the sender 
+  starts automatically.</p>
+  <p>Once the greeting playback finishes, SkypeKit instantiates a second 
+  Voicemail instance for the outgoing voice message. At this point, the 
+  Conversation::P_ACTIVE_VM_ID property update fires again, newVM now 
+  contains a reference to the outgoing message, and recording starts 
+  automatically. If you want to include notification and/or error handling 
+  for whether this message was sent successfully, you should make a copy of
+  newVM now.</p>
+  <p>Once the user finishes (or abandons) recording of their message, they 
+  want to either send the message or to cancel it. To send the message, use
+  Conversation::PostVoiceMessage; to cancel the message, use 
+  Conversation::LeaveLiveSession.</p>
+  <p>Both of these actions results in the Conversation::P_ACTIVE_VM_ID 
+  property update firing for a third time, setting the value to NULL. 
+  However, the Voicemail object will actually continue its existence past 
+  this point. Saving a reference to the message's Voicemail object when you
+  start recording it enables you to keep receiving Voicemail property 
+  updates. This in turn enables your UI to check whether voice message send
+  succeeded or failed.</p>
+  <p>The relevant terminal state Voicemail::P_STATUS property values 
+  are:</p>
+  <ul>
+    <li>
+      Voicemail::CANCELLED - recording and/or sending of this message was 
+      cancelled
+    </li>
+    <li>
+      Voicemail::UPLOADED - message sent
+    </li>
+    <li>
+      Voicemail::FAILED - message could not be sent
+    </li>
+  </ul>
+  <p>Receiving and Playing Back a Voice Message</p>
+  <p>On the remote side, the Voicemail appears as a Message object of type 
+  Message::POSTED_VOICE_MESSAGE. The message's author property contains the
+  Skype Name of the Voicemail originator, and its BodyXml property contains
+  the message length and title text in following format:</p>
+  <p>:</p>
+<pre class="literalblock">
+ &lt;voicemail alt=&quot;Sent voicemail to people in this conversation.&quot;&gt;&lt;message length=&quot;5&quot; &gt;&lt;/message&gt;&lt;/voicemail&gt; 
+</pre>
+  <p>Receiver side UI can then retrieve the Voicemail object from the 
+  message with Message::GetVoiceMessage and start local playback with 
+  Message::StartPlayback.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_init_" class="summary-sig-name">_sk_init_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">object_id</span>,
+        <span class="summary-sig-arg">transport</span>)</span><br />
+      actual constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Voicemail._sk_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Voicemail-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Voicemail.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnPropertyChange"></a><span class="summary-sig-name">OnPropertyChange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">property_name</span>)</span><br />
+      notifies from a property change</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Voicemail.OnPropertyChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Voicemail-class.html#StartRecording" class="summary-sig-name">StartRecording</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Start recording your own auto-answer greeting message (leave message 
+      after the beep...) only.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Voicemail.StartRecording">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Voicemail-class.html#StopRecording" class="summary-sig-name">StopRecording</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Stop recording of your own auto-answer greeting message only.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Voicemail.StopRecording">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="StartPlayback"></a><span class="summary-sig-name">StartPlayback</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Initiates playback of a voice message</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Voicemail.StartPlayback">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="StopPlayback"></a><span class="summary-sig-name">StopPlayback</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Terminates playback of a voice message</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Voicemail.StopPlayback">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Delete"></a><span class="summary-sig-name">Delete</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      first from server, and then the local copy</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Voicemail.Delete">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Voicemail-class.html#Cancel" class="summary-sig-name">Cancel</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Canceling recording of your own auto-answer greeting message.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Voicemail.Cancel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Voicemail-class.html#CheckPermission" class="summary-sig-name">CheckPermission</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      check if we can send voicemail (unauth,blocked,no priv etc cases).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Voicemail.CheckPermission">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#multiget">multiget</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__copy__">__copy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propid"></a><span class="summary-sig-name">propid</span>(<span class="summary-sig-arg">propname</span>)</span><br />
+      convert a property name to the enum of the property</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Voicemail.propid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__new__">__new__</a></code>,
+      <code><a href="skypekit.Cached-class.html#sk_exists">sk_exists</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="event_handlers"></a><span class="summary-name">event_handlers</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#propid2label" class="summary-name">propid2label</a> = <code title="{100: 'type',
+ 101: 'partner_handle',
+ 102: 'partner_dispname',
+ 103: 'status',
+ 104: 'failurereason',
+ 105: 'subject',
+ 106: 'timestamp',
+ 107: 'duration',
+..."><code class="variable-group">{</code>100<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">type</code><code class="variable-quote">'</code><code class="variable-op">, </code>101<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">partner_handle</code><code class="variable-quote">'</code><code class="variable-op">, </code>102<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">part</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="module_id"></a><span class="summary-name">module_id</span> = <code title="7">7</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#TYPE" class="summary-name">TYPE</a> = <code title="{1: 'INCOMING',
+ 2: 'CUSTOM_GREETING',
+ 3: 'OUTGOING',
+ 4: 'DEFAULT_GREETING',
+ 'CUSTOM_GREETING': 2,
+ 'DEFAULT_GREETING': 4,
+ 'INCOMING': 1,
+ 'OUTGOING': 3}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INCOMING</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CUSTOM_GREETING</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">OUTGOING</code><code class="variable-quote">'</code><code class="variable-op">, </code>4<code class="variable-op">:</code><code class="variable-ellipsis">...</code></code><br />
+      INCOMING
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#STATUS" class="summary-name">STATUS</a> = <code title="{1: 'NOTDOWNLOADED',
+ 2: 'DOWNLOADING',
+ 3: 'UNPLAYED',
+ 4: 'BUFFERING',
+ 5: 'PLAYING',
+ 6: 'PLAYED',
+ 7: 'BLANK',
+ 8: 'RECORDING',
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NOTDOWNLOADED</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DOWNLOADING</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNPLAYED</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code><br />
+      NOTDOWNLOADED
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#FAILUREREASON" class="summary-name">FAILUREREASON</a> = <code title="{1: 'MISC_ERROR',
+ 2: 'CONNECT_ERROR',
+ 3: 'NO_VOICEMAIL_CAPABILITY',
+ 4: 'NO_SUCH_VOICEMAIL',
+ 5: 'FILE_READ_ERROR',
+ 6: 'FILE_WRITE_ERROR',
+ 7: 'RECORDING_ERROR',
+ 8: 'PLAYBACK_ERROR',
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">MISC_ERROR</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONNECT_ERROR</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NO_V</code><code class="variable-ellipsis">...</code></code><br />
+      MISC_ERROR
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TYPE"></a><span class="summary-name">P_TYPE</span> = <code title="100">100</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PARTNER_HANDLE"></a><span class="summary-name">P_PARTNER_HANDLE</span> = <code title="101">101</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PARTNER_DISPNAME"></a><span class="summary-name">P_PARTNER_DISPNAME</span> = <code title="102">102</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_STATUS"></a><span class="summary-name">P_STATUS</span> = <code title="103">103</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_FAILUREREASON"></a><span class="summary-name">P_FAILUREREASON</span> = <code title="104">104</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SUBJECT"></a><span class="summary-name">P_SUBJECT</span> = <code title="105">105</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TIMESTAMP"></a><span class="summary-name">P_TIMESTAMP</span> = <code title="106">106</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_DURATION"></a><span class="summary-name">P_DURATION</span> = <code title="107">107</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ALLOWED_DURATION"></a><span class="summary-name">P_ALLOWED_DURATION</span> = <code title="108">108</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PLAYBACK_PROGRESS"></a><span class="summary-name">P_PLAYBACK_PROGRESS</span> = <code title="109">109</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CONVO_ID"></a><span class="summary-name">P_CONVO_ID</span> = <code title="830">830</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CHATMSG_GUID"></a><span class="summary-name">P_CHATMSG_GUID</span> = <code title="831">831</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#rwlock">rwlock</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#properties">properties</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#type" class="summary-name">type</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#partner_handle" class="summary-name">partner_handle</a><br />
+      registered username of the other party
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#partner_dispname" class="summary-name">partner_dispname</a><br />
+      user's display name of the other party
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#status" class="summary-name">status</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#failurereason" class="summary-name">failurereason</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#subject" class="summary-name">subject</a><br />
+      DEPRECATED: subject line
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#timestamp" class="summary-name">timestamp</a><br />
+      timestamp of creation
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#duration" class="summary-name">duration</a><br />
+      duration in seconds
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#allowed_duration" class="summary-name">allowed_duration</a><br />
+      max allowed duration in seconds
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#playback_progress" class="summary-name">playback_progress</a><br />
+      VM playback progress in seconds
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#convo_id" class="summary-name">convo_id</a><br />
+      CONVERSATION_ID of corresponding conversation
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Voicemail-class.html#chatmsg_guid" class="summary-name">chatmsg_guid</a><br />
+      GUID of the message that the VM is tied to
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="_sk_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_sk_init_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">object_id</span>,
+        <span class="sig-arg">transport</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Voicemail._sk_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>actual constructor</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="skypekit.Object-class.html#_sk_init_">skypekit.Object._sk_init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Voicemail.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="StartRecording"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">StartRecording</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Voicemail.StartRecording">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Start recording your own auto-answer greeting message (leave message 
+  after the beep...) only. Recording of outgoing Voicemail messages start 
+  automatically (using Conversation::StartVoiceMessage) after playback of 
+  the remote side greeting message has finished.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="StopRecording"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">StopRecording</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Voicemail.StopRecording">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Stop recording of your own auto-answer greeting message only. To stop 
+  recording of and send an outgoing Voicemail, use 
+  Conversation::PostVoiceMessage.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Cancel"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Cancel</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Voicemail.Cancel">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Canceling recording of your own auto-answer greeting message. To stop 
+  recording of and cancel an outgoing Voicemail, use 
+  Conversation::LeaveLiveSession.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CheckPermission"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CheckPermission</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Voicemail.CheckPermission">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>check if we can send voicemail (unauth,blocked,no priv etc cases). 
+  only OUTGOING</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="propid2label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">propid2label</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>100<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">type</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 101<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">partner_handle</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 102<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">partner_dispname</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 103<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">status</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 104<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">failurereason</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 105<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">subject</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 106<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">timestamp</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 107<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">duration</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TYPE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TYPE</h3>
+  <ul>
+    <li>
+      INCOMING
+    </li>
+    <li>
+      DEFAULT_GREETING
+    </li>
+    <li>
+      CUSTOM_GREETING
+    </li>
+    <li>
+      OUTGOING
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INCOMING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CUSTOM_GREETING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">OUTGOING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DEFAULT_GREETING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CUSTOM_GREETING</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">DEFAULT_GREETING</code><code class="variable-quote">'</code><code class="variable-op">: </code>4<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">INCOMING</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">OUTGOING</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">STATUS</h3>
+  <ul>
+    <li>
+      NOTDOWNLOADED
+    </li>
+    <li>
+      DOWNLOADING
+    </li>
+    <li>
+      UNPLAYED
+    </li>
+    <li>
+      BUFFERING
+    </li>
+    <li>
+      PLAYING
+    </li>
+    <li>
+      PLAYED
+    </li>
+    <li>
+      BLANK
+    </li>
+    <li>
+      RECORDING
+    </li>
+    <li>
+      RECORDED
+    </li>
+    <li>
+      UPLOADING
+    </li>
+    <li>
+      UPLOADED
+    </li>
+    <li>
+      DELETING
+    </li>
+    <li>
+      FAILED
+    </li>
+    <li>
+      DELETING_FAILED
+    </li>
+    <li>
+      CHECKING
+    </li>
+    <li>
+      CANCELLED
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NOTDOWNLOADED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DOWNLOADING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNPLAYED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BUFFERING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PLAYING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PLAYED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BLANK</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RECORDING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="FAILUREREASON"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">FAILUREREASON</h3>
+  <ul>
+    <li>
+      MISC_ERROR
+    </li>
+    <li>
+      CONNECT_ERROR
+    </li>
+    <li>
+      NO_VOICEMAIL_CAPABILITY
+    </li>
+    <li>
+      NO_SUCH_VOICEMAIL
+    </li>
+    <li>
+      FILE_READ_ERROR
+    </li>
+    <li>
+      FILE_WRITE_ERROR
+    </li>
+    <li>
+      RECORDING_ERROR
+    </li>
+    <li>
+      PLAYBACK_ERROR
+    </li>
+    <li>
+      NO_PERMISSION
+    </li>
+    <li>
+      RECEIVER_DISABLED_VOICEMAIL - receiver turned off voicemail
+    </li>
+    <li>
+      SENDER_NOT_AUTHORIZED - receiver has not authorized you and privacy 
+      is not set to anyone
+    </li>
+    <li>
+      SENDER_BLOCKED - receiver blocked sender
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">MISC_ERROR</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONNECT_ERROR</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NO_VOICEMAIL_CAPABILITY</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NO_SUCH_VOICEMAIL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FILE_READ_ERROR</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FILE_WRITE_ERROR</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RECORDING_ERROR</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PLAYBACK_ERROR</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Property Details</span></td>
+</tr>
+</table>
+<a name="type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">type</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_type" class="summary-sig-name" onclick="show_private();">_sk_get_type</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="partner_handle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">partner_handle</h3>
+  <p>registered username of the other party</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_partner_handle" class="summary-sig-name" onclick="show_private();">_sk_get_partner_handle</a>(<span class="summary-sig-arg">self</span>)</span>
+        - registered username of the other party
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="partner_dispname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">partner_dispname</h3>
+  <p>user's display name of the other party</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_partner_dispname" class="summary-sig-name" onclick="show_private();">_sk_get_partner_dispname</a>(<span class="summary-sig-arg">self</span>)</span>
+        - user's display name of the other party
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">status</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_status" class="summary-sig-name" onclick="show_private();">_sk_get_status</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="failurereason"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">failurereason</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_failurereason" class="summary-sig-name" onclick="show_private();">_sk_get_failurereason</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="subject"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">subject</h3>
+  <p>DEPRECATED: subject line</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_subject" class="summary-sig-name" onclick="show_private();">_sk_get_subject</a>(<span class="summary-sig-arg">self</span>)</span>
+        - DEPRECATED: subject line
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timestamp</h3>
+  <p>timestamp of creation</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - timestamp of creation
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="duration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">duration</h3>
+  <p>duration in seconds</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_duration" class="summary-sig-name" onclick="show_private();">_sk_get_duration</a>(<span class="summary-sig-arg">self</span>)</span>
+        - duration in seconds
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="allowed_duration"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">allowed_duration</h3>
+  <p>max allowed duration in seconds</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_allowed_duration" class="summary-sig-name" onclick="show_private();">_sk_get_allowed_duration</a>(<span class="summary-sig-arg">self</span>)</span>
+        - max allowed duration in seconds
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="playback_progress"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">playback_progress</h3>
+  <p>VM playback progress in seconds</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_playback_progress" class="summary-sig-name" onclick="show_private();">_sk_get_playback_progress</a>(<span class="summary-sig-arg">self</span>)</span>
+        - VM playback progress in seconds
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="convo_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">convo_id</h3>
+  <p>CONVERSATION_ID of corresponding conversation</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_convo_id" class="summary-sig-name" onclick="show_private();">_sk_get_convo_id</a>(<span class="summary-sig-arg">self</span>)</span>
+        - CONVERSATION_ID of corresponding conversation
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="chatmsg_guid"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">chatmsg_guid</h3>
+  <p>GUID of the message that the VM is tied to</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Voicemail-class.html#_sk_get_chatmsg_guid" class="summary-sig-name" onclick="show_private();">_sk_get_chatmsg_guid</a>(<span class="summary-sig-arg">self</span>)</span>
+        - GUID of the message that the VM is tied to
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:40 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

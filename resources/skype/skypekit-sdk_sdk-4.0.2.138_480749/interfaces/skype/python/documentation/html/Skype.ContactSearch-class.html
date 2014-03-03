@@ -1,0 +1,1373 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Skype.ContactSearch</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Skype-module.html">Module&nbsp;Skype</a> ::
+        Class&nbsp;ContactSearch
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ContactSearch</h1><p class="nomargin-top"><span class="codelink"><a href="Skype-pysrc.html#ContactSearch">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+        
+              |        
+<a href="skypekit.Cached-class.html">skypekit.Cached</a> --+    
+                  |    
+    <a href="skypekit.Object-class.html">skypekit.Object</a> --+
+                      |
+                     <strong class="uidshort">ContactSearch</strong>
+</pre>
+
+<hr />
+<p>This class encapsulates functionality for looking up contacts on the 
+  Skype network. Contacts can be searched by portion of their name, e-mail 
+  address, language preferences, etc.</p>
+  <p>Contact search is asynchronous. ContactSearch::Submit is a 
+  non-blocking function that initiates the search. Upon finding a matching 
+  contact, ContactSearch::OnNewResult event gets fired, that gives you the 
+  reference to the discovered contact. You can get up to 100 matching 
+  contacts per search. Note that you will need to keep a live reference of 
+  the ContactSearch object while the search is doing its work.</p>
+  <p>So, to perform a contact search:</p>
+  <ul>
+    <li>
+      create a contact search object
+    </li>
+    <li>
+      specify search terms and conditions
+    </li>
+    <li>
+      submit search
+    </li>
+    <li>
+      in ContactSearch::OnNewResult callback, update your UI
+    </li>
+    <li>
+      in ContactSearch::OnChange, check for terminal values of 
+      P_CONTACT_SEARCH_STATUS and update the UI accordingly.
+    </li>
+  </ul>
+  <p>When the search has done its job, the 
+  ContactSearch::P_CONTACT_SEARCH_STATUS property will go to one of the 
+  terminal values.</p>
+  <p>The terminal values are:</p>
+  <ul>
+    <li>
+      FINISHED - the search has stopped. Note that this does not mean any 
+      matches were actually found.
+    </li>
+    <li>
+      FAILED - the search has failed.
+    </li>
+    <li>
+      EXTENDABLE - this state should be considered the same as FINISHED. 
+      The feature of extending long search results is about to be 
+      deprecated. It is still possible for search objects to occasionally 
+      reach that state, so it should be handled in the UI (as FINISHED), 
+      but the extending feature itself should not be implemented in your 
+      UI.
+    </li>
+  </ul>
+  <p>There are three methods to create the ContactSearch objects.</p>
+  <p>A) Skype::CreateIdentitySearch</p>
+  <p>This method takes a string argument and looks for exact matches 
+  against Contact::P_SKYPENAME property. So for example, identity search 
+  for &quot;echo&quot; will return 0 results and search for 
+  &quot;echo123&quot; will return exactly one.</p>
+  <p>Identity in this case means skypename - contact search does not work 
+  with PSTN type contacts. However, it does work for SKYPE type contacts 
+  that have supplied P_PHONE_HOME, P_PHONE_OFFICE or P_PHONE_MOBILE values 
+  in their account data. To search for those, you will need to use complex 
+  search (see below).</p>
+  <p>Note that you should always check for boolean return value of the 
+  CreateIdentitySearch method. If the user submits a string that is not a 
+  valid skypename, the method will return false and the ContactSearchRef 
+  argument will return as NULL.</p>
+  <p>B) Skype::CreateBasicContactSearch</p>
+  <p>This method takes a string argument and looks for non-exact matches 
+  against both P_SKYPENAME and P_FULLNAME properties of the contact. If you
+  intend to implement a simple, one-input search feature - this is the best
+  method for you. The non-exact matching operates similarly to the SQL LIKE
+  condition.</p>
+  <p>C) Skype::CreateContactSearch</p>
+  <p>This method enables you to implement advanced contact search, matching
+  against multiple seach criteria. It takes no input arguments and expects 
+  search criteria to be added to the already constructed search object.</p>
+  <p>Criteria can be added with ContactSearch::AddStrTerm and 
+  ContactSearch::AddIntTerm methods.</p>
+  <p>These methods take Contact class porperty ID, condition, and the match
+  pattern as inputs.</p>
+  <p>Only the following Contact properties can be used for search:</p>
+  <ul>
+    <li>
+      P_SKYPENAME
+    </li>
+    <li>
+      P_FULLNAME
+    </li>
+    <li>
+      P_BIRTHDAY (uint)
+    </li>
+    <li>
+      P_GENDER (uint: 1-male, 2-female)
+    </li>
+    <li>
+      P_LANGUAGES
+    </li>
+    <li>
+      P_COUNTRY
+    </li>
+    <li>
+      P_PROVINCE
+    </li>
+    <li>
+      P_CITY
+    </li>
+    <li>
+      P_PHONE_HOME
+    </li>
+    <li>
+      P_PHONE_OFFICE
+    </li>
+    <li>
+      P_PHONE_MOBILE
+    </li>
+    <li>
+      P_EMAILS
+    </li>
+    <li>
+      P_HOMEPAGE
+    </li>
+    <li>
+      P_ABOUT
+    </li>
+  </ul>
+  <p>String searches are case insensitive, i.e. search for echo123 also 
+  matches ECHO123</p>
+  <p>When adding multiple criteria, default behaviour is that the 
+  criterions are additive. I.e. a term skypename == &quot;joe&quot; 
+  followed by term country == &quot;us&quot; will result in intersection 
+  between all joes and everybody in US.</p>
+  <p>You can explicitly add an &quot;OR&quot; instead of &quot;AND&quot; 
+  between conditions, using the AddOr method.</p>
+  <p>By default, AND criteria are grouped together, before OR's, so 
+  that:</p>
+  <p>AddTerm(condition1) AddTerm(condition2) AddOr() AddTerm(condition3) 
+  AddTerm(condition4)</p>
+  <p>will result in the following logical statement: (condition1 AND 
+  condition2) OR (condition3 AND condition4)</p>
+  <p>However, you can add &quot;global&quot; critera, by using the 
+  add_to_subs argument of the AddXX methods.</p>
+  <p>AddTerm(condition1) AddTerm(condition2) AddOr() AddTerm(condition3) 
+  AddTerm(condition4, add_to_subs=true)</p>
+  <p>which would result in: (condition1 AND condition2 AND condition4) OR 
+  (condition3 AND condition4)</p>
+  <p>Every one of the contact properties can only be used once, per search.
+  For example, you cannot create a search for two different P_FULLNAME 
+  patterns. The &amp;valid argument will still return tue if you do this, 
+  but the last criteria for any given property will override all previous 
+  ones. So, a search like this:</p>
+  <p>cs-&gt;AddStrTerm(Contact::P_FULLNAME, ContactSearch::EQ, &quot;John 
+  Smith&quot;, isValid); cs-&gt;AddOr(); 
+  cs-&gt;AddStrTerm(Contact::P_FULLNAME, ContactSearch::EQ, &quot;Ivan 
+  Sidorov&quot;, isValid);</p>
+  <p>will only return matches for &quot;Ivan Sidorov&quot; and none for 
+  &quot;John Smith&quot;.</p>
+  <p>Some of the contact properties are automatically combined for purposes
+  of search.</p>
+  <p>A search for P_SKYPENAME also returns matches from the P_FULLNAME 
+  property and vice versa.</p>
+  <p>So that this: cs-&gt;AddStrTerm(Contact::P_SKYPENAME, 
+  ContactSearch::EQ, &quot;john.smith&quot;, isValid);</p>
+  <p>..and this: cs-&gt;AddStrTerm(Contact::P_FULLNAME, ContactSearch::EQ, 
+  &quot;John Smith&quot;, isValid);</p>
+  <p>..and this: cs-&gt;AddStrTerm(Contact::P_SKYPENAME, ContactSearch::EQ,
+  &quot;john.smith&quot;, isValid); cs-&gt;AddOr(); 
+  cs-&gt;AddStrTerm(Contact::P_FULLNAME, ContactSearch::EQ, &quot;John 
+  Smith&quot;, isValid);</p>
+  <p>..all search from both the P_FULLNAME and P_SKYPENAME fields.</p>
+  <p>Before using ContactGroup::Submit to start the search, you should 
+  always check whether the search criteria ended up being valid. This you 
+  can do with ContactSearch::IsValid method.</p>
+  <p>As you probably noticed, each of the AddXX methods also return a 
+  validity check boolean. However, it is a better practice to do the 
+  overall check as well, even if all the individual search criteria ended 
+  up looking Ok.</p>
+  <p>For example, lets take a search for contact's e-mail. This can be done
+  with two different methods. Firstly we can use the 
+  ContactSearch::AddEmailTerm method. This method will actually validate 
+  whether the input is a valid e-mail address:</p>
+  <p>cs-&gt;AddEmailTerm (&quot;test@test@test&quot;, isValid); will return
+  the isValid argument as false.</p>
+  <p>However, you can also add the e-mail search criterion as a simple 
+  string, like this:</p>
+  <p>cs-&gt;AddStrTerm(Contact::P_EMAILS, ContactSearch::EQ, 
+  &quot;test@test@test@&quot;, isValid); in which case the isValid will 
+  return true.</p>
+  <p>However, if you then check entire search object with:</p>
+  <p>cs-&gt;IsValid(isValid);</p>
+  <p>the isValid will correctly return false.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactSearch-class.html#_sk_init_" class="summary-sig-name">_sk_init_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">object_id</span>,
+        <span class="summary-sig-arg">transport</span>)</span><br />
+      actual constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch._sk_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactSearch-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnPropertyChange"></a><span class="summary-sig-name">OnPropertyChange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">property_name</span>)</span><br />
+      notifies from a property change</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.OnPropertyChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactSearch-class.html#AddMinAgeTerm" class="summary-sig-name">AddMinAgeTerm</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">min_age_in_years</span>,
+        <span class="summary-sig-arg">add_to_subs</span>=<span class="summary-sig-default">False</span>)</span><br />
+      construct CONTACT_BIRTHDAY term based on current time</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddMinAgeTerm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactSearch-class.html#AddMaxAgeTerm" class="summary-sig-name">AddMaxAgeTerm</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">max_age_in_years</span>,
+        <span class="summary-sig-arg">add_to_subs</span>=<span class="summary-sig-default">False</span>)</span><br />
+      construct CONTACT_BIRTHDAY term based on current time</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddMaxAgeTerm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactSearch-class.html#AddEmailTerm" class="summary-sig-name">AddEmailTerm</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">email</span>,
+        <span class="summary-sig-arg">add_to_subs</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Adds a search term against Contact::P_EMAILS property and 
+      pre-validates the value given in the email argument.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddEmailTerm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactSearch-class.html#AddLanguageTerm" class="summary-sig-name">AddLanguageTerm</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">language</span>,
+        <span class="summary-sig-arg">add_to_subs</span>=<span class="summary-sig-default">False</span>)</span><br />
+      No description available.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddLanguageTerm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactSearch-class.html#AddStrTerm" class="summary-sig-name">AddStrTerm</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prop</span>,
+        <span class="summary-sig-arg">cond</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">add_to_subs</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Adds a string search term to a custom contact search object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddStrTerm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactSearch-class.html#AddIntTerm" class="summary-sig-name">AddIntTerm</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prop</span>,
+        <span class="summary-sig-arg">cond</span>,
+        <span class="summary-sig-arg">value</span>,
+        <span class="summary-sig-arg">add_to_subs</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Adds a search term to a custom contact search object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddIntTerm">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="AddOr"></a><span class="summary-sig-name">AddOr</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      used to group terms (AddTerm(1), AddTerm(2), Or(), AddTerm(3), 
+      AddTerm(4), etc)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddOr">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactSearch-class.html#IsValid" class="summary-sig-name">IsValid</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      checks that terms list is non-empty and does not contain unsupported 
+      keys</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.IsValid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Submit"></a><span class="summary-sig-name">Submit</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      launch search</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.Submit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Extend"></a><span class="summary-sig-name">Extend</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      extend if search is EXTENDABLE</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.Extend">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Release"></a><span class="summary-sig-name">Release</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      releases results that are not referenced from elsewhere</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.Release">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactSearch-class.html#GetResults" class="summary-sig-name">GetResults</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">from_</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">count</span>=<span class="summary-sig-default">4294967295</span>)</span><br />
+      result list is dynamically updated</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.GetResults">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactSearch-class.html#OnNewResult" class="summary-sig-name">OnNewResult</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">contact</span>,
+        <span class="summary-sig-arg">rank_value</span>)</span><br />
+      This callback is fired when a new matching contact has been found 
+      during the search.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.OnNewResult">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#multiget">multiget</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__copy__">__copy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propid"></a><span class="summary-sig-name">propid</span>(<span class="summary-sig-arg">propname</span>)</span><br />
+      convert a property name to the enum of the property</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactSearch.propid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__new__">__new__</a></code>,
+      <code><a href="skypekit.Cached-class.html#sk_exists">sk_exists</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="event_handlers"></a><span class="summary-name">event_handlers</span> = <code title="{1: '_sk_on_new_result'}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk_on_new_result</code><code class="variable-quote">'</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="propid2label"></a><span class="summary-name">propid2label</span> = <code title="{200: 'contact_search_status'}"><code class="variable-group">{</code>200<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">contact_search_status</code><code class="variable-quote">'</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="module_id"></a><span class="summary-name">module_id</span> = <code title="1">1</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.ContactSearch-class.html#STATUS" class="summary-name">STATUS</a> = <code title="{1: 'CONSTRUCTION',
+ 2: 'PENDING',
+ 3: 'EXTENDABLE',
+ 4: 'FINISHED',
+ 5: 'FAILED',
+ 'CONSTRUCTION': 1,
+ 'EXTENDABLE': 3,
+ 'FAILED': 5,
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONSTRUCTION</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PENDING</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EXTENDABLE</code><code class="variable-quote">'</code><code class="variable-op">, </code>4<code class="variable-op">:</code><code class="variable-ellipsis">...</code></code><br />
+      Possible values for the ContactSearch.P_STATUS property.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.ContactSearch-class.html#CONDITION" class="summary-name">CONDITION</a> = <code title="{0: 'EQ',
+ 1: 'GT',
+ 2: 'GE',
+ 3: 'LT',
+ 4: 'LE',
+ 5: 'PREFIX_EQ',
+ 6: 'PREFIX_GE',
+ 7: 'PREFIX_LE',
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EQ</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">GT</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">GE</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LT</code><code class="variable-quote">'</code><code class="variable-op">, </code>4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LE</code><code class="variable-quote">'</code><code class="variable-op">, </code>5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code><br />
+      List of available matching conditions that can be used in AddTerm 
+      methods.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CONTACT_SEARCH_STATUS"></a><span class="summary-name">P_CONTACT_SEARCH_STATUS</span> = <code title="200">200</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#rwlock">rwlock</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#properties">properties</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.ContactSearch-class.html#contact_search_status" class="summary-name">contact_search_status</a>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="_sk_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_sk_init_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">object_id</span>,
+        <span class="sig-arg">transport</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactSearch._sk_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>actual constructor</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="skypekit.Object-class.html#_sk_init_">skypekit.Object._sk_init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactSearch.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="AddMinAgeTerm"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AddMinAgeTerm</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">min_age_in_years</span>,
+        <span class="sig-arg">add_to_subs</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddMinAgeTerm">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>construct CONTACT_BIRTHDAY term based on current time</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>min_age_in_years</b>
+    </li>
+    <li>
+      <b>add_to_subs</b>
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>valid</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AddMaxAgeTerm"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AddMaxAgeTerm</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">max_age_in_years</span>,
+        <span class="sig-arg">add_to_subs</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddMaxAgeTerm">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>construct CONTACT_BIRTHDAY term based on current time</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>max_age_in_years</b>
+    </li>
+    <li>
+      <b>add_to_subs</b>
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>valid</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AddEmailTerm"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AddEmailTerm</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">email</span>,
+        <span class="sig-arg">add_to_subs</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddEmailTerm">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Adds a search term against Contact::P_EMAILS property and 
+  pre-validates the value given in the email argument.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>email</b> - e-mail addres to search for.
+    </li>
+    <li>
+      <b>add_to_subs</b> - This argument enables you to group conditions. 
+      See ContactSearch class details for more information.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>valid</b> - Returns false if the value in email property did not 
+      look like a valid email address.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AddLanguageTerm"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AddLanguageTerm</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">language</span>,
+        <span class="sig-arg">add_to_subs</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddLanguageTerm">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>No description available.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>language</b>
+    </li>
+    <li>
+      <b>add_to_subs</b>
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>valid</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AddStrTerm"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AddStrTerm</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prop</span>,
+        <span class="sig-arg">cond</span>,
+        <span class="sig-arg">value</span>,
+        <span class="sig-arg">add_to_subs</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddStrTerm">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Adds a string search term to a custom contact search object.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>prop</b> - Following Contact class string propkeys can be used for
+      Contact search:
+      <ul>
+        <li>
+          Contact::P_SKYPENAME
+        </li>
+        <li>
+          Contact::P_FULLNAME
+        </li>
+        <li>
+          Contact::P_LANGUAGES
+        </li>
+        <li>
+          Contact::P_COUNTRY
+        </li>
+        <li>
+          Contact::P_PROVINCE
+        </li>
+        <li>
+          Contact::P_CITY
+        </li>
+        <li>
+          Contact::P_PHONE_HOME
+        </li>
+        <li>
+          Contact::P_PHONE_OFFICE
+        </li>
+        <li>
+          Contact::P_PHONE_MOBILE
+        </li>
+        <li>
+          Contact::P_EMAILS
+        </li>
+        <li>
+          Contact::P_HOMEPAGE
+        </li>
+        <li>
+          Contact::P_ABOUT
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p>Note that while Contact::P_EMAILS is technically a string and can be 
+  used in this method, it is recommended that you use 
+  ContactSearch.AddEmailTerm method instead.</p>
+  <ul>
+    <li>
+      <b>cond</b> - Search condition (ContactSearch::CONDITION)
+    </li>
+    <li>
+      <b>value</b> - Value to match against.
+    </li>
+    <li>
+      <b>add_to_subs</b> - This argument enables you to group conditions. 
+      See ContactSearch class details for more information.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>valid</b> - Returns true if the ContactSearch term-set remains 
+      valid after adding this term.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AddIntTerm"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AddIntTerm</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prop</span>,
+        <span class="sig-arg">cond</span>,
+        <span class="sig-arg">value</span>,
+        <span class="sig-arg">add_to_subs</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactSearch.AddIntTerm">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Adds a search term to a custom contact search object. For now, there 
+  are only two searchable Contact properties that are integers, so this can
+  oly be used for Contact::P_BIRTHDAY and Contact::P_GENDER.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>prop</b> - Propkey to search for. Either Contact::P_BIRTHDAY or 
+      Contact::P_GENDER
+    </li>
+    <li>
+      <b>cond</b> - Search condition (ContactSearch::CONDITION)
+    </li>
+    <li>
+      <b>value</b> - Value to match against.
+    </li>
+    <li>
+      <b>add_to_subs</b> - This argument enables you to group conditions. 
+      See ContactSearch class details for more information.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>valid</b> - Returns true if the ContactSearch term-set remains 
+      valid after adding this term.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="IsValid"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IsValid</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactSearch.IsValid">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>checks that terms list is non-empty and does not contain unsupported 
+  keys</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetResults"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetResults</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">from_</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">count</span>=<span class="sig-default">4294967295</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactSearch.GetResults">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>result list is dynamically updated</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>from_</b>
+    </li>
+    <li>
+      <b>count</b>
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>contacts</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="OnNewResult"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OnNewResult</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">contact</span>,
+        <span class="sig-arg">rank_value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactSearch.OnNewResult">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This callback is fired when a new matching contact has been found 
+  during the search.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>contact</b>
+    </li>
+    <li>
+      <b>rank_value</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">STATUS</h3>
+  <p>Possible values for the ContactSearch.P_STATUS property.</p>
+  <ul>
+    <li>
+      CONSTRUCTION - Transient state, obtained after submission and 
+      actually initiating the search on the network.
+    </li>
+    <li>
+      PENDING - Waiting for results to show up. This is a transient state.
+    </li>
+    <li>
+      EXTENDABLE - Enough matches are found. No more OnNewResult events 
+      will fire. The feature of extending long search results is about to 
+      be deprecated. It is still possible for search objects to 
+      occasionally reach that state, so it should be handled in the UI (as 
+      FINISHED), but the extending feature itself should not be implemented
+      in your UI.
+    </li>
+    <li>
+      FINISHED - The search is finished. No more matches are expected. This
+      is a terminal state.
+    </li>
+    <li>
+      FAILED - ContactSearch failed. Better check if the search terms made 
+      any sense, with ContactSearch::IsValid. This is a terminal state.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONSTRUCTION</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PENDING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EXTENDABLE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FINISHED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CONSTRUCTION</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">EXTENDABLE</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">FAILED</code><code class="variable-quote">'</code><code class="variable-op">: </code>5<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CONDITION"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">CONDITION</h3>
+  <p>List of available matching conditions that can be used in AddTerm 
+  methods.</p>
+  <ul>
+    <li>
+      EQ - Equals
+    </li>
+    <li>
+      GT - Is greater than
+    </li>
+    <li>
+      GE - Is greater or equal.
+    </li>
+    <li>
+      LT - Is less than
+    </li>
+    <li>
+      LE - Less or equal
+    </li>
+    <li>
+      PREFIX_EQ - Start of a word macthes exactly (string properties only).
+    </li>
+    <li>
+      PREFIX_GE - Start of a word is greater or equal (string properties 
+      only).
+    </li>
+    <li>
+      PREFIX_LE - Start of a word is less or equal (string properties 
+      only).
+    </li>
+    <li>
+      CONTAINS_WORDS - Contains the word (string properties only).
+    </li>
+    <li>
+      CONTAINS_WORD_PREFIXES - One of the words starts with searched value 
+      (string properties only).
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EQ</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">GT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">GE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PREFIX_EQ</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PREFIX_GE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PREFIX_LE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Property Details</span></td>
+</tr>
+</table>
+<a name="contact_search_status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">contact_search_status</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.ContactSearch-class.html#_sk_get_contact_search_status" class="summary-sig-name" onclick="show_private();">_sk_get_contact_search_status</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:39 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,3220 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Skype.Contact</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Skype-module.html">Module&nbsp;Skype</a> ::
+        Class&nbsp;Contact
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Contact</h1><p class="nomargin-top"><span class="codelink"><a href="Skype-pysrc.html#Contact">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+        
+              |        
+<a href="skypekit.Cached-class.html">skypekit.Cached</a> --+    
+                  |    
+    <a href="skypekit.Object-class.html">skypekit.Object</a> --+
+                      |
+                     <strong class="uidshort">Contact</strong>
+</pre>
+
+<hr />
+<p>Address book entry. Encapsulates methods like GetType, GetIdentity, 
+  GetAvatar, SendAuthRequest, OpenConversation etc. Single contact can have
+  additional phone numbers attached to it (ASSIGNED_PHONE1 .. 
+  ASSIGNED_PHONE3). Note that in the context of a conversation, Contacts 
+  are represented by Participant objects. Contact member functions all 
+  return a Boolean indicating the success (true) or failure (false) of 
+  processing the request itself (transport, runtime availability, and so 
+  forth)?not the success or failure of its associated functionality. For 
+  example, Contact::IsMemberOf returns true if it was able to make a 
+  determination, and its result parameter reflects whether this Contact is 
+  a member of the target group. Similarly, Contact::IsMemberOf returns 
+  false if it was unable to make a determination, and the value of its 
+  result parameter is undefined.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_init_" class="summary-sig-name">_sk_init_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">object_id</span>,
+        <span class="summary-sig-arg">transport</span>)</span><br />
+      actual constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact._sk_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnPropertyChange"></a><span class="summary-sig-name">OnPropertyChange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">property_name</span>)</span><br />
+      notifies from a property change</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.OnPropertyChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#GetType" class="summary-sig-name">GetType</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Getter method for the TYPE property.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.GetType">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#GetIdentity" class="summary-sig-name">GetIdentity</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      No description available.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.GetIdentity">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#GetAvatar" class="summary-sig-name">GetAvatar</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns Conrtact's avatar image (JPG).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.GetAvatar">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#GetVerifiedEmail" class="summary-sig-name">GetVerifiedEmail</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      returns verified-by-Skype e-mail for this contact if exists and 
+      verifiable</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.GetVerifiedEmail">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#GetVerifiedCompany" class="summary-sig-name">GetVerifiedCompany</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      returns verified-by-Skype company for this contact if exists and 
+      verifiable</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.GetVerifiedCompany">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#IsMemberOf" class="summary-sig-name">IsMemberOf</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">group</span>)</span><br />
+      Checks whether the contact is member of a contact group given in 
+      group reference argument.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.IsMemberOf">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#IsMemberOfHardwiredGroup" class="summary-sig-name">IsMemberOfHardwiredGroup</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">group_type</span>)</span><br />
+      Checks whether the contact is member of a pre-defined contact group 
+      given in the TYPE argument (type for this property comes from the 
+      ContactGroup class).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.IsMemberOfHardwiredGroup">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#SetBlocked" class="summary-sig-name">SetBlocked</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">blocked</span>,
+        <span class="summary-sig-arg">abuse</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Blocks or unblocks any further incoming communication attempts from 
+      this contact.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.SetBlocked">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="IgnoreAuthRequest"></a><span class="summary-sig-name">IgnoreAuthRequest</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Rejects and removes a pending authorization request from this 
+      Contact.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.IgnoreAuthRequest">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#GiveDisplayName" class="summary-sig-name">GiveDisplayName</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>)</span><br />
+      sets CONTACT_GIVEN_DISPLAYNAME.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.GiveDisplayName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#SetBuddyStatus" class="summary-sig-name">SetBuddyStatus</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">is_my_buddy</span>,
+        <span class="summary-sig-arg">sync_auth</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Adds or removes this Contact from the ALL_BUDDIES hardwired group.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.SetBuddyStatus">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#SendAuthRequest" class="summary-sig-name">SendAuthRequest</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">message</span>,
+        <span class="summary-sig-arg">extras_bitmask</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Sends a contact authorization request to this user.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.SendAuthRequest">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#HasAuthorizedMe" class="summary-sig-name">HasAuthorizedMe</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      the contact has accepted my auth request</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.HasAuthorizedMe">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#SetPhoneNumber" class="summary-sig-name">SetPhoneNumber</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">num</span>,
+        <span class="summary-sig-arg">label</span>,
+        <span class="summary-sig-arg">number</span>)</span><br />
+      Sets the three P_ASSIGNED_PHONEx and P_ASSIGNED_PHONEx_LABEL 
+      properties, where x reflects the value of num.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.SetPhoneNumber">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#OpenConversation" class="summary-sig-name">OpenConversation</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Retrieves a dialog conversation with the Contact.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.OpenConversation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#HasCapability" class="summary-sig-name">HasCapability</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">capability</span>,
+        <span class="summary-sig-arg">query_server</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Retrieves a Contact::Capability value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.HasCapability">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Contact-class.html#GetCapabilityStatus" class="summary-sig-name">GetCapabilityStatus</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">capability</span>,
+        <span class="summary-sig-arg">query_server</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Retrieves a Contact::Capability value.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.GetCapabilityStatus">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RefreshProfile"></a><span class="summary-sig-name">RefreshProfile</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Refreshes all properties, capabilities, and statuses associated with 
+      this Contact from p2p/CBL, and sets P_REFRESHING to true for the 
+      duration.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.RefreshProfile">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mget_profile"></a><span class="summary-sig-name">mget_profile</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      get multiple properties from self</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.mget_profile">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#multiget">multiget</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__copy__">__copy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propid"></a><span class="summary-sig-name">propid</span>(<span class="summary-sig-arg">propname</span>)</span><br />
+      convert a property name to the enum of the property</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Contact.propid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__new__">__new__</a></code>,
+      <code><a href="skypekit.Cached-class.html#sk_exists">sk_exists</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="event_handlers"></a><span class="summary-name">event_handlers</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#propid2label" class="summary-name">propid2label</a> = <code title="{4: 'skypename',
+ 5: 'fullname',
+ 6: 'pstnnumber',
+ 7: 'birthday',
+ 8: 'gender',
+ 9: 'languages',
+ 10: 'country',
+ 11: 'province',
+..."><code class="variable-group">{</code>4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">skypename</code><code class="variable-quote">'</code><code class="variable-op">, </code>5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">fullname</code><code class="variable-quote">'</code><code class="variable-op">, </code>6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">pstnnumber</code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="module_id"></a><span class="summary-name">module_id</span> = <code title="2">2</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#TYPE" class="summary-name">TYPE</a> = <code title="{0: 'UNRECOGNIZED',
+ 1: 'SKYPE',
+ 2: 'PSTN',
+ 3: 'EMERGENCY_PSTN',
+ 4: 'FREE_PSTN',
+ 5: 'UNDISCLOSED_PSTN',
+ 6: 'EXTERNAL',
+ 'EMERGENCY_PSTN': 3,
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNRECOGNIZED</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SKYPE</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PSTN</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EMERGENC</code><code class="variable-ellipsis">...</code></code><br />
+      Same as with CAPABILITY, enumerator is used by both Contact and 
+      Account objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#AUTHLEVEL" class="summary-name">AUTHLEVEL</a> = <code title="{0: 'NONE',
+ 1: 'AUTHORIZED_BY_ME',
+ 2: 'BLOCKED_BY_ME',
+ 'AUTHORIZED_BY_ME': 1,
+ 'BLOCKED_BY_ME': 2,
+ 'NONE': 0}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NONE</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">AUTHORIZED_BY_ME</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BLOCKED_BY_</code><code class="variable-ellipsis">...</code></code><br />
+      Describes the recognized relational states between a local account 
+      and a remote contact.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#AVAILABILITY" class="summary-name">AVAILABILITY</a> = <code title="{0: 'UNKNOWN',
+ 1: 'OFFLINE',
+ 2: 'ONLINE',
+ 3: 'AWAY',
+ 4: 'NOT_AVAILABLE',
+ 5: 'DO_NOT_DISTURB',
+ 6: 'INVISIBLE',
+ 7: 'SKYPE_ME',
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNKNOWN</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">OFFLINE</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ONLINE</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">A</code><code class="variable-ellipsis">...</code></code><br />
+      Describes the superset list of possible Account and Contact online 
+      statuses.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#EXTRA_AUTHREQ_FIELDS" class="summary-name">EXTRA_AUTHREQ_FIELDS</a> = <code title="{1: 'SEND_VERIFIED_EMAIL',
+ 2: 'SEND_VERIFIED_COMPANY',
+ 'SEND_VERIFIED_COMPANY': 2,
+ 'SEND_VERIFIED_EMAIL': 1}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SEND_VERIFIED_EMAIL</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SEND_VER</code><code class="variable-ellipsis">...</code></code><br />
+      SEND_VERIFIED_EMAIL - send verified e-mail blob with this auth 
+      request
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#CAPABILITY" class="summary-name">CAPABILITY</a> = <code title="{0: 'CAPABILITY_VOICEMAIL',
+ 1: 'CAPABILITY_SKYPEOUT',
+ 2: 'CAPABILITY_SKYPEIN',
+ 3: 'CAPABILITY_CAN_BE_SENT_VM',
+ 4: 'CAPABILITY_CALL_FORWARD',
+ 5: 'CAPABILITY_VIDEO',
+ 6: 'CAPABILITY_TEXT',
+ 7: 'CAPABILITY_SERVICE_PROVIDER',
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_VOICEMAIL</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_SKYPEO</code><code class="variable-ellipsis">...</code></code><br />
+      This enumerator is used by both Contact and Account objects.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#CAPABILITYSTATUS" class="summary-name">CAPABILITYSTATUS</a> = <code title="{0: 'NO_CAPABILITY',
+ 1: 'CAPABILITY_MIXED',
+ 2: 'CAPABILITY_EXISTS',
+ 'CAPABILITY_EXISTS': 2,
+ 'CAPABILITY_MIXED': 1,
+ 'NO_CAPABILITY': 0}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NO_CAPABILITY</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_MIXED</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code><br />
+      List of possible states of each of the Contact class CAPABILITY 
+      items.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TYPE"></a><span class="summary-name">P_TYPE</span> = <code title="202">202</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SKYPENAME"></a><span class="summary-name">P_SKYPENAME</span> = <code title="4">4</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PSTNNUMBER"></a><span class="summary-name">P_PSTNNUMBER</span> = <code title="6">6</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_FULLNAME"></a><span class="summary-name">P_FULLNAME</span> = <code title="5">5</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_BIRTHDAY"></a><span class="summary-name">P_BIRTHDAY</span> = <code title="7">7</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_GENDER"></a><span class="summary-name">P_GENDER</span> = <code title="8">8</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LANGUAGES"></a><span class="summary-name">P_LANGUAGES</span> = <code title="9">9</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_COUNTRY"></a><span class="summary-name">P_COUNTRY</span> = <code title="10">10</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PROVINCE"></a><span class="summary-name">P_PROVINCE</span> = <code title="11">11</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CITY"></a><span class="summary-name">P_CITY</span> = <code title="12">12</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PHONE_HOME"></a><span class="summary-name">P_PHONE_HOME</span> = <code title="13">13</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PHONE_OFFICE"></a><span class="summary-name">P_PHONE_OFFICE</span> = <code title="14">14</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PHONE_MOBILE"></a><span class="summary-name">P_PHONE_MOBILE</span> = <code title="15">15</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_EMAILS"></a><span class="summary-name">P_EMAILS</span> = <code title="16">16</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_HOMEPAGE"></a><span class="summary-name">P_HOMEPAGE</span> = <code title="17">17</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ABOUT"></a><span class="summary-name">P_ABOUT</span> = <code title="18">18</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_AVATAR_IMAGE"></a><span class="summary-name">P_AVATAR_IMAGE</span> = <code title="37">37</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_MOOD_TEXT"></a><span class="summary-name">P_MOOD_TEXT</span> = <code title="26">26</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_RICH_MOOD_TEXT"></a><span class="summary-name">P_RICH_MOOD_TEXT</span> = <code title="205">205</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TIMEZONE"></a><span class="summary-name">P_TIMEZONE</span> = <code title="27">27</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CAPABILITIES"></a><span class="summary-name">P_CAPABILITIES</span> = <code title="36">36</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PROFILE_TIMESTAMP"></a><span class="summary-name">P_PROFILE_TIMESTAMP</span> = <code title="19">19</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_NROF_AUTHED_BUDDIES"></a><span class="summary-name">P_NROF_AUTHED_BUDDIES</span> = <code title="28">28</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_IPCOUNTRY"></a><span class="summary-name">P_IPCOUNTRY</span> = <code title="29">29</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_AVATAR_TIMESTAMP"></a><span class="summary-name">P_AVATAR_TIMESTAMP</span> = <code title="182">182</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_MOOD_TIMESTAMP"></a><span class="summary-name">P_MOOD_TIMESTAMP</span> = <code title="183">183</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_RECEIVED_AUTHREQUEST"></a><span class="summary-name">P_RECEIVED_AUTHREQUEST</span> = <code title="20">20</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_AUTHREQ_TIMESTAMP"></a><span class="summary-name">P_AUTHREQ_TIMESTAMP</span> = <code title="25">25</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LASTONLINE_TIMESTAMP"></a><span class="summary-name">P_LASTONLINE_TIMESTAMP</span> = <code title="35">35</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_AVAILABILITY"></a><span class="summary-name">P_AVAILABILITY</span> = <code title="34">34</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_DISPLAYNAME"></a><span class="summary-name">P_DISPLAYNAME</span> = <code title="21">21</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_REFRESHING"></a><span class="summary-name">P_REFRESHING</span> = <code title="22">22</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_GIVEN_AUTHLEVEL"></a><span class="summary-name">P_GIVEN_AUTHLEVEL</span> = <code title="23">23</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_GIVEN_DISPLAYNAME"></a><span class="summary-name">P_GIVEN_DISPLAYNAME</span> = <code title="33">33</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ASSIGNED_COMMENT"></a><span class="summary-name">P_ASSIGNED_COMMENT</span> = <code title="180">180</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LASTUSED_TIMESTAMP"></a><span class="summary-name">P_LASTUSED_TIMESTAMP</span> = <code title="39">39</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_AUTHREQUEST_COUNT"></a><span class="summary-name">P_AUTHREQUEST_COUNT</span> = <code title="41">41</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ASSIGNED_PHONE1"></a><span class="summary-name">P_ASSIGNED_PHONE1</span> = <code title="184">184</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ASSIGNED_PHONE1_LABEL"></a><span class="summary-name">P_ASSIGNED_PHONE1_LABEL</span> = <code title="185">185</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ASSIGNED_PHONE2"></a><span class="summary-name">P_ASSIGNED_PHONE2</span> = <code title="186">186</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ASSIGNED_PHONE2_LABEL"></a><span class="summary-name">P_ASSIGNED_PHONE2_LABEL</span> = <code title="187">187</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ASSIGNED_PHONE3"></a><span class="summary-name">P_ASSIGNED_PHONE3</span> = <code title="188">188</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ASSIGNED_PHONE3_LABEL"></a><span class="summary-name">P_ASSIGNED_PHONE3_LABEL</span> = <code title="189">189</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_POPULARITY_ORD"></a><span class="summary-name">P_POPULARITY_ORD</span> = <code title="42">42</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#rwlock">rwlock</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#properties">properties</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#type" class="summary-name">type</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#skypename" class="summary-name">skypename</a><br />
+      defined if it is a SKYPE contact
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#pstnnumber" class="summary-name">pstnnumber</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#fullname" class="summary-name">fullname</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#birthday" class="summary-name">birthday</a><br />
+      integer of YYYYMMDD format
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#gender" class="summary-name">gender</a><br />
+      1-male, 2-female
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#languages" class="summary-name">languages</a><br />
+      ISO language code list, space separated
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#country" class="summary-name">country</a><br />
+      ISO country code
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#province" class="summary-name">province</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#city" class="summary-name">city</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#phone_home" class="summary-name">phone_home</a><br />
+      This corresponds to the Account::P_PHONE_HOME property.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#phone_office" class="summary-name">phone_office</a><br />
+      This corresponds to the Account::P_PHONE_OFFICE property.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#phone_mobile" class="summary-name">phone_mobile</a><br />
+      This corresponds to the Account::P_PHONE_MOBILE property.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#emails" class="summary-name">emails</a><br />
+      will be hashed before advertising/querying, space separated
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#homepage" class="summary-name">homepage</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#about" class="summary-name">about</a><br />
+      arbitrary introductory text
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#avatar_image" class="summary-name">avatar_image</a><br />
+      Contact avatar pictures are in JPG format.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#mood_text" class="summary-name">mood_text</a><br />
+      Personal mood message (visible to authorized users only).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#rich_mood_text" class="summary-name">rich_mood_text</a><br />
+      XML version of personal mood text
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#timezone" class="summary-name">timezone</a><br />
+      24*3600+diff_to_UTC_in_seconds.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#capabilities" class="summary-name">capabilities</a><br />
+      binary tag that can be queried via Contact::HasCapability()
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#profile_timestamp" class="summary-name">profile_timestamp</a><br />
+      UNIX timestamp of last profile change
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#nrof_authed_buddies" class="summary-name">nrof_authed_buddies</a><br />
+      count of this user's authorized contacts
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#ipcountry" class="summary-name">ipcountry</a><br />
+      ISO country code assigned by the IP
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#avatar_timestamp" class="summary-name">avatar_timestamp</a><br />
+      UNIX timestamp of when current avatar was set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#mood_timestamp" class="summary-name">mood_timestamp</a><br />
+      NOT SET FOR CONTACTS.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#received_authrequest" class="summary-name">received_authrequest</a><br />
+      set if the contact is waiting to be authorized.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#authreq_timestamp" class="summary-name">authreq_timestamp</a><br />
+      timestamp of last received auth-request
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#lastonline_timestamp" class="summary-name">lastonline_timestamp</a><br />
+      X timestamp of last successful ping to that user
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#availability" class="summary-name">availability</a><br />
+      Contact::AVAILABILITY
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#displayname" class="summary-name">displayname</a><br />
+      always set (assigned by lib by looking at various fields)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#refreshing" class="summary-name">refreshing</a><br />
+      true if querying additional information from p2p or server
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#given_authlevel" class="summary-name">given_authlevel</a><br />
+      Contact::AUTHLEVEL, change via Contact::GiveAuthlevel()
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#given_displayname" class="summary-name">given_displayname</a><br />
+      change via Contact::GiveDisplayname()
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#assigned_comment" class="summary-name">assigned_comment</a><br />
+      change via Contact::AssignComment()
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#lastused_timestamp" class="summary-name">lastused_timestamp</a><br />
+      UNIX timestamp of last outbound session (call, chat, FT, etc)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#authrequest_count" class="summary-name">authrequest_count</a><br />
+      for contacts that have CONTACT_RECEIVED_AUTHREQUEST, how many times 
+      in a row they have requested it without positive answer
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#assigned_phone1" class="summary-name">assigned_phone1</a><br />
+      Office phone no.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#assigned_phone1_label" class="summary-name">assigned_phone1_label</a><br />
+      Value &quot;1&quot; in this property will be translated as 
+      &quot;Office&quot; by Skype Windows desktop client, according to UI 
+      language settings
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#assigned_phone2" class="summary-name">assigned_phone2</a><br />
+      Mobile phone no.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#assigned_phone2_label" class="summary-name">assigned_phone2_label</a><br />
+      Value &quot;2&quot; in this property will be translated as 
+      &quot;Mobile&quot; by Skype Windows desktop client, according to UI 
+      language settings
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#assigned_phone3" class="summary-name">assigned_phone3</a><br />
+      &quot;Other phone no.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#assigned_phone3_label" class="summary-name">assigned_phone3_label</a><br />
+      Value &quot;3&quot; in this property will be translated as 
+      &quot;Other&quot; by Skype Windows desktop client, according to UI 
+      language settings
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Contact-class.html#popularity_ord" class="summary-name">popularity_ord</a><br />
+      Contact's order by presence popularity
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="_sk_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_sk_init_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">object_id</span>,
+        <span class="sig-arg">transport</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact._sk_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>actual constructor</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="skypekit.Object-class.html#_sk_init_">skypekit.Object._sk_init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetType"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetType</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.GetType">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Getter method for the TYPE property.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>type_</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetIdentity"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetIdentity</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.GetIdentity">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>No description available.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>identity</b> - returns CONTACT_SKYPENAME or CONTACT_PSTNNUMBER 
+      value
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetAvatar"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetAvatar</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.GetAvatar">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns Conrtact's avatar image (JPG).</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>present</b> -
+      <ul>
+        <li>
+          true: the Contact has a custom avatar image
+        </li>
+        <li>
+          false: the Contact does not have a custom avatar image
+        </li>
+      </ul>
+    </li>
+    <li>
+      <b>avatar</b> - The avatar image data (JPG). If present is false, 
+      this will be the Skype-assigned default avatar
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetVerifiedEmail"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetVerifiedEmail</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.GetVerifiedEmail">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>returns verified-by-Skype e-mail for this contact if exists and 
+  verifiable</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>email</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetVerifiedCompany"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetVerifiedCompany</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.GetVerifiedCompany">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>returns verified-by-Skype company for this contact if exists and 
+  verifiable</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>company</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="IsMemberOf"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IsMemberOf</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">group</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.IsMemberOf">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks whether the contact is member of a contact group given in group
+  reference argument.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>group</b> - The target contact group
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b> -
+      <ul>
+        <li>
+          true: the Contact is a member of the target contact group
+        </li>
+        <li>
+          false: the Contact is not a member of the target contact group
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="IsMemberOfHardwiredGroup"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IsMemberOfHardwiredGroup</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">group_type</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.IsMemberOfHardwiredGroup">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks whether the contact is member of a pre-defined contact group 
+  given in the TYPE argument (type for this property comes from the 
+  ContactGroup class).</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>group_type</b> - The type designator of the target pre-defined 
+      contact group. For example, specify this parameter as 
+      ContactGroup::TYPE.RECENTLY_CONTACTED_CONTACTS to determine if you've
+      had a recent conversation with this Contact.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b> -
+      <ul>
+        <li>
+          true: the Contact is a member of the target contact group
+        </li>
+        <li>
+          false: the Contact is not a member of the target contact group
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetBlocked"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetBlocked</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">blocked</span>,
+        <span class="sig-arg">abuse</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.SetBlocked">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Blocks or unblocks any further incoming communication attempts from 
+  this contact.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>blocked</b> -
+      <ul>
+        <li>
+          true: block this contact
+        </li>
+        <li>
+          false: unblock this contact
+        </li>
+      </ul>
+    </li>
+    <li>
+      <b>abuse</b> - Optional parameter to report abuse by this Skype user 
+      when blocking this Contact. Note that you can specifiy this parameter
+      as true only when blocking a Contact. Defaults to false if omitted.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GiveDisplayName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GiveDisplayName</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.GiveDisplayName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>sets CONTACT_GIVEN_DISPLAYNAME. clears if size(name)==0</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>name</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetBuddyStatus"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetBuddyStatus</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">is_my_buddy</span>,
+        <span class="sig-arg">sync_auth</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.SetBuddyStatus">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Adds or removes this Contact from the ALL_BUDDIES hardwired group.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>is_my_buddy</b> -
+      <ul>
+        <li>
+          true: add this contact to the ALL_BUDDIES group
+        </li>
+        <li>
+          false: delete contact from the ALL_BUDDIES group
+        </li>
+      </ul>
+    </li>
+    <li>
+      <b>sync_auth</b> - This argument is deprecated and should not be 
+      used.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SendAuthRequest"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SendAuthRequest</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">message</span>,
+        <span class="sig-arg">extras_bitmask</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.SendAuthRequest">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sends a contact authorization request to this user.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>message</b> - Text that typically introduces the requesting user 
+      and details the reason for the authorization request. This text will 
+      be set as Message::P_BODY_XML property of the notification Message 
+      the remote user will receive upon getting the authortization request.
+      While this can be the empty string, it cannot be null.
+    </li>
+    <li>
+      <b>extras_bitmask</b> - Indicates additional information to include 
+      with this authorization request:
+      <ul>
+        <li>
+          0 (zero): do not include any additional information
+        </li>
+        <li>
+          SEND_VERIFIED_EMAIL: include the requestor's verified e-mail 
+          address
+        </li>
+        <li>
+          SEND_VERIFIED_COMPANY: include verified information regarding the
+          requestor's company
+        </li>
+        <li>
+          SEND_VERIFIED_EMAIL + SEND_VERIFIED_COMPANY: include both e-mail 
+          and company information
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="HasAuthorizedMe"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">HasAuthorizedMe</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.HasAuthorizedMe">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>the contact has accepted my auth request</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetPhoneNumber"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetPhoneNumber</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">num</span>,
+        <span class="sig-arg">label</span>,
+        <span class="sig-arg">number</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.SetPhoneNumber">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets the three P_ASSIGNED_PHONEx and P_ASSIGNED_PHONEx_LABEL 
+  properties, where x reflects the value of num.</p>
+  <p>The Skype Windows desktop client uses the following conventions when 
+  interpreting and assigning values to these properties. While your 
+  solution can assign arbitrary values to these properties, we strongly 
+  recommend using these conventions to ensure interoperability with the 
+  Skype Windows desktop client. Keep in mind that the &quot;number&quot; of
+  these property pairs has no relationship to how the Skype Windows client 
+  interprets their label property value strings. For example, the Skype 
+  Windows client will interpret P_ASSIGNED_PHONE3_LABEL as &quot;Home&quot;
+  if its value is the string &quot;0&quot;.</p>
+  <p>Label strings:</p>
+  <p>Populate the label properties with string representations of the 
+  numbers &quot;0&quot; through &quot;3&quot;, rather than descriptive 
+  strings like &quot;Home&quot;, &quot;Mobile&quot;, and so forth. The 
+  Skype desktop clients interpret the numeric string values as:</p>
+  <ul>
+    <li>
+      &quot;0&quot; (zero) - &quot;Home&quot;
+    </li>
+    <li>
+      &quot;1&quot; (one) - &quot;Office&quot;
+    </li>
+    <li>
+      &quot;2&quot; - &quot;Mobile&quot;
+    </li>
+    <li>
+      &quot;3&quot; - &quot;Other&quot;
+    </li>
+  </ul>
+  <p>Keep in mind that the &quot;number&quot; of a property pair has no 
+  relationship to its label string. For example, the Skype Windows client 
+  will interpret P_ASSIGNED_PHONE3_LABEL as &quot;Home&quot; if its value 
+  is the string &quot;0&quot;.</p>
+  <p>Phone number strings:</p>
+  <p>The Skype Windows desktop client has distinct conventions for Skype 
+  Contacts and PSTN (SkypeOut) Contacts: any or all of the property pairs 
+  can be used for Skype Contacts; P_ASSIGNED_PHONE1 cannot be used for PSTN
+  Contacts and P_ASSIGNED_PHONE1_LABEL has special meaning for PSTN 
+  Contacts. Specifically, the Skype desktop clients use 
+  P_ASSIGNED_PHONE1_LABEL as the label for a PSTN Contact's primary number 
+  (regardless of whether it's home, mobile, or office), and use 
+  P_PSTNNUMBER to hold the actual number.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>num</b> - The property pair being set, which must be in the range 
+      0..3
+    </li>
+    <li>
+      <b>label</b> - The label text for the property being set
+    </li>
+    <li>
+      <b>number</b> - The phone number for the property being set
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="OpenConversation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OpenConversation</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.OpenConversation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieves a dialog conversation with the Contact.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>conversation</b> - Retrieved dialog.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="HasCapability"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">HasCapability</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">capability</span>,
+        <span class="sig-arg">query_server</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.HasCapability">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieves a Contact::Capability value. Sets P_REFRESHING to true while
+  querying from server. This method is functionally the same as 
+  Contact::GetCapabilityStatus except that it returns a bool value rather 
+  than Contact::CAPABILITYSTATUS</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>capability</b> - The target capability
+    </li>
+    <li>
+      <b>query_server</b> -
+      <ul>
+        <li>
+          true: obtains the data from the p2p network/server, and sets 
+          P_REFRESHING to true for the duration
+        </li>
+        <li>
+          false: obtains the data from the local client
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b> -
+      <ul>
+        <li>
+          true: the Contact has the target capability through at least one 
+          of the Skype clients they have logged into. Corresponds to 
+          CAPABILITY_MIXED and CAPABILITY_EXISTS
+        </li>
+        <li>
+          false: the Contact does not have the target capability. 
+          Corresponds to NO_CAPABILITY
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetCapabilityStatus"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetCapabilityStatus</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">capability</span>,
+        <span class="sig-arg">query_server</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Contact.GetCapabilityStatus">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieves a Contact::Capability value. Sets P_REFRESHING to true while
+  querying from server.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>capability</b> - The target capability, see Contact::Capability 
+      enumerator.
+    </li>
+    <li>
+      <b>query_server</b> -
+      <ul>
+        <li>
+          true: obtains the data from the p2p network/server, and sets 
+          P_REFRESHING to true for the duration
+        </li>
+        <li>
+          false: obtains the data from the local client
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>status</b> - Status of the target capability.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="propid2label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">propid2label</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">skypename</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">fullname</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">pstnnumber</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">birthday</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">gender</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 9<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">languages</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 10<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">country</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 11<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">province</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TYPE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TYPE</h3>
+  <p>Same as with CAPABILITY, enumerator is used by both Contact and 
+  Account objects.</p>
+  <ul>
+    <li>
+      UNRECOGNIZED - Contact/account has no pre-identified type. This type 
+      is reported by default for SkypeKit clients.
+    </li>
+    <li>
+      SKYPE - Normal Skype contact.
+    </li>
+    <li>
+      PSTN - Normal PSTN contact.
+    </li>
+    <li>
+      EMERGENCY_PSTN - Emergency number (i.e. 911).
+    </li>
+    <li>
+      FREE_PSTN
+    </li>
+    <li>
+      UNDISCLOSED_PSTN - Undisclosed PSTN number.
+    </li>
+    <li>
+      EXTERNAL - This type is currently used by Windows desktop clients for
+      contacts imported from Outlook.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNRECOGNIZED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SKYPE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PSTN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EMERGENCY_PSTN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FREE_PSTN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNDISCLOSED_PSTN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EXTERNAL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">EMERGENCY_PSTN</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="AUTHLEVEL"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">AUTHLEVEL</h3>
+  <p>Describes the recognized relational states between a local account and
+  a remote contact.</p>
+  <ul>
+    <li>
+      NONE - Authorization request is either ignored or pending. In this 
+      state several functionalities may be blocked, depending on settings. 
+      For example, accounts may only allow seeing online presence to be 
+      viewable or only receive calls from authorized contacts.
+    </li>
+    <li>
+      AUTHORIZED_BY_ME - Contact has been authorized by the local account.
+    </li>
+    <li>
+      BLOCKED_BY_ME - Contact has been blocked by the local account. This 
+      prevents incoming calls, chat messages, additional authorization 
+      requests etc.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NONE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">AUTHORIZED_BY_ME</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BLOCKED_BY_ME</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">AUTHORIZED_BY_ME</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">BLOCKED_BY_ME</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">NONE</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="AVAILABILITY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">AVAILABILITY</h3>
+  <p>Describes the superset list of possible Account and Contact online 
+  statuses. In case of Account they apply to local user, in case of Contact
+  they apply to remote contacts.</p>
+  <ul>
+    <li>
+      UNKNOWN - Contact online status cannot be determined. This 
+      availability state should not normally reach the SkypeKit UI level.
+    </li>
+    <li>
+      PENDINGAUTH - Seeing Contact online status is blocked because 
+      authorization between contact and local account has not taken place.
+    </li>
+    <li>
+      BLOCKED - Remote contact has been blocked by local account. This 
+      applies to online accounts.
+    </li>
+    <li>
+      BLOCKED_SKYPEOUT - Remote SkypeOut contact has been blocked by local 
+      account.
+    </li>
+    <li>
+      SKYPEOUT - Contact does not have an online status because he is a 
+      PSTN contact.
+    </li>
+    <li>
+      OFFLINE - Contact appears to be offline.
+    </li>
+    <li>
+      OFFLINE_BUT_VM_ABLE - Contact appears to be offline but has voicemail
+      enabled.
+    </li>
+    <li>
+      OFFLINE_BUT_CF_ABLE - Contact appears to be offline but has enabled 
+      call forwarding, so calls may actually get through to him.
+    </li>
+    <li>
+      ONLINE - Contact / Account is online
+    </li>
+    <li>
+      AWAY - Contact / Account is online but away from keyboard. This can 
+      be either turned on manually or by automatic timer. In Windows 
+      desktop client, the timer can be configured with minute precision.
+    </li>
+    <li>
+      NOT_AVAILABLE - This online status is marked as deprecated. If a 
+      remote contact indicates its status as NOT_AVAILABLE, the UI should 
+      handle this as equivalent of AWAY status.
+    </li>
+    <li>
+      DO_NOT_DISTURB - Contact / Account is online but does not wish to be 
+      disturbed. This status supersedes AWAY status when the account is 
+      DO_NOT_DISTURB the AWAY timer should not modify the status.
+    </li>
+    <li>
+      SKYPE_ME - This online status is marked as deprecated. If a remote 
+      contact indicates its status as SKYPE_ME, the UI should handle this 
+      as equivalent of ONLINE status.
+    </li>
+    <li>
+      INVISIBLE - Account status is set to INVISIBLE. This status in not 
+      applicable to remote Contacts. When the remote contact has set his 
+      availability to INVISIBLE, he will appear as OFFLINE to others.
+    </li>
+    <li>
+      CONNECTING - only possible for local user/account
+    </li>
+    <li>
+      ONLINE_FROM_MOBILE
+    </li>
+    <li>
+      AWAY_FROM_MOBILE - *_FROM_MOBILE only possible for remote user
+    </li>
+    <li>
+      NOT_AVAILABLE_FROM_MOBILE
+    </li>
+    <li>
+      DO_NOT_DISTURB_FROM_MOBILE
+    </li>
+    <li>
+      SKYPE_ME_FROM_MOBILE
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNKNOWN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">OFFLINE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ONLINE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">AWAY</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NOT_AVAILABLE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DO_NOT_DISTURB</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INVISIBLE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SKYPE_ME</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="EXTRA_AUTHREQ_FIELDS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">EXTRA_AUTHREQ_FIELDS</h3>
+  <ul>
+    <li>
+      SEND_VERIFIED_EMAIL - send verified e-mail blob with this auth 
+      request
+    </li>
+    <li>
+      SEND_VERIFIED_COMPANY - send verified company blob with this auth 
+      request
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SEND_VERIFIED_EMAIL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SEND_VERIFIED_COMPANY</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">SEND_VERIFIED_COMPANY</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">SEND_VERIFIED_EMAIL</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CAPABILITY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">CAPABILITY</h3>
+  <p>This enumerator is used by both Contact and Account objects. Thus the 
+  items here can have slightly different meaning, depending on which 
+  context you will examine their values. In case of Contact, the values 
+  apply to a user - across all the instances that user has logged in with 
+  Skype. In case of Account, the capability is that of a local, currently 
+  logged in instance of Skype client.</p>
+  <p>The values that CAPABILITY items can have are also dependant on class 
+  context. In context of Contact, a capability can be CAPABILITY_MIXED. 
+  Which in case of CAPABILITY_VIDEO, for example, would mean that the 
+  remote use has logged in with different clients, some of which support 
+  video calls and some of which don't. In context of Account - there are no
+  mixed result. Currently logged in Skype instance either supports video or
+  it doesn't.</p>
+  <ul>
+    <li>
+      CAPABILITY_VOICEMAIL - For Account object, this is the same as 
+      CAPABILITY_CAN_BE_SENT_VM - it indicates that the currently logged in
+      Skype instance supports voicemails. For Contact objects, it means 
+      that their remote system supports sending voicemails - there is no 
+      technical method for Skype to detect whether they are capable of 
+      receiving voicemails, so the assumption is that they can.
+    </li>
+    <li>
+      CAPABILITY_SKYPEOUT - Indicates that the contact/account has SkypeOut
+      and is thus capable of making PSTN calls.
+    </li>
+    <li>
+      CAPABILITY_SKYPEIN - Indicates that the contact/account has SkypeIn 
+      and is thus capable of answering PSTN calls.
+    </li>
+    <li>
+      CAPABILITY_CAN_BE_SENT_VM - For contacts, this is a combination of 
+      CAPABILITY_VOICEMAIL for local account (local Skype client supports 
+      sending voicemails) and CAPABILITY_VOICEMAIL of the Contact - if the 
+      contact supports sending voicemails then hopefully they can also 
+      receive them.
+    </li>
+    <li>
+      CAPABILITY_CALL_FORWARD - Indicates that Account/Contact supports 
+      call forwarding.
+    </li>
+    <li>
+      CAPABILITY_VIDEO - Indicates that Account/Contact supports call video
+      calls.
+    </li>
+    <li>
+      CAPABILITY_TEXT - In context of Contact, this indicates that the user
+      is noticed running at least one Skype implementation that supports 
+      text messaging. Basically, it applies to a user. When applied to 
+      Account, the meaning is slightly different. In that case it indicates
+      that currently running Skype implementation supports chat messaging. 
+      So, for Account objects, this is a node (rather than user) 
+      capability.
+    </li>
+    <li>
+      CAPABILITY_SERVICE_PROVIDER - Indicates that the contact/account is 
+      flagged as SkypePrime service provider. This is linked to Account 
+      class SERVICE_PROVIDER_INFO property.
+    </li>
+    <li>
+      CAPABILITY_LARGE_CONFERENCE - This is a legacy item, from the old 
+      times when conference calls with more than 5 people were limited to 
+      SkypePro accounts. In other words, this item is no longer relevant 
+      and will likely be removed at some point in future.
+    </li>
+    <li>
+      CAPABILITY_COMMERCIAL_CONTACT
+    </li>
+    <li>
+      CAPABILITY_PSTN_TRANSFER - Indicates that Account/Contact supports 
+      call transfers to PSTN numbers.
+    </li>
+    <li>
+      CAPABILITY_TEXT_EVER - Indicates that the user has had his chat 
+      capability removed by Skype. Basically, this means that the user is 
+      reported as spammer too many times. This applies for both Contact and
+      Account objects - which means your client can check locally, if the 
+      currently logged in user has been marked as a spammer.
+    </li>
+    <li>
+      CAPABILITY_VOICE_EVER - Indicates that the user (Account or Contact) 
+      has had his voice call capability removed by Skype.
+    </li>
+    <li>
+      CAPABILITY_MOBILE_DEVICE - Indicates that the instance of Skype 
+      client Account/Contact is or in Contact's case has at least 
+      occasionally been flagged as a mobile device.
+    </li>
+    <li>
+      CAPABILITY_PUBLIC_CONTACT
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_VOICEMAIL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_SKYPEOUT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_SKYPEIN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_CAN_BE_SENT_VM</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_CALL_FORWARD</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_VIDEO</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_TEXT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_SERVICE_PROVIDER</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CAPABILITYSTATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">CAPABILITYSTATUS</h3>
+  <p>List of possible states of each of the Contact class CAPABILITY 
+  items.</p>
+  <ul>
+    <li>
+      NO_CAPABILITY - Contact does not have the capability
+    </li>
+    <li>
+      CAPABILITY_MIXED - Contact has occasionally logged in with Skype 
+      client that supports the capability. For example, a contact may have 
+      Skype client on several machines, only some of which have webcam - in
+      which case CAPABILITY_VIDEO would have its value set as 
+      CAPABILITY_MIXED.
+    </li>
+    <li>
+      CAPABILITY_EXISTS - Contact has the capability
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NO_CAPABILITY</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_MIXED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_EXISTS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CAPABILITY_EXISTS</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CAPABILITY_MIXED</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">NO_CAPABILITY</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Property Details</span></td>
+</tr>
+</table>
+<a name="type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">type</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_type" class="summary-sig-name" onclick="show_private();">_sk_get_type</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="skypename"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">skypename</h3>
+  <p>defined if it is a SKYPE contact</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_skypename" class="summary-sig-name" onclick="show_private();">_sk_get_skypename</a>(<span class="summary-sig-arg">self</span>)</span>
+        - defined if it is a SKYPE contact
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="pstnnumber"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">pstnnumber</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_pstnnumber" class="summary-sig-name" onclick="show_private();">_sk_get_pstnnumber</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="fullname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">fullname</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_fullname" class="summary-sig-name" onclick="show_private();">_sk_get_fullname</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="birthday"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">birthday</h3>
+  <p>integer of YYYYMMDD format</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_birthday" class="summary-sig-name" onclick="show_private();">_sk_get_birthday</a>(<span class="summary-sig-arg">self</span>)</span>
+        - integer of YYYYMMDD format
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="gender"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">gender</h3>
+  <p>1-male, 2-female</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_gender" class="summary-sig-name" onclick="show_private();">_sk_get_gender</a>(<span class="summary-sig-arg">self</span>)</span>
+        - 1-male, 2-female
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="languages"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">languages</h3>
+  <p>ISO language code list, space separated</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_languages" class="summary-sig-name" onclick="show_private();">_sk_get_languages</a>(<span class="summary-sig-arg">self</span>)</span>
+        - ISO language code list, space separated
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="country"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">country</h3>
+  <p>ISO country code</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_country" class="summary-sig-name" onclick="show_private();">_sk_get_country</a>(<span class="summary-sig-arg">self</span>)</span>
+        - ISO country code
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="province"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">province</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_province" class="summary-sig-name" onclick="show_private();">_sk_get_province</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="city"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">city</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_city" class="summary-sig-name" onclick="show_private();">_sk_get_city</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="phone_home"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">phone_home</h3>
+  <p>This corresponds to the Account::P_PHONE_HOME property. The value is 
+  set by the remote user in Account profile. As Contact property, this is 
+  read-only.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_phone_home" class="summary-sig-name" onclick="show_private();">_sk_get_phone_home</a>(<span class="summary-sig-arg">self</span>)</span>
+        - This corresponds to the Account::P_PHONE_HOME property.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="phone_office"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">phone_office</h3>
+  <p>This corresponds to the Account::P_PHONE_OFFICE property. The value is
+  set by the remote user in Account profile. As Contact property, this is 
+  read-only. If the Contact has not populated his Account profile with 
+  sufficient phone numbers, the UI should implement locally adding 
+  additional phone numbers to Contact P_ASSIGNED_PHONE1 .. 
+  P_ASSIGNED_PHONE3 properties (and corresponding labels). See 
+  Contact::SetPhoneNumber method for more information.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_phone_office" class="summary-sig-name" onclick="show_private();">_sk_get_phone_office</a>(<span class="summary-sig-arg">self</span>)</span>
+        - This corresponds to the Account::P_PHONE_OFFICE property.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="phone_mobile"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">phone_mobile</h3>
+  <p>This corresponds to the Account::P_PHONE_MOBILE property. The value is
+  set by the remote user in Account profile. As Contact property, this is 
+  read-only.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_phone_mobile" class="summary-sig-name" onclick="show_private();">_sk_get_phone_mobile</a>(<span class="summary-sig-arg">self</span>)</span>
+        - This corresponds to the Account::P_PHONE_MOBILE property.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="emails"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">emails</h3>
+  <p>will be hashed before advertising/querying, space separated</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_emails" class="summary-sig-name" onclick="show_private();">_sk_get_emails</a>(<span class="summary-sig-arg">self</span>)</span>
+        - will be hashed before advertising/querying, space separated
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="homepage"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">homepage</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_homepage" class="summary-sig-name" onclick="show_private();">_sk_get_homepage</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="about"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">about</h3>
+  <p>arbitrary introductory text</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_about" class="summary-sig-name" onclick="show_private();">_sk_get_about</a>(<span class="summary-sig-arg">self</span>)</span>
+        - arbitrary introductory text
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="avatar_image"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">avatar_image</h3>
+  <p>Contact avatar pictures are in JPG format. The original size of avatar
+  pictures are in no more than 96 x 96 pixels in size. However, as they can
+  be smaller, scaling the pictures up too much to fit your UI can lead to 
+  distorted images.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_avatar_image" class="summary-sig-name" onclick="show_private();">_sk_get_avatar_image</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Contact avatar pictures are in JPG format.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="mood_text"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">mood_text</h3>
+  <p>Personal mood message (visible to authorized users only).</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_mood_text" class="summary-sig-name" onclick="show_private();">_sk_get_mood_text</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Personal mood message (visible to authorized users only).
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="rich_mood_text"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">rich_mood_text</h3>
+  <p>XML version of personal mood text</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_rich_mood_text" class="summary-sig-name" onclick="show_private();">_sk_get_rich_mood_text</a>(<span class="summary-sig-arg">self</span>)</span>
+        - XML version of personal mood text
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="timezone"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timezone</h3>
+  <p>24*3600+diff_to_UTC_in_seconds. NB! changes with DST</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_timezone" class="summary-sig-name" onclick="show_private();">_sk_get_timezone</a>(<span class="summary-sig-arg">self</span>)</span>
+        - 24*3600+diff_to_UTC_in_seconds.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="capabilities"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">capabilities</h3>
+  <p>binary tag that can be queried via Contact::HasCapability()</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_capabilities" class="summary-sig-name" onclick="show_private();">_sk_get_capabilities</a>(<span class="summary-sig-arg">self</span>)</span>
+        - binary tag that can be queried via Contact::HasCapability()
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="profile_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">profile_timestamp</h3>
+  <p>UNIX timestamp of last profile change</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_profile_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_profile_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - UNIX timestamp of last profile change
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="nrof_authed_buddies"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">nrof_authed_buddies</h3>
+  <p>count of this user's authorized contacts</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_nrof_authed_buddies" class="summary-sig-name" onclick="show_private();">_sk_get_nrof_authed_buddies</a>(<span class="summary-sig-arg">self</span>)</span>
+        - count of this user's authorized contacts
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ipcountry"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ipcountry</h3>
+  <p>ISO country code assigned by the IP</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_ipcountry" class="summary-sig-name" onclick="show_private();">_sk_get_ipcountry</a>(<span class="summary-sig-arg">self</span>)</span>
+        - ISO country code assigned by the IP
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="avatar_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">avatar_timestamp</h3>
+  <p>UNIX timestamp of when current avatar was set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_avatar_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_avatar_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - UNIX timestamp of when current avatar was set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="mood_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">mood_timestamp</h3>
+  <p>NOT SET FOR CONTACTS. For Account object, UNIX timestamp of when 
+  current mood was set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_mood_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_mood_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - NOT SET FOR CONTACTS.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="received_authrequest"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">received_authrequest</h3>
+  <p>set if the contact is waiting to be authorized. The value contains 
+  auth. request text</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_received_authrequest" class="summary-sig-name" onclick="show_private();">_sk_get_received_authrequest</a>(<span class="summary-sig-arg">self</span>)</span>
+        - set if the contact is waiting to be authorized.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="authreq_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">authreq_timestamp</h3>
+  <p>timestamp of last received auth-request</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_authreq_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_authreq_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - timestamp of last received auth-request
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="lastonline_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">lastonline_timestamp</h3>
+  <p>X timestamp of last successful ping to that user</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_lastonline_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_lastonline_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - X timestamp of last successful ping to that user
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="availability"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">availability</h3>
+  <p>Contact::AVAILABILITY</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_availability" class="summary-sig-name" onclick="show_private();">_sk_get_availability</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Contact::AVAILABILITY
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="displayname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">displayname</h3>
+  <p>always set (assigned by lib by looking at various fields)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_displayname" class="summary-sig-name" onclick="show_private();">_sk_get_displayname</a>(<span class="summary-sig-arg">self</span>)</span>
+        - always set (assigned by lib by looking at various fields)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="refreshing"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">refreshing</h3>
+  <p>true if querying additional information from p2p or server</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_refreshing" class="summary-sig-name" onclick="show_private();">_sk_get_refreshing</a>(<span class="summary-sig-arg">self</span>)</span>
+        - true if querying additional information from p2p or server
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="given_authlevel"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">given_authlevel</h3>
+  <p>Contact::AUTHLEVEL, change via Contact::GiveAuthlevel()</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_given_authlevel" class="summary-sig-name" onclick="show_private();">_sk_get_given_authlevel</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Contact::AUTHLEVEL, change via Contact::GiveAuthlevel()
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="given_displayname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">given_displayname</h3>
+  <p>change via Contact::GiveDisplayname()</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_given_displayname" class="summary-sig-name" onclick="show_private();">_sk_get_given_displayname</a>(<span class="summary-sig-arg">self</span>)</span>
+        - change via Contact::GiveDisplayname()
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="assigned_comment"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">assigned_comment</h3>
+  <p>change via Contact::AssignComment()</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_assigned_comment" class="summary-sig-name" onclick="show_private();">_sk_get_assigned_comment</a>(<span class="summary-sig-arg">self</span>)</span>
+        - change via Contact::AssignComment()
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="lastused_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">lastused_timestamp</h3>
+  <p>UNIX timestamp of last outbound session (call, chat, FT, etc)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_lastused_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_lastused_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - UNIX timestamp of last outbound session (call, chat, FT, etc)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="authrequest_count"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">authrequest_count</h3>
+  <p>for contacts that have CONTACT_RECEIVED_AUTHREQUEST, how many times in
+  a row they have requested it without positive answer</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_authrequest_count" class="summary-sig-name" onclick="show_private();">_sk_get_authrequest_count</a>(<span class="summary-sig-arg">self</span>)</span>
+        - for contacts that have CONTACT_RECEIVED_AUTHREQUEST, how many times in a 
+row they have requested it without positive answer
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="assigned_phone1"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">assigned_phone1</h3>
+  <p>Office phone no. of the contact. This property should NOT be used for 
+  SkypeOut contacts</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_assigned_phone1" class="summary-sig-name" onclick="show_private();">_sk_get_assigned_phone1</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Office phone no.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="assigned_phone1_label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">assigned_phone1_label</h3>
+  <p>Value &quot;1&quot; in this property will be translated as 
+  &quot;Office&quot; by Skype Windows desktop client, according to UI 
+  language settings</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_assigned_phone1_label" class="summary-sig-name" onclick="show_private();">_sk_get_assigned_phone1_label</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Value &quot;1&quot; in this property will be translated as 
+&quot;Office&quot; by Skype Windows desktop client, according to UI 
+language settings
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="assigned_phone2"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">assigned_phone2</h3>
+  <p>Mobile phone no. of the contact</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_assigned_phone2" class="summary-sig-name" onclick="show_private();">_sk_get_assigned_phone2</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Mobile phone no.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="assigned_phone2_label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">assigned_phone2_label</h3>
+  <p>Value &quot;2&quot; in this property will be translated as 
+  &quot;Mobile&quot; by Skype Windows desktop client, according to UI 
+  language settings</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_assigned_phone2_label" class="summary-sig-name" onclick="show_private();">_sk_get_assigned_phone2_label</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Value &quot;2&quot; in this property will be translated as 
+&quot;Mobile&quot; by Skype Windows desktop client, according to UI 
+language settings
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="assigned_phone3"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">assigned_phone3</h3>
+  <p>&quot;Other phone no. of the contact</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_assigned_phone3" class="summary-sig-name" onclick="show_private();">_sk_get_assigned_phone3</a>(<span class="summary-sig-arg">self</span>)</span>
+        - &quot;Other phone no.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="assigned_phone3_label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">assigned_phone3_label</h3>
+  <p>Value &quot;3&quot; in this property will be translated as 
+  &quot;Other&quot; by Skype Windows desktop client, according to UI 
+  language settings</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_assigned_phone3_label" class="summary-sig-name" onclick="show_private();">_sk_get_assigned_phone3_label</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Value &quot;3&quot; in this property will be translated as 
+&quot;Other&quot; by Skype Windows desktop client, according to UI language
+settings
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="popularity_ord"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">popularity_ord</h3>
+  <p>Contact's order by presence popularity</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Contact-class.html#_sk_get_popularity_ord" class="summary-sig-name" onclick="show_private();">_sk_get_popularity_ord</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Contact's order by presence popularity
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:39 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

@@ -1,0 +1,17 @@
+[audio/G729]
+clock-rate=8000
+
+[audio/SPEEX:8000]
+clock-rate=8000
+
+[video/H264]
+
+[video/H263]
+
+[video/THEORA]
+
+[video/JPEG]
+id=-1
+
+[video/DV]
+id=-1

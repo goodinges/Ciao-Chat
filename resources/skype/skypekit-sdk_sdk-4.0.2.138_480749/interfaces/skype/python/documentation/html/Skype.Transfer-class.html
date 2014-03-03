@@ -1,0 +1,1403 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Skype.Transfer</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Skype-module.html">Module&nbsp;Skype</a> ::
+        Class&nbsp;Transfer
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Transfer</h1><p class="nomargin-top"><span class="codelink"><a href="Skype-pysrc.html#Transfer">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+        
+              |        
+<a href="skypekit.Cached-class.html">skypekit.Cached</a> --+    
+                  |    
+    <a href="skypekit.Object-class.html">skypekit.Object</a> --+
+                      |
+                     <strong class="uidshort">Transfer</strong>
+</pre>
+
+<hr />
+<p>Transfer in this context refers to transferring (sending/receiving) 
+  files among Skype Contacts, not transferring a call to another Skype or 
+  PSTN Contact. This class includes file transfer-specific properties and 
+  methods, such as FILESIZE, BYTESPERSECOND, Pause and Resume. Recipients 
+  of these file transfers must explicitly accept (or decline) any incoming 
+  transfer. Transfer instances represent files being sent and received 
+  within a Conversation context. Each Transfer instance represents a single
+  file transfer - if a conversation has multiple remote participants, a 
+  separate Transfer instance must be instantiated for each remote 
+  participant (a Transfer instance is not instantiated for the sender).</p>
+  <p>Transfer instances cannot be instantiated directly. Instead, you 
+  initiate a file transfer by invoking Conversation::PostFiles. This 
+  instantiates a Message instance of type POSTED_FILES, which is added to 
+  the Conversation for all the participants (including the sender). The 
+  Transfer instance is associated with this Message instance, and the 
+  Message::P_BODY_XML looks like this:</p>
+  <p>:</p>
+<pre class="literalblock">
+ Some text&lt;files alt=&quot;&quot;&gt;&lt;file size=&quot;2336020&quot; index=&quot;0&quot;&gt;test.zip&lt;/file&gt;&lt;/files&gt; 
+</pre>
+  <p>To put it another way, the object chain goes like this: :</p>
+<pre class="literalblock">
+ Conversation-&gt;Message-&gt;Transfer 
+</pre>
+  <p>The first part of the message (before the files section) comes from 
+  the Conversation::PostFiles body argument. For each file in the message, 
+  a file section is provided with three fields:</p>
+  <ul>
+    <li>
+      file size in bytes
+    </li>
+    <li>
+      index - more or less arbitrary order in which the transfers should be
+      displayed in the UI
+    </li>
+    <li>
+      file name.
+    </li>
+  </ul>
+  <p>For practical purposes, the Message::P_BODY_XML property is not all 
+  that useful in this context. The Transfer instances, however, contain the
+  state and progress feedback for your UI. You retrieve these Transfer 
+  instances using Message::GetTransfers method. Since the sender can post 
+  multiple files to a Conversation using the same Message, 
+  Message:GetTransfers retrieves a list of Transfer instances - one per 
+  file per recipient.</p>
+  <p>You can determine the direction of particular Transfer instance by 
+  querying Transfer::P_TYPE (INCOMING/OUTGOING).</p>
+  <p>You can implement a progress indicator by monitoring 
+  Transfer::P_BYTESTRANSFERRED. Note that when testing this on your local 
+  network, you will most likely catch these property change events at the 
+  beginning and the end of the transfer only - which does not look like too
+  useful. However, for non-local network transfers where the transfer 
+  speeds are in the neighborhood of 200-300 KB per second, you should 
+  consider implementing progress feedback as being mandatory and expect to 
+  catch multiple property change events for all but the smallest files.</p>
+  <p>Another property of interest is Transfer::P_STATUS. The normal 
+  transfer status sequence during successful outgoing transfer is this:</p>
+  <ul>
+    <li>
+      TRANSFER STATUS -&gt; NEW
+    </li>
+    <li>
+      TRANSFER STATUS -&gt; WAITING_FOR_ACCEPT
+    </li>
+    <li>
+      TRANSFER STATUS -&gt; CONNECTING
+    </li>
+    <li>
+      TRANSFER STATUS -&gt; TRANSFERRING
+    </li>
+    <li>
+      TRANSFER STATUS -&gt; CONNECTING
+    </li>
+    <li>
+      TRANSFER STATUS -&gt; COMPLETED
+    </li>
+  </ul>
+  <p>The list of all terminal Transfer statuses is:</p>
+  <ul>
+    <li>
+      COMPLETED
+    </li>
+    <li>
+      FAILED
+    </li>
+    <li>
+      CANCELLED
+    </li>
+    <li>
+      CANCELLED_BY_REMOTE
+    </li>
+  </ul>
+  <p>In-progress transfers can be canceled with Transfer::Cancel and 
+  paused/resumed with Transfer::Pause and Transfer::Resume. For transfers 
+  that complete with a status of FAILED, your UI should provide feedback 
+  based on the value of Transfer::P_FAILUREREASON.</p>
+  <p>Incoming transfers, once accepted, overwrite existing files with the 
+  same name. Before accepting an incoming file transfer, your UI should 
+  prompt the recipient to:</p>
+  <ul>
+    <li>
+      accept or decline the file
+    </li>
+    <li>
+      if accepted, specify the directory of here to save the file (with a 
+      pre-filled default)
+    </li>
+    <li>
+      if accepted and a file having the same name already exists at the 
+      specified destination, your UI should prompt for confirmation to 
+      overwrite and provide a way to alter the file name before accepting 
+      it
+    </li>
+  </ul>
+  <p>Similarly, your UI should verify the existence of outgoing files prior
+  to invoking Conversation::PostFiles.</p>
+  <p>Note that you should provide both Conversation::PostFiles and 
+  Transfer::Accept methods fully-qualified paths. Otherwise, the paths will
+  be assumed to be relative to the path of SkypeKit runtime, since the 
+  methods are actually executed in the runtime context.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_init_" class="summary-sig-name">_sk_init_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">object_id</span>,
+        <span class="summary-sig-arg">transport</span>)</span><br />
+      actual constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Transfer._sk_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Transfer-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Transfer.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnPropertyChange"></a><span class="summary-sig-name">OnPropertyChange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">property_name</span>)</span><br />
+      notifies from a property change</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Transfer.OnPropertyChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Transfer-class.html#Accept" class="summary-sig-name">Accept</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">filename_with_path</span>)</span><br />
+      Accepts an incoming file transfer and saves it to specified file on 
+      the local file system.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Transfer.Accept">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Transfer-class.html#Pause" class="summary-sig-name">Pause</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Temporarily pauses an in-progress incoming or outgoing file transfer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Transfer.Pause">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="Resume"></a><span class="summary-sig-name">Resume</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Resumes a previously paused file transfer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Transfer.Resume">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Transfer-class.html#Cancel" class="summary-sig-name">Cancel</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Cancels an in-progress file transfer.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Transfer.Cancel">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#multiget">multiget</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__copy__">__copy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propid"></a><span class="summary-sig-name">propid</span>(<span class="summary-sig-arg">propname</span>)</span><br />
+      convert a property name to the enum of the property</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Transfer.propid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__new__">__new__</a></code>,
+      <code><a href="skypekit.Cached-class.html#sk_exists">sk_exists</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="event_handlers"></a><span class="summary-name">event_handlers</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#propid2label" class="summary-name">propid2label</a> = <code title="{80: 'type',
+ 81: 'partner_handle',
+ 82: 'partner_dispname',
+ 83: 'status',
+ 84: 'failurereason',
+ 85: 'starttime',
+ 86: 'finishtime',
+ 87: 'filepath',
+..."><code class="variable-group">{</code>80<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">type</code><code class="variable-quote">'</code><code class="variable-op">, </code>81<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">partner_handle</code><code class="variable-quote">'</code><code class="variable-op">, </code>82<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">partner</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="module_id"></a><span class="summary-name">module_id</span> = <code title="6">6</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#TYPE" class="summary-name">TYPE</a> = <code title="{1: 'INCOMING', 2: 'OUTGOING', 'INCOMING': 1, 'OUTGOING': 2}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INCOMING</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">OUTGOING</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">INCOMING</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">OUTGOING</code><code class="variable-ellipsis">...</code></code><br />
+      INCOMING
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#STATUS" class="summary-name">STATUS</a> = <code title="{0: 'NEW',
+ 1: 'CONNECTING',
+ 2: 'WAITING_FOR_ACCEPT',
+ 3: 'TRANSFERRING',
+ 4: 'TRANSFERRING_OVER_RELAY',
+ 5: 'PAUSED',
+ 6: 'REMOTELY_PAUSED',
+ 7: 'CANCELLED',
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NEW</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONNECTING</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">WAITING_FOR_ACCEPT</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_STATUS property.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#FAILUREREASON" class="summary-name">FAILUREREASON</a> = <code title="{1: 'SENDER_NOT_AUTHORISED',
+ 2: 'REMOTELY_CANCELLED',
+ 3: 'FAILED_READ',
+ 4: 'FAILED_REMOTE_READ',
+ 5: 'FAILED_WRITE',
+ 6: 'FAILED_REMOTE_WRITE',
+ 7: 'REMOTE_DOES_NOT_SUPPORT_FT',
+ 8: 'REMOTE_OFFLINE_FOR_TOO_LONG',
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SENDER_NOT_AUTHORISED</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">REMOTELY_CANC</code><code class="variable-ellipsis">...</code></code><br />
+      SENDER_NOT_AUTHORISED
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TYPE"></a><span class="summary-name">P_TYPE</span> = <code title="80">80</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PARTNER_HANDLE"></a><span class="summary-name">P_PARTNER_HANDLE</span> = <code title="81">81</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PARTNER_DISPNAME"></a><span class="summary-name">P_PARTNER_DISPNAME</span> = <code title="82">82</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_STATUS"></a><span class="summary-name">P_STATUS</span> = <code title="83">83</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_FAILUREREASON"></a><span class="summary-name">P_FAILUREREASON</span> = <code title="84">84</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_STARTTIME"></a><span class="summary-name">P_STARTTIME</span> = <code title="85">85</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_FINISHTIME"></a><span class="summary-name">P_FINISHTIME</span> = <code title="86">86</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_FILEPATH"></a><span class="summary-name">P_FILEPATH</span> = <code title="87">87</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_FILENAME"></a><span class="summary-name">P_FILENAME</span> = <code title="88">88</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_FILESIZE"></a><span class="summary-name">P_FILESIZE</span> = <code title="89">89</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_BYTESTRANSFERRED"></a><span class="summary-name">P_BYTESTRANSFERRED</span> = <code title="90">90</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_BYTESPERSECOND"></a><span class="summary-name">P_BYTESPERSECOND</span> = <code title="91">91</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CHATMSG_GUID"></a><span class="summary-name">P_CHATMSG_GUID</span> = <code title="92">92</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CHATMSG_INDEX"></a><span class="summary-name">P_CHATMSG_INDEX</span> = <code title="93">93</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CONVO_ID"></a><span class="summary-name">P_CONVO_ID</span> = <code title="98">98</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#rwlock">rwlock</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#properties">properties</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#type" class="summary-name">type</a><br />
+      INCOMING / OUTGOING
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#partner_handle" class="summary-name">partner_handle</a><br />
+      Skype Name of the remote party of the file transfer.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#partner_dispname" class="summary-name">partner_dispname</a><br />
+      Display name of the remote participant.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#status" class="summary-name">status</a><br />
+      Current state of the transfer
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#failurereason" class="summary-name">failurereason</a><br />
+      Set whenever P_STATUS transitions to FAILED.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#starttime" class="summary-name">starttime</a><br />
+      UNIX timestamp of when this Transfer instance was instantiated, not 
+      when the transfer process actually started (was accepted from 
+      receiver side).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#finishtime" class="summary-name">finishtime</a><br />
+      UNIX timestamp of when this Transfer COMPLETED or FAILED.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#filepath" class="summary-name">filepath</a><br />
+      The path -and- filename of the file being transfered (typically fully
+      qualified).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#filename" class="summary-name">filename</a><br />
+      The filename -only- of the file being transfered.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#filesize" class="summary-name">filesize</a><br />
+      The size of the file being transferred in bytes.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#bytestransferred" class="summary-name">bytestransferred</a><br />
+      The number of bytes already transferred.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#bytespersecond" class="summary-name">bytespersecond</a><br />
+      Current data transfer speed in bytes per second.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#chatmsg_guid" class="summary-name">chatmsg_guid</a><br />
+      The &quot;global ID&quot; of this Transfer's associated Message 
+      instance.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#chatmsg_index" class="summary-name">chatmsg_index</a><br />
+      A more or less arbitrary index for ordering multiple file transfers 
+      within the UI.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Transfer-class.html#convo_id" class="summary-name">convo_id</a><br />
+      The &quot;global ID&quot; of this Transfer's associated Conversation 
+      (as chained through its associated Message).
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="_sk_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_sk_init_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">object_id</span>,
+        <span class="sig-arg">transport</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Transfer._sk_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>actual constructor</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="skypekit.Object-class.html#_sk_init_">skypekit.Object._sk_init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Transfer.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="Accept"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Accept</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">filename_with_path</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Transfer.Accept">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Accepts an incoming file transfer and saves it to specified file on 
+  the local file system. If the specified file exists, SkypeKit will 
+  silently overwrite it. Your UI should prompting the user for confirmation
+  in this case and provide a means for canceling the file transfer or 
+  specifying a different target file.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>filename_with_path</b> - Where on the local file system to save 
+      the file being transferred. Note that you should specify the path as 
+      being fully-qualified. Otherwise, SkypeKit will be assume it to be 
+      relative to the SkypeKit runtime path, since the method is actually 
+      executed in the runtime context.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>success</b> - Set to true if the specified target file was 
+      successfully created on the local file system -and- the initial 
+      write(s) succeeded. However, the transfer itself can subsequently 
+      fail before completion due to its being canceled (either locally or 
+      remotely), network failure, local file system space/write issues, and
+      so forth.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Pause"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Pause</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Transfer.Pause">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Temporarily pauses an in-progress incoming or outgoing file transfer. 
+  For incoming transfers, only this affects the sender and the invoking 
+  recipient only. For outgoing transfers, this affects the sender and all 
+  recipients.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Cancel"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Cancel</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Transfer.Cancel">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Cancels an in-progress file transfer. Transfer::STATUS will transition
+  to CANCELLED for incoming file transfers and to CANCELLED_BY_REMOTE for 
+  outgoing transfers.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="propid2label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">propid2label</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>80<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">type</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 81<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">partner_handle</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 82<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">partner_dispname</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 83<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">status</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 84<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">failurereason</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 85<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">starttime</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 86<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">finishtime</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 87<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">filepath</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TYPE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TYPE</h3>
+  <ul>
+    <li>
+      INCOMING
+    </li>
+    <li>
+      OUTGOING
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INCOMING</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">OUTGOING</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">INCOMING</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">OUTGOING</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">STATUS</h3>
+  <p>Recognized values for the P_STATUS property. Reflects current state of
+  this Transfer.</p>
+  <ul>
+    <li>
+      NEW - The file has either not been posted (sent) (OUTGOING), or not 
+      accepted (received) (INCOMING).
+    </li>
+    <li>
+      CONNECTING - A temporary state that transitions either into 
+      TRANSFERRING (relayed or direct) or to FAILED. For unknown reasons, 
+      outgoing transfers tend go into this state twice - immediately before
+      the actual data transfer starts and immediately after it ends.
+    </li>
+    <li>
+      WAITING_FOR_ACCEPT - The files have been posted but the recipient has
+      not yet accepted (or has declined) the transfer.
+    </li>
+    <li>
+      TRANSFERRING - The transfer has been accepted and file data is being 
+      sent/received. Periodic updates of P_BYTESTRANSFERRED property should
+      occur.
+    </li>
+    <li>
+      TRANSFERRING_OVER_RELAY - The transfer has been accepted and file 
+      data is being sent/received but is going over at least one relay. 
+      Since relayed transfers tend to be significantly slower than direct 
+      transfers, you might want to differentiate the two in your UI and 
+      notify the user that relayed transfer typically take significantly 
+      longer to finish.
+    </li>
+    <li>
+      PAUSED - The local user (either the sender or a receiver) has paused 
+      the transfer.
+    </li>
+    <li>
+      REMOTELY_PAUSED - A remote user has paused the transfer. For senders,
+      a receiver has paused the transfer; for receivers, the sender has 
+      paused the transfer.
+    </li>
+    <li>
+      CANCELLED - Local side (either sender or receiver) has canceled the 
+      transfer. This is a final state of the STATE property.
+    </li>
+    <li>
+      COMPLETED - File transfer has completed. This is a terminal state.
+    </li>
+    <li>
+      FAILED - File transfer has failed. This is a terminal state. UI 
+      should provide feedback, based on value of P_FAILUREREASON.
+    </li>
+    <li>
+      PLACEHOLDER - Transfer whose existence has been hinted by 
+      corresponding chat message, but which is yet to arrive.
+    </li>
+    <li>
+      OFFER_FROM_OTHER_INSTANCE - Outgoing transfer object from another 
+      instance of the same account as current local login, running on 
+      another system. Hinted through chat message - only implies an offer 
+      was made; not necessarily accepted, failed, or completed.
+    </li>
+    <li>
+      CANCELLED_BY_REMOTE - Remote side (either sender or receiver) has 
+      canceled the transfer. This is a final state of the STATE property.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NEW</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONNECTING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">WAITING_FOR_ACCEPT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TRANSFERRING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TRANSFERRING_OVER_RELAY</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PAUSED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">REMOTELY_PAUSED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CANCELLED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="FAILUREREASON"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">FAILUREREASON</h3>
+  <ul>
+    <li>
+      SENDER_NOT_AUTHORISED
+    </li>
+    <li>
+      REMOTELY_CANCELLED
+    </li>
+    <li>
+      FAILED_READ
+    </li>
+    <li>
+      FAILED_REMOTE_READ
+    </li>
+    <li>
+      FAILED_WRITE
+    </li>
+    <li>
+      FAILED_REMOTE_WRITE
+    </li>
+    <li>
+      REMOTE_DOES_NOT_SUPPORT_FT
+    </li>
+    <li>
+      REMOTE_OFFLINE_FOR_TOO_LONG
+    </li>
+    <li>
+      TOO_MANY_PARALLEL
+    </li>
+    <li>
+      PLACEHOLDER_TIMEOUT
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SENDER_NOT_AUTHORISED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">REMOTELY_CANCELLED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FAILED_READ</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FAILED_REMOTE_READ</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FAILED_WRITE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FAILED_REMOTE_WRITE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">REMOTE_DOES_NOT_SUPPORT_FT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">REMOTE_OFFLINE_FOR_TOO_LONG</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Property Details</span></td>
+</tr>
+</table>
+<a name="type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">type</h3>
+  <p>INCOMING / OUTGOING</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_type" class="summary-sig-name" onclick="show_private();">_sk_get_type</a>(<span class="summary-sig-arg">self</span>)</span>
+        - INCOMING / OUTGOING
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="partner_handle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">partner_handle</h3>
+  <p>Skype Name of the remote party of the file transfer. If a file is 
+  posted in a conversation with more than one participant, Transfer objects
+  are created for each of them - so a transfer is always to one single 
+  remote target.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_partner_handle" class="summary-sig-name" onclick="show_private();">_sk_get_partner_handle</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Skype Name of the remote party of the file transfer.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="partner_dispname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">partner_dispname</h3>
+  <p>Display name of the remote participant.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_partner_dispname" class="summary-sig-name" onclick="show_private();">_sk_get_partner_dispname</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Display name of the remote participant.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">status</h3>
+  <p>Current state of the transfer</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_status" class="summary-sig-name" onclick="show_private();">_sk_get_status</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Current state of the transfer
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="failurereason"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">failurereason</h3>
+  <p>Set whenever P_STATUS transitions to FAILED.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_failurereason" class="summary-sig-name" onclick="show_private();">_sk_get_failurereason</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Set whenever P_STATUS transitions to FAILED.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="starttime"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">starttime</h3>
+  <p>UNIX timestamp of when this Transfer instance was instantiated, not 
+  when the transfer process actually started (was accepted from receiver 
+  side). Do not use this property when calculate the data transfer speed! 
+  Instead, monitor changes to P_BYTESPERSECOND.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_starttime" class="summary-sig-name" onclick="show_private();">_sk_get_starttime</a>(<span class="summary-sig-arg">self</span>)</span>
+        - UNIX timestamp of when this Transfer instance was instantiated, not when 
+the transfer process actually started (was accepted from receiver side).
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="finishtime"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">finishtime</h3>
+  <p>UNIX timestamp of when this Transfer COMPLETED or FAILED. This 
+  property is never set if the receiving side (local or remote) canceled 
+  the transfer.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_finishtime" class="summary-sig-name" onclick="show_private();">_sk_get_finishtime</a>(<span class="summary-sig-arg">self</span>)</span>
+        - UNIX timestamp of when this Transfer COMPLETED or FAILED.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="filepath"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">filepath</h3>
+  <p>The path -and- filename of the file being transfered (typically fully 
+  qualified). For the receiver, SkypeKit sets this property upon acceptance
+  of the incoming transfer. If not fully qualified, the path is assumed to 
+  be relative to the path of the SkypeKit runtime.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_filepath" class="summary-sig-name" onclick="show_private();">_sk_get_filepath</a>(<span class="summary-sig-arg">self</span>)</span>
+        - The path -and- filename of the file being transfered (typically fully 
+qualified).
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="filename"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">filename</h3>
+  <p>The filename -only- of the file being transfered. The receiver side 
+  can use this property to pre-populate relevant UI components while 
+  prompting the user to accept the incoming transfer.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_filename" class="summary-sig-name" onclick="show_private();">_sk_get_filename</a>(<span class="summary-sig-arg">self</span>)</span>
+        - The filename -only- of the file being transfered.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="filesize"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">filesize</h3>
+  <p>The size of the file being transferred in bytes. Depending on the 
+  magnitude of this value, your UI might want to display the size in terms 
+  of kilobytes or even megabytes.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_filesize" class="summary-sig-name" onclick="show_private();">_sk_get_filesize</a>(<span class="summary-sig-arg">self</span>)</span>
+        - The size of the file being transferred in bytes.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="bytestransferred"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">bytestransferred</h3>
+  <p>The number of bytes already transferred. Calculate the percentage of 
+  the file transferred so far as: :</p>
+<pre class="literalblock">
+ P_BYTESTRANSFERRED / (P_FILESIZE / 100); 
+</pre>
+  <p>Use float variables to avoid problems with files smaller than 100 
+  bytes!</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_bytestransferred" class="summary-sig-name" onclick="show_private();">_sk_get_bytestransferred</a>(<span class="summary-sig-arg">self</span>)</span>
+        - The number of bytes already transferred.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="bytespersecond"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">bytespersecond</h3>
+  <p>Current data transfer speed in bytes per second. Typically, your UI 
+  will want to display this value as kilobytes per second (KBps).</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_bytespersecond" class="summary-sig-name" onclick="show_private();">_sk_get_bytespersecond</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Current data transfer speed in bytes per second.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="chatmsg_guid"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">chatmsg_guid</h3>
+  <p>The &quot;global ID&quot; of this Transfer's associated Message 
+  instance. GUIDs are shared across Skype client instances and across all 
+  users that can see this Message.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_chatmsg_guid" class="summary-sig-name" onclick="show_private();">_sk_get_chatmsg_guid</a>(<span class="summary-sig-arg">self</span>)</span>
+        - The &quot;global ID&quot; of this Transfer's associated Message instance.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="chatmsg_index"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">chatmsg_index</h3>
+  <p>A more or less arbitrary index for ordering multiple file transfers 
+  within the UI.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_chatmsg_index" class="summary-sig-name" onclick="show_private();">_sk_get_chatmsg_index</a>(<span class="summary-sig-arg">self</span>)</span>
+        - A more or less arbitrary index for ordering multiple file transfers within 
+the UI.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="convo_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">convo_id</h3>
+  <p>The &quot;global ID&quot; of this Transfer's associated Conversation 
+  (as chained through its associated Message). GUIDs are shared across 
+  Skype client instances and across all users that can see this 
+  Conversation.</p>
+  <p>Note that currently SkypeKit sets this property for INCOMING file 
+  transfers only and returns 0 (zero) for all sending side transfers. This 
+  is a known bug.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Transfer-class.html#_sk_get_convo_id" class="summary-sig-name" onclick="show_private();">_sk_get_convo_id</a>(<span class="summary-sig-arg">self</span>)</span>
+        - The &quot;global ID&quot; of this Transfer's associated Conversation (as 
+chained through its associated Message).
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:40 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

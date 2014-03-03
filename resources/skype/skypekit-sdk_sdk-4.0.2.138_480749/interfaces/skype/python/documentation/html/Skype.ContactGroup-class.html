@@ -1,0 +1,1386 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Skype.ContactGroup</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Skype-module.html">Module&nbsp;Skype</a> ::
+        Class&nbsp;ContactGroup
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class ContactGroup</h1><p class="nomargin-top"><span class="codelink"><a href="Skype-pysrc.html#ContactGroup">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+        
+              |        
+<a href="skypekit.Cached-class.html">skypekit.Cached</a> --+    
+                  |    
+    <a href="skypekit.Object-class.html">skypekit.Object</a> --+
+                      |
+                     <strong class="uidshort">ContactGroup</strong>
+</pre>
+
+<hr />
+<p>Collects and manages Contacts related by type, status, or some other 
+  arbitrary criteria. SkypeKit recognizes two distinct ContactGroup flavors
+  - &quot;hardwired&quot; and &quot;custom&quot;. SkypeKit both defines the
+  criteria for and dynamically manages all &quot;hardwired&quot; 
+  ContactGroups. Individual users explicitly create and manage all 
+  &quot;custom&quot; ContactGroups.</p>
+  <p>&quot;Hardwired&quot; groups are primarily organizational tools, for 
+  example, they enable you to display a list of all Contacts awaiting 
+  authorization by you. &quot;Custom&quot; groups are also organizational 
+  tools, for example, they enable you to display a list of all Contacts in 
+  a particular geographical area or belonging to a particular professional 
+  association, social clubs, and so forth. Primarily, though, 
+  &quot;custom&quot; groups are functional tools that enable you to 
+  establish conference calls, group chats, and so forth.</p>
+  <p>&quot;Hardwired&quot; ContactGroups are defined for and available to 
+  all users. SkypeKit determines membership in a particular 
+  &quot;hardwired&quot; group dynamically whenever a user invokes 
+  Skype.GetHardwiredContactGroup for that group. Subsequent changes to a 
+  Contact's status might result in its being added to (for example, the 
+  Contact is now authorized) or removed from (for example, the Contact is 
+  now removed or blocked) one or more &quot;hardwired&quot; groups.</p>
+  <p>SkypeKit fires OnChange events for all affected ContractGroup 
+  instances. Essentially all ContactGroup methods related to explicitly 
+  adding and removing members and conversations from the group return 
+  false, and CanAdd and CanRemove additionally return a false result.</p>
+  <p>&quot;Custom&quot; ContactGroups can be defined by a particular Skype 
+  user through the UI. Your UI should implement Creation, deletion and 
+  filtering contact list by custom contact groups, as well as adding and 
+  removing contacts in those groups.</p>
+  <p>A Contact can belong to multiple non-mutually exclusive 
+  &quot;hardwired&quot; groups at the same time, for example, an authorized
+  contact is typically in your &quot;buddy&quot; group, but a Contact 
+  cannot belong to CONTACTS_AUTHORIZED_BY_ME if they are awaiting 
+  authorization. Similarly, a Contact can belong to multiple 
+  &quot;custom&quot; groups and mutual exclusivity is typically not an 
+  issue.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#_sk_init_" class="summary-sig-name">_sk_init_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">object_id</span>,
+        <span class="summary-sig-arg">transport</span>)</span><br />
+      actual constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup._sk_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnPropertyChange"></a><span class="summary-sig-name">OnPropertyChange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">property_name</span>)</span><br />
+      notifies from a property change</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.OnPropertyChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#GiveDisplayName" class="summary-sig-name">GiveDisplayName</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>)</span><br />
+      Setter for ContactGroup class GIVEN_DISPLAYNAME property.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.GiveDisplayName">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#Delete" class="summary-sig-name">Delete</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Removes the contact group.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.Delete">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#GetConversations" class="summary-sig-name">GetConversations</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Returns list of conversations in the ContactGroup.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.GetConversations">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#CanAddConversation" class="summary-sig-name">CanAddConversation</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">conversation</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Checks if the current user can add given conversation to the 
+      ContactGroup.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.CanAddConversation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#AddConversation" class="summary-sig-name">AddConversation</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">conversation</span>)</span><br />
+      Adds given conversation to the ContactGroup.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.AddConversation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#CanRemoveConversation" class="summary-sig-name">CanRemoveConversation</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Checks if the current user can remove given conversation from the 
+      ContactGroup.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.CanRemoveConversation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#RemoveConversation" class="summary-sig-name">RemoveConversation</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">conversation</span>)</span><br />
+      Removes given conversation from the ContactGroup.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.RemoveConversation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#OnChangeConversation" class="summary-sig-name">OnChangeConversation</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">conversation</span>)</span><br />
+      conversation added or removed from this group</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.OnChangeConversation">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#GetContacts" class="summary-sig-name">GetContacts</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Retrieves contact list.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.GetContacts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#CanAddContact" class="summary-sig-name">CanAddContact</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">contact</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Checks if the current user can add given contact to the ContactGroup.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.CanAddContact">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#AddContact" class="summary-sig-name">AddContact</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">contact</span>)</span><br />
+      Adds contact to a contact group.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.AddContact">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#CanRemoveContact" class="summary-sig-name">CanRemoveContact</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Checks if the current user can remove given contact from the 
+      ContactGroup.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.CanRemoveContact">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#RemoveContact" class="summary-sig-name">RemoveContact</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">contact</span>)</span><br />
+      Removes contact from the ContactGroup.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.RemoveContact">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.ContactGroup-class.html#OnChange" class="summary-sig-name">OnChange</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">contact</span>)</span><br />
+      A contact has been added or removed to this ContactGroup.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.OnChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#multiget">multiget</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__copy__">__copy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propid"></a><span class="summary-sig-name">propid</span>(<span class="summary-sig-arg">propname</span>)</span><br />
+      convert a property name to the enum of the property</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#ContactGroup.propid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__new__">__new__</a></code>,
+      <code><a href="skypekit.Cached-class.html#sk_exists">sk_exists</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.ContactGroup-class.html#event_handlers" class="summary-name">event_handlers</a> = <code title="{1: '_sk_on_change_conversation', 2: '_sk_on_change'}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk_on_change_conversation</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk_on_</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.ContactGroup-class.html#propid2label" class="summary-name">propid2label</a> = <code title="{151: 'given_displayname',
+ 152: 'nrofcontacts',
+ 153: 'nrofcontacts_online',
+ 154: 'custom_group_id',
+ 155: 'type'}"><code class="variable-group">{</code>151<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">given_displayname</code><code class="variable-quote">'</code><code class="variable-op">, </code>152<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">nrofcontacts</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="module_id"></a><span class="summary-name">module_id</span> = <code title="10">10</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.ContactGroup-class.html#TYPE" class="summary-name">TYPE</a> = <code title="{1: 'ALL_KNOWN_CONTACTS',
+ 2: 'ALL_BUDDIES',
+ 3: 'SKYPE_BUDDIES',
+ 4: 'SKYPEOUT_BUDDIES',
+ 5: 'ONLINE_BUDDIES',
+ 6: 'UNKNOWN_OR_PENDINGAUTH_BUDDIES',
+ 7: 'RECENTLY_CONTACTED_CONTACTS',
+ 8: 'CONTACTS_WAITING_MY_AUTHORIZATION',
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ALL_KNOWN_CONTACTS</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ALL_BUDDIES</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SKYPE_B</code><code class="variable-ellipsis">...</code></code><br />
+      The list of all possible ContactGroup types.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TYPE"></a><span class="summary-name">P_TYPE</span> = <code title="155">155</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CUSTOM_GROUP_ID"></a><span class="summary-name">P_CUSTOM_GROUP_ID</span> = <code title="154">154</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_GIVEN_DISPLAYNAME"></a><span class="summary-name">P_GIVEN_DISPLAYNAME</span> = <code title="151">151</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_NROFCONTACTS"></a><span class="summary-name">P_NROFCONTACTS</span> = <code title="152">152</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_NROFCONTACTS_ONLINE"></a><span class="summary-name">P_NROFCONTACTS_ONLINE</span> = <code title="153">153</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#rwlock">rwlock</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#properties">properties</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.ContactGroup-class.html#type" class="summary-name">type</a><br />
+      ContactGroup::TYPE
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.ContactGroup-class.html#custom_group_id" class="summary-name">custom_group_id</a><br />
+      unique 32-bit ID for custom groups
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.ContactGroup-class.html#given_displayname" class="summary-name">given_displayname</a><br />
+      change via ContactGroup::GiveDisplayname()
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.ContactGroup-class.html#nrofcontacts" class="summary-name">nrofcontacts</a><br />
+      Number of contacts in the group.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.ContactGroup-class.html#nrofcontacts_online" class="summary-name">nrofcontacts_online</a><br />
+      number of contacts online in the group
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="_sk_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_sk_init_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">object_id</span>,
+        <span class="sig-arg">transport</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup._sk_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>actual constructor</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="skypekit.Object-class.html#_sk_init_">skypekit.Object._sk_init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GiveDisplayName"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GiveDisplayName</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.GiveDisplayName">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setter for ContactGroup class GIVEN_DISPLAYNAME property.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>name</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Delete"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Delete</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.Delete">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Removes the contact group. This is synced across instances logged in 
+  with the same account - which can take several minutes for the sync to 
+  happen.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetConversations"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetConversations</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.GetConversations">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns list of conversations in the ContactGroup.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>conversations</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CanAddConversation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CanAddConversation</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">conversation</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.CanAddConversation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks if the current user can add given conversation to the 
+  ContactGroup. Returns false for most of the hardwired contact groups for 
+  example.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>conversation</b> - Conversation to be checked.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b> - Returns true if Conversation can be added to this 
+      ContactGroup.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AddConversation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AddConversation</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">conversation</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.AddConversation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Adds given conversation to the ContactGroup.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>conversation</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CanRemoveConversation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CanRemoveConversation</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.CanRemoveConversation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks if the current user can remove given conversation from the 
+  ContactGroup. Again, returns false for most hardwired contact groups.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b> - true if RemoveConversation(contact) works on this 
+      group
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="RemoveConversation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RemoveConversation</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">conversation</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.RemoveConversation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Removes given conversation from the ContactGroup.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>conversation</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="OnChangeConversation"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OnChangeConversation</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">conversation</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.OnChangeConversation">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>conversation added or removed from this group</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>conversation</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetContacts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetContacts</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.GetContacts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieves contact list.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>contacts</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CanAddContact"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CanAddContact</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">contact</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.CanAddContact">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks if the current user can add given contact to the 
+  ContactGroup.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>contact</b> - Contact to be checked.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b> - returns true if AddContact(contact) works on this 
+      group.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AddContact"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AddContact</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">contact</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.AddContact">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Adds contact to a contact group. This only works for non-hardwired 
+  contact groups.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>contact</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CanRemoveContact"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CanRemoveContact</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.CanRemoveContact">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks if the current user can remove given contact from the 
+  ContactGroup.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b> - true if RemoveContact(contact) works on this group
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="RemoveContact"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RemoveContact</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">contact</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.RemoveContact">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Removes contact from the ContactGroup.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>contact</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="OnChange"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OnChange</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">contact</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#ContactGroup.OnChange">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>A contact has been added or removed to this ContactGroup. NB! On rare 
+  occasions, the ContectRef argument to this callback can be NULL. You 
+  should always check whether the reference is valid, before accessing 
+  methods or properties.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>contact</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="event_handlers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">event_handlers</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk_on_change_conversation</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk_on_change</code><code class="variable-quote">'</code><code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="propid2label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">propid2label</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>151<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">given_displayname</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 152<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">nrofcontacts</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 153<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">nrofcontacts_online</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 154<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">custom_group_id</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 155<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">type</code><code class="variable-quote">'</code><code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TYPE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TYPE</h3>
+  <p>The list of all possible ContactGroup types. A value of this type can 
+  be passed to Skype class GetHardwiredContactGroup to retrieve the 
+  relevant ContactGroup object.</p>
+  <ul>
+    <li>
+      ALL_KNOWN_CONTACTS - The superset of all &quot;hardwired&quot; 
+      contact groups.
+    </li>
+    <li>
+      ALL_BUDDIES - The set of all authorized contacts, that is, contacts 
+      that were last the target of Contact::SetBuddyStatus(false) plus all 
+      SkypeOut contacts.
+    </li>
+    <li>
+      SKYPE_BUDDIES - The set of all authorized Skype contacts 
+      (Contact:_SKYPENAME is non-null).
+    </li>
+  </ul>
+  <p>Note that this excludes Skype contacts that have either never been the
+  target of Contact::SetBuddyStatus(true) or were last the target of 
+  Contactact::SetBuddyStatus(false).</p>
+  <ul>
+    <li>
+      SKYPEOUT_BUDDIES - The set of all SkypeOut contacts 
+      (Contact:_PSTNNUMBER is non-null). PSTN contacts can be added to the 
+      contact list by retrieving a new contact object with 
+      Skype::GetContact, passing in the phone number as string, and then 
+      either using Contact::SetBuddyStatus(true) or adding the contact to 
+      the SKYPEOUT_BUDDIES group with ContactGroup::AddContact.
+    </li>
+    <li>
+      ONLINE_BUDDIES - The subset of ALL_BUDDIES that are currently online,
+      including those currently marked as DO_NOT_DISTURBED and AWAY.
+    </li>
+    <li>
+      UNKNOWN_OR_PENDINGAUTH_BUDDIES - The set of all contacts whose 
+      Contact:_TYPE reflects UNRECOGNIZED OR have not authorized the local 
+      user yet.
+    </li>
+    <li>
+      RECENTLY_CONTACTED_CONTACTS - This filter returns top 10 most 
+      recently contacted contacts, based on Contact::P_LASTUSED_TIMESTAMP 
+      property values. This is not configurable. Note that the 
+      P_LASTUSED_TIMESTAMP property does not propagate between different 
+      Skype instances - thus this filter only works in context of the local
+      database. Recent contacts that were in touch with the user on some 
+      other Skype installation will not show up in this filter.
+    </li>
+    <li>
+      CONTACTS_WAITING_MY_AUTHORIZATION - Contacts to whose authorization 
+      request the user has not responded yet. The UI should enable the user
+      to accept, decline the authorization request and in case of decline, 
+      optionally block further incoming communication from the contact. 
+      See: Contact::SetBuddyStatus, Contact::SetBlocked and 
+      Contact::IgnoreAuthRequest for more information.
+    </li>
+    <li>
+      CONTACTS_AUTHORIZED_BY_ME - All contacts authorized by the user.
+    </li>
+    <li>
+      CONTACTS_BLOCKED_BY_ME - Group of contacts the user has blocked from 
+      further incoming communications. If the UI enables contact blocking, 
+      it should also provide interface for the user to unblock the blocked 
+      contacts. Note that a contact can simultaneously be in both 
+      CONTACTS_BLOCKED_BY_ME and CONTACTS_AUTHORIZED_BY_ME groups.
+    </li>
+    <li>
+      UNGROUPED_BUDDIES - The set of all &quot;buddies&quot; that are not 
+      also a member of a custom group.
+    </li>
+    <li>
+      CUSTOM_GROUP - A custom group defined by user.
+    </li>
+    <li>
+      PROPOSED_SHARED_GROUP - The shared contact group functionality is no 
+      longer supported. This contact group type can be ignored.
+    </li>
+    <li>
+      SHARED_GROUP - The shared contact group functionality is no longer 
+      supported. This contact group type can be ignored.
+    </li>
+    <li>
+      EXTERNAL_CONTACTS - The set of all contacts that were originally 
+      imported from an external address book.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ALL_KNOWN_CONTACTS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ALL_BUDDIES</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SKYPE_BUDDIES</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SKYPEOUT_BUDDIES</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ONLINE_BUDDIES</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNKNOWN_OR_PENDINGAUTH_BUDDIES</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RECENTLY_CONTACTED_CONTACTS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONTACTS_WAITING_MY_AUTHORIZATION</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Property Details</span></td>
+</tr>
+</table>
+<a name="type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">type</h3>
+  <p>ContactGroup::TYPE</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.ContactGroup-class.html#_sk_get_type" class="summary-sig-name" onclick="show_private();">_sk_get_type</a>(<span class="summary-sig-arg">self</span>)</span>
+        - ContactGroup::TYPE
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="custom_group_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">custom_group_id</h3>
+  <p>unique 32-bit ID for custom groups</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.ContactGroup-class.html#_sk_get_custom_group_id" class="summary-sig-name" onclick="show_private();">_sk_get_custom_group_id</a>(<span class="summary-sig-arg">self</span>)</span>
+        - unique 32-bit ID for custom groups
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="given_displayname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">given_displayname</h3>
+  <p>change via ContactGroup::GiveDisplayname()</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.ContactGroup-class.html#_sk_get_given_displayname" class="summary-sig-name" onclick="show_private();">_sk_get_given_displayname</a>(<span class="summary-sig-arg">self</span>)</span>
+        - change via ContactGroup::GiveDisplayname()
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="nrofcontacts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">nrofcontacts</h3>
+  <p>Number of contacts in the group. NB! The value of this property does 
+  not get updated until 5 seconds after account login. During these initial
+  5 seconds, the value of this property remains 0. The reason for this 5 
+  second delay is to reduce the flurry of property update traffic that 
+  occurs during the CBL synchronization phase, following successful login. 
+  Note that if you absolutely need to have this value immediately after 
+  login, you can still get it by retrieving the contact list with 
+  ContactGroup::GetContacts method and examining its size.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.ContactGroup-class.html#_sk_get_nrofcontacts" class="summary-sig-name" onclick="show_private();">_sk_get_nrofcontacts</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Number of contacts in the group.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="nrofcontacts_online"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">nrofcontacts_online</h3>
+  <p>number of contacts online in the group</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.ContactGroup-class.html#_sk_get_nrofcontacts_online" class="summary-sig-name" onclick="show_private();">_sk_get_nrofcontacts_online</a>(<span class="summary-sig-arg">self</span>)</span>
+        - number of contacts online in the group
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:39 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

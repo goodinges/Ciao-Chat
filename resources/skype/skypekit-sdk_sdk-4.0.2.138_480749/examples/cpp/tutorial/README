@@ -1,0 +1,36 @@
+
+This directory contains the SkypeKit C++ wrapper tutorial examples.
+
+Step  1: Subclassing and login
+Step  2: Conversation class and properties
+Step  3: Receive and send chat messages
+Step  4: Retrieve Contact list and catch online status change events
+Step  5: Pick up incoming voice calls and catch voice activity events
+Step  6: Initiate a voice call
+Step  7: Initiate a conference call
+Step  8: Add and remove (PSTN) contacts 
+Step  9: Detecting incoming contact authorization requests.
+Step 10: Creating Public Chat Join BLOBs
+Step 11: App2App datagrams
+Step 12: Event history (call hisory and authentication request history)
+Step 13: Sending SMS messages
+Step 14: Sending and receiving Voicemails
+Step 15: App2App streams (read/write)
+Step 16: File transfers
+
+To get these examples working, you will need to:
+1. register a (test) application and version at https://developer.skype.com/
+2. download a runtime and an application token (key pair).
+3. save the key pair as keypair.pem file in examples/cpp/tutorial/keypair
+4. re-build C++ wrapper from project files located in interfaces/skype/cpp_embedded/build directory.
+5. build tutorials from project files located in examples/cpp/tutorial/build
+
+You can find additional information about the tutorial programs and how to generate project files for them at https://developer.skype.com/SkypeKit/Docs/TutorialGuide
+
+Additional notes on application token changes in SDK version 3.2
+In prior versions the tutorial examples included a app_token.h file from the examples/cpp/tutorial/apptoken directory. As of version 3.2, this has been replaced with keypair.h from the keypair directory. This file contains a getKeyPair function that loads the keypair from a tutorial/apptoken/keypair.pem file and assigns the value to the keyBuf variable that then gets passed to skype::init, just as the old AppToken used to be. 
+
+To retrieve a valid key pair, you will need to log in to your account on http://developer.skype.com/ and register a test application, and a version of that application. At that point you will be able to download a runtime and a keypair. To get tutorial examples working, you will need to save the key pair as keypair.pem file in the tutorial/apptoken/ directory.
+
+WARNING! This method of including key pairs for applications (in separate plain text files) is NOT something that you should ever do in your own applications. You do not want third parties getting access to your key pairs. For this reason, you shouuld use obfuscation techniques to hide the keys in your application.
+

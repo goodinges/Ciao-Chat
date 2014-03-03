@@ -1,0 +1,38 @@
+<project basedir="." default="main" name="sid-cpp-wrapper">
+
+    <taskdef name="cmake" 
+             classname="org.iainhull.ant.CmakeBuilder"/>
+
+    <property name="build.dir" value="${basedir}/cmake-build" />
+
+    <target name="help">
+        <echo>Skypekit CPP wrapper build. Available targets:</echo>
+        <echo>    help:         Display this help.</echo>
+        <echo>    main:         Default target. Generates build files for current platform using cmake</echo>
+        <echo>    build:        Generates build files for current platform using cmake, then build and install cpp_embedded libraries and client</echo>
+        <echo>                  Requires access to the cmakeant task, available at http://code.google.com/p/cmakeant/</echo>
+    </target>
+
+    <target name="main">
+        <mkdir dir="${build.dir}" />
+        <cmake srcdir="${basedir}"
+               bindir="${build.dir}"
+               cmakeonly="true" >
+            <generator name="Visual Studio 10" platform="windows" />
+            <generator name="Xcode" platform="Mac OS X" />
+            <generator name="Code Blocks" platform="Linux" />
+            <generator name="Unix Makefiles" />
+        </cmake>
+    </target>
+
+    <target name="build">
+        <mkdir dir="${build.dir}" />
+        <cmake srcdir="${basedir}"
+               bindir="${build.dir}"
+               cmakeonly="false" >
+            <generator name="Visual Studio 10" platform="windows" target="install"/>
+            <generator name="CodeBlocks - Unix Makefiles" platform="Linux" target="install"/>
+            <generator name="Unix Makefiles" target="install"/>
+        </cmake>
+    </target>
+</project>

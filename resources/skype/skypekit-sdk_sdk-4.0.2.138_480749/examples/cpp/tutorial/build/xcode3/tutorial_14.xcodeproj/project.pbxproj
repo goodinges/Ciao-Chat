@@ -1,0 +1,541 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		2BC136F24AA761D1061448B7 /* tutorial_14.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 426365A64BEE261D21D00A2B /* tutorial_14.cpp */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		426365A64BEE261D21D00A2B /* tutorial_14.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = "tutorial_14.cpp"; path = "tutorial_14.cpp"; sourceTree = "<group>"; };
+		265036F61B91095563822A66 /* tutorial_14 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; name = "tutorial_14"; path = "tutorial_14"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		08D953076A10538134D97025 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7E8330C17AF9602064E77618 /* tutorial_14 */ = {
+			isa = PBXGroup;
+			children = (
+				623550A82BD61C1D77AC6648 /* step14 */,
+				488F762D42C9194161CF4DAA /* Products */,
+			);
+			name = "tutorial_14";
+			sourceTree = "<group>";
+		};
+		623550A82BD61C1D77AC6648 /* step14 */ = {
+			isa = PBXGroup;
+			children = (
+				426365A64BEE261D21D00A2B /* tutorial_14.cpp */,
+			);
+			name = "step14";
+			path = ../../step14;
+			sourceTree = "<group>";
+		};
+		488F762D42C9194161CF4DAA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				265036F61B91095563822A66 /* tutorial_14 */,
+			);
+			name = "Products";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		2EED685A0F22572411F91554 /* tutorial_14 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2F8F60537E6B2A8840736352 /* Build configuration list for PBXNativeTarget "tutorial_14" */;
+			buildPhases = (
+				20A122A833FB4C773EC52BA8 /* Resources */,
+				32BF0129114E7EAE2746331E /* Sources */,
+				08D953076A10538134D97025 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "tutorial_14";
+			productInstallPath = "$(HOME)/bin";
+			productName = "tutorial_14";
+			productReference = 265036F61B91095563822A66 /* tutorial_14 */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		08FB7793FE84155DC02AAC07 /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = 1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "tutorial_14" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 7E8330C17AF9602064E77618 /* tutorial_14 */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				2EED685A0F22572411F91554 /* tutorial_14 */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		20A122A833FB4C773EC52BA8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		32BF0129114E7EAE2746331E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2BC136F24AA761D1061448B7 /* tutorial_14.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0E8561083B54003F66F63E6C /* Debug Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../step14;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "tutorial_14";
+			};
+			name = "Debug Native 32-bit";
+		};
+		1F104EBC0E4516712077379C /* Debug Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../step14;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "tutorial_14";
+			};
+			name = "Debug Native 64-bit";
+		};
+		2B323D744E30589621E858F7 /* Debug Native */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CONFIGURATION_BUILD_DIR = ../../step14;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "tutorial_14";
+			};
+			name = "Debug Native";
+		};
+		7C0069F47B8910CF459B12E0 /* Release Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CONFIGURATION_BUILD_DIR = ../../step14;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "tutorial_14";
+			};
+			name = "Release Native 32-bit";
+		};
+		6BC135BD39E827043A722646 /* Release Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CONFIGURATION_BUILD_DIR = ../../step14;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "tutorial_14";
+			};
+			name = "Release Native 64-bit";
+		};
+		1521407C36104F227E1066BD /* Release Native */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				CONFIGURATION_BUILD_DIR = ../../step14;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_MODEL_TUNING = G5;
+				INSTALL_PATH = /usr/local/bin;
+				PRODUCT_NAME = "tutorial_14";
+			};
+			name = "Release Native";
+		};
+		39475A9214CE5BA617561511 /* Debug Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "i386";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_DEBUG",
+					"DEBUG",
+					"SSL_LIB_CYASSL",
+					"NO_FILESYSTEM",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread",
+					"../../../../../interfaces/skype/cpp_embedded/src/api",
+					"../../../../../interfaces/skype/cpp_embedded/src/ipc",
+					"../../../../../interfaces/skype/cpp_embedded/src/types",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport/tcp",
+					"../../../../../ipc/cpp",
+					"../../../../../ipc/cpp/platform/se",
+					"../../../../../ipc/cpp/ssl/cyassl/include",
+					"../../../../../ipc/cpp/ssl/cyassl/ctaocrypt/include",
+					"../../../../../ipc/cpp/ssl/cyassl/include/openssl",
+					"../../keypair",
+					"../../common",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/build",
+					"../../../../../bin/mac-x86",
+				);
+				OBJROOT = "obj/x32/Debug/tutorial_14";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lpthread",
+					"-lskypekit-cppwrapper_2_lib",
+					"-lskypekit-cyassl_lib",
+				);
+				PREBINDING = NO;
+				SYMROOT = "../../step14";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = "Debug Native 32-bit";
+		};
+		3A9F37D33B4204B46C5E46F5 /* Debug Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "x86_64";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_DEBUG",
+					"DEBUG",
+					"SSL_LIB_CYASSL",
+					"NO_FILESYSTEM",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread",
+					"../../../../../interfaces/skype/cpp_embedded/src/api",
+					"../../../../../interfaces/skype/cpp_embedded/src/ipc",
+					"../../../../../interfaces/skype/cpp_embedded/src/types",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport/tcp",
+					"../../../../../ipc/cpp",
+					"../../../../../ipc/cpp/platform/se",
+					"../../../../../ipc/cpp/ssl/cyassl/include",
+					"../../../../../ipc/cpp/ssl/cyassl/ctaocrypt/include",
+					"../../../../../ipc/cpp/ssl/cyassl/include/openssl",
+					"../../keypair",
+					"../../common",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/build",
+					"../../../../../bin/mac-x86",
+				);
+				OBJROOT = "obj/x64/Debug/tutorial_14";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lpthread",
+					"-lskypekit-cppwrapper_2_lib",
+					"-lskypekit-cyassl_lib",
+				);
+				PREBINDING = NO;
+				SYMROOT = "../../step14";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = "Debug Native 64-bit";
+		};
+		023F306D3A003D9430AC20F6 /* Debug Native */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_DEBUG",
+					"DEBUG",
+					"SSL_LIB_CYASSL",
+					"NO_FILESYSTEM",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread",
+					"../../../../../interfaces/skype/cpp_embedded/src/api",
+					"../../../../../interfaces/skype/cpp_embedded/src/ipc",
+					"../../../../../interfaces/skype/cpp_embedded/src/types",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport/tcp",
+					"../../../../../ipc/cpp",
+					"../../../../../ipc/cpp/platform/se",
+					"../../../../../ipc/cpp/ssl/cyassl/include",
+					"../../../../../ipc/cpp/ssl/cyassl/ctaocrypt/include",
+					"../../../../../ipc/cpp/ssl/cyassl/include/openssl",
+					"../../keypair",
+					"../../common",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/build",
+					"../../../../../bin/mac-x86",
+				);
+				OBJROOT = "obj/Debug/tutorial_14";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lpthread",
+					"-lskypekit-cppwrapper_2_lib",
+					"-lskypekit-cyassl_lib",
+				);
+				PREBINDING = NO;
+				SYMROOT = "../../step14";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = "Debug Native";
+		};
+		25E064AC619D34257B1E0214 /* Release Native 32-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "i386";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG",
+					"SSL_LIB_CYASSL",
+					"NO_FILESYSTEM",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread",
+					"../../../../../interfaces/skype/cpp_embedded/src/api",
+					"../../../../../interfaces/skype/cpp_embedded/src/ipc",
+					"../../../../../interfaces/skype/cpp_embedded/src/types",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport/tcp",
+					"../../../../../ipc/cpp",
+					"../../../../../ipc/cpp/platform/se",
+					"../../../../../ipc/cpp/ssl/cyassl/include",
+					"../../../../../ipc/cpp/ssl/cyassl/ctaocrypt/include",
+					"../../../../../ipc/cpp/ssl/cyassl/include/openssl",
+					"../../keypair",
+					"../../common",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/build",
+					"../../../../../bin/mac-x86",
+				);
+				OBJROOT = "obj/x32/Release/tutorial_14";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lpthread",
+					"-lskypekit-cppwrapper_2_lib",
+					"-lskypekit-cyassl_lib",
+				);
+				PREBINDING = NO;
+				SYMROOT = "../../step14";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = "Release Native 32-bit";
+		};
+		6DF965A563BA3C2A3E3C05A3 /* Release Native 64-bit */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "x86_64";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG",
+					"SSL_LIB_CYASSL",
+					"NO_FILESYSTEM",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread",
+					"../../../../../interfaces/skype/cpp_embedded/src/api",
+					"../../../../../interfaces/skype/cpp_embedded/src/ipc",
+					"../../../../../interfaces/skype/cpp_embedded/src/types",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport/tcp",
+					"../../../../../ipc/cpp",
+					"../../../../../ipc/cpp/platform/se",
+					"../../../../../ipc/cpp/ssl/cyassl/include",
+					"../../../../../ipc/cpp/ssl/cyassl/ctaocrypt/include",
+					"../../../../../ipc/cpp/ssl/cyassl/include/openssl",
+					"../../keypair",
+					"../../common",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/build",
+					"../../../../../bin/mac-x86",
+				);
+				OBJROOT = "obj/x64/Release/tutorial_14";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lpthread",
+					"-lskypekit-cppwrapper_2_lib",
+					"-lskypekit-cyassl_lib",
+				);
+				PREBINDING = NO;
+				SYMROOT = "../../step14";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = "Release Native 64-bit";
+		};
+		70197A1150B26BA20AE0164D /* Release Native */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(NATIVE_ARCH_ACTUAL)";
+				CONFIGURATION_BUILD_DIR = "$(SYMROOT)";
+				CONFIGURATION_TEMP_DIR = "$(OBJROOT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_CPP_EXCEPTIONS = NO;
+				GCC_ENABLE_CPP_RTTI = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = NO;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"NDEBUG",
+					"SSL_LIB_CYASSL",
+					"NO_FILESYSTEM",
+				);
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread",
+					"../../../../../interfaces/skype/cpp_embedded/src/api",
+					"../../../../../interfaces/skype/cpp_embedded/src/ipc",
+					"../../../../../interfaces/skype/cpp_embedded/src/types",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/threading",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport",
+					"../../../../../interfaces/skype/cpp_embedded/src/platform/transport/tcp",
+					"../../../../../ipc/cpp",
+					"../../../../../ipc/cpp/platform/se",
+					"../../../../../ipc/cpp/ssl/cyassl/include",
+					"../../../../../ipc/cpp/ssl/cyassl/ctaocrypt/include",
+					"../../../../../ipc/cpp/ssl/cyassl/include/openssl",
+					"../../keypair",
+					"../../common",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"../../../../../interfaces/skype/cpp_embedded/build",
+					"../../../../../bin/mac-x86",
+				);
+				OBJROOT = "obj/Release/tutorial_14";
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-lpthread",
+					"-lskypekit-cppwrapper_2_lib",
+					"-lskypekit-cyassl_lib",
+				);
+				PREBINDING = NO;
+				SYMROOT = "../../step14";
+				WARNING_CFLAGS = "-Wall";
+			};
+			name = "Release Native";
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2F8F60537E6B2A8840736352 /* Build configuration list for PBXNativeTarget "tutorial_14" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0E8561083B54003F66F63E6C /* Debug Native 32-bit */,
+				1F104EBC0E4516712077379C /* Debug Native 64-bit */,
+				2B323D744E30589621E858F7 /* Debug Native */,
+				7C0069F47B8910CF459B12E0 /* Release Native 32-bit */,
+				6BC135BD39E827043A722646 /* Release Native 64-bit */,
+				1521407C36104F227E1066BD /* Release Native */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug Native 32-bit";
+		};
+		1DEB928908733DD80010E9CD /* Build configuration list for PBXProject "tutorial_14" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				39475A9214CE5BA617561511 /* Debug Native 32-bit */,
+				3A9F37D33B4204B46C5E46F5 /* Debug Native 64-bit */,
+				023F306D3A003D9430AC20F6 /* Debug Native */,
+				25E064AC619D34257B1E0214 /* Release Native 32-bit */,
+				6DF965A563BA3C2A3E3C05A3 /* Release Native 64-bit */,
+				70197A1150B26BA20AE0164D /* Release Native */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = "Debug Native 32-bit";
+		};
+/* End XCConfigurationList section */
+
+	};
+	rootObject = 08FB7793FE84155DC02AAC07 /* Project object */;
+}

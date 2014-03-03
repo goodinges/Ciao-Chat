@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="loopback" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug-x86">
+				<Option output="loopback" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Debug-x86" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-Werror" />
+					<Add option="-g" />
+					<Add option="-fno-rtti" />
+					<Add option="-fno-exceptions" />
+					<Add option="-D_DEBUG" />
+					<Add option="-DDEBUG" />
+					<Add option="-DSKYPEKIT" />
+					<Add option="-DENABLE_DEBUG" />
+					<Add option="`pkg-config libavcodec --cflags`" />
+					<Add directory="../../common" />
+					<Add directory="../../common/video" />
+					<Add directory="../src" />
+					<Add directory="../../../interfaces/videortp" />
+					<Add directory="../../../interfaces/videortp/videohost_ipc" />
+					<Add directory="../../../interfaces/skype/cpp_embedded/src/types" />
+					<Add directory="../../../ipc/cpp/platform/se" />
+					<Add directory="../../../interfaces/skype/cpp_embedded/src/platform/threading" />
+					<Add directory="../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread" />
+					<Add directory="../../../ipc/cpp" />
+				</Compiler>
+				<Linker>
+					<Add option="`pkg-config libavcodec libavutil --libs`" />
+					<Add option="-lx264 -lXv" />
+				</Linker>
+			</Target>
+			<Target title="Release-x86">
+				<Option output="loopback" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Release-x86" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Wall" />
+					<Add option="-Werror" />
+					<Add option="-O2" />
+					<Add option="-fno-rtti" />
+					<Add option="-fno-exceptions" />
+					<Add option="-DNDEBUG" />
+					<Add option="-DSKYPEKIT" />
+					<Add option="-DENABLE_DEBUG" />
+					<Add option="`pkg-config libavcodec --cflags`" />
+					<Add directory="../../common" />
+					<Add directory="../../common/video" />
+					<Add directory="../src" />
+					<Add directory="../../../interfaces/videortp" />
+					<Add directory="../../../interfaces/videortp/videohost_ipc" />
+					<Add directory="../../../interfaces/skype/cpp_embedded/src/types" />
+					<Add directory="../../../ipc/cpp/platform/se" />
+					<Add directory="../../../interfaces/skype/cpp_embedded/src/platform/threading" />
+					<Add directory="../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread" />
+					<Add directory="../../../ipc/cpp" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="`pkg-config libavcodec libavutil --libs`" />
+					<Add option="-lx264 -lXv" />
+				</Linker>
+			</Target>
+		</Build>
+		<Unit filename="../../../interfaces/skype/cpp_embedded/src/types/skype-string.cpp">
+		</Unit>
+		<Unit filename="../../common/rtph.hpp">
+		</Unit>
+		<Unit filename="../../common/debugging.hpp">
+		</Unit>
+		<Unit filename="../../common/ptasking.hpp">
+		</Unit>
+		<Unit filename="../../common/ptasking.cpp">
+		</Unit>
+		<Unit filename="../../common/video/TimingStat.hpp">
+		</Unit>
+		<Unit filename="../../common/video/SlidingAvg.hpp">
+		</Unit>
+		<Unit filename="../../common/video/rfc3984.hpp">
+		</Unit>
+		<Unit filename="../../common/video/BitrateStat.hpp">
+		</Unit>
+		<Unit filename="../../common/video/PcapHandler.hpp">
+		</Unit>
+		<Unit filename="../../common/video/H264AnxbReader.hpp">
+		</Unit>
+		<Unit filename="../../common/video/V4l2Capture.hpp">
+		</Unit>
+		<Unit filename="../../common/video/H264AnxbToRtp.hpp">
+		</Unit>
+		<Unit filename="../../common/video/H264RtpToAnxb.hpp">
+		</Unit>
+		<Unit filename="../../common/video/StaticSyncQueue.hpp">
+		</Unit>
+		<Unit filename="../../common/video/H264RtpToAnxb.cpp">
+		</Unit>
+		<Unit filename="../../common/video/H264AnxbToRtp.cpp">
+		</Unit>
+		<Unit filename="../../common/video/PcapHandler.cpp">
+		</Unit>
+		<Unit filename="../../common/video/V4l2Capture.cpp">
+		</Unit>
+		<Unit filename="../../common/video/H264AnxbReader.cpp">
+		</Unit>
+		<Unit filename="../src/SendVideoWrapper.cpp">
+		</Unit>
+		<Unit filename="../src/ReceiveVideoWrapper.cpp">
+		</Unit>
+		<Unit filename="../src/H264AnxbFileReader.cpp">
+		</Unit>
+		<Unit filename="../src/PcapFileReader.cpp">
+		</Unit>
+		<Unit filename="../src/Configuration.cpp">
+		</Unit>
+		<Unit filename="../src/V4l2Capturer.cpp">
+		</Unit>
+		<Unit filename="../src/H264Encoder.cpp">
+		</Unit>
+		<Unit filename="../src/X11Renderer.cpp">
+		</Unit>
+		<Unit filename="../src/H264Decoder.cpp">
+		</Unit>
+		<Unit filename="../src/ColorConvert.cpp">
+		</Unit>
+		<Unit filename="../src/DummyCapturer.cpp">
+		</Unit>
+		<Unit filename="../src/main.cpp">
+		</Unit>
+		<Unit filename="../../../interfaces/skype/cpp_embedded/src/types/skype-binary.cpp">
+		</Unit>
+		<Unit filename="../../../interfaces/skype/cpp_embedded/src/platform/threading/pthread/skype-thread-pthread.cpp">
+		</Unit>
+		<Extensions />
+	</Project>
+</CodeBlocks_project_file>
+

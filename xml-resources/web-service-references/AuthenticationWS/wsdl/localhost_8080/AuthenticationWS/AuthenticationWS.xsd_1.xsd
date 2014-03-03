@@ -1,0 +1,91 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.1.1-b09 (branches/2.1-6834; 2011-07-16T17:14:48+0000) JAXWS-RI/2.2.5-promoted-b04 JAXWS/2.2. --><xs:schema xmlns:tns="http://Authentication/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Authentication/">
+
+<xs:element name="Athenticate" type="tns:Athenticate"/>
+
+<xs:element name="AthenticateResponse" type="tns:AthenticateResponse"/>
+
+<xs:element name="forgetCred" type="tns:forgetCred"/>
+
+<xs:element name="forgetCredResponse" type="tns:forgetCredResponse"/>
+
+<xs:element name="getUserInfo" type="tns:getUserInfo"/>
+
+<xs:element name="getUserInfoResponse" type="tns:getUserInfoResponse"/>
+
+<xs:element name="signup" type="tns:signup"/>
+
+<xs:element name="signupResponse" type="tns:signupResponse"/>
+
+<xs:element name="userNameTaken" type="tns:userNameTaken"/>
+
+<xs:element name="userNameTakenResponse" type="tns:userNameTakenResponse"/>
+
+<xs:complexType name="Athenticate">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+<xs:element name="pass" type="xs:unsignedShort" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="AthenticateResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserInfo">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getUserInfoResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="forgetCred">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="forgetCredResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="signup">
+<xs:sequence>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="pass" type="xs:string" minOccurs="0"/>
+<xs:element name="question" type="xs:int"/>
+<xs:element name="answer" type="xs:string" minOccurs="0"/>
+<xs:element name="firstName" type="xs:string" minOccurs="0"/>
+<xs:element name="lastName" type="xs:string" minOccurs="0"/>
+<xs:element name="gender" type="xs:boolean"/>
+<xs:element name="birthday" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="signupResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="userNameTaken">
+<xs:sequence>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="userNameTakenResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

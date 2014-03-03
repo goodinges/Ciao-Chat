@@ -1,0 +1,2000 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Skype.Message</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Skype-module.html">Module&nbsp;Skype</a> ::
+        Class&nbsp;Message
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Message</h1><p class="nomargin-top"><span class="codelink"><a href="Skype-pysrc.html#Message">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+        
+              |        
+<a href="skypekit.Cached-class.html">skypekit.Cached</a> --+    
+                  |    
+    <a href="skypekit.Object-class.html">skypekit.Object</a> --+
+                      |
+                     <strong class="uidshort">Message</strong>
+</pre>
+
+<hr />
+<p>Events in a conversation context are expressed as Messages. It is 
+  therefore useful to think of Message objects as events, rather than 
+  specifically text chat messages.</p>
+  <p>Message member functions all return a Boolean indicating the success 
+  (true) or failure (false) of processing the request itself (transport, 
+  runtime availability, and so forth) - not the success or failure of its 
+  associated functionality. For example, Message::Edit returns true if it 
+  was able to make a determination, and its result parameter reflects 
+  whether this Message can be edited. Similarly, Message::Edit returns 
+  false if it was unable to make a determination, and the value of its 
+  result parameter is undefined.</p>
+  <p>Message member functions that are specific to a Message TYPE return 
+  false if this Message is not of that type. For example, 
+  Message::GetVoiceMessage will return false if this Message's type is not 
+  POSTED_VOICE_MESSAGE.</p>
+  <p>The actual meaning of a Message can be determined by its P_TYPE 
+  property. The meanings of most other Message properties depend on the 
+  value of P_TYPE. For example, let's take P_BODY_XML property.</p>
+  <p>Following messages have a text entered by the user as a body. It may 
+  contain emoticons, URLs, etc.</p>
+  <ul>
+    <li>
+      POSTED_TEXT
+    </li>
+    <li>
+      POSTED_EMOTE
+    </li>
+    <li>
+      SET_METADATA
+    </li>
+    <li>
+      REQUESTED_AUTH
+    </li>
+  </ul>
+  <p>Following messages have a custom XML format for the body (see the 
+  specific section on these message types for details):</p>
+  <ul>
+    <li>
+      POSTED_CONTACTS
+    </li>
+    <li>
+      POSTED_VOICE_MESSAGE
+    </li>
+    <li>
+      POSTED_FILES
+    </li>
+    <li>
+      POSTED_SMS
+    </li>
+    <li>
+      STARTED_LIVESESSION and ENDED_LIVESESSION (same format)
+    </li>
+  </ul>
+  <p>Following messages do not use the body property:</p>
+  <ul>
+    <li>
+      SPAWNED_CONFERENCE
+    </li>
+    <li>
+      ADDED_CONSUMERS
+    </li>
+    <li>
+      ADDED_APPLICANTS
+    </li>
+    <li>
+      RETIRED_OTHERS
+    </li>
+    <li>
+      RETIRED
+    </li>
+    <li>
+      SET_RANK
+    </li>
+    <li>
+      HAS_BIRTHDAY
+    </li>
+    <li>
+      GRANTED_AUTH
+    </li>
+    <li>
+      BLOCKED
+    </li>
+  </ul>
+  <p>Messages such as POSTED_TEXT use a small subset of a HTML-like markup 
+  to control the visual representation of the text. This markup is used by 
+  POSTED_TEXT and POSTED_EMOTE, but also for the conversation topic 
+  (CONVERSATION_META_TOPIC property and the body of the SET_METADATA 
+  message) and for authorization requests.</p>
+  <p>Having chat messages in XML format means that all formatting is 
+  indicated by XML tags. This includes emoticons and URls. The big 
+  advantage is that it makes the parsing of the message by the UI much 
+  easier. The UI does not need to do emoticons or URL detection, this is 
+  already done and it only needs to look for the XML tags.</p>
+  <p>For text messages, it is possible for the UI to simply ignore (meaning
+  strip) the XML and the message will be understandable fine, it will only 
+  have lost some formatting.</p>
+  <p>But it is obviously nicer to display at least the most commonly used 
+  tags.</p>
+  <p>To strip the XML:</p>
+  <ul>
+    <li>
+      if they have the alt=&quot;sometext&quot; attribute set, return 
+      sometext as the output of that tag and ignore the rest of tag and all
+      nested sub tags
+    </li>
+    <li>
+      if no alt=&quot;&quot; attribute set, use tag content as output - 
+      &lt;sometag&gt;hereissomething&lt;/sometag&gt; is output as 
+      hereissomething
+    </li>
+    <li>
+      if no alt=&quot;&quot; and no tag content, ignore the tag altogether 
+      (return nothing)
+    </li>
+  </ul>
+  <p>Skype for Windows supports displaying many XML tags, but only a 
+  sub-set is regularly used and should be supported by the UI for a good 
+  experience. These are the ones described here. Animated emoticons 
+  Emoticons are encoded with the &quot;ss&quot; tag. The element content is
+  the plain text representation. It has a &quot;type&quot; attribute 
+  indicating the emoticons canonical name. Example: :</p>
+<pre class="literalblock">
+ Hi &lt;ss type=&quot;smile&quot;&gt;:-)&lt;/ss&gt; 
+</pre>
+  <p>Flag emoticons Flag emoticons are little flags. They are encoded with 
+  the &quot;flag&quot; tag. The element contents is the plain text 
+  representation and it has a &quot;country&quot; attribute which is a 
+  2-letter ISO-3166 country code. The user can enter a flag using 
+  &quot;(flag:XX)&quot;, where XX is a valid ISO country code. Example: 
+  :</p>
+<pre class="literalblock">
+ I am in &lt;flag country=&quot;cc&quot;&gt;CC&lt;/flag&gt; 
+</pre>
+  <p>Links If the library detects a URL, it will encode it using the html 
+  &quot;a&quot; tag, with the &quot;href&quot; attribute indicating the 
+  URL. The plain text representation is what the user originally typed. 
+  Example: :</p>
+<pre class="literalblock">
+ I am in &lt;a href=&quot;http://wwww.skype.com&quot;&gt;www.skype.com&lt;/a&gt; 
+</pre>
+  <p>Alert matches When a conversation is configured to display only alerts
+  if specific words are present in the message (see &quot;/alertson [text 
+  to match]&quot; command), if a message matches the alert, it will be 
+  marked with the &lt;alertmatch&gt; tag. This allows the UI to highlight 
+  the word matching. Example: :</p>
+<pre class="literalblock">
+ Maybe &lt;alertmatch&gt;Vincent&lt;/alertmatch&gt; knows the answer 
+</pre>
+  <p>Bold, italic, etc Skype for Windows also supports displaying bold and 
+  italic text, using the &quot;b&quot; and &quot;i&quot; tags.</p>
+  <p>Encoding messages When sending a chat message via PostText(), there is
+  the possibility to indicate if the library should do the XML encoding, or
+  if the message has already been encoded. Usually, the UI can let library 
+  do the encoding. This is the case when the message does not contain any 
+  specific formatting. It may contain emoticons or URls, which will be 
+  detected by the library encoder and converted into XML tags. If the 
+  message has some more complex encoding, such as a quote or some bold 
+  text, it is up to the UI to encode the message.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Message-class.html#_sk_init_" class="summary-sig-name">_sk_init_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">object_id</span>,
+        <span class="summary-sig-arg">transport</span>)</span><br />
+      actual constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Message._sk_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Message-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Message.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnPropertyChange"></a><span class="summary-sig-name">OnPropertyChange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">property_name</span>)</span><br />
+      notifies from a property change</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Message.OnPropertyChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Message-class.html#CanEdit" class="summary-sig-name">CanEdit</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      For Message types having a body, determines whether that body is 
+      editable by the user.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Message.CanEdit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Message-class.html#Edit" class="summary-sig-name">Edit</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">new_text</span>,
+        <span class="summary-sig-arg">is_xml</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">undo</span>=<span class="summary-sig-default">False</span>)</span><br />
+      For Message types that include a body and are editable:</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Message.Edit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Message-class.html#GetContacts" class="summary-sig-name">GetContacts</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      For messages of type POSTED_CONTACTS, parses the body XML and formats
+      the data as a list of Contact instances.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Message.GetContacts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Message-class.html#GetTransfers" class="summary-sig-name">GetTransfers</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      For messages of type POSTED_FILES, parses the body XML and creates a 
+      list of Transfer instances.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Message.GetTransfers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Message-class.html#GetVoiceMessage" class="summary-sig-name">GetVoiceMessage</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      For messages of type POSTED_VOICE_MESSAGE, parses the body XML and 
+      creates a Voicemail instance.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Message.GetVoiceMessage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Message-class.html#GetSMS" class="summary-sig-name">GetSMS</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      For messages of type POSTED_SMS, parses the body XML and creates an 
+      SMS instances</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Message.GetSMS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Message-class.html#DeleteLocally" class="summary-sig-name">DeleteLocally</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Deletes this message from the local database.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Message.DeleteLocally">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#multiget">multiget</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__copy__">__copy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propid"></a><span class="summary-sig-name">propid</span>(<span class="summary-sig-arg">propname</span>)</span><br />
+      convert a property name to the enum of the property</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Message.propid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__new__">__new__</a></code>,
+      <code><a href="skypekit.Cached-class.html#sk_exists">sk_exists</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="event_handlers"></a><span class="summary-name">event_handlers</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#propid2label" class="summary-name">propid2label</a> = <code title="{120: 'convo_guid',
+ 121: 'timestamp',
+ 122: 'author',
+ 123: 'author_displayname',
+ 125: 'identities',
+ 126: 'leavereason',
+ 127: 'body_xml',
+ 222: 'edited_by',
+..."><code class="variable-group">{</code>120<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">convo_guid</code><code class="variable-quote">'</code><code class="variable-op">, </code>121<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">timestamp</code><code class="variable-quote">'</code><code class="variable-op">, </code>122<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">aut</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="module_id"></a><span class="summary-name">module_id</span> = <code title="9">9</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#TYPE" class="summary-name">TYPE</a> = <code title="{2: 'SET_METADATA',
+ 4: 'SPAWNED_CONFERENCE',
+ 10: 'ADDED_CONSUMERS',
+ 11: 'ADDED_APPLICANTS',
+ 12: 'RETIRED_OTHERS',
+ 13: 'RETIRED',
+ 21: 'SET_RANK',
+ 30: 'STARTED_LIVESESSION',
+..."><code class="variable-group">{</code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SET_METADATA</code><code class="variable-quote">'</code><code class="variable-op">, </code>4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SPAWNED_CONFERENCE</code><code class="variable-quote">'</code><code class="variable-op">, </code>10<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ADDED</code><code class="variable-ellipsis">...</code></code><br />
+      The P_TYPE property determines the actual meaning of the Message 
+      object.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#SENDING_STATUS" class="summary-name">SENDING_STATUS</a> = <code title="{1: 'SENDING',
+ 2: 'SENT',
+ 3: 'FAILED_TO_SEND',
+ 'FAILED_TO_SEND': 3,
+ 'SENDING': 1,
+ 'SENT': 2}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SENDING</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SENT</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FAILED_TO_SEND</code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code><br />
+      SENDING - Message has not been delivered to at least one of the 
+      participants
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#CONSUMPTION_STATUS" class="summary-name">CONSUMPTION_STATUS</a> = <code title="{0: 'CONSUMED',
+ 1: 'UNCONSUMED_SUPPRESSED',
+ 2: 'UNCONSUMED_NORMAL',
+ 3: 'UNCONSUMED_ELEVATED',
+ 'CONSUMED': 0,
+ 'UNCONSUMED_ELEVATED': 3,
+ 'UNCONSUMED_NORMAL': 2,
+ 'UNCONSUMED_SUPPRESSED': 1}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONSUMED</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNCONSUMED_SUPPRESSED</code><code class="variable-ellipsis">...</code></code><br />
+      Indicates if a message has been consumed (meaning read) or not
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#SET_METADATA_KEY" class="summary-name">SET_METADATA_KEY</a> = <code title="{3640: 'SET_META_NAME',
+ 3644: 'SET_META_TOPIC',
+ 3652: 'SET_META_GUIDELINES',
+ 3658: 'SET_META_PICTURE',
+ 'SET_META_GUIDELINES': 3652,
+ 'SET_META_NAME': 3640,
+ 'SET_META_PICTURE': 3658,
+ 'SET_META_TOPIC': 3644}"><code class="variable-group">{</code>3640<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SET_META_NAME</code><code class="variable-quote">'</code><code class="variable-op">, </code>3644<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SET_META_TOP</code><code class="variable-ellipsis">...</code></code><br />
+      For messages of type SET_METADATA that alert participants to changes 
+      to the associated Conversation's metadata, indicates which metadata 
+      property changed and its P_BODY_XML property contains the changed 
+      data.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#LEAVEREASON" class="summary-name">LEAVEREASON</a> = <code title="{2: 'USER_INCAPABLE',
+ 3: 'ADDER_MUST_BE_FRIEND',
+ 4: 'ADDER_MUST_BE_AUTHORIZED',
+ 5: 'DECLINE_ADD',
+ 6: 'UNSUBSCRIBE',
+ 'ADDER_MUST_BE_AUTHORIZED': 4,
+ 'ADDER_MUST_BE_FRIEND': 3,
+ 'DECLINE_ADD': 5,
+..."><code class="variable-group">{</code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">USER_INCAPABLE</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ADDER_MUST_BE_FRIEND</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code><br />
+      Indicates the reason a user could not join or left a Conversation.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CONVO_ID"></a><span class="summary-name">P_CONVO_ID</span> = <code title="960">960</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CONVO_GUID"></a><span class="summary-name">P_CONVO_GUID</span> = <code title="120">120</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_AUTHOR"></a><span class="summary-name">P_AUTHOR</span> = <code title="122">122</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_AUTHOR_DISPLAYNAME"></a><span class="summary-name">P_AUTHOR_DISPLAYNAME</span> = <code title="123">123</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_GUID"></a><span class="summary-name">P_GUID</span> = <code title="792">792</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ORIGINALLY_MEANT_FOR"></a><span class="summary-name">P_ORIGINALLY_MEANT_FOR</span> = <code title="790">790</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TIMESTAMP"></a><span class="summary-name">P_TIMESTAMP</span> = <code title="121">121</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TYPE"></a><span class="summary-name">P_TYPE</span> = <code title="961">961</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SENDING_STATUS"></a><span class="summary-name">P_SENDING_STATUS</span> = <code title="962">962</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CONSUMPTION_STATUS"></a><span class="summary-name">P_CONSUMPTION_STATUS</span> = <code title="968">968</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_EDITED_BY"></a><span class="summary-name">P_EDITED_BY</span> = <code title="222">222</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_EDIT_TIMESTAMP"></a><span class="summary-name">P_EDIT_TIMESTAMP</span> = <code title="223">223</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PARAM_KEY"></a><span class="summary-name">P_PARAM_KEY</span> = <code title="963">963</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PARAM_VALUE"></a><span class="summary-name">P_PARAM_VALUE</span> = <code title="964">964</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_BODY_XML"></a><span class="summary-name">P_BODY_XML</span> = <code title="127">127</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_IDENTITIES"></a><span class="summary-name">P_IDENTITIES</span> = <code title="125">125</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_REASON"></a><span class="summary-name">P_REASON</span> = <code title="966">966</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LEAVEREASON"></a><span class="summary-name">P_LEAVEREASON</span> = <code title="126">126</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PARTICIPANT_COUNT"></a><span class="summary-name">P_PARTICIPANT_COUNT</span> = <code title="982">982</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#rwlock">rwlock</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#properties">properties</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#convo_id" class="summary-name">convo_id</a><br />
+      DB ID of corresponding conversation
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#convo_guid" class="summary-name">convo_guid</a><br />
+      GUID of the Conversation.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#author" class="summary-name">author</a><br />
+      Identity of the sender.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#author_displayname" class="summary-name">author_displayname</a><br />
+      displayname of the sender at the time of posting
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#guid" class="summary-name">guid</a><br />
+      Unlike the message id, the GUID is the same on all instances and for 
+      all participants.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#originally_meant_for" class="summary-name">originally_meant_for</a><br />
+      This property gets set when a conference is spawned from dialog 
+      Conversation.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#timestamp" class="summary-name">timestamp</a><br />
+      UNIX timestamp (sent time, adjusted for local clock)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#type" class="summary-name">type</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#sending_status" class="summary-name">sending_status</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#consumption_status" class="summary-name">consumption_status</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#edited_by" class="summary-name">edited_by</a><br />
+      Identity of the author that last edited this message.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#edit_timestamp" class="summary-name">edit_timestamp</a><br />
+      UNIX timestamp of last edit
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#param_key" class="summary-name">param_key</a><br />
+      Message type-specific parameter.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#param_value" class="summary-name">param_value</a><br />
+      Message type-specific parameter
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#body_xml" class="summary-name">body_xml</a><br />
+      Message type-specific parameter
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#identities" class="summary-name">identities</a><br />
+      Message type-specific parameter.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#reason" class="summary-name">reason</a><br />
+      Message type-specific parameter.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#leavereason" class="summary-name">leavereason</a><br />
+      Leave reason for message of the RETIRED type, and 
+      STARTED/ENDED_LIVESESSION.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Message-class.html#participant_count" class="summary-name">participant_count</a><br />
+      Number of people who received this message (including local user)
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="_sk_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_sk_init_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">object_id</span>,
+        <span class="sig-arg">transport</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Message._sk_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>actual constructor</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="skypekit.Object-class.html#_sk_init_">skypekit.Object._sk_init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Message.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CanEdit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CanEdit</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Message.CanEdit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>For Message types having a body, determines whether that body is 
+  editable by the user.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Edit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Edit</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">new_text</span>,
+        <span class="sig-arg">is_xml</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">undo</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Message.Edit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>For Message types that include a body and are editable:</p>
+  <ul>
+    <li>
+      alters BODY_XML of the message object
+    </li>
+    <li>
+      sets EDITED_BY and EDIT_TIMESTAMP properties
+    </li>
+    <li>
+      propagates the changes to remote users.
+    </li>
+  </ul>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>new_text</b> - New value of the message BODY_XML property.
+    </li>
+    <li>
+      <b>is_xml</b> - Specify isXML as true if the message body is 
+      formatted as XML; omit it or specify it as false if the message body 
+      is plain text.
+    </li>
+    <li>
+      <b>undo</b> - Reverts the message body to the original version. 
+      newText argument is ignored when this is set.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetContacts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetContacts</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Message.GetContacts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>For messages of type POSTED_CONTACTS, parses the body XML and formats 
+  the data as a list of Contact instances.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>contacts</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetTransfers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetTransfers</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Message.GetTransfers">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>For messages of type POSTED_FILES, parses the body XML and creates a 
+  list of Transfer instances.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>transfers</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetVoiceMessage"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetVoiceMessage</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Message.GetVoiceMessage">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>For messages of type POSTED_VOICE_MESSAGE, parses the body XML and 
+  creates a Voicemail instance.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>voicemail</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetSMS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetSMS</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Message.GetSMS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>For messages of type POSTED_SMS, parses the body XML and creates an 
+  SMS instances</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>sms</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="DeleteLocally"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">DeleteLocally</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Message.DeleteLocally">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Deletes this message from the local database. These deletions do not 
+  propagate to the other Skype instances that the user may have on other 
+  computers. Nor do they affect other participants that have the same 
+  message. This method is specifically from removing Message objects from 
+  the database - not for removing Messages from conversations. To remove a 
+  Message from a conversation, use Message::Edit method to replace the 
+  existing body text with an empty string.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="propid2label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">propid2label</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>120<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">convo_guid</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 121<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">timestamp</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 122<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">author</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 123<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">author_displayname</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 125<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">identities</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 126<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">leavereason</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 127<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">body_xml</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 222<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">edited_by</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TYPE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TYPE</h3>
+  <p>The P_TYPE property determines the actual meaning of the Message 
+  object. Only Messages of POSTED_TEXT type contain actual text messages. 
+  The meaning and content of the rest of the message properties are largely
+  dependant of the value of the Message::P_TYPE.</p>
+  <ul>
+    <li>
+      SET_METADATA - Conference metadata were changed
+    </li>
+    <li>
+      SPAWNED_CONFERENCE - A conference was spawned from this dialog
+    </li>
+    <li>
+      ADDED_CONSUMERS - Some users were added to the conference
+    </li>
+    <li>
+      ADDED_APPLICANTS - Some users are applying to be added to the 
+      conference
+    </li>
+    <li>
+      RETIRED_OTHERS - User was kicked from the conference
+    </li>
+    <li>
+      RETIRED - User left the conference
+    </li>
+    <li>
+      SET_RANK - Changed the rank of a user in the Conversation (multichat 
+      administration)
+    </li>
+    <li>
+      STARTED_LIVESESSION - A live session started
+    </li>
+    <li>
+      ENDED_LIVESESSION - A live session ended
+    </li>
+    <li>
+      REQUESTED_AUTH - User requested authorization
+    </li>
+    <li>
+      GRANTED_AUTH - User was granted authorization. Notification message 
+      that user is now an authorized contact (of the local user).
+    </li>
+    <li>
+      BLOCKED - User was blocked
+    </li>
+    <li>
+      POSTED_TEXT - A text message
+    </li>
+    <li>
+      POSTED_EMOTE - An emote ('John Doe is laughing', cf /me chat command)
+    </li>
+    <li>
+      POSTED_CONTACTS - The message represents (a set of) contact card(s) 
+      posted in the conversation. One message can contain more than one 
+      contact cards. The contacts can be retrieved from the message by 
+      parsing them out from the P_BODY_XML property. For more information, 
+      see Conversation::PostContacts
+    </li>
+    <li>
+      POSTED_SMS - The message represents an SMS object that was posted in 
+      the Conversation. See Conversation::PostSMS for more details. The Sms
+      object itself can be retrieved from the Message with Message::GetSms 
+      The message BODY_XML contains a set of SMS properties, such as 
+      status, failurereason, targets, price and timestamp.
+    </li>
+    <li>
+      POSTED_ALERT - Deprecated, never sent
+    </li>
+    <li>
+      POSTED_VOICE_MESSAGE - A voicemail
+    </li>
+    <li>
+      POSTED_FILES - The message represents a (list of) file transfers that
+      were posted in the Conversation with Conversation::PostFiles. 
+      Transfer objects can be retrieved from the Message with 
+      Message::GetTransfers
+    </li>
+    <li>
+      POSTED_INVOICE - Currently unused.
+    </li>
+    <li>
+      HAS_BIRTHDAY - The message represents a Contact birthday 
+      notification.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SET_METADATA</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SPAWNED_CONFERENCE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 10<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ADDED_CONSUMERS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 11<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ADDED_APPLICANTS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 12<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RETIRED_OTHERS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 13<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RETIRED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 21<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SET_RANK</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 30<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">STARTED_LIVESESSION</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SENDING_STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">SENDING_STATUS</h3>
+  <ul>
+    <li>
+      SENDING - Message has not been delivered to at least one of the 
+      participants
+    </li>
+    <li>
+      SENT - Message has been delivered to at least one other participant
+    </li>
+    <li>
+      FAILED_TO_SEND - Message could not be delivered (for SMS this 
+      reflects the actual SMS, not the chat message)
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SENDING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SENT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FAILED_TO_SEND</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">FAILED_TO_SEND</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">SENDING</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">SENT</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CONSUMPTION_STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">CONSUMPTION_STATUS</h3>
+  <p>Indicates if a message has been consumed (meaning read) or not</p>
+  <ul>
+    <li>
+      CONSUMED - Message has been read. Note that this is a read-only 
+      property. Consumption status of individual messages can not be set 
+      selectively. Message consumption status is determined at the 
+      conversation level, based conversation consumption horizon and 
+      individual message timestamps. Conversation consumption horizon can 
+      be updated with Conversation::SetConsumedHorizon method.
+    </li>
+    <li>
+      UNCONSUMED_SUPPRESSED - Do not notify the user that they have this 
+      unread message
+    </li>
+    <li>
+      UNCONSUMED_NORMAL - Notify the user that they have this unread 
+      message
+    </li>
+    <li>
+      UNCONSUMED_ELEVATED - This message consumption state is marked as 
+      DEPRECATED
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONSUMED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNCONSUMED_SUPPRESSED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNCONSUMED_NORMAL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNCONSUMED_ELEVATED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CONSUMED</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">UNCONSUMED_ELEVATED</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">UNCONSUMED_NORMAL</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">UNCONSUMED_SUPPRESSED</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SET_METADATA_KEY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">SET_METADATA_KEY</h3>
+  <p>For messages of type SET_METADATA that alert participants to changes 
+  to the associated Conversation's metadata, indicates which metadata 
+  property changed and its P_BODY_XML property contains the changed data. 
+  Your UI is expected to detect messages with PARAM_KEY set and to update 
+  its visual representation of Conversation accordingly. You can use the 
+  associated Conversation's properties and methods to obtain the updated 
+  metadata rather than parse the message body XML, for example, 
+  Conversation::P_META_PICTURE and 
+  Conversation::Conversation::GetPropMetaPicture.</p>
+  <ul>
+    <li>
+      SET_META_NAME - Notification message that conversation name has 
+      changed.
+    </li>
+    <li>
+      SET_META_TOPIC - Notification message that conversation topic has 
+      changed.
+    </li>
+    <li>
+      SET_META_GUIDELINES - Notification message that conversation 
+      guidelines have changed.
+    </li>
+    <li>
+      SET_META_PICTURE - Notification message that conversation picture has
+      changed.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>3640<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SET_META_NAME</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3644<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SET_META_TOPIC</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3652<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SET_META_GUIDELINES</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3658<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SET_META_PICTURE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">SET_META_GUIDELINES</code><code class="variable-quote">'</code><code class="variable-op">: </code>3652<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">SET_META_NAME</code><code class="variable-quote">'</code><code class="variable-op">: </code>3640<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">SET_META_PICTURE</code><code class="variable-quote">'</code><code class="variable-op">: </code>3658<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">SET_META_TOPIC</code><code class="variable-quote">'</code><code class="variable-op">: </code>3644<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="LEAVEREASON"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">LEAVEREASON</h3>
+  <p>Indicates the reason a user could not join or left a Conversation. 
+  SkypeKit automatically sets &quot;could not join&quot;-related values. 
+  &quot;Left voluntarily&quot;-related values are set as a result of 
+  explicit user actions.</p>
+  <ul>
+    <li>
+      USER_INCAPABLE - User cannot chat (user is currently logged in with a
+      client that has chat disabled - see 
+      Contact::CAPABILITY.CAPABILITY_TEXT)
+    </li>
+    <li>
+      ADDER_MUST_BE_FRIEND - Attempt to add local user to a conversation by
+      an unknown contact
+    </li>
+    <li>
+      ADDER_MUST_BE_AUTHORIZED - Attempt to add local user to a 
+      conversation by an unauthorized contact
+    </li>
+    <li>
+      DECLINE_ADD - Local user declined an &quot;invitation&quot; to join a
+      chat
+    </li>
+    <li>
+      UNSUBSCRIBE - User decided to end participation in an on-going 
+      multi-chat
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">USER_INCAPABLE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ADDER_MUST_BE_FRIEND</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ADDER_MUST_BE_AUTHORIZED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DECLINE_ADD</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">UNSUBSCRIBE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ADDER_MUST_BE_AUTHORIZED</code><code class="variable-quote">'</code><code class="variable-op">: </code>4<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ADDER_MUST_BE_FRIEND</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">DECLINE_ADD</code><code class="variable-quote">'</code><code class="variable-op">: </code>5<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Property Details</span></td>
+</tr>
+</table>
+<a name="convo_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">convo_id</h3>
+  <p>DB ID of corresponding conversation</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_convo_id" class="summary-sig-name" onclick="show_private();">_sk_get_convo_id</a>(<span class="summary-sig-arg">self</span>)</span>
+        - DB ID of corresponding conversation
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="convo_guid"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">convo_guid</h3>
+  <p>GUID of the Conversation. The GUID is a &quot;global ID&quot; - these 
+  values are shared accross Skype client instances and accross all the 
+  participants of the conversation.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_convo_guid" class="summary-sig-name" onclick="show_private();">_sk_get_convo_guid</a>(<span class="summary-sig-arg">self</span>)</span>
+        - GUID of the Conversation.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="author"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">author</h3>
+  <p>Identity of the sender. While this is almost always the same as 
+  SKYPENAME property of the Contact, in some rare cases it can also be a 
+  phone number - for example, incoming voicemail notification Messages 
+  (message type = POSTED_VOICE_MESSAGE).</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_author" class="summary-sig-name" onclick="show_private();">_sk_get_author</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Identity of the sender.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="author_displayname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">author_displayname</h3>
+  <p>displayname of the sender at the time of posting</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_author_displayname" class="summary-sig-name" onclick="show_private();">_sk_get_author_displayname</a>(<span class="summary-sig-arg">self</span>)</span>
+        - displayname of the sender at the time of posting
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="guid"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">guid</h3>
+  <p>Unlike the message id, the GUID is the same on all instances and for 
+  all participants.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_guid" class="summary-sig-name" onclick="show_private();">_sk_get_guid</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Unlike the message id, the GUID is the same on all instances and for all 
+participants.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="originally_meant_for"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">originally_meant_for</h3>
+  <p>This property gets set when a conference is spawned from dialog 
+  Conversation. In that case recent message history from the original 
+  dialog is copied to the target conversation. For all the copied messages,
+  the ORIGINALLY_MEANT_FOR property will be set to identity of the remote 
+  participant of the original dialog.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_originally_meant_for" class="summary-sig-name" onclick="show_private();">_sk_get_originally_meant_for</a>(<span class="summary-sig-arg">self</span>)</span>
+        - This property gets set when a conference is spawned from dialog 
+Conversation.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timestamp</h3>
+  <p>UNIX timestamp (sent time, adjusted for local clock)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - UNIX timestamp (sent time, adjusted for local clock)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">type</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_type" class="summary-sig-name" onclick="show_private();">_sk_get_type</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="sending_status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">sending_status</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_sending_status" class="summary-sig-name" onclick="show_private();">_sk_get_sending_status</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="consumption_status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">consumption_status</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_consumption_status" class="summary-sig-name" onclick="show_private();">_sk_get_consumption_status</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="edited_by"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">edited_by</h3>
+  <p>Identity of the author that last edited this message. NULL if message 
+  has not been edited</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_edited_by" class="summary-sig-name" onclick="show_private();">_sk_get_edited_by</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Identity of the author that last edited this message.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="edit_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">edit_timestamp</h3>
+  <p>UNIX timestamp of last edit</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_edit_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_edit_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - UNIX timestamp of last edit
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="param_key"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">param_key</h3>
+  <p>Message type-specific parameter. See Message::SET_METADATA_KEY for 
+  more information.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_param_key" class="summary-sig-name" onclick="show_private();">_sk_get_param_key</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Message type-specific parameter.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="param_value"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">param_value</h3>
+  <p>Message type-specific parameter</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_param_value" class="summary-sig-name" onclick="show_private();">_sk_get_param_value</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Message type-specific parameter
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="body_xml"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">body_xml</h3>
+  <p>Message type-specific parameter</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_body_xml" class="summary-sig-name" onclick="show_private();">_sk_get_body_xml</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Message type-specific parameter
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="identities"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">identities</h3>
+  <p>Message type-specific parameter. Depending of Message type, this 
+  property contains:</p>
+  <ul>
+    <li>
+      STARTED_LIVESESSION - list of participants in the cal;
+    </li>
+    <li>
+      ENDED_LIVESESSION - list of participants in the call;
+    </li>
+    <li>
+      POSTED_SMS - list of recipients of the message;
+    </li>
+    <li>
+      SPAWNED_CONFERENCE - the list of identities that were added;
+    </li>
+    <li>
+      ADDED_CONSUMERS - the list of identities that were added;
+    </li>
+    <li>
+      RETIRED_OTHERS - the skypename of the participant who was kicked;
+    </li>
+    <li>
+      SET_RANK - the skypename of the participant whose rank was changed;
+    </li>
+    <li>
+      REQUESTED_AUTH - Message::P_AUTHOR and Message::P_IDENTITIES are set 
+      to the users receiving and requesting the authorization, depending if
+      the message was received or sent;
+    </li>
+    <li>
+      GRANTED_AUTH - the skypename of the user we granted authorization;
+    </li>
+    <li>
+      BLOCKED - the skypename of the user who was blocked;
+    </li>
+    <li>
+      HAS_BIRTHDAY - skypename of current logged in user.
+    </li>
+  </ul>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_identities" class="summary-sig-name" onclick="show_private();">_sk_get_identities</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Message type-specific parameter.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="reason"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">reason</h3>
+  <p>Message type-specific parameter. Possible values for 
+  STARTED/ENDED_LIVESESSION (only set for dialogs):</p>
+  <ul>
+    <li>
+      no_answer
+    </li>
+    <li>
+      manual
+    </li>
+    <li>
+      busy
+    </li>
+    <li>
+      connection_dropped
+    </li>
+    <li>
+      no_skypeout_subscription;
+    </li>
+    <li>
+      insufficient_funds
+    </li>
+    <li>
+      internet_connection_lost
+    </li>
+    <li>
+      skypeout_account_blocked
+    </li>
+    <li>
+      pstn_could_not_connect_to_skype_proxy
+    </li>
+    <li>
+      pstn_invalid_number
+    </li>
+    <li>
+      pstn_number_forbidden
+    </li>
+    <li>
+      pstn_call_timed_out
+    </li>
+    <li>
+      pstn_busy
+    </li>
+    <li>
+      pstn_call_terminated
+    </li>
+    <li>
+      pstn_network_error
+    </li>
+    <li>
+      number_unavailable
+    </li>
+    <li>
+      pstn_call_rejected
+    </li>
+    <li>
+      pstn_misc_error
+    </li>
+    <li>
+      internal_error
+    </li>
+    <li>
+      unable_to_connect
+    </li>
+    <li>
+      connection_dropped
+    </li>
+    <li>
+      recording_failed
+    </li>
+    <li>
+      playback_error
+    </li>
+    <li>
+      legacy_error
+    </li>
+    <li>
+      blocked_by_privacy_settings
+    </li>
+    <li>
+      error
+    </li>
+    <li>
+      transfer_failed
+    </li>
+    <li>
+      transfer_insufficient_funds
+    </li>
+    <li>
+      blocked_by_us
+    </li>
+    <li>
+      emergency_call_denied
+    </li>
+  </ul>
+  <p>This information is now available as an enum in LEAVEREASON</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_reason" class="summary-sig-name" onclick="show_private();">_sk_get_reason</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Message type-specific parameter.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="leavereason"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">leavereason</h3>
+  <p>Leave reason for message of the RETIRED type, and 
+  STARTED/ENDED_LIVESESSION. Use for STARTED/ENDED_LIVESESSION is to 
+  provide simpler, enum based handling and deprecates the reason property 
+  (only set for dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_leavereason" class="summary-sig-name" onclick="show_private();">_sk_get_leavereason</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Leave reason for message of the RETIRED type, and 
+STARTED/ENDED_LIVESESSION.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="participant_count"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">participant_count</h3>
+  <p>Number of people who received this message (including local user)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Message-class.html#_sk_get_participant_count" class="summary-sig-name" onclick="show_private();">_sk_get_participant_count</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Number of people who received this message (including local user)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:40 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

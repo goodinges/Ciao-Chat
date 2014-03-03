@@ -1,0 +1,16 @@
+﻿<tr>
+  <td valign=top style='border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><img width=50 height=50 src=statuses.htm
+  alt="Description: Description: Description: #userName"></p>
+  </td>
+  <td width=548 valign=top style='width:411.0pt;border:none;border-bottom:solid windowtext 1.0pt;
+  padding:0in 5.4pt 0in 5.4pt'>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><b><span style='font-family:"Tahoma","sans-serif";color:#3B5998'>#userName</span></b></p>
+  <p class=MsoNormal style='margin-bottom:0in;margin-bottom:.0001pt;line-height:
+  normal'><span dir=RTL></span><span lang=FA dir=RTL style='font-family:"Tahoma","sans-serif";
+  color:black'><span dir=RTL></span>#userStatus</span></p>
+  </td>
+ </tr>

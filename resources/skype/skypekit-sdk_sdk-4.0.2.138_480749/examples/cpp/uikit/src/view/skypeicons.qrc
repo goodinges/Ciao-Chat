@@ -1,0 +1,38 @@
+<RCC>
+  <qresource prefix="/">
+    <file>icons/AddContact_24x24.png</file>
+    <file>icons/CallConferenceIn_24x24.png</file>
+    <file>icons/CallConferenceMissed_24x24.png</file>
+    <file>icons/CallConferenceOut_24x24.png</file>
+    <file>icons/CallEnd_24x24.png</file>
+    <file>icons/CallHold_24x24.png</file>
+    <file>icons/CallIn_24x24.png</file>
+    <file>icons/CallList_24x24.png</file>
+    <file>icons/CallMissed_24x24.png</file>
+    <file>icons/CallOut_24x24.png</file>
+    <file>icons/CallOutFailed_24x24.png</file>
+    <file>icons/CallResume_24x24.png</file>
+    <file>icons/CallStart_24x24.png</file>
+    <file>icons/ConferenceAdd_24x24.png</file>
+    <file>icons/Contact_32x32.png</file>
+    <file>icons/Dial_24x24.png</file>
+    <file>icons/FileDownload_24x24.png</file>
+    <file>icons/FileUpload_24x24.png</file>
+    <file>icons/Message_24x24.png</file>
+    <file>icons/MessageMissed_24x24.png</file>
+    <file>icons/MessageSMS_24x24.png</file>
+    <file>icons/PresenceAway_16x16.png</file>
+    <file>icons/PresenceDoNotDisturb_16x16.png</file>
+    <file>icons/PresenceOffline_16x16.png</file>
+    <file>icons/PresenceOnline_16x16.png</file>
+    <file>icons/Reject_24x24.png</file>
+    <file>icons/Skype_icon-blue.png</file>
+    <file>icons/SkypeOut_16x16.png</file>
+    <file>icons/Sound_24x24.png</file>
+    <file>icons/SoundMuted_24x24.png</file>
+    <file>icons/StopVideo_24x24.png</file>
+    <file>icons/Video_24x24.png</file>
+    <file>icons/VideoSnapshot_24x24.png</file>
+    <file>icons/Voicemail_24x24.png</file>
+  </qresource>
+</RCC>

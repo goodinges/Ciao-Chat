@@ -1,0 +1,178 @@
+== Notes ==
+
+-- Setup --
+Set up the build environment as detailed below.
+
+Get Android Froyo source
+host# mkdir -p /opt/droid
+host# cd /opt/droid/
+host# git clone -b froyo git://android.git.kernel.org/platform/dalvik.git
+host# git clone -b froyo git://android.git.kernel.org/platform/external/opencore.git external/opencore
+host# git clone -b froyo git://android.git.kernel.org/platform/frameworks/base.git frameworks/base
+host# git clone -b froyo git://android.git.kernel.org/platform/hardware/libhardware.git hardware/libhardware
+host# git clone -b froyo git://android.git.kernel.org/platform/system/core.git system/core
+For details, refer to: http://source.android.com/
+
+Alternatively, get Android Gingerbread source
+host# mkdir -p /opt/droid
+host# cd /opt/droid/
+host# git clone -b gingerbread git://android.git.kernel.org/platform/dalvik.git
+host# git clone -b gingerbread git://android.git.kernel.org/platform/frameworks/base.git frameworks/base
+host# git clone -b gingerbread git://android.git.kernel.org/platform/hardware/libhardware.git hardware/libhardware
+host# git clone -b gingerbread git://android.git.kernel.org/platform/system/core.git system/core
+
+Extract system libraries from device
+host# cd /opt/droid/
+host# mkdir lib
+host# cd lib/
+host# adb pull /system/lib/libandroid_runtime.so
+host# adb pull /system/lib/libcamera_client.so
+host# adb pull /system/lib/libmedia.so
+host# adb pull /system/lib/libnativehelper.so
+host# adb pull /system/lib/libstagefright.so
+host# adb pull /system/lib/libsurfaceflinger_client.so
+host# adb pull /system/lib/libutils.so
+The Skype Android reference application will link Android libraries located in
+the directory defined by ANDROID_LIBPATH (default '/opt/droid/lib/').
+
+Install Android SDK for Froyo/Gingerbread
+Froyo: http://dl.google.com/android/android-sdk_r07-linux_x86.tgz
+Gingerbread: http://dl.google.com/android/android-sdk_r09-linux_x86.tgz
+host# cd /opt/
+host# tar xvzf android-sdk_r07-linux_x86.tgz
+host# cd android-sdk-linux_x86
+host# tools/android update sdk
+Eclipse:
+[Menu]
+Window -> Preferences
+[Preferences]: Android
+SDK Location:
+- Enter '/opt/android-sdk-linux_x86'
+- Click 'OK'
+(Also detailed below.)
+
+Install Android NDK for Froyo/Gingerbread
+Froyo: http://dl.google.com/android/ndk/android-ndk-r4b-linux-x86.zip
+Gingerbread: http://dl.google.com/android/ndk/android-ndk-r5b-linux-x86.tar.bz2
+host# cd /opt/
+Froyo: host# unzip android-ndk-r4b-linux-x86.zip
+Gingerbread: host# tar xvjf /mnt/hgfs/F/NVIDIA/android-ndk-r5b-linux-x86.tar.bz2
+For details, refer to: http://developer.android.com/sdk/ndk/
+
+Install SkypeKit
+http://developer.skype.com/skypekit/releases
+host# cd /opt/
+host# tar xvzf skypekit-sdk_sdk-3.3.2.31_257682.tar.gz
+For details, refer to: http://developer.skype.com/skypekit
+
+Build SkypeKit Java wrapper
+host# cd /opt/skypekit-sdk_sdk-3.3.2.31_257682/interfaces/skype/java/
+host# ant
+
+Install SkypeKit runtime on device
+host# cd /opt/skypekit-sdk_sdk-3.3.2.31_257682/bin/linux-armv6le-eabi/
+host# adb push linux-armv6-skypekit-voicepcm-videortp /data/data/com.skype.ref/files/
+
+Download SkypeKit PKCS#8 key pair
+http://developer.skype.com/skypekit/development-guide/general/runtimes-and-key-pairs
+
+Convert PKCS#8 key pair from PEM to DER format
+host# openssl pkcs8 -topk8 -nocrypt -inform PEM -outform DER -in skypekit.pem -out skypekit.der
+For details, refer to: http://www.openssl.org/docs/apps/pkcs8.html
+
+Install key pairs on device
+host# adb push skypekit.pem /data/data/com.skype.ref/files/
+host# adb push skypekit.der /data/data/com.skype.ref/files/
+
+-- Eclipse --
+Import project into Eclipse workspace
+host# ./eclipse
+[Workspace Launcher]
+Workspace:
+- Enter folder to store workspace
+- Click 'OK'
+[Menu]
+File -> Import...
+[Import]: Select
+General -> Existing Projects into Workspace
+- Click 'Next'
+[Import]: Import Projects
+Select root directory:
+- Enter 'reference/reference-android'
+- Deselect "Copy projects into workspace"
+- Click 'Finish'
+[Menu]
+Window -> Preferences
+[Preferences]: Android
+SDK Location:
+- Enter '/opt/android-sdk-linux_x86'
+- Click 'OK'
+[Menu]
+Window -> Open Perspective -> Other...
+[Open Perspective]
+- Select 'C/C++'
+- Click 'OK'
+[Menu]
+Project -> Build Automatically
+- Uncheck 'Build Automatically'
+[Package explorer]
+- Right-click reference-android
+Properties
+[Properties for reference-android]
+Java Build Path
+- Verify that sid-java-wrapper.jar is set correctly
+(For example: sid-java-wrapper.jar - /opt/skypekit-sdk_sdk-3.3.2.31_257682/interfaces/skype/java/api)
+
+Eclipse note 1: If the 'Console' window is black, and text is visible only when
+selected, this could be due to a known problem in Eclipse. Remedied as follows.
+[Menu]
+Window -> Preferences
+[Preferences]
+General -> Appearance
+[Appearance]
+Current presentation:
+- Select 'Classic Presentation'
+- Click 'OK'
+[Confirm Presentation Change]
+Changing the presentation settings will require restarting the workbench to
+complete the change. Restart now?
+- Click 'Yes'
+
+Eclipse note 2: If Eclipse gives a warning "Invalid Project Path", this may be
+due to a known bug in Eclipse.
+[Package explorer]
+- Right-click reference-android
+Properties
+[Properties for reference-android]
+C/C++ Build -> Discovery Options
+- Uncheck 'Automate discovery of paths and symbols'
+For details, refer to: https://bugs.eclipse.org/bugs/show_bug.cgi?id=206372
+
+Build Skype Android reference application
+[Menu]
+Project -> Build All
+
+Install Android application
+host# adb install bin/skypekit-android-videodemo.apk
+
+Data directory is defined by SKYPEKIT_ROOT_PATH in files local.mk,
+SkypeApp.java, and SkypeKitRunner.java. This defaults to
+'/data/data/com.skype.ref/files/', which is the application folder on the
+device. The key pair used by SkypeKit (default 'skypekit.pem') is defined in
+SkypeApp.java.
+
+-- Startup --
+Startup should be done as follows.
+
+Launching SkypeKitVideoDemo application
+- Enter Skype Name
+- Enter Password
+- Click 'Sign In' to log in
+
+Upon successful login, the Status should change to 'Online'. After a short while
+the contact list should be populated on the right hand side of the screen.
+
+-- Calling --
+Placing a video call
+- Select a contact from the list to call to
+- Click the green dial icon to place a video call

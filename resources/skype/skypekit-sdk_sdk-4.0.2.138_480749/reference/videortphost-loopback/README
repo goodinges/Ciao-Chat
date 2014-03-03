@@ -1,0 +1,11 @@
+Building:
+make - Build 
+build options: 
+	TARGET_ARCH=(default i686, see sid/buildfiles/arch directory for other TARGET_ARCH options) - build for specific architecture
+	verbose=(0 | 1, default 0) - be verbose
+make clean - clean build
+
+To run the application:
+  - in a terminal window, run ./videortphost-loopback
+  - in a terminal window, run ./linux-x86-skypekit-videortp
+  - in a terminal window, run ./skypekitclient -t pemfile

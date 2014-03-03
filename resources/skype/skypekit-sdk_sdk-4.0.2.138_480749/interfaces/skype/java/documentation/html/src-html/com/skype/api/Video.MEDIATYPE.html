@@ -1,0 +1,660 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    package com.skype.api;<a name="line.1"></a>
+<FONT color="green">002</FONT>    <a name="line.2"></a>
+<FONT color="green">003</FONT>    import java.io.IOException;<a name="line.3"></a>
+<FONT color="green">004</FONT>    import java.util.*;<a name="line.4"></a>
+<FONT color="green">005</FONT>    import com.skype.ipc.*;<a name="line.5"></a>
+<FONT color="green">006</FONT>    /**<a name="line.6"></a>
+<FONT color="green">007</FONT>     * This class contains basic video control functionality for live conversations with video. Basically, Video objects represent specific Participant's video state in a live Conversation. The Video class can represent both local (outgoing) and remote (incoming) video streams. Note that as of SkypeKit SDK version 3.2, this class no longer handles video rendering in the UI. Currently available SkypeKit runtimes do not support multi-party video. The API however is designed with future compatibility in mind, so the Video class is attached to Participant class rather than Conversation class. Once multi-party video will become available for SkypeKit, the logic should go like this: &lt;br&gt;&lt;br&gt;Let there be 4-way live conversation C and participants P1, P2, P3 and P4. P1 is the local user. Remote participants P2 and P3 are capable of sending video. Remote user P4 is not capable of sending video. You would then end up with 4 video objects: V1, V2, V3 and V0. &lt;br&gt;&lt;br&gt; - C-&gt;P1-&gt;V1-&gt; outgoing video stream &lt;br&gt; - C-&gt;P2-&gt;V2-&gt; incoming video stream 1 &lt;br&gt; - C-&gt;P3-&gt;V3-&gt; incoming video stream 2 &lt;br&gt; - C-&gt;P4-&gt; no video object as participant P4 does not advertise supporting video &lt;br&gt; - V0-&gt; local webcam preview - this is not attached to any particular conversation, however the corresponding video object can be retrieved with Skype.GetPreviewVideo method. &lt;br&gt;&lt;br&gt;As getting from a live conversation to running video streams involves three classes, it can be somewhat less than obvious. The basic state transition logic goes like this: &lt;br&gt;&lt;br&gt;You start out with a Conversation, that suddenly becomes live &lt;br&gt;&lt;br&gt;CONVERSATION.LOCAL_LIVESTATUS = IM_LIVE &lt;br&gt;At this point you have access to participant list of that conversation. The next step will be to catch Partcipant property changes for PARTICIPANT.VIDEO_STATUS to see if any of the people in conversation have Video available. Note that you should not make assumptions on when this availability happens. Remote users may switch their video on-off as they please. &lt;br&gt;&lt;br&gt;PARTICIPANT.VIDEO_STATUS = VIDEO_AVAILABLE &lt;br&gt;If you get to VIDEO_AVAILABLE (not necessarily for all Participants), you can retrieve Video object, with Participant.GetVideo method. &lt;br&gt;&lt;br&gt;Now you will need to handle Video.STATUS property changes. In case of successful video call, the sequence of Video.STATUS and Participant.VIDEO_STATUS changes for each Participant and Video object should look like this: &lt;br&gt;&lt;br&gt; - Video.STATUS = AVAILABLE &lt;br&gt; - Video.STATUS = STARTING &lt;br&gt; - Video.STATUS = CHECKING_SUBSCRIPTION &lt;br&gt; - Video.STATUS = STARTING &lt;br&gt;&lt;br&gt;Participant.VIDEO_STATUS = VIDEO_CONNECTING &lt;br&gt; - Video.STATUS = RUNNING &lt;br&gt; - Participant.VIDEO_STATUS = STREAMING &lt;br&gt;Both Video.STATUS == RUNNING and Participant.VIDEO_STATUS == STREAMING are indicative that the video for that particular participant is up and running, and your UI should update itself accordingly. &lt;br&gt;&lt;br&gt;NB! Note that it is not enough to check for Video.STATUS property updates. By the time you obtain the Video object in your client, it may already it may already have progressed to a further status. You should always check the status property immediately after obtaining the Video object. &lt;br&gt;<a name="line.7"></a>
+<FONT color="green">008</FONT>     */<a name="line.8"></a>
+<FONT color="green">009</FONT>    <a name="line.9"></a>
+<FONT color="green">010</FONT>    <a name="line.10"></a>
+<FONT color="green">011</FONT>    public class Video extends SkypeObject {<a name="line.11"></a>
+<FONT color="green">012</FONT>    <a name="line.12"></a>
+<FONT color="green">013</FONT>    <a name="line.13"></a>
+<FONT color="green">014</FONT>            public interface VideoListener {<a name="line.14"></a>
+<FONT color="green">015</FONT>                    /** This event gets called when there are changes to Video properties defined in Video.PROPERTY  */<a name="line.15"></a>
+<FONT color="green">016</FONT>                    public void OnPropertyChange(SkypeObject obj, PROPERTY prop, Object value);<a name="line.16"></a>
+<FONT color="green">017</FONT>                    <a name="line.17"></a>
+<FONT color="green">018</FONT>                    /**This method has no effect in current version. &lt;br&gt;*/<a name="line.18"></a>
+<FONT color="green">019</FONT>                    public void OnCaptureRequestCompleted(SkypeObject obj, int requestId, boolean isSuccessful, byte[] image, int width, int height);<a name="line.19"></a>
+<FONT color="green">020</FONT>                    <a name="line.20"></a>
+<FONT color="green">021</FONT>            }<a name="line.21"></a>
+<FONT color="green">022</FONT>            <a name="line.22"></a>
+<FONT color="green">023</FONT>            public Video(int oid, Skype skype) {<a name="line.23"></a>
+<FONT color="green">024</FONT>                    super(oid,skype);<a name="line.24"></a>
+<FONT color="green">025</FONT>            }<a name="line.25"></a>
+<FONT color="green">026</FONT>            <a name="line.26"></a>
+<FONT color="green">027</FONT>            private static final int MODULE_ID = 11;<a name="line.27"></a>
+<FONT color="green">028</FONT>            <a name="line.28"></a>
+<FONT color="green">029</FONT>            public static final int moduleID() {<a name="line.29"></a>
+<FONT color="green">030</FONT>                    return MODULE_ID;<a name="line.30"></a>
+<FONT color="green">031</FONT>            }<a name="line.31"></a>
+<FONT color="green">032</FONT>            <a name="line.32"></a>
+<FONT color="green">033</FONT>            /** Properties of the Video class */<a name="line.33"></a>
+<FONT color="green">034</FONT>            public enum PROPERTY {<a name="line.34"></a>
+<FONT color="green">035</FONT>            <a name="line.35"></a>
+<FONT color="green">036</FONT>                    /** Video.STATUS, type: STATUS */<a name="line.36"></a>
+<FONT color="green">037</FONT>                    status(130),<a name="line.37"></a>
+<FONT color="green">038</FONT>                    <a name="line.38"></a>
+<FONT color="green">039</FONT>                    /** 'errorcode errortext' , type: String */<a name="line.39"></a>
+<FONT color="green">040</FONT>                    error(131),<a name="line.40"></a>
+<FONT color="green">041</FONT>                    <a name="line.41"></a>
+<FONT color="green">042</FONT>                    /** space-separated string of tokens, type: String */<a name="line.42"></a>
+<FONT color="green">043</FONT>                    debuginfo(132),<a name="line.43"></a>
+<FONT color="green">044</FONT>                    <a name="line.44"></a>
+<FONT color="green">045</FONT>                    /** This property does not currently work, always containing an empty string. For desktop video, you can get the frame dimensions from the video frame buffers API instead - the buffer struct retrieved with ipc.getFrame() or ipc.getNewFrame() has width and height fields, which you can then use in your UI. With RTP video solutions, you already have the frame sizes in your videohost code. Communicating these to the UI process is currently up to you. &lt;br&gt;, type: String */<a name="line.45"></a>
+<FONT color="green">046</FONT>                    dimensions(133),<a name="line.46"></a>
+<FONT color="green">047</FONT>                    <a name="line.47"></a>
+<FONT color="green">048</FONT>                    /** Indicates whether the video object is streaming webcam video or screensharing session, values: MEDIA_SCREENSHARING, MEDIA_VIDEO &lt;br&gt;, type: MEDIATYPE */<a name="line.48"></a>
+<FONT color="green">049</FONT>                    media_type(134),<a name="line.49"></a>
+<FONT color="green">050</FONT>                    <a name="line.50"></a>
+<FONT color="green">051</FONT>                    /** conference id to be able to identify remote/local video in the same call, type: int */<a name="line.51"></a>
+<FONT color="green">052</FONT>                    convo_id(1104),<a name="line.52"></a>
+<FONT color="green">053</FONT>                    <a name="line.53"></a>
+<FONT color="green">054</FONT>                    /** device path used by video object, type: String */<a name="line.54"></a>
+<FONT color="green">055</FONT>                    device_path(1105);<a name="line.55"></a>
+<FONT color="green">056</FONT>                    <a name="line.56"></a>
+<FONT color="green">057</FONT>                    private static final Map&lt;Integer,PROPERTY&gt; lookup = new HashMap&lt;Integer,PROPERTY&gt;();<a name="line.57"></a>
+<FONT color="green">058</FONT>                    <a name="line.58"></a>
+<FONT color="green">059</FONT>                    static {<a name="line.59"></a>
+<FONT color="green">060</FONT>                            for(PROPERTY s : EnumSet.allOf(PROPERTY.class))<a name="line.60"></a>
+<FONT color="green">061</FONT>                                    lookup.put(s.getId(), s);<a name="line.61"></a>
+<FONT color="green">062</FONT>                    }<a name="line.62"></a>
+<FONT color="green">063</FONT>                    <a name="line.63"></a>
+<FONT color="green">064</FONT>                    private final int id;<a name="line.64"></a>
+<FONT color="green">065</FONT>                    <a name="line.65"></a>
+<FONT color="green">066</FONT>                    private PROPERTY(int value) {<a name="line.66"></a>
+<FONT color="green">067</FONT>                            this.id = value;<a name="line.67"></a>
+<FONT color="green">068</FONT>                    }<a name="line.68"></a>
+<FONT color="green">069</FONT>                    <a name="line.69"></a>
+<FONT color="green">070</FONT>                    public int getId() { return id; }<a name="line.70"></a>
+<FONT color="green">071</FONT>                    <a name="line.71"></a>
+<FONT color="green">072</FONT>                    public static PROPERTY get(int code) {<a name="line.72"></a>
+<FONT color="green">073</FONT>                            return lookup.get(code);<a name="line.73"></a>
+<FONT color="green">074</FONT>                    }<a name="line.74"></a>
+<FONT color="green">075</FONT>                    <a name="line.75"></a>
+<FONT color="green">076</FONT>                    public static PROPERTY fromString(String s) {<a name="line.76"></a>
+<FONT color="green">077</FONT>                            for (PROPERTY p : lookup.values()) {<a name="line.77"></a>
+<FONT color="green">078</FONT>                                    if (p.toString() == s) {<a name="line.78"></a>
+<FONT color="green">079</FONT>                                            return p;<a name="line.79"></a>
+<FONT color="green">080</FONT>                                    }<a name="line.80"></a>
+<FONT color="green">081</FONT>                            }<a name="line.81"></a>
+<FONT color="green">082</FONT>                            return null;<a name="line.82"></a>
+<FONT color="green">083</FONT>                    }<a name="line.83"></a>
+<FONT color="green">084</FONT>            }<a name="line.84"></a>
+<FONT color="green">085</FONT>            <a name="line.85"></a>
+<FONT color="green">086</FONT>            public Object GetPropertyAsEnum(int propid) {<a name="line.86"></a>
+<FONT color="green">087</FONT>                    return PROPERTY.get(propid);<a name="line.87"></a>
+<FONT color="green">088</FONT>            }<a name="line.88"></a>
+<FONT color="green">089</FONT>            <a name="line.89"></a>
+<FONT color="green">090</FONT>            public String GetStrProperty(PROPERTY prop) {<a name="line.90"></a>
+<FONT color="green">091</FONT>                    //check in propcache if so then return<a name="line.91"></a>
+<FONT color="green">092</FONT>                    if (mPropCache.containsKey(new Integer(prop.id))){<a name="line.92"></a>
+<FONT color="green">093</FONT>                            String value =  (String)mPropCache.get(prop.id);<a name="line.93"></a>
+<FONT color="green">094</FONT>                            if (value != null &amp;&amp; !(value.length() == 0) ){<a name="line.94"></a>
+<FONT color="green">095</FONT>                                    return value;<a name="line.95"></a>
+<FONT color="green">096</FONT>                            }<a name="line.96"></a>
+<FONT color="green">097</FONT>                    }<a name="line.97"></a>
+<FONT color="green">098</FONT>                    //else get from skypekit...<a name="line.98"></a>
+<FONT color="green">099</FONT>                    GetPropertyRequest request = new GetPropertyRequest(11, mObjectId, prop.id);<a name="line.99"></a>
+<FONT color="green">100</FONT>                    <a name="line.100"></a>
+<FONT color="green">101</FONT>                    String string = null;<a name="line.101"></a>
+<FONT color="green">102</FONT>                    GetPropertyResponse r = skype.GetProperty(request);<a name="line.102"></a>
+<FONT color="green">103</FONT>                    if (r != null){<a name="line.103"></a>
+<FONT color="green">104</FONT>                            string = r.GetAsString();<a name="line.104"></a>
+<FONT color="green">105</FONT>                    }<a name="line.105"></a>
+<FONT color="green">106</FONT>                    <a name="line.106"></a>
+<FONT color="green">107</FONT>                    if (string != null)<a name="line.107"></a>
+<FONT color="green">108</FONT>                    {<a name="line.108"></a>
+<FONT color="green">109</FONT>                            mPropCache.put(new Integer(prop.id), string);<a name="line.109"></a>
+<FONT color="green">110</FONT>                    }<a name="line.110"></a>
+<FONT color="green">111</FONT>                    return string;<a name="line.111"></a>
+<FONT color="green">112</FONT>            }<a name="line.112"></a>
+<FONT color="green">113</FONT>            <a name="line.113"></a>
+<FONT color="green">114</FONT>            public int GetIntProperty(PROPERTY prop) {<a name="line.114"></a>
+<FONT color="green">115</FONT>                    //check in propcache if so then return<a name="line.115"></a>
+<FONT color="green">116</FONT>                    if (mPropCache.containsKey(new Integer(prop.id))){<a name="line.116"></a>
+<FONT color="green">117</FONT>                            int value = ((Integer)mPropCache.get(prop.id)).intValue();<a name="line.117"></a>
+<FONT color="green">118</FONT>                            if (value != 0){<a name="line.118"></a>
+<FONT color="green">119</FONT>                                    return value;<a name="line.119"></a>
+<FONT color="green">120</FONT>                            }<a name="line.120"></a>
+<FONT color="green">121</FONT>                    }<a name="line.121"></a>
+<FONT color="green">122</FONT>                    //else get from skypekit...<a name="line.122"></a>
+<FONT color="green">123</FONT>                    GetPropertyRequest request = new GetPropertyRequest(moduleID(), mObjectId, prop.id);<a name="line.123"></a>
+<FONT color="green">124</FONT>                    <a name="line.124"></a>
+<FONT color="green">125</FONT>                    Integer integer = null;<a name="line.125"></a>
+<FONT color="green">126</FONT>                    GetPropertyResponse r = skype.GetProperty(request);<a name="line.126"></a>
+<FONT color="green">127</FONT>                    if (r != null){<a name="line.127"></a>
+<FONT color="green">128</FONT>                            integer  = r.GetAsInt();<a name="line.128"></a>
+<FONT color="green">129</FONT>                    }<a name="line.129"></a>
+<FONT color="green">130</FONT>                    <a name="line.130"></a>
+<FONT color="green">131</FONT>                    if (integer != null)<a name="line.131"></a>
+<FONT color="green">132</FONT>                    {<a name="line.132"></a>
+<FONT color="green">133</FONT>                            mPropCache.put(new Integer(prop.id), integer);<a name="line.133"></a>
+<FONT color="green">134</FONT>                            return integer.intValue();<a name="line.134"></a>
+<FONT color="green">135</FONT>                    }<a name="line.135"></a>
+<FONT color="green">136</FONT>                    else<a name="line.136"></a>
+<FONT color="green">137</FONT>                    {<a name="line.137"></a>
+<FONT color="green">138</FONT>                            return 0;<a name="line.138"></a>
+<FONT color="green">139</FONT>                    }<a name="line.139"></a>
+<FONT color="green">140</FONT>            }<a name="line.140"></a>
+<FONT color="green">141</FONT>            <a name="line.141"></a>
+<FONT color="green">142</FONT>            public boolean GetBooleanProperty(PROPERTY prop) {<a name="line.142"></a>
+<FONT color="green">143</FONT>                    //check in propcache if so then return<a name="line.143"></a>
+<FONT color="green">144</FONT>                    if (mPropCache.containsKey(new Integer(prop.id))){<a name="line.144"></a>
+<FONT color="green">145</FONT>                            return ((Boolean)mPropCache.get(prop.id)).booleanValue();<a name="line.145"></a>
+<FONT color="green">146</FONT>                    }<a name="line.146"></a>
+<FONT color="green">147</FONT>                    //else get from skypekit...<a name="line.147"></a>
+<FONT color="green">148</FONT>                    GetPropertyRequest request = new GetPropertyRequest(moduleID(), mObjectId, prop.id);<a name="line.148"></a>
+<FONT color="green">149</FONT>                    <a name="line.149"></a>
+<FONT color="green">150</FONT>                    Boolean boolResp = null;<a name="line.150"></a>
+<FONT color="green">151</FONT>                    GetPropertyResponse r = skype.GetProperty(request);<a name="line.151"></a>
+<FONT color="green">152</FONT>                    if (r != null){<a name="line.152"></a>
+<FONT color="green">153</FONT>                            boolResp  = r.GetAsBoolean();<a name="line.153"></a>
+<FONT color="green">154</FONT>                    }<a name="line.154"></a>
+<FONT color="green">155</FONT>                    <a name="line.155"></a>
+<FONT color="green">156</FONT>                    if (boolResp != null)<a name="line.156"></a>
+<FONT color="green">157</FONT>                    {<a name="line.157"></a>
+<FONT color="green">158</FONT>                            mPropCache.put(new Integer(prop.id), boolResp);<a name="line.158"></a>
+<FONT color="green">159</FONT>                            return boolResp.booleanValue();<a name="line.159"></a>
+<FONT color="green">160</FONT>                    }<a name="line.160"></a>
+<FONT color="green">161</FONT>                    else<a name="line.161"></a>
+<FONT color="green">162</FONT>                    {<a name="line.162"></a>
+<FONT color="green">163</FONT>                            return false;<a name="line.163"></a>
+<FONT color="green">164</FONT>                    }<a name="line.164"></a>
+<FONT color="green">165</FONT>            }<a name="line.165"></a>
+<FONT color="green">166</FONT>            <a name="line.166"></a>
+<FONT color="green">167</FONT>            public byte [] GetBinProperty(PROPERTY prop) {<a name="line.167"></a>
+<FONT color="green">168</FONT>                    //get from skypekit...<a name="line.168"></a>
+<FONT color="green">169</FONT>                    GetPropertyRequest request = new GetPropertyRequest(11, mObjectId, prop.id);<a name="line.169"></a>
+<FONT color="green">170</FONT>                    <a name="line.170"></a>
+<FONT color="green">171</FONT>                    byte [] data = null;<a name="line.171"></a>
+<FONT color="green">172</FONT>                    GetPropertyResponse r = skype.GetProperty(request);<a name="line.172"></a>
+<FONT color="green">173</FONT>                    if (r != null) {<a name="line.173"></a>
+<FONT color="green">174</FONT>                            data = r.GetAsBinary();<a name="line.174"></a>
+<FONT color="green">175</FONT>                    }<a name="line.175"></a>
+<FONT color="green">176</FONT>                    return data;<a name="line.176"></a>
+<FONT color="green">177</FONT>            }<a name="line.177"></a>
+<FONT color="green">178</FONT>            <a name="line.178"></a>
+<FONT color="green">179</FONT>            /** Setupkey SETUPKEY_VIDEO_DEVICE type:string  &lt;br&gt;Selected video device name &lt;br&gt;This is account-specific setup key. It can only be used while an account is logged in. &lt;br&gt; */<a name="line.179"></a>
+<FONT color="green">180</FONT>            public static final String VIDEO_DEVICE = "Lib/Video/Device";<a name="line.180"></a>
+<FONT color="green">181</FONT>            <a name="line.181"></a>
+<FONT color="green">182</FONT>            /** Setupkey SETUPKEY_VIDEO_DEVICE_PATH type:string  &lt;br&gt;Currently selected video device path. &lt;br&gt;This is account-specific setup key. It can only be used while an account is logged in. &lt;br&gt; */<a name="line.182"></a>
+<FONT color="green">183</FONT>            public static final String VIDEO_DEVICE_PATH = "Lib/Video/DevicePath";<a name="line.183"></a>
+<FONT color="green">184</FONT>            <a name="line.184"></a>
+<FONT color="green">185</FONT>            /** Setupkey SETUPKEY_VIDEO_AUTOSEND type:int  &lt;br&gt;Setting this to 1 starts sending video automatically when call starts &lt;br&gt;This is account-specific setup key. It can only be used while an account is logged in. &lt;br&gt; */<a name="line.185"></a>
+<FONT color="green">186</FONT>            public static final String VIDEO_AUTOSEND = "Lib/Video/AutoSend";<a name="line.186"></a>
+<FONT color="green">187</FONT>            <a name="line.187"></a>
+<FONT color="green">188</FONT>            /** Setupkey SETUPKEY_VIDEO_DISABLE type:int  &lt;br&gt;Setting this to 1 disables all video functionality. &lt;br&gt;This setup key is machine-specific and affects all local accounts. &lt;br&gt; */<a name="line.188"></a>
+<FONT color="green">189</FONT>            public static final String VIDEO_DISABLE = "*Lib/Video/Disable";<a name="line.189"></a>
+<FONT color="green">190</FONT>            <a name="line.190"></a>
+<FONT color="green">191</FONT>            /** Setupkey SETUPKEY_VIDEO_RECVPOLICY type:string default value:"contacts" &lt;br&gt;noone | contacts | callpolicy &lt;br&gt;This is account-specific setup key. It can only be used while an account is logged in. &lt;br&gt; */<a name="line.191"></a>
+<FONT color="green">192</FONT>            public static final String VIDEO_RECVPOLICY = "Lib/Video/RecvPolicy";<a name="line.192"></a>
+<FONT color="green">193</FONT>            <a name="line.193"></a>
+<FONT color="green">194</FONT>            /** Setupkey SETUPKEY_VIDEO_ADVERTPOLICY type:string default value:"contacts" &lt;br&gt;noone | contacts | everyone &lt;br&gt;This is account-specific setup key. It can only be used while an account is logged in. &lt;br&gt; */<a name="line.194"></a>
+<FONT color="green">195</FONT>            public static final String VIDEO_ADVERTPOLICY = "Lib/Video/AdvertPolicy";<a name="line.195"></a>
+<FONT color="green">196</FONT>            <a name="line.196"></a>
+<FONT color="green">197</FONT>            /**<a name="line.197"></a>
+<FONT color="green">198</FONT>             */<a name="line.198"></a>
+<FONT color="green">199</FONT>            public enum STATUS {<a name="line.199"></a>
+<FONT color="green">200</FONT>            <a name="line.200"></a>
+<FONT color="green">201</FONT>                    /** */<a name="line.201"></a>
+<FONT color="green">202</FONT>                    NOT_AVAILABLE(0),<a name="line.202"></a>
+<FONT color="green">203</FONT>                    <a name="line.203"></a>
+<FONT color="green">204</FONT>                    /** */<a name="line.204"></a>
+<FONT color="green">205</FONT>                    AVAILABLE(1),<a name="line.205"></a>
+<FONT color="green">206</FONT>                    <a name="line.206"></a>
+<FONT color="green">207</FONT>                    /** */<a name="line.207"></a>
+<FONT color="green">208</FONT>                    STARTING(2),<a name="line.208"></a>
+<FONT color="green">209</FONT>                    <a name="line.209"></a>
+<FONT color="green">210</FONT>                    /** */<a name="line.210"></a>
+<FONT color="green">211</FONT>                    REJECTED(3),<a name="line.211"></a>
+<FONT color="green">212</FONT>                    <a name="line.212"></a>
+<FONT color="green">213</FONT>                    /** */<a name="line.213"></a>
+<FONT color="green">214</FONT>                    RUNNING(4),<a name="line.214"></a>
+<FONT color="green">215</FONT>                    <a name="line.215"></a>
+<FONT color="green">216</FONT>                    /** */<a name="line.216"></a>
+<FONT color="green">217</FONT>                    STOPPING(5),<a name="line.217"></a>
+<FONT color="green">218</FONT>                    <a name="line.218"></a>
+<FONT color="green">219</FONT>                    /** */<a name="line.219"></a>
+<FONT color="green">220</FONT>                    PAUSED(6),<a name="line.220"></a>
+<FONT color="green">221</FONT>                    <a name="line.221"></a>
+<FONT color="green">222</FONT>                    /** */<a name="line.222"></a>
+<FONT color="green">223</FONT>                    NOT_STARTED(7),<a name="line.223"></a>
+<FONT color="green">224</FONT>                    <a name="line.224"></a>
+<FONT color="green">225</FONT>                    /** */<a name="line.225"></a>
+<FONT color="green">226</FONT>                    HINT_IS_VIDEOCALL_RECEIVED(8),<a name="line.226"></a>
+<FONT color="green">227</FONT>                    <a name="line.227"></a>
+<FONT color="green">228</FONT>                    /** */<a name="line.228"></a>
+<FONT color="green">229</FONT>                    UNKNOWN(9),<a name="line.229"></a>
+<FONT color="green">230</FONT>                    <a name="line.230"></a>
+<FONT color="green">231</FONT>                    /** */<a name="line.231"></a>
+<FONT color="green">232</FONT>                    RENDERING(10),<a name="line.232"></a>
+<FONT color="green">233</FONT>                    <a name="line.233"></a>
+<FONT color="green">234</FONT>                    /** */<a name="line.234"></a>
+<FONT color="green">235</FONT>                    CHECKING_SUBSCRIPTION(11),<a name="line.235"></a>
+<FONT color="green">236</FONT>                    <a name="line.236"></a>
+<FONT color="green">237</FONT>                    /** */<a name="line.237"></a>
+<FONT color="green">238</FONT>                    SWITCHING_DEVICE(12);<a name="line.238"></a>
+<FONT color="green">239</FONT>                    <a name="line.239"></a>
+<FONT color="green">240</FONT>                    private static final Map&lt;Integer,STATUS&gt; lookup = new HashMap&lt;Integer,STATUS&gt;();<a name="line.240"></a>
+<FONT color="green">241</FONT>                    <a name="line.241"></a>
+<FONT color="green">242</FONT>                    static {<a name="line.242"></a>
+<FONT color="green">243</FONT>                            for(STATUS s : EnumSet.allOf(STATUS.class))<a name="line.243"></a>
+<FONT color="green">244</FONT>                                    lookup.put(s.getId(), s);<a name="line.244"></a>
+<FONT color="green">245</FONT>                    }<a name="line.245"></a>
+<FONT color="green">246</FONT>                    <a name="line.246"></a>
+<FONT color="green">247</FONT>                    private final int id;<a name="line.247"></a>
+<FONT color="green">248</FONT>                    <a name="line.248"></a>
+<FONT color="green">249</FONT>                    private STATUS(int value) {<a name="line.249"></a>
+<FONT color="green">250</FONT>                            this.id = value;<a name="line.250"></a>
+<FONT color="green">251</FONT>                    }<a name="line.251"></a>
+<FONT color="green">252</FONT>                    <a name="line.252"></a>
+<FONT color="green">253</FONT>                    public int getId() { return id; }<a name="line.253"></a>
+<FONT color="green">254</FONT>                    <a name="line.254"></a>
+<FONT color="green">255</FONT>                    public static STATUS get(int code) {<a name="line.255"></a>
+<FONT color="green">256</FONT>                            return lookup.get(code);<a name="line.256"></a>
+<FONT color="green">257</FONT>                    }<a name="line.257"></a>
+<FONT color="green">258</FONT>                    <a name="line.258"></a>
+<FONT color="green">259</FONT>                    public static STATUS fromString(String s) {<a name="line.259"></a>
+<FONT color="green">260</FONT>                            for (STATUS p : lookup.values()) {<a name="line.260"></a>
+<FONT color="green">261</FONT>                                    if (p.toString() == s) {<a name="line.261"></a>
+<FONT color="green">262</FONT>                                            return p;<a name="line.262"></a>
+<FONT color="green">263</FONT>                                    }<a name="line.263"></a>
+<FONT color="green">264</FONT>                            }<a name="line.264"></a>
+<FONT color="green">265</FONT>                            return null;<a name="line.265"></a>
+<FONT color="green">266</FONT>                    }<a name="line.266"></a>
+<FONT color="green">267</FONT>            }<a name="line.267"></a>
+<FONT color="green">268</FONT>            <a name="line.268"></a>
+<FONT color="green">269</FONT>            /**<a name="line.269"></a>
+<FONT color="green">270</FONT>             */<a name="line.270"></a>
+<FONT color="green">271</FONT>            public enum MEDIATYPE {<a name="line.271"></a>
+<FONT color="green">272</FONT>            <a name="line.272"></a>
+<FONT color="green">273</FONT>                    /** */<a name="line.273"></a>
+<FONT color="green">274</FONT>                    MEDIA_SCREENSHARING(1),<a name="line.274"></a>
+<FONT color="green">275</FONT>                    <a name="line.275"></a>
+<FONT color="green">276</FONT>                    /** */<a name="line.276"></a>
+<FONT color="green">277</FONT>                    MEDIA_VIDEO(0);<a name="line.277"></a>
+<FONT color="green">278</FONT>                    <a name="line.278"></a>
+<FONT color="green">279</FONT>                    private static final Map&lt;Integer,MEDIATYPE&gt; lookup = new HashMap&lt;Integer,MEDIATYPE&gt;();<a name="line.279"></a>
+<FONT color="green">280</FONT>                    <a name="line.280"></a>
+<FONT color="green">281</FONT>                    static {<a name="line.281"></a>
+<FONT color="green">282</FONT>                            for(MEDIATYPE s : EnumSet.allOf(MEDIATYPE.class))<a name="line.282"></a>
+<FONT color="green">283</FONT>                                    lookup.put(s.getId(), s);<a name="line.283"></a>
+<FONT color="green">284</FONT>                    }<a name="line.284"></a>
+<FONT color="green">285</FONT>                    <a name="line.285"></a>
+<FONT color="green">286</FONT>                    private final int id;<a name="line.286"></a>
+<FONT color="green">287</FONT>                    <a name="line.287"></a>
+<FONT color="green">288</FONT>                    private MEDIATYPE(int value) {<a name="line.288"></a>
+<FONT color="green">289</FONT>                            this.id = value;<a name="line.289"></a>
+<FONT color="green">290</FONT>                    }<a name="line.290"></a>
+<FONT color="green">291</FONT>                    <a name="line.291"></a>
+<FONT color="green">292</FONT>                    public int getId() { return id; }<a name="line.292"></a>
+<FONT color="green">293</FONT>                    <a name="line.293"></a>
+<FONT color="green">294</FONT>                    public static MEDIATYPE get(int code) {<a name="line.294"></a>
+<FONT color="green">295</FONT>                            return lookup.get(code);<a name="line.295"></a>
+<FONT color="green">296</FONT>                    }<a name="line.296"></a>
+<FONT color="green">297</FONT>                    <a name="line.297"></a>
+<FONT color="green">298</FONT>                    public static MEDIATYPE fromString(String s) {<a name="line.298"></a>
+<FONT color="green">299</FONT>                            for (MEDIATYPE p : lookup.values()) {<a name="line.299"></a>
+<FONT color="green">300</FONT>                                    if (p.toString() == s) {<a name="line.300"></a>
+<FONT color="green">301</FONT>                                            return p;<a name="line.301"></a>
+<FONT color="green">302</FONT>                                    }<a name="line.302"></a>
+<FONT color="green">303</FONT>                            }<a name="line.303"></a>
+<FONT color="green">304</FONT>                            return null;<a name="line.304"></a>
+<FONT color="green">305</FONT>                    }<a name="line.305"></a>
+<FONT color="green">306</FONT>            }<a name="line.306"></a>
+<FONT color="green">307</FONT>            <a name="line.307"></a>
+<FONT color="green">308</FONT>            /**<a name="line.308"></a>
+<FONT color="green">309</FONT>             */<a name="line.309"></a>
+<FONT color="green">310</FONT>            public enum VIDEO_DEVICE_CAPABILITY {<a name="line.310"></a>
+<FONT color="green">311</FONT>            <a name="line.311"></a>
+<FONT color="green">312</FONT>                    /** */<a name="line.312"></a>
+<FONT color="green">313</FONT>                    VIDEOCAP_HQ_CAPABLE(0),<a name="line.313"></a>
+<FONT color="green">314</FONT>                    <a name="line.314"></a>
+<FONT color="green">315</FONT>                    /** */<a name="line.315"></a>
+<FONT color="green">316</FONT>                    VIDEOCAP_HQ_CERTIFIED(1),<a name="line.316"></a>
+<FONT color="green">317</FONT>                    <a name="line.317"></a>
+<FONT color="green">318</FONT>                    /** */<a name="line.318"></a>
+<FONT color="green">319</FONT>                    VIDEOCAP_REQ_DRIVERUPDATE(2),<a name="line.319"></a>
+<FONT color="green">320</FONT>                    <a name="line.320"></a>
+<FONT color="green">321</FONT>                    /** */<a name="line.321"></a>
+<FONT color="green">322</FONT>                    VIDEOCAP_USB_HIGHSPEED(3);<a name="line.322"></a>
+<FONT color="green">323</FONT>                    <a name="line.323"></a>
+<FONT color="green">324</FONT>                    private static final Map&lt;Integer,VIDEO_DEVICE_CAPABILITY&gt; lookup = new HashMap&lt;Integer,VIDEO_DEVICE_CAPABILITY&gt;();<a name="line.324"></a>
+<FONT color="green">325</FONT>                    <a name="line.325"></a>
+<FONT color="green">326</FONT>                    static {<a name="line.326"></a>
+<FONT color="green">327</FONT>                            for(VIDEO_DEVICE_CAPABILITY s : EnumSet.allOf(VIDEO_DEVICE_CAPABILITY.class))<a name="line.327"></a>
+<FONT color="green">328</FONT>                                    lookup.put(s.getId(), s);<a name="line.328"></a>
+<FONT color="green">329</FONT>                    }<a name="line.329"></a>
+<FONT color="green">330</FONT>                    <a name="line.330"></a>
+<FONT color="green">331</FONT>                    private final int id;<a name="line.331"></a>
+<FONT color="green">332</FONT>                    <a name="line.332"></a>
+<FONT color="green">333</FONT>                    private VIDEO_DEVICE_CAPABILITY(int value) {<a name="line.333"></a>
+<FONT color="green">334</FONT>                            this.id = value;<a name="line.334"></a>
+<FONT color="green">335</FONT>                    }<a name="line.335"></a>
+<FONT color="green">336</FONT>                    <a name="line.336"></a>
+<FONT color="green">337</FONT>                    public int getId() { return id; }<a name="line.337"></a>
+<FONT color="green">338</FONT>                    <a name="line.338"></a>
+<FONT color="green">339</FONT>                    public static VIDEO_DEVICE_CAPABILITY get(int code) {<a name="line.339"></a>
+<FONT color="green">340</FONT>                            return lookup.get(code);<a name="line.340"></a>
+<FONT color="green">341</FONT>                    }<a name="line.341"></a>
+<FONT color="green">342</FONT>                    <a name="line.342"></a>
+<FONT color="green">343</FONT>                    public static VIDEO_DEVICE_CAPABILITY fromString(String s) {<a name="line.343"></a>
+<FONT color="green">344</FONT>                            for (VIDEO_DEVICE_CAPABILITY p : lookup.values()) {<a name="line.344"></a>
+<FONT color="green">345</FONT>                                    if (p.toString() == s) {<a name="line.345"></a>
+<FONT color="green">346</FONT>                                            return p;<a name="line.346"></a>
+<FONT color="green">347</FONT>                                    }<a name="line.347"></a>
+<FONT color="green">348</FONT>                            }<a name="line.348"></a>
+<FONT color="green">349</FONT>                            return null;<a name="line.349"></a>
+<FONT color="green">350</FONT>                    }<a name="line.350"></a>
+<FONT color="green">351</FONT>            }<a name="line.351"></a>
+<FONT color="green">352</FONT>            <a name="line.352"></a>
+<FONT color="green">353</FONT>            /**<a name="line.353"></a>
+<FONT color="green">354</FONT>             *This is a legacy method, used in earlier version of desktop video, for passing window handles from the UI to the rendering engine in the runtime. In current version of desktop video, the rendering takes place in the client. The video objects now need to be associated not with a specific window, but rather with an IPC channel that the Video object sends decoded video frames from the runtime to the client UI. See Video.SetRemoteRendererId for more information. &lt;br&gt;<a name="line.354"></a>
+<FONT color="green">355</FONT>             * @param windowh<a name="line.355"></a>
+<FONT color="green">356</FONT>             */<a name="line.356"></a>
+<FONT color="green">357</FONT>            public void SetScreen( int windowh) {<a name="line.357"></a>
+<FONT color="green">358</FONT>            <a name="line.358"></a>
+<FONT color="green">359</FONT>                    Request request = null;<a name="line.359"></a>
+<FONT color="green">360</FONT>                    try {<a name="line.360"></a>
+<FONT color="green">361</FONT>                            request = new XCallRequest(11,1);<a name="line.361"></a>
+<FONT color="green">362</FONT>                    } catch (IOException e) {<a name="line.362"></a>
+<FONT color="green">363</FONT>                            e.printStackTrace();<a name="line.363"></a>
+<FONT color="green">364</FONT>                            if (skype.errorListener != null)<a name="line.364"></a>
+<FONT color="green">365</FONT>                                    skype.errorListener.OnSkypeKitFatalError();<a name="line.365"></a>
+<FONT color="green">366</FONT>                    }<a name="line.366"></a>
+<FONT color="green">367</FONT>                    request.addParm('O',0,mObjectId);<a name="line.367"></a>
+<FONT color="green">368</FONT>                    request.addParm('u',1,windowh);<a name="line.368"></a>
+<FONT color="green">369</FONT>                    <a name="line.369"></a>
+<FONT color="green">370</FONT>                    skype.XCall((XCallRequest)request);<a name="line.370"></a>
+<FONT color="green">371</FONT>            }<a name="line.371"></a>
+<FONT color="green">372</FONT>            <a name="line.372"></a>
+<FONT color="green">373</FONT>            /**<a name="line.373"></a>
+<FONT color="green">374</FONT>             *This method starts either video send or video receive, depending on whether the video object is sender or receiver. In case of desktop video, the receiver side needs to instantiate a renderer object and associate it with the receiveing video (Video.SetRemoteRendererId).  &lt;br&gt;<a name="line.374"></a>
+<FONT color="green">375</FONT>             */<a name="line.375"></a>
+<FONT color="green">376</FONT>            public void Start() {<a name="line.376"></a>
+<FONT color="green">377</FONT>            <a name="line.377"></a>
+<FONT color="green">378</FONT>                    Request request = null;<a name="line.378"></a>
+<FONT color="green">379</FONT>                    try {<a name="line.379"></a>
+<FONT color="green">380</FONT>                            request = new XCallRequest(11,2);<a name="line.380"></a>
+<FONT color="green">381</FONT>                    } catch (IOException e) {<a name="line.381"></a>
+<FONT color="green">382</FONT>                            e.printStackTrace();<a name="line.382"></a>
+<FONT color="green">383</FONT>                            if (skype.errorListener != null)<a name="line.383"></a>
+<FONT color="green">384</FONT>                                    skype.errorListener.OnSkypeKitFatalError();<a name="line.384"></a>
+<FONT color="green">385</FONT>                    }<a name="line.385"></a>
+<FONT color="green">386</FONT>                    request.addParm('O',0,mObjectId);<a name="line.386"></a>
+<FONT color="green">387</FONT>                    <a name="line.387"></a>
+<FONT color="green">388</FONT>                    skype.XCall((XCallRequest)request);<a name="line.388"></a>
+<FONT color="green">389</FONT>            }<a name="line.389"></a>
+<FONT color="green">390</FONT>            <a name="line.390"></a>
+<FONT color="green">391</FONT>            /**<a name="line.391"></a>
+<FONT color="green">392</FONT>             *This method stops either video send or video receive, depending on whether the video object is sender or receiver. In case of desktop video, the receiver side needs to dis-associate the video object from the renderer, by calling Video.SetRemoteRendererId(0).  &lt;br&gt;<a name="line.392"></a>
+<FONT color="green">393</FONT>             */<a name="line.393"></a>
+<FONT color="green">394</FONT>            public void Stop() {<a name="line.394"></a>
+<FONT color="green">395</FONT>            <a name="line.395"></a>
+<FONT color="green">396</FONT>                    Request request = null;<a name="line.396"></a>
+<FONT color="green">397</FONT>                    try {<a name="line.397"></a>
+<FONT color="green">398</FONT>                            request = new XCallRequest(11,3);<a name="line.398"></a>
+<FONT color="green">399</FONT>                    } catch (IOException e) {<a name="line.399"></a>
+<FONT color="green">400</FONT>                            e.printStackTrace();<a name="line.400"></a>
+<FONT color="green">401</FONT>                            if (skype.errorListener != null)<a name="line.401"></a>
+<FONT color="green">402</FONT>                                    skype.errorListener.OnSkypeKitFatalError();<a name="line.402"></a>
+<FONT color="green">403</FONT>                    }<a name="line.403"></a>
+<FONT color="green">404</FONT>                    request.addParm('O',0,mObjectId);<a name="line.404"></a>
+<FONT color="green">405</FONT>                    <a name="line.405"></a>
+<FONT color="green">406</FONT>                    skype.XCall((XCallRequest)request);<a name="line.406"></a>
+<FONT color="green">407</FONT>            }<a name="line.407"></a>
+<FONT color="green">408</FONT>            <a name="line.408"></a>
+<FONT color="green">409</FONT>            /**<a name="line.409"></a>
+<FONT color="green">410</FONT>             *This method has no known effect in current version. &lt;br&gt;<a name="line.410"></a>
+<FONT color="green">411</FONT>             * @return SubmitCaptureRequestResult<a name="line.411"></a>
+<FONT color="green">412</FONT>             */<a name="line.412"></a>
+<FONT color="green">413</FONT>            public SubmitCaptureRequestResult SubmitCaptureRequest() {<a name="line.413"></a>
+<FONT color="green">414</FONT>            <a name="line.414"></a>
+<FONT color="green">415</FONT>                    Request request = null;<a name="line.415"></a>
+<FONT color="green">416</FONT>                    try {<a name="line.416"></a>
+<FONT color="green">417</FONT>                            request = new XCallRequest(11,11);<a name="line.417"></a>
+<FONT color="green">418</FONT>                    } catch (IOException e) {<a name="line.418"></a>
+<FONT color="green">419</FONT>                            e.printStackTrace();<a name="line.419"></a>
+<FONT color="green">420</FONT>                            if (skype.errorListener != null)<a name="line.420"></a>
+<FONT color="green">421</FONT>                                    skype.errorListener.OnSkypeKitFatalError();<a name="line.421"></a>
+<FONT color="green">422</FONT>                    }<a name="line.422"></a>
+<FONT color="green">423</FONT>                    request.addParm('O',0,mObjectId);<a name="line.423"></a>
+<FONT color="green">424</FONT>                    <a name="line.424"></a>
+<FONT color="green">425</FONT>                    Response r = skype.XCall((XCallRequest)request);<a name="line.425"></a>
+<FONT color="green">426</FONT>                    <a name="line.426"></a>
+<FONT color="green">427</FONT>                    if (r.isErrCall())<a name="line.427"></a>
+<FONT color="green">428</FONT>                            return null;<a name="line.428"></a>
+<FONT color="green">429</FONT>                            <a name="line.429"></a>
+<FONT color="green">430</FONT>                    SubmitCaptureRequestResult result = new SubmitCaptureRequestResult();<a name="line.430"></a>
+<FONT color="green">431</FONT>                    <a name="line.431"></a>
+<FONT color="green">432</FONT>                    boolean ret = false;<a name="line.432"></a>
+<FONT color="green">433</FONT>                    ret = r.GetAsBoolean(1);<a name="line.433"></a>
+<FONT color="green">434</FONT>                    result.ret = ret;<a name="line.434"></a>
+<FONT color="green">435</FONT>                    <a name="line.435"></a>
+<FONT color="green">436</FONT>                    int requestId = 0;<a name="line.436"></a>
+<FONT color="green">437</FONT>                    requestId = r.GetAsInt(2);<a name="line.437"></a>
+<FONT color="green">438</FONT>                    result.requestId = requestId;<a name="line.438"></a>
+<FONT color="green">439</FONT>                    <a name="line.439"></a>
+<FONT color="green">440</FONT>                    return result;<a name="line.440"></a>
+<FONT color="green">441</FONT>            }<a name="line.441"></a>
+<FONT color="green">442</FONT>            <a name="line.442"></a>
+<FONT color="green">443</FONT>            public class SubmitCaptureRequestResult {<a name="line.443"></a>
+<FONT color="green">444</FONT>                    public boolean ret;<a name="line.444"></a>
+<FONT color="green">445</FONT>                    public int requestId;<a name="line.445"></a>
+<FONT color="green">446</FONT>            }<a name="line.446"></a>
+<FONT color="green">447</FONT>            <a name="line.447"></a>
+<FONT color="green">448</FONT>            /**<a name="line.448"></a>
+<FONT color="green">449</FONT>             *This method has no known effect in current version. &lt;br&gt;<a name="line.449"></a>
+<FONT color="green">450</FONT>             * @param x0<a name="line.450"></a>
+<FONT color="green">451</FONT>             * @param y0<a name="line.451"></a>
+<FONT color="green">452</FONT>             * @param width<a name="line.452"></a>
+<FONT color="green">453</FONT>             * @param height<a name="line.453"></a>
+<FONT color="green">454</FONT>             * @param monitorNumber<a name="line.454"></a>
+<FONT color="green">455</FONT>             * @param windowHandle<a name="line.455"></a>
+<FONT color="green">456</FONT>             */<a name="line.456"></a>
+<FONT color="green">457</FONT>            public void SetScreenCaptureRectangle( int x0, int y0, int width, int height, int monitorNumber, int windowHandle) {<a name="line.457"></a>
+<FONT color="green">458</FONT>            <a name="line.458"></a>
+<FONT color="green">459</FONT>                    Request request = null;<a name="line.459"></a>
+<FONT color="green">460</FONT>                    try {<a name="line.460"></a>
+<FONT color="green">461</FONT>                            request = new XCallRequest(11,5);<a name="line.461"></a>
+<FONT color="green">462</FONT>                    } catch (IOException e) {<a name="line.462"></a>
+<FONT color="green">463</FONT>                            e.printStackTrace();<a name="line.463"></a>
+<FONT color="green">464</FONT>                            if (skype.errorListener != null)<a name="line.464"></a>
+<FONT color="green">465</FONT>                                    skype.errorListener.OnSkypeKitFatalError();<a name="line.465"></a>
+<FONT color="green">466</FONT>                    }<a name="line.466"></a>
+<FONT color="green">467</FONT>                    request.addParm('O',0,mObjectId);<a name="line.467"></a>
+<FONT color="green">468</FONT>                    request.addParm('i',1,x0);<a name="line.468"></a>
+<FONT color="green">469</FONT>                    request.addParm('i',2,y0);<a name="line.469"></a>
+<FONT color="green">470</FONT>                    request.addParm('u',3,width);<a name="line.470"></a>
+<FONT color="green">471</FONT>                    request.addParm('u',4,height);<a name="line.471"></a>
+<FONT color="green">472</FONT>                    request.addParm('i',5,monitorNumber);<a name="line.472"></a>
+<FONT color="green">473</FONT>                    request.addParm('u',6,windowHandle);<a name="line.473"></a>
+<FONT color="green">474</FONT>                    <a name="line.474"></a>
+<FONT color="green">475</FONT>                    skype.XCall((XCallRequest)request);<a name="line.475"></a>
+<FONT color="green">476</FONT>            }<a name="line.476"></a>
+<FONT color="green">477</FONT>            <a name="line.477"></a>
+<FONT color="green">478</FONT>            /**<a name="line.478"></a>
+<FONT color="green">479</FONT>             *Sets video render rectangle co-ordinates, relative to upper left corner of the rendering window's client area (there us no need to compensate for the title bar area or window borders). Note that the rendering rectangle does not get automatically updated after video window resize occurs. You will need to catch the resize events and update the rendering rectangle according to the new size of the video window. &lt;br&gt;&lt;br&gt;NB! Currently, when the updating the render rectangle to the new size of the video window, you will also need to call Video class SetScreen method - before SetRenderRectangle. &lt;br&gt;<a name="line.479"></a>
+<FONT color="green">480</FONT>             * @param x0<a name="line.480"></a>
+<FONT color="green">481</FONT>             * @param y0<a name="line.481"></a>
+<FONT color="green">482</FONT>             * @param width<a name="line.482"></a>
+<FONT color="green">483</FONT>             * @param height<a name="line.483"></a>
+<FONT color="green">484</FONT>             */<a name="line.484"></a>
+<FONT color="green">485</FONT>            public void SetRenderRectangle( int x0, int y0, int width, int height) {<a name="line.485"></a>
+<FONT color="green">486</FONT>            <a name="line.486"></a>
+<FONT color="green">487</FONT>                    Request request = null;<a name="line.487"></a>
+<FONT color="green">488</FONT>                    try {<a name="line.488"></a>
+<FONT color="green">489</FONT>                            request = new XCallRequest(11,6);<a name="line.489"></a>
+<FONT color="green">490</FONT>                    } catch (IOException e) {<a name="line.490"></a>
+<FONT color="green">491</FONT>                            e.printStackTrace();<a name="line.491"></a>
+<FONT color="green">492</FONT>                            if (skype.errorListener != null)<a name="line.492"></a>
+<FONT color="green">493</FONT>                                    skype.errorListener.OnSkypeKitFatalError();<a name="line.493"></a>
+<FONT color="green">494</FONT>                    }<a name="line.494"></a>
+<FONT color="green">495</FONT>                    request.addParm('O',0,mObjectId);<a name="line.495"></a>
+<FONT color="green">496</FONT>                    request.addParm('i',1,x0);<a name="line.496"></a>
+<FONT color="green">497</FONT>                    request.addParm('i',2,y0);<a name="line.497"></a>
+<FONT color="green">498</FONT>                    request.addParm('u',3,width);<a name="line.498"></a>
+<FONT color="green">499</FONT>                    request.addParm('u',4,height);<a name="line.499"></a>
+<FONT color="green">500</FONT>                    <a name="line.500"></a>
+<FONT color="green">501</FONT>                    skype.XCall((XCallRequest)request);<a name="line.501"></a>
+<FONT color="green">502</FONT>            }<a name="line.502"></a>
+<FONT color="green">503</FONT>            <a name="line.503"></a>
+<FONT color="green">504</FONT>            /**<a name="line.504"></a>
+<FONT color="green">505</FONT>             *This method is specific to working with desktop video runtimes. In case of desktop video, this method associates a Video object with a rendering object. Once this association is in place, the Video object will start sending decoded video frames to the renderer object, over shared memory IPC transport. The renderer then periodically reads the shared memory buffer and draws bitmaps on the screen.  &lt;br&gt;&lt;br&gt;The "remote renderer ID" value you are expected to pass in this method comes from the renderer. The renderer class is normally implemented by you (for a specific GUI framework). However, the shared memory transport mechanism, for receiving decoded frames, is independant of GUI framework and are provided with the SDK for all three supporeted operating systems.  &lt;br&gt;&lt;br&gt;Your renderer class can include instance of the IPC transport as VideoTransportClient &lt;WinShm&gt; ipc or VideoTransportClient &lt;PosixShm&gt;  ipc; The ipc object then exposes ipc.key() function that returns the IPC channel ID. This ID can then be passed to the Video.SetRemoteRendererId method. A reference implementation of desktop video is included in the SDK (examples/cpp/qt_videocalls). &lt;br&gt;&lt;br&gt;When the incoming video stream stops (or rendering is stopped by the user), your client should explicitly stop the frame transport by calling Video.SetRemoteRendererId(0). &lt;br&gt;<a name="line.505"></a>
+<FONT color="green">506</FONT>             * @param id IPC channel ID retrieved from the shared memory transport class (see ipc/cpp/VideoBuffers in the SDK). &lt;br&gt;<a name="line.506"></a>
+<FONT color="green">507</FONT>             */<a name="line.507"></a>
+<FONT color="green">508</FONT>            public void SetRemoteRendererId( int id) {<a name="line.508"></a>
+<FONT color="green">509</FONT>            <a name="line.509"></a>
+<FONT color="green">510</FONT>                    Request request = null;<a name="line.510"></a>
+<FONT color="green">511</FONT>                    try {<a name="line.511"></a>
+<FONT color="green">512</FONT>                            request = new XCallRequest(11,14);<a name="line.512"></a>
+<FONT color="green">513</FONT>                    } catch (IOException e) {<a name="line.513"></a>
+<FONT color="green">514</FONT>                            e.printStackTrace();<a name="line.514"></a>
+<FONT color="green">515</FONT>                            if (skype.errorListener != null)<a name="line.515"></a>
+<FONT color="green">516</FONT>                                    skype.errorListener.OnSkypeKitFatalError();<a name="line.516"></a>
+<FONT color="green">517</FONT>                    }<a name="line.517"></a>
+<FONT color="green">518</FONT>                    request.addParm('O',0,mObjectId);<a name="line.518"></a>
+<FONT color="green">519</FONT>                    request.addParm('u',1,id);<a name="line.519"></a>
+<FONT color="green">520</FONT>                    <a name="line.520"></a>
+<FONT color="green">521</FONT>                    skype.XCall((XCallRequest)request);<a name="line.521"></a>
+<FONT color="green">522</FONT>            }<a name="line.522"></a>
+<FONT color="green">523</FONT>            <a name="line.523"></a>
+<FONT color="green">524</FONT>            /**<a name="line.524"></a>
+<FONT color="green">525</FONT>             *This method has no effect in current version. &lt;br&gt;<a name="line.525"></a>
+<FONT color="green">526</FONT>             * @param mediaType<a name="line.526"></a>
+<FONT color="green">527</FONT>             * @param webcamName<a name="line.527"></a>
+<FONT color="green">528</FONT>             * @param devicePath<a name="line.528"></a>
+<FONT color="green">529</FONT>             * @param updateSetup<a name="line.529"></a>
+<FONT color="green">530</FONT>             */<a name="line.530"></a>
+<FONT color="green">531</FONT>            public void SelectVideoSource( Video.MEDIATYPE mediaType, String webcamName, String devicePath, boolean updateSetup) {<a name="line.531"></a>
+<FONT color="green">532</FONT>            <a name="line.532"></a>
+<FONT color="green">533</FONT>                    Request request = null;<a name="line.533"></a>
+<FONT color="green">534</FONT>                    try {<a name="line.534"></a>
+<FONT color="green">535</FONT>                            request = new XCallRequest(11,7);<a name="line.535"></a>
+<FONT color="green">536</FONT>                    } catch (IOException e) {<a name="line.536"></a>
+<FONT color="green">537</FONT>                            e.printStackTrace();<a name="line.537"></a>
+<FONT color="green">538</FONT>                            if (skype.errorListener != null)<a name="line.538"></a>
+<FONT color="green">539</FONT>                                    skype.errorListener.OnSkypeKitFatalError();<a name="line.539"></a>
+<FONT color="green">540</FONT>                    }<a name="line.540"></a>
+<FONT color="green">541</FONT>                    request.addParm('O',0,mObjectId);<a name="line.541"></a>
+<FONT color="green">542</FONT>                    request.addParm('e',1,mediaType.getId());<a name="line.542"></a>
+<FONT color="green">543</FONT>                    request.addParm('S',2,webcamName);<a name="line.543"></a>
+<FONT color="green">544</FONT>                    request.addParm('S',3,devicePath);<a name="line.544"></a>
+<FONT color="green">545</FONT>                    request.addParm('b',4,updateSetup);<a name="line.545"></a>
+<FONT color="green">546</FONT>                    <a name="line.546"></a>
+<FONT color="green">547</FONT>                    skype.XCall((XCallRequest)request);<a name="line.547"></a>
+<FONT color="green">548</FONT>            }<a name="line.548"></a>
+<FONT color="green">549</FONT>            <a name="line.549"></a>
+<FONT color="green">550</FONT>            /**<a name="line.550"></a>
+<FONT color="green">551</FONT>             * @return GetCurrentVideoDeviceResult<a name="line.551"></a>
+<FONT color="green">552</FONT>             */<a name="line.552"></a>
+<FONT color="green">553</FONT>            public GetCurrentVideoDeviceResult GetCurrentVideoDevice() {<a name="line.553"></a>
+<FONT color="green">554</FONT>            <a name="line.554"></a>
+<FONT color="green">555</FONT>                    Request request = null;<a name="line.555"></a>
+<FONT color="green">556</FONT>                    try {<a name="line.556"></a>
+<FONT color="green">557</FONT>                            request = new XCallRequest(11,10);<a name="line.557"></a>
+<FONT color="green">558</FONT>                    } catch (IOException e) {<a name="line.558"></a>
+<FONT color="green">559</FONT>                            e.printStackTrace();<a name="line.559"></a>
+<FONT color="green">560</FONT>                            if (skype.errorListener != null)<a name="line.560"></a>
+<FONT color="green">561</FONT>                                    skype.errorListener.OnSkypeKitFatalError();<a name="line.561"></a>
+<FONT color="green">562</FONT>                    }<a name="line.562"></a>
+<FONT color="green">563</FONT>                    request.addParm('O',0,mObjectId);<a name="line.563"></a>
+<FONT color="green">564</FONT>                    <a name="line.564"></a>
+<FONT color="green">565</FONT>                    Response r = skype.XCall((XCallRequest)request);<a name="line.565"></a>
+<FONT color="green">566</FONT>                    <a name="line.566"></a>
+<FONT color="green">567</FONT>                    if (r.isErrCall())<a name="line.567"></a>
+<FONT color="green">568</FONT>                            return null;<a name="line.568"></a>
+<FONT color="green">569</FONT>                            <a name="line.569"></a>
+<FONT color="green">570</FONT>                    GetCurrentVideoDeviceResult result = new GetCurrentVideoDeviceResult();<a name="line.570"></a>
+<FONT color="green">571</FONT>                    <a name="line.571"></a>
+<FONT color="green">572</FONT>                    MEDIATYPE mediatype = null;<a name="line.572"></a>
+<FONT color="green">573</FONT>                    mediatype = MEDIATYPE.get(r.GetAsInt(1));<a name="line.573"></a>
+<FONT color="green">574</FONT>                    result.mediatype = mediatype;<a name="line.574"></a>
+<FONT color="green">575</FONT>                    <a name="line.575"></a>
+<FONT color="green">576</FONT>                    String deviceName = null;<a name="line.576"></a>
+<FONT color="green">577</FONT>                    deviceName = r.GetAsString(2);<a name="line.577"></a>
+<FONT color="green">578</FONT>                    result.deviceName = deviceName;<a name="line.578"></a>
+<FONT color="green">579</FONT>                    <a name="line.579"></a>
+<FONT color="green">580</FONT>                    String devicePath = null;<a name="line.580"></a>
+<FONT color="green">581</FONT>                    devicePath = r.GetAsString(3);<a name="line.581"></a>
+<FONT color="green">582</FONT>                    result.devicePath = devicePath;<a name="line.582"></a>
+<FONT color="green">583</FONT>                    <a name="line.583"></a>
+<FONT color="green">584</FONT>                    return result;<a name="line.584"></a>
+<FONT color="green">585</FONT>            }<a name="line.585"></a>
+<FONT color="green">586</FONT>            <a name="line.586"></a>
+<FONT color="green">587</FONT>            public class GetCurrentVideoDeviceResult {<a name="line.587"></a>
+<FONT color="green">588</FONT>                    public MEDIATYPE mediatype;<a name="line.588"></a>
+<FONT color="green">589</FONT>                    public String deviceName;<a name="line.589"></a>
+<FONT color="green">590</FONT>                    public String devicePath;<a name="line.590"></a>
+<FONT color="green">591</FONT>            }<a name="line.591"></a>
+<FONT color="green">592</FONT>            <a name="line.592"></a>
+<FONT color="green">593</FONT>    <a name="line.593"></a>
+<FONT color="green">594</FONT>    }<a name="line.594"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

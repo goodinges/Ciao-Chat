@@ -1,0 +1,8 @@
+
+This directory contains the SkypeKit Python wrapper tutorial examples.
+
+The Python wrapper Reference Manual can be found in the <distroroot>\interfaces\skype\python\documentation directory.
+
+These tutorial examples do not automatically launch the skype runtime. You will need to have a runtime up before running these examples.
+
+NB! You will also need to supply a valid application keypair file name in a separate file, which you can change in keypair.py).

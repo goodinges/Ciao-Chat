@@ -1,0 +1,57 @@
+--- RtAudio.cpp.orig	2009-08-14 17:06:37.000000000 +0300
++++ RtAudio.cpp	2009-08-17 18:22:18.000000000 +0300
+@@ -5086,6 +5086,8 @@
+   char name[64];
+   snd_ctl_t *handle;
+ 
++  nDevices++; // "default"
++
+   // Count cards and devices
+   card = -1;
+   snd_card_next( &card );
+@@ -5129,6 +5131,18 @@
+   char name[64];
+   snd_ctl_t *chandle;
+ 
++  if ( nDevices == device ) {
++      sprintf( name, "default" );
++      result = snd_ctl_open( &chandle, name, SND_CTL_NONBLOCK );
++      if ( result < 0 ) {
++          errorStream_ << "RtApiAlsa::getDeviceInfo: control open, device default, " << snd_strerror( result ) << ".";
++          errorText_ = errorStream_.str();
++          error( RtError::WARNING );
++      }
++      goto foundDevice;
++  }
++  nDevices++;
++
+   // Count cards and devices
+   card = -1;
+   snd_card_next( &card );
+@@ -5368,10 +5382,13 @@
+   }
+ 
+   // Get the device name
++  if (device != 0)
++  {
+   char *cardname;
+   result = snd_card_get_name( card, &cardname );
+   if ( result >= 0 )
+     sprintf( name, "hw:%s,%d", cardname, subdevice );
++  }
+   info.name = name;
+ 
+   // That's all ... close the device and return
+@@ -5408,6 +5425,12 @@
+   char name[64];
+   snd_ctl_t *chandle;
+ 
++  if ( nDevices == device ) {
++      sprintf( name, "default" );
++      goto foundDevice;
++  }
++  nDevices++;
++
+   // Count cards and devices
+   card = -1;
+   snd_card_next( &card );

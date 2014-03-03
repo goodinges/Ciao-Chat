@@ -1,0 +1,1488 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Skype.Video</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Skype-module.html">Module&nbsp;Skype</a> ::
+        Class&nbsp;Video
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Video</h1><p class="nomargin-top"><span class="codelink"><a href="Skype-pysrc.html#Video">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+        
+              |        
+<a href="skypekit.Cached-class.html">skypekit.Cached</a> --+    
+                  |    
+    <a href="skypekit.Object-class.html">skypekit.Object</a> --+
+                      |
+                     <strong class="uidshort">Video</strong>
+</pre>
+
+<hr />
+<p>This class contains basic video control functionality for live 
+  conversations with video. Basically, Video objects represent specific 
+  Participant's video state in a live Conversation. The Video class can 
+  represent both local (outgoing) and remote (incoming) video streams. Note
+  that as of SkypeKit SDK version 3.2, this class no longer handles video 
+  rendering in the UI. Currently available SkypeKit runtimes do not support
+  multi-party video. The API however is designed with future compatibility 
+  in mind, so the Video class is attached to Participant class rather than 
+  Conversation class. Once multi-party video will become available for 
+  SkypeKit, the logic should go like this:</p>
+  <p>Let there be 4-way live conversation C and participants P1, P2, P3 and
+  P4. P1 is the local user. Remote participants P2 and P3 are capable of 
+  sending video. Remote user P4 is not capable of sending video. You would 
+  then end up with 4 video objects: V1, V2, V3 and V0.</p>
+  <ul>
+    <li>
+      C-&gt;P1-&gt;V1-&gt; outgoing video stream
+    </li>
+    <li>
+      C-&gt;P2-&gt;V2-&gt; incoming video stream 1
+    </li>
+    <li>
+      C-&gt;P3-&gt;V3-&gt; incoming video stream 2
+    </li>
+    <li>
+      C-&gt;P4-&gt; no video object as participant P4 does not advertise 
+      supporting video
+    </li>
+    <li>
+      V0-&gt; local webcam preview - this is not attached to any particular
+      conversation, however the corresponding video object can be retrieved
+      with Skype::GetPreviewVideo method.
+    </li>
+  </ul>
+  <p>As getting from a live conversation to running video streams involves 
+  three classes, it can be somewhat less than obvious. The basic state 
+  transition logic goes like this:</p>
+  <p>You start out with a Conversation, that suddenly becomes live</p>
+  <p>CONVERSATION::LOCAL_LIVESTATUS = IM_LIVE At this point you have access
+  to participant list of that conversation. The next step will be to catch 
+  Partcipant property changes for PARTICIPANT::VIDEO_STATUS to see if any 
+  of the people in conversation have Video available. Note that you should 
+  not make assumptions on when this availability happens. Remote users may 
+  switch their video on-off as they please.</p>
+  <p>PARTICIPANT::VIDEO_STATUS = VIDEO_AVAILABLE If you get to 
+  VIDEO_AVAILABLE (not necessarily for all Participants), you can retrieve 
+  Video object, with Participant::GetVideo method.</p>
+  <p>Now you will need to handle Video::STATUS property changes. In case of
+  successful video call, the sequence of Video::STATUS and 
+  Participant::VIDEO_STATUS changes for each Participant and Video object 
+  should look like this:</p>
+  <ul>
+    <li>
+      Video::STATUS = AVAILABLE
+    </li>
+    <li>
+      Video::STATUS = STARTING
+    </li>
+    <li>
+      Video::STATUS = CHECKING_SUBSCRIPTION
+    </li>
+    <li>
+      Video::STATUS = STARTING
+    </li>
+  </ul>
+  <p>Participant::VIDEO_STATUS = VIDEO_CONNECTING</p>
+  <ul>
+    <li>
+      Video::STATUS = RUNNING
+    </li>
+    <li>
+      Participant::VIDEO_STATUS = STREAMING
+    </li>
+  </ul>
+  <p>Both Video::STATUS == RUNNING and Participant::VIDEO_STATUS == 
+  STREAMING are indicative that the video for that particular participant 
+  is up and running, and your UI should update itself accordingly.</p>
+  <p>NB! Note that it is not enough to check for Video::STATUS property 
+  updates. By the time you obtain the Video object in your client, it may 
+  already it may already have progressed to a further status. You should 
+  always check the status property immediately after obtaining the Video 
+  object.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#_sk_init_" class="summary-sig-name">_sk_init_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">object_id</span>,
+        <span class="summary-sig-arg">transport</span>)</span><br />
+      actual constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video._sk_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnPropertyChange"></a><span class="summary-sig-name">OnPropertyChange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">property_name</span>)</span><br />
+      notifies from a property change</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.OnPropertyChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#SetScreen" class="summary-sig-name">SetScreen</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">windowh</span>)</span><br />
+      This is a legacy method, used in earlier version of desktop video, 
+      for passing window handles from the UI to the rendering engine in the
+      runtime.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.SetScreen">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#Start" class="summary-sig-name">Start</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      This method starts either video send or video receive, depending on 
+      whether the video object is sender or receiver.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.Start">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#Stop" class="summary-sig-name">Stop</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      This method stops either video send or video receive, depending on 
+      whether the video object is sender or receiver.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.Stop">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#SubmitCaptureRequest" class="summary-sig-name">SubmitCaptureRequest</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      This method has no known effect in current version.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.SubmitCaptureRequest">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#OnCaptureRequestCompleted" class="summary-sig-name">OnCaptureRequestCompleted</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">request_id</span>,
+        <span class="summary-sig-arg">is_successful</span>,
+        <span class="summary-sig-arg">image</span>,
+        <span class="summary-sig-arg">width</span>,
+        <span class="summary-sig-arg">height</span>)</span><br />
+      This method has no effect in current version.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.OnCaptureRequestCompleted">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#SetScreenCaptureRectangle" class="summary-sig-name">SetScreenCaptureRectangle</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x0</span>,
+        <span class="summary-sig-arg">y0</span>,
+        <span class="summary-sig-arg">width</span>,
+        <span class="summary-sig-arg">height</span>,
+        <span class="summary-sig-arg">monitor_number</span>=<span class="summary-sig-default">0</span>,
+        <span class="summary-sig-arg">window_handle</span>=<span class="summary-sig-default">0</span>)</span><br />
+      This method has no known effect in current version.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.SetScreenCaptureRectangle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#SetRenderRectangle" class="summary-sig-name">SetRenderRectangle</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">x0</span>,
+        <span class="summary-sig-arg">y0</span>,
+        <span class="summary-sig-arg">width</span>,
+        <span class="summary-sig-arg">height</span>)</span><br />
+      Sets video render rectangle co-ordinates, relative to upper left 
+      corner of the rendering window's client area (there us no need to 
+      compensate for the title bar area or window borders).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.SetRenderRectangle">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#SetRemoteRendererId" class="summary-sig-name">SetRemoteRendererId</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">id</span>)</span><br />
+      This method is specific to working with desktop video runtimes.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.SetRemoteRendererId">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#SelectVideoSource" class="summary-sig-name">SelectVideoSource</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">media_type</span>,
+        <span class="summary-sig-arg">webcam_name</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">device_path</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">update_setup</span>=<span class="summary-sig-default">False</span>)</span><br />
+      This method has no effect in current version.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.SelectVideoSource">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Video-class.html#GetCurrentVideoDevice" class="summary-sig-name">GetCurrentVideoDevice</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      No description available.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.GetCurrentVideoDevice">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#multiget">multiget</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__copy__">__copy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propid"></a><span class="summary-sig-name">propid</span>(<span class="summary-sig-arg">propname</span>)</span><br />
+      convert a property name to the enum of the property</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Video.propid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__new__">__new__</a></code>,
+      <code><a href="skypekit.Cached-class.html#sk_exists">sk_exists</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="event_handlers"></a><span class="summary-name">event_handlers</span> = <code title="{2: '_sk_on_capture_request_completed'}"><code class="variable-group">{</code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk_on_capture_request_completed</code><code class="variable-quote">'</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Video-class.html#propid2label" class="summary-name">propid2label</a> = <code title="{130: 'status',
+ 131: 'error',
+ 132: 'debuginfo',
+ 133: 'dimensions',
+ 134: 'media_type',
+ 1104: 'convo_id',
+ 1105: 'device_path'}"><code class="variable-group">{</code>130<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">status</code><code class="variable-quote">'</code><code class="variable-op">, </code>131<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">error</code><code class="variable-quote">'</code><code class="variable-op">, </code>132<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">debuginfo</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="module_id"></a><span class="summary-name">module_id</span> = <code title="11">11</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Video-class.html#STATUS" class="summary-name">STATUS</a> = <code title="{0: 'NOT_AVAILABLE',
+ 1: 'AVAILABLE',
+ 2: 'STARTING',
+ 3: 'REJECTED',
+ 4: 'RUNNING',
+ 5: 'STOPPING',
+ 6: 'PAUSED',
+ 7: 'NOT_STARTED',
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NOT_AVAILABLE</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">AVAILABLE</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">STARTING</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-ellipsis">...</code></code><br />
+      NOT_AVAILABLE
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Video-class.html#MEDIATYPE" class="summary-name">MEDIATYPE</a> = <code title="{0: 'MEDIA_VIDEO',
+ 1: 'MEDIA_SCREENSHARING',
+ 'MEDIA_SCREENSHARING': 1,
+ 'MEDIA_VIDEO': 0}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">MEDIA_VIDEO</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">MEDIA_SCREENSHARING</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-quote">'</code><code class="variable-string">MEDI</code><code class="variable-ellipsis">...</code></code><br />
+      MEDIA_SCREENSHARING
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Video-class.html#VIDEO_DEVICE_CAPABILITY" class="summary-name">VIDEO_DEVICE_CAPABILITY</a> = <code title="{0: 'VIDEOCAP_HQ_CAPABLE',
+ 1: 'VIDEOCAP_HQ_CERTIFIED',
+ 2: 'VIDEOCAP_REQ_DRIVERUPDATE',
+ 3: 'VIDEOCAP_USB_HIGHSPEED',
+ 'VIDEOCAP_HQ_CAPABLE': 0,
+ 'VIDEOCAP_HQ_CERTIFIED': 1,
+ 'VIDEOCAP_REQ_DRIVERUPDATE': 2,
+ 'VIDEOCAP_USB_HIGHSPEED': 3}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEOCAP_HQ_CAPABLE</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEO</code><code class="variable-ellipsis">...</code></code><br />
+      VIDEOCAP_HQ_CAPABLE
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_STATUS"></a><span class="summary-name">P_STATUS</span> = <code title="130">130</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ERROR"></a><span class="summary-name">P_ERROR</span> = <code title="131">131</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_DEBUGINFO"></a><span class="summary-name">P_DEBUGINFO</span> = <code title="132">132</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_DIMENSIONS"></a><span class="summary-name">P_DIMENSIONS</span> = <code title="133">133</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_MEDIA_TYPE"></a><span class="summary-name">P_MEDIA_TYPE</span> = <code title="134">134</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CONVO_ID"></a><span class="summary-name">P_CONVO_ID</span> = <code title="1104">1104</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_DEVICE_PATH"></a><span class="summary-name">P_DEVICE_PATH</span> = <code title="1105">1105</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_VIDEO_DEVICE"></a><span class="summary-name">SETUPKEY_VIDEO_DEVICE</span> = <code title="'Lib/Video/Device'"><code class="variable-quote">'</code><code class="variable-string">Lib/Video/Device</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_VIDEO_DEVICE_PATH"></a><span class="summary-name">SETUPKEY_VIDEO_DEVICE_PATH</span> = <code title="'Lib/Video/DevicePath'"><code class="variable-quote">'</code><code class="variable-string">Lib/Video/DevicePath</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_VIDEO_AUTOSEND"></a><span class="summary-name">SETUPKEY_VIDEO_AUTOSEND</span> = <code title="'Lib/Video/AutoSend'"><code class="variable-quote">'</code><code class="variable-string">Lib/Video/AutoSend</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_VIDEO_DISABLE"></a><span class="summary-name">SETUPKEY_VIDEO_DISABLE</span> = <code title="'*Lib/Video/Disable'"><code class="variable-quote">'</code><code class="variable-string">*Lib/Video/Disable</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_VIDEO_RECVPOLICY"></a><span class="summary-name">SETUPKEY_VIDEO_RECVPOLICY</span> = <code title="'Lib/Video/RecvPolicy'"><code class="variable-quote">'</code><code class="variable-string">Lib/Video/RecvPolicy</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_VIDEO_ADVERTPOLICY"></a><span class="summary-name">SETUPKEY_VIDEO_ADVERTPOLICY</span> = <code title="'Lib/Video/AdvertPolicy'"><code class="variable-quote">'</code><code class="variable-string">Lib/Video/AdvertPolicy</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#rwlock">rwlock</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#properties">properties</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Video-class.html#status" class="summary-name">status</a><br />
+      Video::STATUS
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Video-class.html#error" class="summary-name">error</a><br />
+      'errorcode errortext'
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Video-class.html#debuginfo" class="summary-name">debuginfo</a><br />
+      space-separated string of tokens
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Video-class.html#dimensions" class="summary-name">dimensions</a><br />
+      This property does not currently work, always containing an empty 
+      string.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Video-class.html#media_type" class="summary-name">media_type</a><br />
+      Indicates whether the video object is streaming webcam video or 
+      screensharing session, values: MEDIA_SCREENSHARING, MEDIA_VIDEO
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Video-class.html#convo_id" class="summary-name">convo_id</a><br />
+      conference id to be able to identify remote/local video in the same 
+      call
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Video-class.html#device_path" class="summary-name">device_path</a><br />
+      device path used by video object
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="_sk_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_sk_init_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">object_id</span>,
+        <span class="sig-arg">transport</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video._sk_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>actual constructor</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="skypekit.Object-class.html#_sk_init_">skypekit.Object._sk_init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetScreen"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetScreen</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">windowh</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video.SetScreen">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This is a legacy method, used in earlier version of desktop video, for
+  passing window handles from the UI to the rendering engine in the 
+  runtime. In current version of desktop video, the rendering takes place 
+  in the client. The video objects now need to be associated not with a 
+  specific window, but rather with an IPC channel that the Video object 
+  sends decoded video frames from the runtime to the client UI. See 
+  Video::SetRemoteRendererId for more information.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>windowh</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Start"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Start</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video.Start">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method starts either video send or video receive, depending on 
+  whether the video object is sender or receiver. In case of desktop video,
+  the receiver side needs to instantiate a renderer object and associate it
+  with the receiveing video (Video::SetRemoteRendererId).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Stop"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Stop</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video.Stop">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method stops either video send or video receive, depending on 
+  whether the video object is sender or receiver. In case of desktop video,
+  the receiver side needs to dis-associate the video object from the 
+  renderer, by calling Video::SetRemoteRendererId(0).</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SubmitCaptureRequest"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SubmitCaptureRequest</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video.SubmitCaptureRequest">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method has no known effect in current version.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>ret</b>
+    </li>
+    <li>
+      <b>request_id</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="OnCaptureRequestCompleted"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OnCaptureRequestCompleted</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">request_id</span>,
+        <span class="sig-arg">is_successful</span>,
+        <span class="sig-arg">image</span>,
+        <span class="sig-arg">width</span>,
+        <span class="sig-arg">height</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video.OnCaptureRequestCompleted">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method has no effect in current version.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>request_id</b>
+    </li>
+    <li>
+      <b>is_successful</b>
+    </li>
+    <li>
+      <b>image</b>
+    </li>
+    <li>
+      <b>width</b>
+    </li>
+    <li>
+      <b>height</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetScreenCaptureRectangle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetScreenCaptureRectangle</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x0</span>,
+        <span class="sig-arg">y0</span>,
+        <span class="sig-arg">width</span>,
+        <span class="sig-arg">height</span>,
+        <span class="sig-arg">monitor_number</span>=<span class="sig-default">0</span>,
+        <span class="sig-arg">window_handle</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video.SetScreenCaptureRectangle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method has no known effect in current version.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>x0</b>
+    </li>
+    <li>
+      <b>y0</b>
+    </li>
+    <li>
+      <b>width</b>
+    </li>
+    <li>
+      <b>height</b>
+    </li>
+    <li>
+      <b>monitor_number</b>
+    </li>
+    <li>
+      <b>window_handle</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetRenderRectangle"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetRenderRectangle</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">x0</span>,
+        <span class="sig-arg">y0</span>,
+        <span class="sig-arg">width</span>,
+        <span class="sig-arg">height</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video.SetRenderRectangle">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets video render rectangle co-ordinates, relative to upper left 
+  corner of the rendering window's client area (there us no need to 
+  compensate for the title bar area or window borders). Note that the 
+  rendering rectangle does not get automatically updated after video window
+  resize occurs. You will need to catch the resize events and update the 
+  rendering rectangle according to the new size of the video window.</p>
+  <p>NB! Currently, when the updating the render rectangle to the new size 
+  of the video window, you will also need to call Video class SetScreen 
+  method - before SetRenderRectangle.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>x0</b>
+    </li>
+    <li>
+      <b>y0</b>
+    </li>
+    <li>
+      <b>width</b>
+    </li>
+    <li>
+      <b>height</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetRemoteRendererId"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetRemoteRendererId</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">id</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video.SetRemoteRendererId">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method is specific to working with desktop video runtimes. In 
+  case of desktop video, this method associates a Video object with a 
+  rendering object. Once this association is in place, the Video object 
+  will start sending decoded video frames to the renderer object, over 
+  shared memory IPC transport. The renderer then periodically reads the 
+  shared memory buffer and draws bitmaps on the screen.</p>
+  <p>The &quot;remote renderer ID&quot; value you are expected to pass in 
+  this method comes from the renderer. The renderer class is normally 
+  implemented by you (for a specific GUI framework). However, the shared 
+  memory transport mechanism, for receiving decoded frames, is independant 
+  of GUI framework and are provided with the SDK for all three supporeted 
+  operating systems.</p>
+  <p>Your renderer class can include instance of the IPC transport as 
+  VideoTransportClient &lt;WinShm&gt; ipc or VideoTransportClient 
+  &lt;PosixShm&gt; ipc; The ipc object then exposes ipc.key() function that
+  returns the IPC channel ID. This ID can then be passed to the 
+  Video::SetRemoteRendererId method. A reference implementation of desktop 
+  video is included in the SDK (examples/cpp/qt_videocalls).</p>
+  <p>When the incoming video stream stops (or rendering is stopped by the 
+  user), your client should explicitly stop the frame transport by calling 
+  Video::SetRemoteRendererId(0).</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>id</b> - IPC channel ID retrieved from the shared memory transport
+      class (see ipc/cpp/VideoBuffers in the SDK).
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SelectVideoSource"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SelectVideoSource</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">media_type</span>,
+        <span class="sig-arg">webcam_name</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">device_path</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">update_setup</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video.SelectVideoSource">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method has no effect in current version.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>media_type</b>
+    </li>
+    <li>
+      <b>webcam_name</b>
+    </li>
+    <li>
+      <b>device_path</b>
+    </li>
+    <li>
+      <b>update_setup</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetCurrentVideoDevice"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetCurrentVideoDevice</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Video.GetCurrentVideoDevice">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>No description available.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>mediatype</b>
+    </li>
+    <li>
+      <b>device_name</b>
+    </li>
+    <li>
+      <b>device_path</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="propid2label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">propid2label</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>130<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">status</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 131<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">error</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 132<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">debuginfo</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 133<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">dimensions</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 134<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">media_type</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1104<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">convo_id</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1105<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">device_path</code><code class="variable-quote">'</code><code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">STATUS</h3>
+  <ul>
+    <li>
+      NOT_AVAILABLE
+    </li>
+    <li>
+      AVAILABLE
+    </li>
+    <li>
+      STARTING
+    </li>
+    <li>
+      REJECTED
+    </li>
+    <li>
+      RUNNING
+    </li>
+    <li>
+      STOPPING
+    </li>
+    <li>
+      PAUSED
+    </li>
+    <li>
+      NOT_STARTED
+    </li>
+    <li>
+      HINT_IS_VIDEOCALL_RECEIVED
+    </li>
+    <li>
+      UNKNOWN
+    </li>
+    <li>
+      RENDERING
+    </li>
+    <li>
+      CHECKING_SUBSCRIPTION
+    </li>
+    <li>
+      SWITCHING_DEVICE
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NOT_AVAILABLE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">AVAILABLE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">STARTING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">REJECTED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RUNNING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">STOPPING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PAUSED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NOT_STARTED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="MEDIATYPE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">MEDIATYPE</h3>
+  <ul>
+    <li>
+      MEDIA_SCREENSHARING
+    </li>
+    <li>
+      MEDIA_VIDEO
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">MEDIA_VIDEO</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">MEDIA_SCREENSHARING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">MEDIA_SCREENSHARING</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">MEDIA_VIDEO</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="VIDEO_DEVICE_CAPABILITY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">VIDEO_DEVICE_CAPABILITY</h3>
+  <ul>
+    <li>
+      VIDEOCAP_HQ_CAPABLE
+    </li>
+    <li>
+      VIDEOCAP_HQ_CERTIFIED
+    </li>
+    <li>
+      VIDEOCAP_REQ_DRIVERUPDATE
+    </li>
+    <li>
+      VIDEOCAP_USB_HIGHSPEED
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEOCAP_HQ_CAPABLE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEOCAP_HQ_CERTIFIED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEOCAP_REQ_DRIVERUPDATE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VIDEOCAP_USB_HIGHSPEED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">VIDEOCAP_HQ_CAPABLE</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">VIDEOCAP_HQ_CERTIFIED</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">VIDEOCAP_REQ_DRIVERUPDATE</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">VIDEOCAP_USB_HIGHSPEED</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Property Details</span></td>
+</tr>
+</table>
+<a name="status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">status</h3>
+  <p>Video::STATUS</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Video-class.html#_sk_get_status" class="summary-sig-name" onclick="show_private();">_sk_get_status</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Video::STATUS
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="error"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">error</h3>
+  <p>'errorcode errortext'</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Video-class.html#_sk_get_error" class="summary-sig-name" onclick="show_private();">_sk_get_error</a>(<span class="summary-sig-arg">self</span>)</span>
+        - 'errorcode errortext'
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="debuginfo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">debuginfo</h3>
+  <p>space-separated string of tokens</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Video-class.html#_sk_get_debuginfo" class="summary-sig-name" onclick="show_private();">_sk_get_debuginfo</a>(<span class="summary-sig-arg">self</span>)</span>
+        - space-separated string of tokens
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="dimensions"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">dimensions</h3>
+  <p>This property does not currently work, always containing an empty 
+  string. For desktop video, you can get the frame dimensions from the 
+  video frame buffers API instead - the buffer struct retrieved with 
+  ipc.getFrame() or ipc.getNewFrame() has width and height fields, which 
+  you can then use in your UI. With RTP video solutions, you already have 
+  the frame sizes in your videohost code. Communicating these to the UI 
+  process is currently up to you.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Video-class.html#_sk_get_dimensions" class="summary-sig-name" onclick="show_private();">_sk_get_dimensions</a>(<span class="summary-sig-arg">self</span>)</span>
+        - This property does not currently work, always containing an empty string.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="media_type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">media_type</h3>
+  <p>Indicates whether the video object is streaming webcam video or 
+  screensharing session, values: MEDIA_SCREENSHARING, MEDIA_VIDEO</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Video-class.html#_sk_get_media_type" class="summary-sig-name" onclick="show_private();">_sk_get_media_type</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Indicates whether the video object is streaming webcam video or 
+screensharing session, values: MEDIA_SCREENSHARING, MEDIA_VIDEO
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="convo_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">convo_id</h3>
+  <p>conference id to be able to identify remote/local video in the same 
+  call</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Video-class.html#_sk_get_convo_id" class="summary-sig-name" onclick="show_private();">_sk_get_convo_id</a>(<span class="summary-sig-arg">self</span>)</span>
+        - conference id to be able to identify remote/local video in the same call
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="device_path"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">device_path</h3>
+  <p>device path used by video object</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Video-class.html#_sk_get_device_path" class="summary-sig-name" onclick="show_private();">_sk_get_device_path</a>(<span class="summary-sig-arg">self</span>)</span>
+        - device path used by video object
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:40 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

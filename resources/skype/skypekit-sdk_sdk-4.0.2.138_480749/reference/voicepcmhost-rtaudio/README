@@ -1,0 +1,9 @@
+Uncompress rtaudio-4.0.6.tar.gz into current directory, so it will be located in rtaudio-4.0.6 subdirectory and run "make PCMHOST=rtaudio" from interfaces/pcm directory of sid.
+
+Building:
+make - Build 
+build options: 
+	TARGET_ARCH=(default i686, see sid/buildfiles/arch directory for other TARGET_ARCH options) - build for specific architecture
+	verbose=(0 | 1, default 0) - be verbose
+make clean - clean build
+

@@ -1,0 +1,1482 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Skype.Sms</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Skype-module.html">Module&nbsp;Skype</a> ::
+        Class&nbsp;Sms
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Sms</h1><p class="nomargin-top"><span class="codelink"><a href="Skype-pysrc.html#Sms">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+        
+              |        
+<a href="skypekit.Cached-class.html">skypekit.Cached</a> --+    
+                  |    
+    <a href="skypekit.Object-class.html">skypekit.Object</a> --+
+                      |
+                     <strong class="uidshort">Sms</strong>
+</pre>
+
+<hr />
+<p>Wrapper class that includes SMS-specific properties and methods, such 
+  as P_BODY and GetTargetPrice. Instantiate SMS instances using 
+  Skype::CreateOutgoingSms; post SMS messages to a Conversation using 
+  Conversation::PostSMS.</p>
+  <p>Each SMS can have multiple targets (normalized phone numbers). Note 
+  that in a Conversation context, every SMS instance has a corresponding 
+  Message instance. Once you've posted an SMS, you can retrieve its 
+  corresponding Message instance using Sms::GetPropChatmsgId. That Message 
+  instance's P_BODY_XML property contains the SMS message data, such as 
+  price, target phone number(s), failure codes, and so forth, which you can
+  parsed out and display in the UI. To put it another way, the object chain
+  goes like this:</p>
+  <p>:</p>
+<pre class="literalblock">
+ Conversation-&gt;Message-&gt;SMS 
+</pre>
+  <p>Note that SkypeKit SDK supports outgoing SMS messages only. SkypeKit 
+  clients, even when logged in with accounts that have SkypeIn numbers, 
+  cannot receive SMS messages.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_init_" class="summary-sig-name">_sk_init_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">object_id</span>,
+        <span class="summary-sig-arg">transport</span>)</span><br />
+      actual constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Sms._sk_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Sms-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Sms.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnPropertyChange"></a><span class="summary-sig-name">OnPropertyChange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">property_name</span>)</span><br />
+      notifies from a property change</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Sms.OnPropertyChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Sms-class.html#GetTargetStatus" class="summary-sig-name">GetTargetStatus</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">target</span>)</span><br />
+      Retrieves the send status of this SMS to a particular recipient 
+      (P_TARGET_STATUSES) either prior to or after invoking 
+      Conversation::PostSMS.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Sms.GetTargetStatus">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Sms-class.html#GetTargetPrice" class="summary-sig-name">GetTargetPrice</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">target</span>)</span><br />
+      Retrieves the amount of Skype credit necessary to send the SMS to a 
+      particular recipient.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Sms.GetTargetPrice">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Sms-class.html#SetTargets" class="summary-sig-name">SetTargets</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">numbers</span>)</span><br />
+      Sets the recipient(s) of this SMS.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Sms.SetTargets">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Sms-class.html#SetBody" class="summary-sig-name">SetBody</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">text</span>)</span><br />
+      -The- method for setting the body text of this SMS.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Sms.SetBody">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Sms-class.html#GetBodyChunks" class="summary-sig-name">GetBodyChunks</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Retrieves string list of SMS text chunks in first argument, while the
+      second argument contains the number of available characters until 
+      creation of the next chunk becomes necessary.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Sms.GetBodyChunks">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#multiget">multiget</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__copy__">__copy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propid"></a><span class="summary-sig-name">propid</span>(<span class="summary-sig-arg">propname</span>)</span><br />
+      convert a property name to the enum of the property</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Sms.propid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__new__">__new__</a></code>,
+      <code><a href="skypekit.Cached-class.html#sk_exists">sk_exists</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="event_handlers"></a><span class="summary-name">event_handlers</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#propid2label" class="summary-name">propid2label</a> = <code title="{48: 'is_failed_unseen',
+ 49: 'price_precision',
+ 190: 'type',
+ 191: 'status',
+ 192: 'failurereason',
+ 193: 'price',
+ 194: 'price_currency',
+ 195: 'target_numbers',
+..."><code class="variable-group">{</code>48<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">is_failed_unseen</code><code class="variable-quote">'</code><code class="variable-op">, </code>49<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">price_precision</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="module_id"></a><span class="summary-name">module_id</span> = <code title="12">12</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#TYPE" class="summary-name">TYPE</a> = <code title="{2: 'OUTGOING',
+ 3: 'CONFIRMATION_CODE_REQUEST',
+ 4: 'CONFIRMATION_CODE_SUBMIT',
+ 'CONFIRMATION_CODE_REQUEST': 3,
+ 'CONFIRMATION_CODE_SUBMIT': 4,
+ 'OUTGOING': 2}"><code class="variable-group">{</code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">OUTGOING</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONFIRMATION_CODE_REQUEST</code><code class="variable-quote">'</code><code class="variable-op">, </code>4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CON</code><code class="variable-ellipsis">...</code></code><br />
+      OUTGOING - a normal outgoing SMS message
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#STATUS" class="summary-name">STATUS</a> = <code title="{3: 'COMPOSING',
+ 4: 'SENDING_TO_SERVER',
+ 5: 'SENT_TO_SERVER',
+ 6: 'DELIVERED',
+ 7: 'SOME_TARGETS_FAILED',
+ 8: 'FAILED',
+ 'COMPOSING': 3,
+ 'DELIVERED': 6,
+..."><code class="variable-group">{</code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">COMPOSING</code><code class="variable-quote">'</code><code class="variable-op">, </code>4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SENDING_TO_SERVER</code><code class="variable-quote">'</code><code class="variable-op">, </code>5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SENT_TO_</code><code class="variable-ellipsis">...</code></code><br />
+      COMPOSING
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#FAILUREREASON" class="summary-name">FAILUREREASON</a> = <code title="{1: 'MISC_ERROR',
+ 2: 'SERVER_CONNECT_FAILED',
+ 3: 'NO_SMS_CAPABILITY',
+ 4: 'INSUFFICIENT_FUNDS',
+ 5: 'INVALID_CONFIRMATION_CODE',
+ 6: 'USER_BLOCKED',
+ 7: 'IP_BLOCKED',
+ 8: 'NODE_BLOCKED',
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">MISC_ERROR</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SERVER_CONNECT_FAILED</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code><br />
+      MISC_ERROR
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#TARGETSTATUS" class="summary-name">TARGETSTATUS</a> = <code title="{1: 'TARGET_ANALYZING',
+ 2: 'TARGET_UNDEFINED',
+ 3: 'TARGET_ACCEPTABLE',
+ 4: 'TARGET_NOT_ROUTABLE',
+ 5: 'TARGET_DELIVERY_PENDING',
+ 6: 'TARGET_DELIVERY_SUCCESSFUL',
+ 7: 'TARGET_DELIVERY_FAILED',
+ 'TARGET_ACCEPTABLE': 3,
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TARGET_ANALYZING</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TARGET_UNDEFINED</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code><br />
+      TARGET_ANALYZING
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#SETBODYRESULT" class="summary-name">SETBODYRESULT</a> = <code title="{0: 'BODY_INVALID',
+ 1: 'BODY_TRUNCATED',
+ 2: 'BODY_OK',
+ 3: 'BODY_LASTCHAR_IGNORED',
+ 'BODY_INVALID': 0,
+ 'BODY_LASTCHAR_IGNORED': 3,
+ 'BODY_OK': 2,
+ 'BODY_TRUNCATED': 1}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BODY_INVALID</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BODY_TRUNCATED</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">B</code><code class="variable-ellipsis">...</code></code><br />
+      BODY_INVALID - body not set.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#CONFIRM_TYPE" class="summary-name">CONFIRM_TYPE</a> = <code title="{1: 'ID_SMS',
+ 2: 'ID_MOBILE',
+ 3: 'ID_SKYPEIN',
+ 'ID_MOBILE': 2,
+ 'ID_SKYPEIN': 3,
+ 'ID_SMS': 1}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ID_SMS</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ID_MOBILE</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ID_SKYPEIN</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code><br />
+      ID_SMS - Confirm mobile number as SMS sender number
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TYPE"></a><span class="summary-name">P_TYPE</span> = <code title="190">190</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_STATUS"></a><span class="summary-name">P_STATUS</span> = <code title="191">191</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_FAILUREREASON"></a><span class="summary-name">P_FAILUREREASON</span> = <code title="192">192</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_IS_FAILED_UNSEEN"></a><span class="summary-name">P_IS_FAILED_UNSEEN</span> = <code title="48">48</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TIMESTAMP"></a><span class="summary-name">P_TIMESTAMP</span> = <code title="198">198</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PRICE"></a><span class="summary-name">P_PRICE</span> = <code title="193">193</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PRICE_PRECISION"></a><span class="summary-name">P_PRICE_PRECISION</span> = <code title="49">49</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PRICE_CURRENCY"></a><span class="summary-name">P_PRICE_CURRENCY</span> = <code title="194">194</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_REPLY_TO_NUMBER"></a><span class="summary-name">P_REPLY_TO_NUMBER</span> = <code title="199">199</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TARGET_NUMBERS"></a><span class="summary-name">P_TARGET_NUMBERS</span> = <code title="195">195</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TARGET_STATUSES"></a><span class="summary-name">P_TARGET_STATUSES</span> = <code title="196">196</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_BODY"></a><span class="summary-name">P_BODY</span> = <code title="197">197</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CHATMSG_ID"></a><span class="summary-name">P_CHATMSG_ID</span> = <code title="840">840</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#rwlock">rwlock</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#properties">properties</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#type" class="summary-name">type</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#status" class="summary-name">status</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#failurereason" class="summary-name">failurereason</a><br />
+      Set asynchronously and meaningful only after invoking 
+      Conversation::PostSMS and detecting Sms::STATUS of 
+      SOME_TARGETS_FAILED or FAILED.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#is_failed_unseen" class="summary-name">is_failed_unseen</a><br />
+      set to 1 when status goes to FAILED.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#timestamp" class="summary-name">timestamp</a><br />
+      unix timestamp of message submission
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#price" class="summary-name">price</a><br />
+      The total price of sending this SMS message (sum of the individual 
+      prices to send to each recipient).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#price_precision" class="summary-name">price_precision</a><br />
+      The decimal precision of the SMS price values, both individual and 
+      total.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#price_currency" class="summary-name">price_currency</a><br />
+      should be same as account currency at the time of composing/sending
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#reply_to_number" class="summary-name">reply_to_number</a><br />
+      number that should receive the replies
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#target_numbers" class="summary-name">target_numbers</a><br />
+      space-separated normalised pstn numbers
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#target_statuses" class="summary-name">target_statuses</a><br />
+      binary blob.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#body" class="summary-name">body</a><br />
+      actual payload
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Sms-class.html#chatmsg_id" class="summary-name">chatmsg_id</a><br />
+      reference to Message
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="_sk_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_sk_init_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">object_id</span>,
+        <span class="sig-arg">transport</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Sms._sk_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>actual constructor</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="skypekit.Object-class.html#_sk_init_">skypekit.Object._sk_init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Sms.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetTargetStatus"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetTargetStatus</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">target</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Sms.GetTargetStatus">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieves the send status of this SMS to a particular recipient 
+  (P_TARGET_STATUSES) either prior to or after invoking 
+  Conversation::PostSMS.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>target</b> - The normalized phone number of the target recipient.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>status</b> - The send status of the target recipient, for example,
+      TARGET_ANALYZING, TARGET_DELIVERY_PENDING, 
+      TARGET_DELIVERY_SUCCESSFUL, TARGET_DELIVERY_FAILED, and so forth. 
+      TARGET_UNDEFINED implies that the specified target is not a recipient
+      of this SMS.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetTargetPrice"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetTargetPrice</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">target</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Sms.GetTargetPrice">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieves the amount of Skype credit necessary to send the SMS to a 
+  particular recipient. Defaults to -1 on instantiation and set only when 
+  that recipient's status reflects TARGET_ACCEPTABLE. Use Sms::GetPropPrice
+  to retrieve the total cost of this SMS.</p>
+  <p>Note that the target price is an integer value. Calculate the actual 
+  price (in units specified by P_PRICE_CURRENCY) using P_PRICE_PRECISION 
+  as: :</p>
+<pre class="literalblock">
+ actualTargetPrice = targetPrice / 10^pricePrecision; 
+</pre>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>target</b> - The normalized phone number of the target recipient.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>price</b> - The price of sending this SMS message to the target 
+      recipient.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetTargets"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetTargets</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">numbers</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Sms.SetTargets">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets the recipient(s) of this SMS. Note that each invocation replaces 
+  the target list and re-calculates all prices - they are not additive!</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>numbers</b> - Normalized phone number(s) of the intended 
+      recipient(s).
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>success</b> - Set to true if the target list appears to contain 
+      valid, normalized telephone numbers. Note that this check is not very
+      reliable. Actual target validity checking occurs asynchronously in 
+      the background, and manifests itself as a series of 
+      Sms::P_TARGET_STATUSES property change events.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetBody"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetBody</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">text</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Sms.SetBody">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>-The- method for setting the body text of this SMS. While 
+  Conversation::PostSMS does have a body argument, that argument is 
+  currently unused.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>text</b> - Message body text.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b> - Whether the Message body was successfully set and if 
+      not, why not.
+    </li>
+    <li>
+      <b>chunks</b> - The Message body as a list of individual chunks.
+    </li>
+    <li>
+      <b>chars_until_next_chunk</b> - Number of available characters until 
+      creation of the next chunk becomes necessary.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetBodyChunks"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetBodyChunks</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Sms.GetBodyChunks">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieves string list of SMS text chunks in first argument, while the 
+  second argument contains the number of available characters until 
+  creation of the next chunk becomes necessary.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>text_chunks</b> - List of text chunk strings
+    </li>
+    <li>
+      <b>chars_until_next_chunk</b> - Number of available characters until 
+      creation of the next chunk becomes necessary.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="propid2label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">propid2label</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>48<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">is_failed_unseen</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 49<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">price_precision</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 190<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">type</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 191<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">status</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 192<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">failurereason</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 193<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">price</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 194<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">price_currency</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 195<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">target_numbers</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TYPE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TYPE</h3>
+  <ul>
+    <li>
+      OUTGOING - a normal outgoing SMS message
+    </li>
+    <li>
+      CONFIRMATION_CODE_REQUEST - a message requesting a SMS confirmation 
+      code be sent to the number provided
+    </li>
+    <li>
+      CONFIRMATION_CODE_SUBMIT - a message returning the SMS confirmation 
+      code received as a result of a CONFIRMATION_CODE_REQUEST to authorize
+      it
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">OUTGOING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONFIRMATION_CODE_REQUEST</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONFIRMATION_CODE_SUBMIT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CONFIRMATION_CODE_REQUEST</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CONFIRMATION_CODE_SUBMIT</code><code class="variable-quote">'</code><code class="variable-op">: </code>4<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">OUTGOING</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">STATUS</h3>
+  <ul>
+    <li>
+      COMPOSING
+    </li>
+    <li>
+      SENDING_TO_SERVER
+    </li>
+    <li>
+      SENT_TO_SERVER
+    </li>
+    <li>
+      DELIVERED
+    </li>
+    <li>
+      SOME_TARGETS_FAILED
+    </li>
+    <li>
+      FAILED
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">COMPOSING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SENDING_TO_SERVER</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SENT_TO_SERVER</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DELIVERED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SOME_TARGETS_FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">COMPOSING</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">DELIVERED</code><code class="variable-quote">'</code><code class="variable-op">: </code>6<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="FAILUREREASON"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">FAILUREREASON</h3>
+  <ul>
+    <li>
+      MISC_ERROR
+    </li>
+    <li>
+      SERVER_CONNECT_FAILED
+    </li>
+    <li>
+      NO_SMS_CAPABILITY
+    </li>
+    <li>
+      INSUFFICIENT_FUNDS
+    </li>
+    <li>
+      INVALID_CONFIRMATION_CODE
+    </li>
+    <li>
+      USER_BLOCKED
+    </li>
+    <li>
+      IP_BLOCKED
+    </li>
+    <li>
+      NODE_BLOCKED
+    </li>
+    <li>
+      NO_SENDERID_CAPABILITY
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">MISC_ERROR</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SERVER_CONNECT_FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NO_SMS_CAPABILITY</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INSUFFICIENT_FUNDS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INVALID_CONFIRMATION_CODE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">USER_BLOCKED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">IP_BLOCKED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NODE_BLOCKED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TARGETSTATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TARGETSTATUS</h3>
+  <ul>
+    <li>
+      TARGET_ANALYZING
+    </li>
+    <li>
+      TARGET_UNDEFINED
+    </li>
+    <li>
+      TARGET_ACCEPTABLE
+    </li>
+    <li>
+      TARGET_NOT_ROUTABLE
+    </li>
+    <li>
+      TARGET_DELIVERY_PENDING
+    </li>
+    <li>
+      TARGET_DELIVERY_SUCCESSFUL
+    </li>
+    <li>
+      TARGET_DELIVERY_FAILED
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TARGET_ANALYZING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TARGET_UNDEFINED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TARGET_ACCEPTABLE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TARGET_NOT_ROUTABLE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TARGET_DELIVERY_PENDING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TARGET_DELIVERY_SUCCESSFUL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TARGET_DELIVERY_FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">TARGET_ACCEPTABLE</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SETBODYRESULT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">SETBODYRESULT</h3>
+  <ul>
+    <li>
+      BODY_INVALID - body not set. message status wrong or invalid, or body
+      not valid utf8 string
+    </li>
+    <li>
+      BODY_TRUNCATED - body too long. set, but truncated. 
+      charsUntilNextChunk contains maxChunks value
+    </li>
+    <li>
+      BODY_OK - body was set OK
+    </li>
+    <li>
+      BODY_LASTCHAR_IGNORED - last unicode char was ignored, as some of the
+      text would be deleted due to conversion
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BODY_INVALID</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BODY_TRUNCATED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BODY_OK</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BODY_LASTCHAR_IGNORED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">BODY_INVALID</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">BODY_LASTCHAR_IGNORED</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">BODY_OK</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">BODY_TRUNCATED</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CONFIRM_TYPE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">CONFIRM_TYPE</h3>
+  <ul>
+    <li>
+      ID_SMS - Confirm mobile number as SMS sender number
+    </li>
+    <li>
+      ID_MOBILE - Confirm mobile number as CLI for SkypeOut calls
+    </li>
+    <li>
+      ID_SKYPEIN - unused currently
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ID_SMS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ID_MOBILE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ID_SKYPEIN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ID_MOBILE</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ID_SKYPEIN</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ID_SMS</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Property Details</span></td>
+</tr>
+</table>
+<a name="type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">type</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_type" class="summary-sig-name" onclick="show_private();">_sk_get_type</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">status</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_status" class="summary-sig-name" onclick="show_private();">_sk_get_status</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="failurereason"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">failurereason</h3>
+  <p>Set asynchronously and meaningful only after invoking 
+  Conversation::PostSMS and detecting Sms::STATUS of SOME_TARGETS_FAILED or
+  FAILED.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_failurereason" class="summary-sig-name" onclick="show_private();">_sk_get_failurereason</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Set asynchronously and meaningful only after invoking Conversation::PostSMS
+and detecting Sms::STATUS of SOME_TARGETS_FAILED or FAILED.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="is_failed_unseen"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">is_failed_unseen</h3>
+  <p>set to 1 when status goes to FAILED. use MarkSeen() to clear</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_is_failed_unseen" class="summary-sig-name" onclick="show_private();">_sk_get_is_failed_unseen</a>(<span class="summary-sig-arg">self</span>)</span>
+        - set to 1 when status goes to FAILED.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timestamp</h3>
+  <p>unix timestamp of message submission</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - unix timestamp of message submission
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="price"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">price</h3>
+  <p>The total price of sending this SMS message (sum of the individual 
+  prices to send to each recipient). Defaults to -1 on instantiation and 
+  incremented by the price for each recipient once that recipient's status 
+  reflects TARGET_ACCEPTABLE. Use Sms::GetTargetPrice to retrieve 
+  individual target prices.</p>
+  <p>A value of MAX_UINT indicates that SkypeKit is actively querying 
+  and/or updating the value. Note that P_PRICE is an integer value. 
+  Calculate the actual price (in units specified by P_PRICE_CURRENCY) using
+  P_PRICE_PRECISION as:</p>
+  <p>:</p>
+<pre class="literalblock">
+ actualPrice = price / 10^pricePrecision; 
+</pre>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_price" class="summary-sig-name" onclick="show_private();">_sk_get_price</a>(<span class="summary-sig-arg">self</span>)</span>
+        - The total price of sending this SMS message (sum of the individual prices 
+to send to each recipient).
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="price_precision"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">price_precision</h3>
+  <p>The decimal precision of the SMS price values, both individual and 
+  total. For example, a value of 2 indicates that you should divide the 
+  price (represented as an integer) by 100 (10^2) to obtain the actual 
+  price.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_price_precision" class="summary-sig-name" onclick="show_private();">_sk_get_price_precision</a>(<span class="summary-sig-arg">self</span>)</span>
+        - The decimal precision of the SMS price values, both individual and total.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="price_currency"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">price_currency</h3>
+  <p>should be same as account currency at the time of 
+  composing/sending</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_price_currency" class="summary-sig-name" onclick="show_private();">_sk_get_price_currency</a>(<span class="summary-sig-arg">self</span>)</span>
+        - should be same as account currency at the time of composing/sending
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="reply_to_number"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">reply_to_number</h3>
+  <p>number that should receive the replies</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_reply_to_number" class="summary-sig-name" onclick="show_private();">_sk_get_reply_to_number</a>(<span class="summary-sig-arg">self</span>)</span>
+        - number that should receive the replies
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="target_numbers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">target_numbers</h3>
+  <p>space-separated normalised pstn numbers</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_target_numbers" class="summary-sig-name" onclick="show_private();">_sk_get_target_numbers</a>(<span class="summary-sig-arg">self</span>)</span>
+        - space-separated normalised pstn numbers
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="target_statuses"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">target_statuses</h3>
+  <p>binary blob. track with OnPropertyChange(), access with 
+  GetTargetStatus(target)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_target_statuses" class="summary-sig-name" onclick="show_private();">_sk_get_target_statuses</a>(<span class="summary-sig-arg">self</span>)</span>
+        - binary blob.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="body"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">body</h3>
+  <p>actual payload</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_body" class="summary-sig-name" onclick="show_private();">_sk_get_body</a>(<span class="summary-sig-arg">self</span>)</span>
+        - actual payload
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="chatmsg_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">chatmsg_id</h3>
+  <p>reference to Message</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Sms-class.html#_sk_get_chatmsg_id" class="summary-sig-name" onclick="show_private();">_sk_get_chatmsg_id</a>(<span class="summary-sig-arg">self</span>)</span>
+        - reference to Message
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:40 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

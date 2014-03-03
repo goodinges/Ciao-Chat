@@ -1,0 +1,50 @@
+<project name="SkypekitClient" basedir="." default="main">
+
+    <!-- source locations -->
+    <property name="client.src" location="${basedir}" />
+    <property name="api.src"    location="${basedir}/../api" />
+    <property name="wrapper.dir"    location="${api.src}" />
+    <property name="ipc.src"    location="${basedir}/../../../../ipc/java/" />
+
+    <!-- target directory for building -->
+    <property name="build.dir"   location="${basedir}/bin"/>
+
+    <!-- the main class, that needs to be specified on jar's manifest -->
+    <property name="main-class"  value="com.skype.skypekitclient.SkypekitClient" />
+
+    <!-- the name of the output jar application -->
+    <property name="target.jar" value="skypekitclient.jar" />
+    <property name="wrapper.jar" location="${api.src}/sid-java-wrapper.jar" />
+
+    <path id="project.classpath">
+        <fileset dir="${wrapper.dir}">
+            <include name="*.jar" />
+        </fileset>
+    </path>
+
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile">
+        <mkdir dir="${build.dir}"/>
+        <javac destdir="${build.dir}" includeAntRuntime="false" classpathref="project.classpath">
+            <src path="${client.src}"/>
+        </javac>
+    </target>
+
+    <target name="jar" depends="compile">
+        <jar destfile="${target.jar}" basedir="${build.dir}" level="9">
+            <manifest>
+                <attribute name="Main-Class" value="${main-class}"/>
+                <attribute name="Class-Path" value="${wrapper.jar}"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="clean-build" depends="clean,jar"/>
+
+    <target name="main" depends="clean-build"/>
+
+</project>

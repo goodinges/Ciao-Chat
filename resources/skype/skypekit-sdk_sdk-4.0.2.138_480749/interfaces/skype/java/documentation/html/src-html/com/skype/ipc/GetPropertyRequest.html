@@ -1,0 +1,106 @@
+<HTML>
+<BODY BGCOLOR="white">
+<PRE>
+<FONT color="green">001</FONT>    /**<a name="line.1"></a>
+<FONT color="green">002</FONT>     * Copyright (C) 2010, Skype Limited<a name="line.2"></a>
+<FONT color="green">003</FONT>     *<a name="line.3"></a>
+<FONT color="green">004</FONT>     * All intellectual property rights, including but not limited to copyrights,<a name="line.4"></a>
+<FONT color="green">005</FONT>     * trademarks and patents, as well as know how and trade secrets contained in,<a name="line.5"></a>
+<FONT color="green">006</FONT>     * relating to, or arising from the internet telephony software of<a name="line.6"></a>
+<FONT color="green">007</FONT>     * Skype Limited (including its affiliates, "Skype"), including without<a name="line.7"></a>
+<FONT color="green">008</FONT>     * limitation this source code, Skype API and related material of such<a name="line.8"></a>
+<FONT color="green">009</FONT>     * software proprietary to Skype and/or its licensors ("IP Rights") are and<a name="line.9"></a>
+<FONT color="green">010</FONT>     * shall remain the exclusive property of Skype and/or its licensors.<a name="line.10"></a>
+<FONT color="green">011</FONT>     * The recipient hereby acknowledges and agrees that any unauthorized use of<a name="line.11"></a>
+<FONT color="green">012</FONT>     * the IP Rights is a violation of intellectual property laws.<a name="line.12"></a>
+<FONT color="green">013</FONT>     *<a name="line.13"></a>
+<FONT color="green">014</FONT>     * Skype reserves all rights and may take legal action against infringers of<a name="line.14"></a>
+<FONT color="green">015</FONT>     * IP Rights.<a name="line.15"></a>
+<FONT color="green">016</FONT>     *<a name="line.16"></a>
+<FONT color="green">017</FONT>     * The recipient agrees not to remove, obscure, make illegible or alter any<a name="line.17"></a>
+<FONT color="green">018</FONT>     * notices or indications of the IP Rights and/or Skype's rights and<a name="line.18"></a>
+<FONT color="green">019</FONT>     * ownership thereof.<a name="line.19"></a>
+<FONT color="green">020</FONT>     */<a name="line.20"></a>
+<FONT color="green">021</FONT>    <a name="line.21"></a>
+<FONT color="green">022</FONT>    package com.skype.ipc;<a name="line.22"></a>
+<FONT color="green">023</FONT>    <a name="line.23"></a>
+<FONT color="green">024</FONT>    // G propid modid oid*;<a name="line.24"></a>
+<FONT color="green">025</FONT>    // g (moid (oid (N tag | kind tag value)*)*)* <a name="line.25"></a>
+<FONT color="green">026</FONT>    public class GetPropertyRequest extends Request<a name="line.26"></a>
+<FONT color="green">027</FONT>    {<a name="line.27"></a>
+<FONT color="green">028</FONT>        public GetPropertyRequest(int moduleId, int objectId, int propId)<a name="line.28"></a>
+<FONT color="green">029</FONT>        {<a name="line.29"></a>
+<FONT color="green">030</FONT>            super();<a name="line.30"></a>
+<FONT color="green">031</FONT>            <a name="line.31"></a>
+<FONT color="green">032</FONT>            tokens.write('G');<a name="line.32"></a>
+<FONT color="green">033</FONT>            encodeVaruint(propId);<a name="line.33"></a>
+<FONT color="green">034</FONT>            tokens.write(']');<a name="line.34"></a>
+<FONT color="green">035</FONT>            encodeVaruint(moduleId);<a name="line.35"></a>
+<FONT color="green">036</FONT>            encodeVaruint(objectId);<a name="line.36"></a>
+<FONT color="green">037</FONT>            tokens.write(']');<a name="line.37"></a>
+<FONT color="green">038</FONT>            tokens.write(']');<a name="line.38"></a>
+<FONT color="green">039</FONT>        }<a name="line.39"></a>
+<FONT color="green">040</FONT>    }<a name="line.40"></a>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</PRE>
+</BODY>
+</HTML>

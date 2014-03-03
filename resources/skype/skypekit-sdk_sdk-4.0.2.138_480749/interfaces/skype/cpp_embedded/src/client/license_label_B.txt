@@ -1,0 +1,6 @@
+
+The content of this directory and its subdirectories (unless specified othwerise) is labelled as Platform Reference Source Code.
+
+As per Skype Platform SDK Licence Agreement, chapter 2. You have agreed to:
+
+"install and use the Skype Platform Reference Source Code solely for internal use by your Permitted Users as a reference tool for purposes of developing and testing Platform Products on your behalf, and not for incorporation into or redistribution with your Platform Products;"

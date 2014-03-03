@@ -1,0 +1,17 @@
+[x264enc]
+byte-stream=1
+bframes=0
+b-adapt=0
+cabac=0
+dct8x8=0
+tune=4
+profile=1
+sync-lookahead=0
+rc-lookahead=0
+sliced-threads=true
+pass=5
+option-string=no-force-cfr
+bitrate=200
+
+[rtph264pay]
+config-interval=0

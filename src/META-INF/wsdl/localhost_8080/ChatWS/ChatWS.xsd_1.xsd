@@ -1,0 +1,207 @@
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI at http://jax-ws.dev.java.net. RI's version is Metro/2.1.1-b09 (branches/2.1-6834; 2011-07-16T17:14:48+0000) JAXWS-RI/2.2.5-promoted-b04 JAXWS/2.2. --><xs:schema xmlns:tns="http://Chat/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://Chat/">
+
+<xs:element name="AddContact" type="tns:AddContact"/>
+
+<xs:element name="AddContactResponse" type="tns:AddContactResponse"/>
+
+<xs:element name="InviteFriend" type="tns:InviteFriend"/>
+
+<xs:element name="InviteFriendResponse" type="tns:InviteFriendResponse"/>
+
+<xs:element name="RemoveContact" type="tns:RemoveContact"/>
+
+<xs:element name="RemoveContactResponse" type="tns:RemoveContactResponse"/>
+
+<xs:element name="getContactlist" type="tns:getContactlist"/>
+
+<xs:element name="getContactlistResponse" type="tns:getContactlistResponse"/>
+
+<xs:element name="getIP" type="tns:getIP"/>
+
+<xs:element name="getIPResponse" type="tns:getIPResponse"/>
+
+<xs:element name="getPort" type="tns:getPort"/>
+
+<xs:element name="getPortResponse" type="tns:getPortResponse"/>
+
+<xs:element name="getProfilePicture" type="tns:getProfilePicture"/>
+
+<xs:element name="getProfilePictureResponse" type="tns:getProfilePictureResponse"/>
+
+<xs:element name="hello" type="tns:hello"/>
+
+<xs:element name="helloResponse" type="tns:helloResponse"/>
+
+<xs:element name="requestChat" type="tns:requestChat"/>
+
+<xs:element name="requestChatResponse" type="tns:requestChatResponse"/>
+
+<xs:element name="search" type="tns:search"/>
+
+<xs:element name="searchResponse" type="tns:searchResponse"/>
+
+<xs:element name="sendIP" type="tns:sendIP"/>
+
+<xs:element name="sendPort" type="tns:sendPort"/>
+
+<xs:element name="sendProfilePicture" type="tns:sendProfilePicture"/>
+
+<xs:complexType name="InviteFriend">
+<xs:sequence>
+<xs:element name="UserID" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="InviteFriendResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendPort">
+<xs:sequence>
+<xs:element name="port" type="xs:int"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIP">
+<xs:sequence>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getIPResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getContactlist">
+<xs:sequence>
+<xs:element name="userID" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getContactlistResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:anyType" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="search">
+<xs:sequence>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+<xs:element name="email" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="searchResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RemoveContact">
+<xs:sequence>
+<xs:element name="userID" type="xs:string" minOccurs="0"/>
+<xs:element name="FriendID" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="RemoveContactResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPort">
+<xs:sequence>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getPortResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="hello">
+<xs:sequence>
+<xs:element name="name" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="helloResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="AddContact">
+<xs:sequence>
+<xs:element name="UserID" type="xs:string" minOccurs="0"/>
+<xs:element name="FriendID" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="AddContactResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="sendProfilePicture">
+<xs:sequence>
+<xs:element name="picture" type="xs:byte" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="username" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="requestChat">
+<xs:sequence>
+<xs:element name="ID" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="requestChatResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:inetSocketAddress" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="inetSocketAddress">
+<xs:complexContent>
+<xs:extension base="tns:socketAddress">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+
+<xs:complexType name="socketAddress" abstract="true">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="sendIP">
+<xs:sequence>
+<xs:element name="ip" type="xs:string" minOccurs="0"/>
+<xs:element name="id" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProfilePicture">
+<xs:sequence>
+<xs:element name="userName" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="getProfilePictureResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:byte" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>

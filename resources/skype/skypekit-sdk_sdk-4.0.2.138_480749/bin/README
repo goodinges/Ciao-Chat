@@ -1,0 +1,7 @@
+
+This package contains SkypeKit SDK binaries (runtimes, netlogger binaries and pre-built skypekitclient binary).
+
+For complete list of runtime versions, consult the runtime-versions page on developer.skype.com
+http://developer.skype.com/skypekit/development-guide/skype-kit-runtime-versions
+
+Note that the SkypeKit runtimes are custom built. They will only work with key pairs issued to your developer account.

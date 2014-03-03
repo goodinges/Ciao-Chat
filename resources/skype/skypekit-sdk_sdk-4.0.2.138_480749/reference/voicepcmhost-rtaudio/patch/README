@@ -1,0 +1,3 @@
+
+If you are building your own pcmhost and encountering unstable audio problems (inability to open devices), try to apply the RtAudio-4.0.6-default.patch file.
+

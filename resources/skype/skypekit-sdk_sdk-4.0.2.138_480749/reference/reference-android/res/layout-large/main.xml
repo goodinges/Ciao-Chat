@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="fill_parent">
+	<TableRow>
+
+		<TableLayout android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+			<TableRow>
+				<LinearLayout android:orientation="vertical"
+					android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<TextView android:id="@+id/txtSkype"
+						android:text="SkypeKit Android reference application"
+						android:layout_width="wrap_content" android:layout_height="wrap_content" />
+					<LinearLayout android:orientation="horizontal" android:visibility="gone"
+						android:layout_width="wrap_content" android:layout_height="wrap_content">
+						<Button android:id="@+id/btnQuit" android:layout_width="wrap_content"
+							android:layout_height="wrap_content" android:text="Quit" />
+						<Button android:id="@+id/btnDisconnect" android:layout_width="wrap_content"
+							android:layout_height="wrap_content" android:text="Disconnect" />
+						<Button android:id="@+id/btnStopAVHosts"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:text="Stop AVHosts" />
+						<Button android:id="@+id/btnStopKit" android:layout_width="wrap_content"
+							android:layout_height="wrap_content" android:text="Stop SkypeKit" />
+						<Spinner android:id="@+id/spnRunmode"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:drawSelectorOnTop="true">
+						</Spinner>
+					</LinearLayout>
+				</LinearLayout>
+			</TableRow>
+			<TableRow>
+				<LinearLayout android:orientation="horizontal" android:visibility="gone"
+					android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<Button android:id="@+id/btnStartKit" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:text="Start SkypeKit" />
+					<Button android:id="@+id/btnInitAVHosts" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:text="Initialize AVHosts" />
+					<Button android:id="@+id/btnStartAVHosts"
+						android:layout_width="wrap_content" android:layout_height="wrap_content"
+						android:text="Start AVHosts" />
+					<Button android:id="@+id/btnConnect" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:text="Connect" />
+				</LinearLayout>
+			</TableRow>
+			<TableRow>
+				<LinearLayout android:orientation="horizontal"
+					android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<LinearLayout android:orientation="vertical"
+						android:layout_width="wrap_content" android:layout_height="wrap_content">
+						<TextView android:id="@+id/txtpreview" android:text="Preview video"
+							android:layout_width="wrap_content" android:layout_height="wrap_content" />
+						<SurfaceView android:id="@+id/preview"
+							android:layout_width="320px" android:layout_height="240px"
+							android:background="#20ff0000" android:layout_margin="5px" />
+					</LinearLayout>
+					<LinearLayout android:orientation="vertical"
+						android:layout_width="wrap_content" android:layout_height="wrap_content">
+						<TextView android:id="@+id/txtvideo" android:text="Remote video"
+							android:layout_width="wrap_content" android:layout_height="wrap_content" />
+						<SurfaceView android:id="@+id/video"
+							android:layout_width="320px" android:layout_height="240px"
+							android:layout_margin="5px" android:background="#2000ff00" />
+					</LinearLayout>
+				</LinearLayout>
+			</TableRow>
+		</TableLayout>
+
+		<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+			android:layout_width="wrap_content" android:layout_height="wrap_content">
+			<TableRow>
+				<LinearLayout android:orientation="horizontal"
+					android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<LinearLayout android:orientation="vertical"
+						android:layout_width="wrap_content" android:layout_height="wrap_content">
+						<TextView android:id="@+id/txtSkypeName" android:text="Skype Name"
+							android:layout_width="wrap_content" android:layout_height="wrap_content" />
+						<EditText android:id="@+id/editSkypeName"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:minEms="7" android:maxEms="7" />
+					</LinearLayout>
+					<LinearLayout android:orientation="vertical"
+						android:layout_width="wrap_content" android:layout_height="wrap_content">
+						<TextView android:id="@+id/txtPassword" android:text="Password"
+							android:layout_width="wrap_content" android:layout_height="wrap_content" />
+						<EditText android:id="@+id/editPassword"
+							android:layout_width="wrap_content" android:layout_height="wrap_content"
+							android:password="true" android:minEms="6" android:maxEms="6" />
+					</LinearLayout>
+				</LinearLayout>
+			</TableRow>
+			<TableRow>
+				<LinearLayout android:orientation="horizontal"
+					android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<ImageView android:id="@+id/status" android:src="@drawable/status_offline"
+						android:layout_width="wrap_content" android:layout_height="wrap_content" />
+					<Button android:id="@+id/btnLogin" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:text="Sign In" />
+					<Button android:id="@+id/btnLogout" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" android:text="Sign Out" />
+					<ImageButton android:id="@+id/btnCallStart"
+						android:src="@drawable/call_start" android:background="@null"
+						android:layout_width="wrap_content" android:layout_height="wrap_content" />
+					<ImageButton android:id="@+id/btnCallEnd" android:src="@drawable/call_end"
+						android:background="@null" android:layout_width="wrap_content"
+						android:layout_height="wrap_content" />
+				</LinearLayout>
+			</TableRow>
+			<TableRow>
+				<LinearLayout android:orientation="vertical"
+					android:layout_width="wrap_content" android:layout_height="wrap_content">
+					<TextView android:id="@+id/txtContacts" android:text="Contacts"
+						android:layout_width="wrap_content" android:layout_height="wrap_content" />
+					<ListView android:id="@+id/listConversations"
+						android:layout_height="wrap_content" android:choiceMode="singleChoice"
+						android:layout_width="fill_parent"></ListView>
+				</LinearLayout>
+			</TableRow>
+		</TableLayout>
+	</TableRow>
+</TableLayout>

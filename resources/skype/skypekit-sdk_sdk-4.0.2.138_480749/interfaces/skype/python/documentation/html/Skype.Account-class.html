@@ -1,0 +1,3987 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Skype.Account</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Skype-module.html">Module&nbsp;Skype</a> ::
+        Class&nbsp;Account
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Account</h1><p class="nomargin-top"><span class="codelink"><a href="Skype-pysrc.html#Account">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+        
+              |        
+<a href="skypekit.Cached-class.html">skypekit.Cached</a> --+    
+                  |    
+    <a href="skypekit.Object-class.html">skypekit.Object</a> --+
+                      |
+                     <strong class="uidshort">Account</strong>
+</pre>
+
+<hr />
+<p>Represents a local account. Encapsulates methods for Skype account 
+  creation, login and logout as well as account profile setting properties.
+  NB! Unlike all the other SkypeKit classes, most of the Account class 
+  properties are actually read-write. In fact, there are two sorts of 
+  Account's read-write properties: server-side properties and local 
+  properties. Different setter methods need to be used for those two 
+  kinds.</p>
+  <p>The subset of server-side properties consists of all the policy 
+  properties (everything with _POLICY suffix) that are all of type int and 
+  can be set with SetServersideIntProperty method. There is currently only 
+  one server-side string property - OFFLINE_CALLFORWARD which can be set 
+  with SetServersideStrProperty setter.</p>
+  <p>The set of writeable account profile properties (local profile) is as 
+  follows;</p>
+  <ul>
+    <li>
+      P_FULLNAME,
+    </li>
+    <li>
+      P_BIRTHDAY,
+    </li>
+    <li>
+      P_GENDER,
+    </li>
+    <li>
+      P_LANGUAGES,
+    </li>
+    <li>
+      P_COUNTRY,
+    </li>
+    <li>
+      P_PROVINCE,
+    </li>
+    <li>
+      P_CITY,
+    </li>
+    <li>
+      P_PHONE_HOME,
+    </li>
+    <li>
+      P_PHONE_OFFICE,
+    </li>
+    <li>
+      P_PHONE_MOBILE,
+    </li>
+    <li>
+      P_EMAILS,
+    </li>
+    <li>
+      P_HOMEPAGE,
+    </li>
+    <li>
+      P_ABOUT,
+    </li>
+    <li>
+      P_MOOD_TEXT,
+    </li>
+    <li>
+      P_TIMEZONE,
+    </li>
+    <li>
+      P_AVATAR_IMAGE,
+    </li>
+    <li>
+      P_RICH_MOOD_TEXT
+    </li>
+  </ul>
+  <p>These can be set with SetIntProperty, SetStrProperty and 
+  SetBinProperty setter methods. Note that there are special methods for 
+  changing account online status (availability) and enabling/disabling 
+  auto-login - SetAvailability and SetSavePwd.</p>
+  <p>Note that to set Account properties, you that Account needs to be 
+  logged in. Generally, assumption is that the first thing you do with an 
+  Account object after you retrieve it with Skype::GetAccount is login, 
+  with exception of creating a new account.</p>
+  <p>The Account class has no default constructor and creating an Account 
+  instance is not the same as creating a Skype account. To create a Skype 
+  account:</p>
+  <ul>
+    <li>
+      obtain an Account instance by invoking Skype::GetAccount. This 
+      automatically sets P_SKYPENAME.
+    </li>
+    <li>
+      set any additional profile-related properties. Skype recommends that 
+      you minimally set the following:
+    </li>
+    <li>
+      their email address so that they can retrieve a lost password 
+      (P_EMAILS)
+    </li>
+    <li>
+      the user's full name (P_FULLNAME)
+    </li>
+    <li>
+      at least one phone number (P_PHONE_HOME, P_PHONE_HOME, 
+      P_PHONE_OFFICE)
+    </li>
+    <li>
+      invoke Account::Register to actually create the account
+    </li>
+  </ul>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#_sk_init_" class="summary-sig-name">_sk_init_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">object_id</span>,
+        <span class="summary-sig-arg">transport</span>)</span><br />
+      actual constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account._sk_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnPropertyChange"></a><span class="summary-sig-name">OnPropertyChange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">property_name</span>)</span><br />
+      notifies from a property change</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.OnPropertyChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#GetStatusWithProgress" class="summary-sig-name">GetStatusWithProgress</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      No description available.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.GetStatusWithProgress">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#Login" class="summary-sig-name">Login</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">set_availability_to</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">UNKNOWN</code><code class="variable-quote">'</code></span>)</span><br />
+      Login an auto-login enabled account (P_STATUS is 
+      LOGGED_OUT_AND_PWD_SAVED) and optionally set the availability, for 
+      example login in as Contact::DO_NOT_DISTURB.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.Login">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#LoginWithPassword" class="summary-sig-name">LoginWithPassword</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">password</span>,
+        <span class="summary-sig-arg">save_pwd</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">save_data_locally</span>=<span class="summary-sig-default">True</span>)</span><br />
+      Login in an account by specifying its password.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.LoginWithPassword">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#Register" class="summary-sig-name">Register</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">password</span>,
+        <span class="summary-sig-arg">save_pwd</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">save_data_locally</span>=<span class="summary-sig-default">True</span>,
+        <span class="summary-sig-arg">email</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="summary-sig-arg">allow_spam</span>=<span class="summary-sig-default">False</span>)</span><br />
+      This command can be used to create a new Skype account, based on the 
+      Account object.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.Register">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#Logout" class="summary-sig-name">Logout</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">clear_saved_pwd</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Logs out current account.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.Logout">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#ChangePassword" class="summary-sig-name">ChangePassword</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">old_password</span>,
+        <span class="summary-sig-arg">new_password</span>,
+        <span class="summary-sig-arg">save_pwd</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Changes this account's password.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.ChangePassword">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#SetPasswordSaved" class="summary-sig-name">SetPasswordSaved</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">save_pwd</span>)</span><br />
+      save or clear credentials for auto-login whilst already logged in</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.SetPasswordSaved">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#SetServersideIntProperty" class="summary-sig-name">SetServersideIntProperty</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prop_key</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Setter for integer (and enum) server-side properties.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.SetServersideIntProperty">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#SetServersideStrProperty" class="summary-sig-name">SetServersideStrProperty</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prop_key</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Setter for String server-side properties.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.SetServersideStrProperty">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#CancelServerCommit" class="summary-sig-name">CancelServerCommit</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Cancels an attempt to commit a server-side P_XXX_POLICY or the 
+      P_OFFLINE_CALLFORWARD server-side property.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.CancelServerCommit">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#SetIntProperty" class="summary-sig-name">SetIntProperty</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prop_key</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Setter for integer properties.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.SetIntProperty">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#SetStrProperty" class="summary-sig-name">SetStrProperty</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prop_key</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Setter for String properties.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.SetStrProperty">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#SetBinProperty" class="summary-sig-name">SetBinProperty</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prop_key</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Setter for BLOB properties, such as its avatar image.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.SetBinProperty">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#SetAvailability" class="summary-sig-name">SetAvailability</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">availability</span>)</span><br />
+      Sets online status of the currently logged in account to one of the 
+      values from Contact class AVAILABILITY enumerator.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.SetAvailability">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#SetStandby" class="summary-sig-name">SetStandby</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">standby</span>)</span><br />
+      Transitions the availability of this account's associated user, who 
+      is assumed to be logged in.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.SetStandby">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#GetCapabilityStatus" class="summary-sig-name">GetCapabilityStatus</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">capability</span>)</span><br />
+      Returns state of a given account capability.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.GetCapabilityStatus">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#GetSkypenameHash" class="summary-sig-name">GetSkypenameHash</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Response is empty when called with an inactive or invalid account</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.GetSkypenameHash">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#GetVerifiedEmail" class="summary-sig-name">GetVerifiedEmail</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      returns verified-by-Skype e-mail for this account if exists and 
+      verifiable</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.GetVerifiedEmail">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#GetVerifiedCompany" class="summary-sig-name">GetVerifiedCompany</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      returns verified-by-Skype company for this account if exists and 
+      verifiable</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.GetVerifiedCompany">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Account-class.html#Delete" class="summary-sig-name">Delete</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Deletes all account data stored locally.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.Delete">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="mget_profile"></a><span class="summary-sig-name">mget_profile</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      get multiple properties from self</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.mget_profile">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#multiget">multiget</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__copy__">__copy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propid"></a><span class="summary-sig-name">propid</span>(<span class="summary-sig-arg">propname</span>)</span><br />
+      convert a property name to the enum of the property</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Account.propid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__new__">__new__</a></code>,
+      <code><a href="skypekit.Cached-class.html#sk_exists">sk_exists</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="event_handlers"></a><span class="summary-name">event_handlers</span> = <code title="{}"><code class="variable-group">{</code><code class="variable-group">}</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#propid2label" class="summary-name">propid2label</a> = <code title="{4: 'skypename',
+ 5: 'fullname',
+ 7: 'birthday',
+ 8: 'gender',
+ 9: 'languages',
+ 10: 'country',
+ 11: 'province',
+ 12: 'city',
+..."><code class="variable-group">{</code>4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">skypename</code><code class="variable-quote">'</code><code class="variable-op">, </code>5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">fullname</code><code class="variable-quote">'</code><code class="variable-op">, </code>7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">birthday</code><code class="variable-quote">'</code><code class="variable-op">, </code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="module_id"></a><span class="summary-name">module_id</span> = <code title="5">5</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#STATUS" class="summary-name">STATUS</a> = <code title="{1: 'LOGGED_OUT',
+ 2: 'LOGGED_OUT_AND_PWD_SAVED',
+ 3: 'CONNECTING_TO_P2P',
+ 4: 'CONNECTING_TO_SERVER',
+ 5: 'LOGGING_IN',
+ 6: 'INITIALIZING',
+ 7: 'LOGGED_IN',
+ 8: 'LOGGING_OUT',
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LOGGED_OUT</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LOGGED_OUT_AND_PWD_SAVED</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code><br />
+      LOGGED_OUT
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#CBLSYNCSTATUS" class="summary-name">CBLSYNCSTATUS</a> = <code title="{0: 'CBL_INITIALIZING',
+ 1: 'CBL_INITIAL_SYNC_PENDING',
+ 2: 'CBL_SYNC_PENDING',
+ 3: 'CBL_SYNC_IN_PROGRESS',
+ 4: 'CBL_IN_SYNC',
+ 5: 'CBL_SYNC_FAILED',
+ 6: 'CBL_REMOTE_SYNC_PENDING',
+ 'CBL_INITIALIZING': 0,
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CBL_INITIALIZING</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CBL_INITIAL_SYNC_P</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_CBLSYNCSTATUS property.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#LOGOUTREASON" class="summary-name">LOGOUTREASON</a> = <code title="{1: 'LOGOUT_CALLED',
+ 2: 'HTTPS_PROXY_AUTH_FAILED',
+ 3: 'SOCKS_PROXY_AUTH_FAILED',
+ 4: 'P2P_CONNECT_FAILED',
+ 5: 'SERVER_CONNECT_FAILED',
+ 6: 'SERVER_OVERLOADED',
+ 7: 'DB_IN_USE',
+ 8: 'INVALID_SKYPENAME',
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LOGOUT_CALLED</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">HTTPS_PROXY_AUTH_FAILE</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the Account::P_LOGOUTREASON.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#PWDCHANGESTATUS" class="summary-name">PWDCHANGESTATUS</a> = <code title="{0: 'PWD_OK',
+ 1: 'PWD_CHANGING',
+ 2: 'PWD_INVALID_OLD_PASSWORD',
+ 3: 'PWD_SERVER_CONNECT_FAILED',
+ 4: 'PWD_OK_BUT_CHANGE_SUGGESTED',
+ 5: 'PWD_MUST_DIFFER_FROM_OLD',
+ 6: 'PWD_INVALID_NEW_PWD',
+ 7: 'PWD_MUST_LOG_IN_TO_CHANGE',
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PWD_OK</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PWD_CHANGING</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PWD_INV</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_PWDCHANGESTATUS property that provides 
+      information on whether a password change succeeded or failed, giving 
+      detailed failure reason.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#COMMITSTATUS" class="summary-name">COMMITSTATUS</a> = <code title="{1: 'COMMITTED',
+ 2: 'COMMITTING_TO_SERVER',
+ 3: 'COMMIT_FAILED',
+ 'COMMITTED': 1,
+ 'COMMITTING_TO_SERVER': 2,
+ 'COMMIT_FAILED': 3}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">COMMITTED</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">COMMITTING_TO_SERVER</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-ellipsis">...</code></code><br />
+      The list of possible values of Account class COMMITSTATUS property.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#CHATPOLICY" class="summary-name">CHATPOLICY</a> = <code title="{0: 'EVERYONE_CAN_ADD',
+ 2: 'BUDDIES_OR_AUTHORIZED_CAN_ADD',
+ 'BUDDIES_OR_AUTHORIZED_CAN_ADD': 2,
+ 'EVERYONE_CAN_ADD': 0}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EVERYONE_CAN_ADD</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BUDDIES_OR_AUTHORIZED</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_CHAT_POLICY property that controls 
+      whether non-authorized users can initiate text chat with the 
+      currently logged in account.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#SKYPECALLPOLICY" class="summary-name">SKYPECALLPOLICY</a> = <code title="{0: 'EVERYONE_CAN_CALL',
+ 2: 'BUDDIES_OR_AUTHORIZED_CAN_CALL',
+ 'BUDDIES_OR_AUTHORIZED_CAN_CALL': 2,
+ 'EVERYONE_CAN_CALL': 0}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EVERYONE_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BUDDIES_OR_AUTH</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_SKYPECALLPOLICY property that controls 
+      acceptance of incoming Skype calls.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#PSTNCALLPOLICY" class="summary-name">PSTNCALLPOLICY</a> = <code title="{0: 'ALL_NUMBERS_CAN_CALL',
+ 1: 'DISCLOSED_NUMBERS_CAN_CALL',
+ 2: 'BUDDY_NUMBERS_CAN_CALL',
+ 'ALL_NUMBERS_CAN_CALL': 0,
+ 'BUDDY_NUMBERS_CAN_CALL': 2,
+ 'DISCLOSED_NUMBERS_CAN_CALL': 1}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ALL_NUMBERS_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DISCLOSED_NUM</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_PSTNCALLPOLICY property that controls 
+      whether (and from whom) this account accepts incoming PSTN calls.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#AVATARPOLICY" class="summary-name">AVATARPOLICY</a> = <code title="{0: 'BUDDIES_OR_AUTHORIZED_CAN_SEE',
+ 2: 'EVERYONE_CAN_SEE',
+ 'BUDDIES_OR_AUTHORIZED_CAN_SEE': 0,
+ 'EVERYONE_CAN_SEE': 2}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BUDDIES_OR_AUTHORIZED_CAN_SEE</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EVERYO</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_AVATAR_POLICY property that controls 
+      whether remote contacts can view local account's avatar image.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#BUDDYCOUNTPOLICY" class="summary-name">BUDDYCOUNTPOLICY</a> = <code title="{0: 'DISCLOSE_TO_AUTHORIZED',
+ 1: 'DISCLOSE_TO_NOONE',
+ 'DISCLOSE_TO_AUTHORIZED': 0,
+ 'DISCLOSE_TO_NOONE': 1}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DISCLOSE_TO_AUTHORIZED</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DISCLOSE_</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_BUDDYCOUNT_POLICY property that controls 
+      whether the number of this user's authorized contacts is visible to 
+      other users, either through Account::GetPropNrofAuthedBuddies or 
+      Contact::GetPropNrofAuthedBuddies when those instances reference this
+      user.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#TIMEZONEPOLICY" class="summary-name">TIMEZONEPOLICY</a> = <code title="{0: 'TZ_AUTOMATIC',
+ 1: 'TZ_MANUAL',
+ 2: 'TZ_UNDISCLOSED',
+ 'TZ_AUTOMATIC': 0,
+ 'TZ_MANUAL': 1,
+ 'TZ_UNDISCLOSED': 2}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TZ_AUTOMATIC</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TZ_MANUAL</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TZ_UN</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_TIMEZONEPOLICY property that sets the 
+      rules for timezone offset so remote clients can determine your local 
+      time.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#WEBPRESENCEPOLICY" class="summary-name">WEBPRESENCEPOLICY</a> = <code title="{0: 'WEBPRESENCE_DISABLED',
+ 1: 'WEBPRESENCE_ENABLED',
+ 'WEBPRESENCE_DISABLED': 0,
+ 'WEBPRESENCE_ENABLED': 1}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">WEBPRESENCE_DISABLED</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">WEBPRESENC</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_WEBPRESENCEPOLICY property that controls 
+      whether your online status (presence) can be seen using the 
+      &quot;Skype buttons&quot; ( http://www.skype.com/share/buttons/ ) 
+      embedded in web pages.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#PHONENUMBERSPOLICY" class="summary-name">PHONENUMBERSPOLICY</a> = <code title="{0: 'PHONENUMBERS_VISIBLE_FOR_BUDDIES',
+ 1: 'PHONENUMBERS_VISIBLE_FOR_EVERYONE',
+ 'PHONENUMBERS_VISIBLE_FOR_BUDDIES': 0,
+ 'PHONENUMBERS_VISIBLE_FOR_EVERYONE': 1}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PHONENUMBERS_VISIBLE_FOR_BUDDIES</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_PHONENUMBERSPOLICY property that controls
+      whether unauthorized remote users can see associated phone numbers in
+      their UI (for reference, see the different phone number tabs in 
+      Windows desktop Client contact view).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#VOICEMAILPOLICY" class="summary-name">VOICEMAILPOLICY</a> = <code title="{0: 'VOICEMAIL_ENABLED',
+ 1: 'VOICEMAIL_DISABLED',
+ 'VOICEMAIL_DISABLED': 1,
+ 'VOICEMAIL_ENABLED': 0}"><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VOICEMAIL_ENABLED</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VOICEMAIL_DISAB</code><code class="variable-ellipsis">...</code></code><br />
+      Recognized values for the P_VOICEMAILPOLICY property that controls 
+      acceptance of incoming voicemail messages.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#CAPABILITYSTATUS" class="summary-name">CAPABILITYSTATUS</a> = <code title="{0: 'NO_CAPABILITY',
+ 1: 'CAPABILITY_EXISTS',
+ 2: 'FIRST_EXPIRY_WARNING',
+ 3: 'SECOND_EXPIRY_WARNING',
+ 4: 'FINAL_EXPIRY_WARNING',
+ 'CAPABILITY_EXISTS': 1,
+ 'FINAL_EXPIRY_WARNING': 4,
+ 'FIRST_EXPIRY_WARNING': 2,
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NO_CAPABILITY</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_EXISTS</code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code><br />
+      Account capabability statuses are possible values of Contact class 
+      CAPABILITY enumerator, when that enumerator is used in context of 
+      account.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_STATUS"></a><span class="summary-name">P_STATUS</span> = <code title="70">70</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PWDCHANGESTATUS"></a><span class="summary-name">P_PWDCHANGESTATUS</span> = <code title="71">71</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LOGOUTREASON"></a><span class="summary-name">P_LOGOUTREASON</span> = <code title="73">73</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_COMMITSTATUS"></a><span class="summary-name">P_COMMITSTATUS</span> = <code title="78">78</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SUGGESTED_SKYPENAME"></a><span class="summary-name">P_SUGGESTED_SKYPENAME</span> = <code title="72">72</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SKYPEOUT_BALANCE_CURRENCY"></a><span class="summary-name">P_SKYPEOUT_BALANCE_CURRENCY</span> = <code title="74">74</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SKYPEOUT_BALANCE"></a><span class="summary-name">P_SKYPEOUT_BALANCE</span> = <code title="75">75</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SKYPEOUT_PRECISION"></a><span class="summary-name">P_SKYPEOUT_PRECISION</span> = <code title="804">804</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SKYPEIN_NUMBERS"></a><span class="summary-name">P_SKYPEIN_NUMBERS</span> = <code title="76">76</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CBLSYNCSTATUS"></a><span class="summary-name">P_CBLSYNCSTATUS</span> = <code title="79">79</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_OFFLINE_CALLFORWARD"></a><span class="summary-name">P_OFFLINE_CALLFORWARD</span> = <code title="77">77</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CHAT_POLICY"></a><span class="summary-name">P_CHAT_POLICY</span> = <code title="160">160</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SKYPE_CALL_POLICY"></a><span class="summary-name">P_SKYPE_CALL_POLICY</span> = <code title="161">161</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PSTN_CALL_POLICY"></a><span class="summary-name">P_PSTN_CALL_POLICY</span> = <code title="162">162</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_AVATAR_POLICY"></a><span class="summary-name">P_AVATAR_POLICY</span> = <code title="163">163</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_BUDDYCOUNT_POLICY"></a><span class="summary-name">P_BUDDYCOUNT_POLICY</span> = <code title="164">164</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TIMEZONE_POLICY"></a><span class="summary-name">P_TIMEZONE_POLICY</span> = <code title="165">165</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_WEBPRESENCE_POLICY"></a><span class="summary-name">P_WEBPRESENCE_POLICY</span> = <code title="166">166</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PHONENUMBERS_POLICY"></a><span class="summary-name">P_PHONENUMBERS_POLICY</span> = <code title="168">168</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_VOICEMAIL_POLICY"></a><span class="summary-name">P_VOICEMAIL_POLICY</span> = <code title="169">169</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PARTNER_OPTEDOUT"></a><span class="summary-name">P_PARTNER_OPTEDOUT</span> = <code title="773">773</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SERVICE_PROVIDER_INFO"></a><span class="summary-name">P_SERVICE_PROVIDER_INFO</span> = <code title="800">800</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_REGISTRATION_TIMESTAMP"></a><span class="summary-name">P_REGISTRATION_TIMESTAMP</span> = <code title="801">801</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_NR_OF_OTHER_INSTANCES"></a><span class="summary-name">P_NR_OF_OTHER_INSTANCES</span> = <code title="802">802</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SKYPENAME"></a><span class="summary-name">P_SKYPENAME</span> = <code title="4">4</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_FULLNAME"></a><span class="summary-name">P_FULLNAME</span> = <code title="5">5</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_BIRTHDAY"></a><span class="summary-name">P_BIRTHDAY</span> = <code title="7">7</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_GENDER"></a><span class="summary-name">P_GENDER</span> = <code title="8">8</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LANGUAGES"></a><span class="summary-name">P_LANGUAGES</span> = <code title="9">9</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_COUNTRY"></a><span class="summary-name">P_COUNTRY</span> = <code title="10">10</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PROVINCE"></a><span class="summary-name">P_PROVINCE</span> = <code title="11">11</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CITY"></a><span class="summary-name">P_CITY</span> = <code title="12">12</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PHONE_HOME"></a><span class="summary-name">P_PHONE_HOME</span> = <code title="13">13</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PHONE_OFFICE"></a><span class="summary-name">P_PHONE_OFFICE</span> = <code title="14">14</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PHONE_MOBILE"></a><span class="summary-name">P_PHONE_MOBILE</span> = <code title="15">15</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_EMAILS"></a><span class="summary-name">P_EMAILS</span> = <code title="16">16</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_HOMEPAGE"></a><span class="summary-name">P_HOMEPAGE</span> = <code title="17">17</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ABOUT"></a><span class="summary-name">P_ABOUT</span> = <code title="18">18</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PROFILE_TIMESTAMP"></a><span class="summary-name">P_PROFILE_TIMESTAMP</span> = <code title="19">19</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_MOOD_TEXT"></a><span class="summary-name">P_MOOD_TEXT</span> = <code title="26">26</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TIMEZONE"></a><span class="summary-name">P_TIMEZONE</span> = <code title="27">27</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_NROF_AUTHED_BUDDIES"></a><span class="summary-name">P_NROF_AUTHED_BUDDIES</span> = <code title="28">28</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_AVAILABILITY"></a><span class="summary-name">P_AVAILABILITY</span> = <code title="34">34</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_AVATAR_IMAGE"></a><span class="summary-name">P_AVATAR_IMAGE</span> = <code title="37">37</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_AVATAR_TIMESTAMP"></a><span class="summary-name">P_AVATAR_TIMESTAMP</span> = <code title="182">182</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_MOOD_TIMESTAMP"></a><span class="summary-name">P_MOOD_TIMESTAMP</span> = <code title="183">183</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_RICH_MOOD_TEXT"></a><span class="summary-name">P_RICH_MOOD_TEXT</span> = <code title="205">205</code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#rwlock">rwlock</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#properties">properties</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#status" class="summary-name">status</a><br />
+      Account::STATUS
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#pwdchangestatus" class="summary-name">pwdchangestatus</a><br />
+      Account::PWDCHANGESTATUS
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#logoutreason" class="summary-name">logoutreason</a><br />
+      This property should only be examined when Account::P_STATUS is 
+      LOGGED_OUT or LOGGED_OUT_AND_PWD_SAVED.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#commitstatus" class="summary-name">commitstatus</a><br />
+      Account::COMMITSTATUS
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#suggested_skypename" class="summary-name">suggested_skypename</a><br />
+      suggested skypenames, semi-colon separated.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#skypeout_balance_currency" class="summary-name">skypeout_balance_currency</a><br />
+      'EUR', 'USD', etc.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#skypeout_balance" class="summary-name">skypeout_balance</a><br />
+      balance in 'cents'
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#skypeout_precision" class="summary-name">skypeout_precision</a><br />
+      decimal points in ACCOUNT_SKYPEOUT_BALANCE
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#skypein_numbers" class="summary-name">skypein_numbers</a><br />
+      space-separated list of skypein numbers
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#cblsyncstatus" class="summary-name">cblsyncstatus</a><br />
+      Account::CBLSYNCSTATUS
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#offline_callforward" class="summary-name">offline_callforward</a><br />
+      space-separated list of 'begSecond,endSecond,identity' tokens
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#chat_policy" class="summary-name">chat_policy</a><br />
+      Server-side account property, use SetServerside*Property() to set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#skype_call_policy" class="summary-name">skype_call_policy</a><br />
+      Server-side account property, use SetServerside*Property() to set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#pstn_call_policy" class="summary-name">pstn_call_policy</a><br />
+      Server-side account property, use SetServerside*Property() to set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#avatar_policy" class="summary-name">avatar_policy</a><br />
+      Server-side account property, use SetServerside*Property() to set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#buddycount_policy" class="summary-name">buddycount_policy</a><br />
+      Server-side account property, use SetServerside*Property() to set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#timezone_policy" class="summary-name">timezone_policy</a><br />
+      Server-side account property, use SetServerside*Property() to set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#webpresence_policy" class="summary-name">webpresence_policy</a><br />
+      Server-side account property, use SetServerside*Property() to set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#phonenumbers_policy" class="summary-name">phonenumbers_policy</a><br />
+      Server-side account property, use SetServerside*Property() to set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#voicemail_policy" class="summary-name">voicemail_policy</a><br />
+      Server-side account property, use SetServerside*Property() to set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#partner_optedout" class="summary-name">partner_optedout</a><br />
+      Alerts: opted out partner id's, space separated
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#service_provider_info" class="summary-name">service_provider_info</a><br />
+      service information if the user is a paid service provider
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#registration_timestamp" class="summary-name">registration_timestamp</a><br />
+      NB! Unlike your common UNIX timestamps, the registration_timestamp is
+      special, as it counts MINUTES rather than seconds, from Epoch 
+      (January 1, 1970)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#nr_of_other_instances" class="summary-name">nr_of_other_instances</a><br />
+      number of times this user is logged in from other computers
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#skypename" class="summary-name">skypename</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#fullname" class="summary-name">fullname</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#birthday" class="summary-name">birthday</a><br />
+      YYYYMMDD
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#gender" class="summary-name">gender</a><br />
+      1-male, 2-female
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#languages" class="summary-name">languages</a><br />
+      ISO language codes, space-separated
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#country" class="summary-name">country</a><br />
+      ISO country code
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#province" class="summary-name">province</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#city" class="summary-name">city</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#phone_home" class="summary-name">phone_home</a><br />
+      NB! string not integer
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#phone_office" class="summary-name">phone_office</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#phone_mobile" class="summary-name">phone_mobile</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#emails" class="summary-name">emails</a><br />
+      Space separated
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#homepage" class="summary-name">homepage</a>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#about" class="summary-name">about</a><br />
+      arbitrary introductory text
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#profile_timestamp" class="summary-name">profile_timestamp</a><br />
+      UNIX timestamp of last profile change
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#mood_text" class="summary-name">mood_text</a><br />
+      Personal mood text (visible to authorised users only).
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#timezone" class="summary-name">timezone</a><br />
+      24*3600+diff_to_UTC_in_seconds.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#nrof_authed_buddies" class="summary-name">nrof_authed_buddies</a><br />
+      Count of this user's authorized contacts.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#availability" class="summary-name">availability</a><br />
+      Contact::AVAILABILITY
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#avatar_image" class="summary-name">avatar_image</a><br />
+      Account avatar picture can be set with Account::SetBinProperty 
+      method.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#avatar_timestamp" class="summary-name">avatar_timestamp</a><br />
+      UNIX timestamp of when current avatar was set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#mood_timestamp" class="summary-name">mood_timestamp</a><br />
+      UNIX timestamp of when current mood was set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Account-class.html#rich_mood_text" class="summary-name">rich_mood_text</a><br />
+      XML version of CONTACT_MOOD_TEXT.
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="_sk_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_sk_init_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">object_id</span>,
+        <span class="sig-arg">transport</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account._sk_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>actual constructor</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="skypekit.Object-class.html#_sk_init_">skypekit.Object._sk_init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetStatusWithProgress"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetStatusWithProgress</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.GetStatusWithProgress">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>No description available.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>status</b> - Current value of this account's P_STATUS property
+    </li>
+    <li>
+      <b>progress</b> - This argument returns 0.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Login"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Login</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">set_availability_to</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">UNKNOWN</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.Login">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Login an auto-login enabled account (P_STATUS is 
+  LOGGED_OUT_AND_PWD_SAVED) and optionally set the availability, for 
+  example login in as Contact::DO_NOT_DISTURB. To find out whether there is
+  an auto-login enabled account available, you can use 
+  Skype::GetDefaultAccountName to retrieve the skypename of that account. 
+  You can then get an Account instance for login by invoking 
+  Skype::GetAccount.</p>
+  <p>If no accounts with stored login credentials are available 
+  (GetDefaultAccountName returns an empty string), then you will have to 
+  prompt the user for account name and password and then use 
+  LoginWithPassword. Account name field in the UI can be pre-populated with
+  strings retrieved with Skype::GetExistingAccounts</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>set_availability_to</b> - force this account's initial online 
+      status to the specified Contact::AVAILABILITY value.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="LoginWithPassword"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">LoginWithPassword</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">password</span>,
+        <span class="sig-arg">save_pwd</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">save_data_locally</span>=<span class="sig-default">True</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.LoginWithPassword">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Login in an account by specifying its password. To retrieve an account
+  instance for login, invoke Skype::GetAccount.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>password</b> - Password string (plaintext) for this account, which
+      should be pre-validated (Skype::ValidatePassword)
+    </li>
+    <li>
+      <b>save_pwd</b> -
+      <ul>
+        <li>
+          true: Saves the password, ensuring that auto-login is enabled.
+        </li>
+        <li>
+          false (default): Does not save the password, and so the user 
+          might not be able to effect auto-login until they explicitly 
+          invoke Account::SetPasswordSaved(true).
+        </li>
+      </ul>
+    </li>
+    <li>
+      <b>save_data_locally</b> - For internal use only.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Register"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Register</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">password</span>,
+        <span class="sig-arg">save_pwd</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">save_data_locally</span>=<span class="sig-default">True</span>,
+        <span class="sig-arg">email</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>,
+        <span class="sig-arg">allow_spam</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.Register">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This command can be used to create a new Skype account, based on the 
+  Account object. When successful, this command will also log in with the 
+  newly created account. If the new account registration was not 
+  successful, Account status property will change to LOGGED_OUT. A common 
+  reason for registration failures is that the an account with that name 
+  already exists. In that case, Account LOGOUT_REASON will be set to 
+  SKYPENAME_TAKEN. Also, Account SUGGESTED_SKYPENAME property will be set 
+  to a list of similar but still available skypenames that could be used 
+  instead. The property will contain up to 5 semicolon-separated 
+  alternative skypenames. In if no suggested skypenames were available, 
+  then this property will contain an empty string. NB! You should 
+  pre-validate your P_SKYPENAME value and any email string 
+  (Skype::ValidateProfileString) prior to invoking this method.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>password</b> - Password string (plaintext) for this account, which
+      should be pre-validated (Skype::ValidatePassword)
+    </li>
+    <li>
+      <b>save_pwd</b> -
+      <ul>
+        <li>
+          true: Saves the password and enables auto-login.
+        </li>
+        <li>
+          false (default): Does not save the password, and the user needs 
+          to be prompted for password on the next login attempt.
+        </li>
+      </ul>
+    </li>
+    <li>
+      <b>save_data_locally</b> - For internal use only.
+    </li>
+    <li>
+      <b>email</b> - An email address for retrieving lost passwords and 
+      receiving news and information from Skype.
+    </li>
+    <li>
+      <b>allow_spam</b> - enable/disable news and information from Skype 
+      being sent to account's e-mail.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Logout"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Logout</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">clear_saved_pwd</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.Logout">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Logs out current account. Note that calling this on client application
+  exit is optional.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>clear_saved_pwd</b> -
+      <ul>
+        <li>
+          true: Clears any saved password use with auto-login and so 
+          disables auto-login until you explicitly invoke 
+          Account::SetPasswordSaved(true).
+        </li>
+        <li>
+          false (default): Does not clear any saved password and so does 
+          not affect existing auto-login behavior.
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="ChangePassword"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">ChangePassword</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">old_password</span>,
+        <span class="sig-arg">new_password</span>,
+        <span class="sig-arg">save_pwd</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.ChangePassword">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Changes this account's password. Returns false if the change failed. 
+  NB! You should pre-validate your password strings 
+  (Skype::ValidatePassword) and ensure that they are different prior to 
+  invoking this method.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>old_password</b> - &quot;Current password string (plaintext) for 
+      this account
+    </li>
+    <li>
+      <b>new_password</b> - New password string (plaintext) for this 
+      account
+    </li>
+    <li>
+      <b>save_pwd</b> -
+      <ul>
+        <li>
+          true: Saves the new password and enables auto-login.
+        </li>
+        <li>
+          false (default): Clears any existing saved password and so the 
+          user cannot effect auto-login until they explicitly invoke 
+          Account::SetPasswordSaved(true)
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetPasswordSaved"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetPasswordSaved</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">save_pwd</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.SetPasswordSaved">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>save or clear credentials for auto-login whilst already logged in</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>save_pwd</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetServersideIntProperty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetServersideIntProperty</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prop_key</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.SetServersideIntProperty">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setter for integer (and enum) server-side properties. For a list of 
+  writeable server-side properties, see the detailed description of the 
+  Account class.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>prop_key</b>
+    </li>
+    <li>
+      <b>value</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetServersideStrProperty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetServersideStrProperty</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prop_key</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.SetServersideStrProperty">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setter for String server-side properties. For a list of writeable 
+  server-side properties, see the detailed description of the Account 
+  class.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>prop_key</b>
+    </li>
+    <li>
+      <b>value</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CancelServerCommit"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CancelServerCommit</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.CancelServerCommit">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Cancels an attempt to commit a server-side P_XXX_POLICY or the 
+  P_OFFLINE_CALLFORWARD server-side property. Invoking this cancellation 
+  only makes sense whilst the P_COMMITTSTATUS is in COMMITTING_TO_SERVER 
+  state.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetIntProperty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetIntProperty</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prop_key</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.SetIntProperty">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setter for integer properties. For a list of writeable account profile
+  properties, see the detailed description of the Account class.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>prop_key</b>
+    </li>
+    <li>
+      <b>value</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetStrProperty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetStrProperty</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prop_key</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.SetStrProperty">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setter for String properties. For a list of writeable account profile 
+  properties, see the detailed description of the Account class. NB! You 
+  should pre-validate your about and mood message strings 
+  (Skype::ValidateProfileString) prior to invoking this method.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>prop_key</b>
+    </li>
+    <li>
+      <b>value</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetBinProperty"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetBinProperty</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prop_key</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.SetBinProperty">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setter for BLOB properties, such as its avatar image. For a list of 
+  writeable account profile properties, see the detailed description of the
+  Account class. NB! You should pre-validate your avatar image 
+  (Skype::ValidateAvatar) prior to invoking this method.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>prop_key</b>
+    </li>
+    <li>
+      <b>value</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetAvailability"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetAvailability</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">availability</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.SetAvailability">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets online status of the currently logged in account to one of the 
+  values from Contact class AVAILABILITY enumerator.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>availability</b> - only subset of all contact availabilities 
+      allowed
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetStandby"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetStandby</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">standby</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.SetStandby">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Transitions the availability of this account's associated user, who is
+  assumed to be logged in.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>standby</b> -
+      <ul>
+        <li>
+          true: Saves the user's current availability, then sets it to 
+          CONTACT::AVAILABILITY.OFFLINE
+        </li>
+        <li>
+          false: Reconnects the user and restores their previous 
+          availability
+        </li>
+      </ul>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetCapabilityStatus"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetCapabilityStatus</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">capability</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.GetCapabilityStatus">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns state of a given account capability. Takes Contact class 
+  CAPABILITY property as input argument and returns its state and 
+  expiration timestamp where appropriate. For example (C++ wrapper, with 
+  other wrappers the syntax may vary but the idea is the same) 
+  MyAccount.GetCapabilityStatus(Contact::CAPABILITY_SKYPEOUT, Cap, T); will
+  return Account::CAPABILITY_EXISTS if local account has SkypeOut 
+  enabled.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>capability</b>
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>status</b>
+    </li>
+    <li>
+      <b>expiry_timestamp</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetSkypenameHash"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetSkypenameHash</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.GetSkypenameHash">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Response is empty when called with an inactive or invalid account</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>skypename_hash</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetVerifiedEmail"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetVerifiedEmail</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.GetVerifiedEmail">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>returns verified-by-Skype e-mail for this account if exists and 
+  verifiable</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>email</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetVerifiedCompany"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetVerifiedCompany</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.GetVerifiedCompany">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>returns verified-by-Skype company for this account if exists and 
+  verifiable</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>company</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Delete"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Delete</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Account.Delete">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Deletes all account data stored locally. Does not remove any account 
+  data from the server!</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="propid2label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">propid2label</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">skypename</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">fullname</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">birthday</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">gender</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 9<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">languages</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 10<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">country</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 11<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">province</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 12<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">city</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">STATUS</h3>
+  <ul>
+    <li>
+      LOGGED_OUT
+    </li>
+    <li>
+      LOGGED_OUT_AND_PWD_SAVED - the account is logged out, but password is
+      not needed for re-login
+    </li>
+    <li>
+      CONNECTING_TO_P2P - connecting to P2P network
+    </li>
+    <li>
+      CONNECTING_TO_SERVER - connecting to login server
+    </li>
+    <li>
+      LOGGING_IN - waiting for response from server
+    </li>
+    <li>
+      INITIALIZING - response OK. initialising account-specific lib 
+      structures
+    </li>
+    <li>
+      LOGGED_IN - alright, we're good to go!
+    </li>
+    <li>
+      LOGGING_OUT - Logout() has been called but not processed yet
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LOGGED_OUT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LOGGED_OUT_AND_PWD_SAVED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONNECTING_TO_P2P</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONNECTING_TO_SERVER</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LOGGING_IN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INITIALIZING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LOGGED_IN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LOGGING_OUT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CBLSYNCSTATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">CBLSYNCSTATUS</h3>
+  <p>Recognized values for the P_CBLSYNCSTATUS property. CBL stands for 
+  Central Buddy List. In principle, this property and its states can be 
+  ignored by most UI developers. However, it can help to optimize UI 
+  buildup and behaviour, particularly in case of limited resources (such as
+  mobile devices).</p>
+  <p>CBL is used to backup your contact list, contact groups, and profile 
+  information, and also used to synchronize this information with other 
+  Skype instances of your account (i.e. on another device). CBL sync can 
+  occur both during login and during normal operation. Note that CBL 
+  synchronization does not take place immediately after an Account property
+  is changed. A delay between the first property change and CBL sync 
+  initiation enables the client to accumulate changes and do the 
+  synchronization in bulk.</p>
+  <p>Clients with limited resources might want to wait for CBL_IN_SYNC 
+  status before generating their UI's contact list representation. 
+  Otherwise it might be forced to redraw the contact list multiple times, 
+  as new updates get retrieved from the server-side. Similarly, 
+  applications that modify an account's mood message might want to know 
+  when the P_MOOD_TEXT or P_RICH_MOOD_TEXT property is synchronized to the 
+  server. Note that this sync is only for CBL and other logged in instances
+  of the same account - other contacts will receive the mood message update
+  directly.</p>
+  <ul>
+    <li>
+      CBL_INITIALIZING - status is not clear (yet)
+    </li>
+    <li>
+      CBL_INITIAL_SYNC_PENDING - first sync with empty profile
+    </li>
+    <li>
+      CBL_SYNC_PENDING - Account properties are considered to be out of 
+      sync with CBL - attempt at synchronization is imminent. You might 
+      wish to wait with updating UI components that display the data that 
+      is about to change anyway.
+    </li>
+    <li>
+      CBL_SYNC_IN_PROGRESS - CBL synchronization is currently taking place.
+    </li>
+    <li>
+      CBL_IN_SYNC - Account properties are up-to-date.
+    </li>
+    <li>
+      CBL_SYNC_FAILED - CBL sync has. Another attempt will be made after 
+      several minutes. If a second attempt also fails, subsequent attempts 
+      at synchronization will be made at ever increasing intervals.
+    </li>
+    <li>
+      CBL_REMOTE_SYNC_PENDING - we have received a hint that there is a 
+      remote data change in CBL
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CBL_INITIALIZING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CBL_INITIAL_SYNC_PENDING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CBL_SYNC_PENDING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CBL_SYNC_IN_PROGRESS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CBL_IN_SYNC</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CBL_SYNC_FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CBL_REMOTE_SYNC_PENDING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CBL_INITIALIZING</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="LOGOUTREASON"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">LOGOUTREASON</h3>
+  <p>Recognized values for the Account::P_LOGOUTREASON. Note that this 
+  property should only be examined when Account::P_STATUS is LOGGED_OUT or 
+  LOGGED_OUT_AND_PWD_SAVED. That is, you should not monitor changes to this
+  property in Account::OnChange callback, other than after already having 
+  checked that P_STATUS property has appropriate value. The reason for this
+  is that the LOGOUTREASON does not get reset before the next login 
+  attempt. For example: if a user tried to log in with a wrong password, 
+  the LOGOUTREASON gets set to INCORRECT_PASSWORD. Now, if the user tries 
+  to log in again, and yet again submits an incorrect password, the value 
+  of the LOGOUTREASON does not change anymore, because it already is set to
+  INCORRECT_PASSWORD. Consequently, Account::OnChange will not fire in this
+  case.</p>
+  <ul>
+    <li>
+      LOGOUT_CALLED - manual logout (or unknown reason from previous 
+      session)
+    </li>
+    <li>
+      HTTPS_PROXY_AUTH_FAILED - sync errors at login/registration
+    </li>
+    <li>
+      SOCKS_PROXY_AUTH_FAILED - sync errors at login/registration
+    </li>
+    <li>
+      P2P_CONNECT_FAILED - sync errors at login/registration
+    </li>
+    <li>
+      SERVER_CONNECT_FAILED - sync errors at login/registration
+    </li>
+    <li>
+      SERVER_OVERLOADED - sync errors at login/registration
+    </li>
+    <li>
+      DB_IN_USE - sync errors at login/registration
+    </li>
+    <li>
+      INVALID_SKYPENAME - sync errors at registration
+    </li>
+    <li>
+      INVALID_EMAIL - sync errors at registration
+    </li>
+    <li>
+      UNACCEPTABLE_PASSWORD - sync errors at registration
+    </li>
+    <li>
+      SKYPENAME_TAKEN - sync errors at registration
+    </li>
+    <li>
+      REJECTED_AS_UNDERAGE - sync errors at registration
+    </li>
+    <li>
+      NO_SUCH_IDENTITY - sync errors at login
+    </li>
+    <li>
+      INCORRECT_PASSWORD - sync errors at login
+    </li>
+    <li>
+      TOO_MANY_LOGIN_ATTEMPTS - sync errors at login
+    </li>
+    <li>
+      PASSWORD_HAS_CHANGED - async errors (can happen anytime while logged 
+      in)
+    </li>
+    <li>
+      PERIODIC_UIC_UPDATE_FAILED - async errors (can happen anytime while 
+      logged in)
+    </li>
+    <li>
+      DB_DISK_FULL - async errors (can happen anytime while logged in)
+    </li>
+    <li>
+      DB_IO_ERROR - async errors (can happen anytime while logged in)
+    </li>
+    <li>
+      DB_CORRUPT - async errors (can happen anytime while logged in)
+    </li>
+    <li>
+      DB_FAILURE - deprecated (superceded by more detailed DB_* errors)
+    </li>
+    <li>
+      INVALID_APP_ID - platform sdk
+    </li>
+    <li>
+      APP_ID_FAILURE - platform sdk
+    </li>
+    <li>
+      UNSUPPORTED_VERSION - forced upgrade/discontinuation
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LOGOUT_CALLED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">HTTPS_PROXY_AUTH_FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SOCKS_PROXY_AUTH_FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">P2P_CONNECT_FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SERVER_CONNECT_FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SERVER_OVERLOADED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DB_IN_USE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INVALID_SKYPENAME</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="PWDCHANGESTATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">PWDCHANGESTATUS</h3>
+  <p>Recognized values for the P_PWDCHANGESTATUS property that provides 
+  information on whether a password change succeeded or failed, giving 
+  detailed failure reason. After successful return from the Change Password
+  method, clients should monitor the P_PWDCHANGESTATUS property 
+  changes.</p>
+  <ul>
+    <li>
+      PWD_CHANGING - consider displaying an &quot;in progress&quot; 
+      indicator and continue polling
+    </li>
+    <li>
+      PWD_OK - consider displaying an updated indicator and stop polling
+    </li>
+    <li>
+      PWD_OK_BUT_CHANGE_SUGGESTED - consider displaying an updated 
+      indicator, along with a recommendation to change again to a stronger 
+      password.
+    </li>
+  </ul>
+  <ul>
+    <li>
+      PWD_OK - Password change succeeded.
+    </li>
+    <li>
+      PWD_CHANGING - Password change is in progress.
+    </li>
+    <li>
+      PWD_INVALID_OLD_PASSWORD - Old password was incorrect.
+    </li>
+    <li>
+      PWD_SERVER_CONNECT_FAILED - Failed to verify password because of no 
+      connection to server.
+    </li>
+    <li>
+      PWD_OK_BUT_CHANGE_SUGGESTED - Password was set but server didn't like
+      it much.
+    </li>
+    <li>
+      PWD_MUST_DIFFER_FROM_OLD - New password was exactly the same as old 
+      one.
+    </li>
+    <li>
+      PWD_INVALID_NEW_PWD - The new password was unacceptable. (too short, 
+      too simple, etc.)
+    </li>
+    <li>
+      PWD_MUST_LOG_IN_TO_CHANGE - Account was currently not logged in.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PWD_OK</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PWD_CHANGING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PWD_INVALID_OLD_PASSWORD</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PWD_SERVER_CONNECT_FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PWD_OK_BUT_CHANGE_SUGGESTED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PWD_MUST_DIFFER_FROM_OLD</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PWD_INVALID_NEW_PWD</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PWD_MUST_LOG_IN_TO_CHANGE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="COMMITSTATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">COMMITSTATUS</h3>
+  <p>The list of possible values of Account class COMMITSTATUS property. 
+  Note that this property and its values have nothing to do with 
+  (automatic) CBL synchronization. Rather, the COMMITSTATUS reflects commit
+  status to account's server side properties initiated with calls to 
+  Account class SetServersideIntProperty and Account class 
+  SetServersideStrProperty methods. After those methods, your client UI may
+  want to wait until the COMMITSTATUS becomes COMMITTING_TO_SERVER followed
+  by COMMITTED and inform the user if the value becomes COMMIT_FAILED. 
+  SetServerside&lt;type&gt;Property methods are used for writing privacy 
+  policy related and call forwarding related Account properties to the 
+  server. Unlike CBL synchronization, those updates are executed 
+  immediately.</p>
+  <ul>
+    <li>
+      COMMITTED - No pending updates to the server.
+    </li>
+    <li>
+      COMMITTING_TO_SERVER - Update to the server in progress.
+    </li>
+    <li>
+      COMMIT_FAILED - Server update has failed.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">COMMITTED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">COMMITTING_TO_SERVER</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">COMMIT_FAILED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">COMMITTED</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">COMMITTING_TO_SERVER</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">COMMIT_FAILED</code><code class="variable-quote">'</code><code class="variable-op">: </code>3<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CHATPOLICY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">CHATPOLICY</h3>
+  <p>Recognized values for the P_CHAT_POLICY property that controls whether
+  non-authorized users can initiate text chat with the currently logged in 
+  account. Note that since this set of values is associated with a 
+  server-side property, you must set that property using 
+  Account::SetServersideIntProperty</p>
+  <ul>
+    <li>
+      EVERYONE_CAN_ADD - Unauthorized contacts can initiate text chat.
+    </li>
+    <li>
+      BUDDIES_OR_AUTHORIZED_CAN_ADD - Only authorized contacts can initiate
+      chat (default policy).
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EVERYONE_CAN_ADD</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BUDDIES_OR_AUTHORIZED_CAN_ADD</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">BUDDIES_OR_AUTHORIZED_CAN_ADD</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">EVERYONE_CAN_ADD</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SKYPECALLPOLICY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">SKYPECALLPOLICY</h3>
+  <p>Recognized values for the P_SKYPECALLPOLICY property that controls 
+  acceptance of incoming Skype calls. Note that since this set of values is
+  associated with a server-side property, you must set that property using 
+  Account::SetServersideIntPropertyserver-side.</p>
+  <ul>
+    <li>
+      EVERYONE_CAN_CALL - Skype calls accepted from unauthorized contacts.
+    </li>
+    <li>
+      BUDDIES_OR_AUTHORIZED_CAN_CALL - Skype calls not accepted from 
+      unauthorized contacts.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EVERYONE_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BUDDIES_OR_AUTHORIZED_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">BUDDIES_OR_AUTHORIZED_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">EVERYONE_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="PSTNCALLPOLICY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">PSTNCALLPOLICY</h3>
+  <p>Recognized values for the P_PSTNCALLPOLICY property that controls 
+  whether (and from whom) this account accepts incoming PSTN calls. Note 
+  that since this set of values is associated with a server-side property, 
+  you must set that property using Account::SetServersideIntProperty</p>
+  <ul>
+    <li>
+      ALL_NUMBERS_CAN_CALL - All incoming PSTN calls are accepted.
+    </li>
+    <li>
+      DISCLOSED_NUMBERS_CAN_CALL - Only PSTN calls that report caller ID 
+      are accepted.
+    </li>
+    <li>
+      BUDDY_NUMBERS_CAN_CALL - Only calls from PSTN numbers found in local 
+      contact list are accepted.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ALL_NUMBERS_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DISCLOSED_NUMBERS_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BUDDY_NUMBERS_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ALL_NUMBERS_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">BUDDY_NUMBERS_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">DISCLOSED_NUMBERS_CAN_CALL</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="AVATARPOLICY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">AVATARPOLICY</h3>
+  <p>Recognized values for the P_AVATAR_POLICY property that controls 
+  whether remote contacts can view local account's avatar image. Note that 
+  since this set of values is associated with a server-side property, you 
+  must set that property using 
+  Account::SetServersideIntPropertyserver-side. Note that setting account's
+  AVATAR_POLICY to BUDDIES_OR_AUTHORIZED_CAN_SEE does not guarantee that 
+  remote users will be able to immediately retrieve the avatar picture via 
+  corresponding Contact object. Avatar changes propagate between clients 
+  only when direct sessions between clients are established. Direct 
+  sessions are established during live sessions or whilst online contacts 
+  are engaged in chat.</p>
+  <ul>
+    <li>
+      BUDDIES_OR_AUTHORIZED_CAN_SEE - Only authorized remote users can see 
+      this user's avatar image
+    </li>
+    <li>
+      EVERYONE_CAN_SEE - Everyone can see this user's avatar image, once 
+      the contact/account avatar property has been synchronized during a 
+      direct session. The avatar image may also become viewable on some 
+      Skype Web-based services.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BUDDIES_OR_AUTHORIZED_CAN_SEE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">EVERYONE_CAN_SEE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">BUDDIES_OR_AUTHORIZED_CAN_SEE</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">EVERYONE_CAN_SEE</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="BUDDYCOUNTPOLICY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">BUDDYCOUNTPOLICY</h3>
+  <p>Recognized values for the P_BUDDYCOUNT_POLICY property that controls 
+  whether the number of this user's authorized contacts is visible to other
+  users, either through Account::GetPropNrofAuthedBuddies or 
+  Contact::GetPropNrofAuthedBuddies when those instances reference this 
+  user. Note that since this set of values is associated with a server-side
+  property, you must set that property using 
+  Account::SetServersideIntProperty, like this: 
+  account-&gt;SetServersideIntProperty(Account::P_BUDDYCOUNT_POLICY, 
+  Account::DISCLOSE_TO_AUTHORIZED); 
+  account-&gt;SetServersideIntProperty(Account::P_BUDDYCOUNT_POLICY, 
+  Account::DISCLOSE_TO_NOONE );</p>
+  <ul>
+    <li>
+      DISCLOSE_TO_AUTHORIZED - Authorized remote users can retrieve the 
+      number of this user's authorized contacts 
+      (Contact::P_NROF_AUTHED_BUDDIES)
+    </li>
+    <li>
+      DISCLOSE_TO_NOONE - No remote user - regardless their authorization 
+      status - can retrieve the number of this user's authorized contacts. 
+      Account::GetPropNrofAuthedBuddies and 
+      Contact::GetPropNrofAuthedBuddies will always return 0
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DISCLOSE_TO_AUTHORIZED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DISCLOSE_TO_NOONE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">DISCLOSE_TO_AUTHORIZED</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">DISCLOSE_TO_NOONE</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TIMEZONEPOLICY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TIMEZONEPOLICY</h3>
+  <p>Recognized values for the P_TIMEZONEPOLICY property that sets the 
+  rules for timezone offset so remote clients can determine your local 
+  time. Note that since this set of values is associated with a server-side
+  property, you must set that property using 
+  Account::SetServersideIntPropertyserver-side.</p>
+  <ul>
+    <li>
+      TZ_AUTOMATIC - Account's timezone setting is determined 
+      automatically.
+    </li>
+    <li>
+      TZ_MANUAL - Account's timezone setting is set manually.
+    </li>
+    <li>
+      TZ_UNDISCLOSED - Remote users will have no idea what your local time 
+      is.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TZ_AUTOMATIC</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TZ_MANUAL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TZ_UNDISCLOSED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">TZ_AUTOMATIC</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">TZ_MANUAL</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">TZ_UNDISCLOSED</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="WEBPRESENCEPOLICY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">WEBPRESENCEPOLICY</h3>
+  <p>Recognized values for the P_WEBPRESENCEPOLICY property that controls 
+  whether your online status (presence) can be seen using the &quot;Skype 
+  buttons&quot; ( http://www.skype.com/share/buttons/ ) embedded in web 
+  pages. Note that since this set of values is associated with a 
+  server-side property, you must set that property using 
+  Account::SetServersideIntPropertyserver-side.</p>
+  <ul>
+    <li>
+      WEBPRESENCE_DISABLED - Disable displaying online status on web for 
+      this account.
+    </li>
+    <li>
+      WEBPRESENCE_ENABLED - Enable displaying online status on web for this
+      account.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">WEBPRESENCE_DISABLED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">WEBPRESENCE_ENABLED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">WEBPRESENCE_DISABLED</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">WEBPRESENCE_ENABLED</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="PHONENUMBERSPOLICY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">PHONENUMBERSPOLICY</h3>
+  <p>Recognized values for the P_PHONENUMBERSPOLICY property that controls 
+  whether unauthorized remote users can see associated phone numbers in 
+  their UI (for reference, see the different phone number tabs in Windows 
+  desktop Client contact view). Note that since this set of values is 
+  associated with a server-side property, you must set that property using 
+  Account::SetServersideIntProperty</p>
+  <ul>
+    <li>
+      PHONENUMBERS_VISIBLE_FOR_BUDDIES - Only authorized contacts can see 
+      the phone numbers.
+    </li>
+    <li>
+      PHONENUMBERS_VISIBLE_FOR_EVERYONE - Everyone can see the phone 
+      numbers.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PHONENUMBERS_VISIBLE_FOR_BUDDIES</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PHONENUMBERS_VISIBLE_FOR_EVERYONE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">PHONENUMBERS_VISIBLE_FOR_BUDDIES</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">PHONENUMBERS_VISIBLE_FOR_EVERYONE</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="VOICEMAILPOLICY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">VOICEMAILPOLICY</h3>
+  <p>Recognized values for the P_VOICEMAILPOLICY property that controls 
+  acceptance of incoming voicemail messages. Note that since this set of 
+  values is associated with a server-side property, you must set that 
+  property using Account::SetServersideIntPropertyserver-side.</p>
+  <ul>
+    <li>
+      VOICEMAIL_ENABLED - Incoming voicemails enabled.
+    </li>
+    <li>
+      VOICEMAIL_DISABLED - Incoming voicemails disabled.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VOICEMAIL_ENABLED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">VOICEMAIL_DISABLED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">VOICEMAIL_DISABLED</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">VOICEMAIL_ENABLED</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="CAPABILITYSTATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">CAPABILITYSTATUS</h3>
+  <p>Account capabability statuses are possible values of Contact class 
+  CAPABILITY enumerator, when that enumerator is used in context of 
+  account. Compared to Contact class CAPABILITYSTATUS enums, Account class 
+  CAPABILITYSTATUS has additional items for subscription expiration 
+  warnings.</p>
+  <ul>
+    <li>
+      NO_CAPABILITY - Capability is not supported by the currently logged 
+      in SkypeKit client.
+    </li>
+    <li>
+      CAPABILITY_EXISTS - Capability is supported by the currently logged 
+      in SkypeKit client.
+    </li>
+    <li>
+      FIRST_EXPIRY_WARNING - Support for this capability ends this month 
+      (within 30 days)
+    </li>
+    <li>
+      SECOND_EXPIRY_WARNING - Support for this capability ends this week 
+      (within 7 days)
+    </li>
+    <li>
+      FINAL_EXPIRY_WARNING - Support for this capability ends today
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NO_CAPABILITY</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CAPABILITY_EXISTS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FIRST_EXPIRY_WARNING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SECOND_EXPIRY_WARNING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">FINAL_EXPIRY_WARNING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CAPABILITY_EXISTS</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">FINAL_EXPIRY_WARNING</code><code class="variable-quote">'</code><code class="variable-op">: </code>4<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">FIRST_EXPIRY_WARNING</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Property Details</span></td>
+</tr>
+</table>
+<a name="status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">status</h3>
+  <p>Account::STATUS</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_status" class="summary-sig-name" onclick="show_private();">_sk_get_status</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Account::STATUS
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="pwdchangestatus"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">pwdchangestatus</h3>
+  <p>Account::PWDCHANGESTATUS</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_pwdchangestatus" class="summary-sig-name" onclick="show_private();">_sk_get_pwdchangestatus</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Account::PWDCHANGESTATUS
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="logoutreason"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">logoutreason</h3>
+  <p>This property should only be examined when Account::P_STATUS is 
+  LOGGED_OUT or LOGGED_OUT_AND_PWD_SAVED. That is, you should not monitor 
+  changes to this property in Account::OnChange callback, other than after 
+  already having checked that P_STATUS property has appropriate value. The 
+  reason for this is that the LOGOUTREASON does not get reset before the 
+  next login attempt. For example: if a user tried to log in with a wrong 
+  password, the LOGOUTREASON gets set to INCORRECT_PASSWORD. Now, if the 
+  user tries to log in again, and yet again submits an incorrect password, 
+  the value of the LOGOUTREASON does not change anymore, because it already
+  is set to INCORRECT_PASSWORD. Consequently, Account::OnChange will not 
+  fire in this case.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_logoutreason" class="summary-sig-name" onclick="show_private();">_sk_get_logoutreason</a>(<span class="summary-sig-arg">self</span>)</span>
+        - This property should only be examined when Account::P_STATUS is LOGGED_OUT 
+or LOGGED_OUT_AND_PWD_SAVED.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="commitstatus"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">commitstatus</h3>
+  <p>Account::COMMITSTATUS</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_commitstatus" class="summary-sig-name" onclick="show_private();">_sk_get_commitstatus</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Account::COMMITSTATUS
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="suggested_skypename"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">suggested_skypename</h3>
+  <p>suggested skypenames, semi-colon separated. present if 
+  logoutreason==SKYPENAME_TAKEN</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_suggested_skypename" class="summary-sig-name" onclick="show_private();">_sk_get_suggested_skypename</a>(<span class="summary-sig-arg">self</span>)</span>
+        - suggested skypenames, semi-colon separated.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="skypeout_balance_currency"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">skypeout_balance_currency</h3>
+  <p>'EUR', 'USD', etc.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_skypeout_balance_currency" class="summary-sig-name" onclick="show_private();">_sk_get_skypeout_balance_currency</a>(<span class="summary-sig-arg">self</span>)</span>
+        - 'EUR', 'USD', etc.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="skypeout_balance"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">skypeout_balance</h3>
+  <p>balance in 'cents'</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_skypeout_balance" class="summary-sig-name" onclick="show_private();">_sk_get_skypeout_balance</a>(<span class="summary-sig-arg">self</span>)</span>
+        - balance in 'cents'
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="skypeout_precision"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">skypeout_precision</h3>
+  <p>decimal points in ACCOUNT_SKYPEOUT_BALANCE</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_skypeout_precision" class="summary-sig-name" onclick="show_private();">_sk_get_skypeout_precision</a>(<span class="summary-sig-arg">self</span>)</span>
+        - decimal points in ACCOUNT_SKYPEOUT_BALANCE
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="skypein_numbers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">skypein_numbers</h3>
+  <p>space-separated list of skypein numbers</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_skypein_numbers" class="summary-sig-name" onclick="show_private();">_sk_get_skypein_numbers</a>(<span class="summary-sig-arg">self</span>)</span>
+        - space-separated list of skypein numbers
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="cblsyncstatus"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">cblsyncstatus</h3>
+  <p>Account::CBLSYNCSTATUS</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_cblsyncstatus" class="summary-sig-name" onclick="show_private();">_sk_get_cblsyncstatus</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Account::CBLSYNCSTATUS
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="offline_callforward"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">offline_callforward</h3>
+  <p>space-separated list of 'begSecond,endSecond,identity' tokens</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_offline_callforward" class="summary-sig-name" onclick="show_private();">_sk_get_offline_callforward</a>(<span class="summary-sig-arg">self</span>)</span>
+        - space-separated list of 'begSecond,endSecond,identity' tokens
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="chat_policy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">chat_policy</h3>
+  <p>Server-side account property, use SetServerside*Property() to set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_chat_policy" class="summary-sig-name" onclick="show_private();">_sk_get_chat_policy</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Server-side account property, use SetServerside*Property() to set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="skype_call_policy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">skype_call_policy</h3>
+  <p>Server-side account property, use SetServerside*Property() to set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_skype_call_policy" class="summary-sig-name" onclick="show_private();">_sk_get_skype_call_policy</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Server-side account property, use SetServerside*Property() to set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="pstn_call_policy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">pstn_call_policy</h3>
+  <p>Server-side account property, use SetServerside*Property() to set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_pstn_call_policy" class="summary-sig-name" onclick="show_private();">_sk_get_pstn_call_policy</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Server-side account property, use SetServerside*Property() to set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="avatar_policy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">avatar_policy</h3>
+  <p>Server-side account property, use SetServerside*Property() to set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_avatar_policy" class="summary-sig-name" onclick="show_private();">_sk_get_avatar_policy</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Server-side account property, use SetServerside*Property() to set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="buddycount_policy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">buddycount_policy</h3>
+  <p>Server-side account property, use SetServerside*Property() to set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_buddycount_policy" class="summary-sig-name" onclick="show_private();">_sk_get_buddycount_policy</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Server-side account property, use SetServerside*Property() to set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="timezone_policy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timezone_policy</h3>
+  <p>Server-side account property, use SetServerside*Property() to set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_timezone_policy" class="summary-sig-name" onclick="show_private();">_sk_get_timezone_policy</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Server-side account property, use SetServerside*Property() to set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="webpresence_policy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">webpresence_policy</h3>
+  <p>Server-side account property, use SetServerside*Property() to set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_webpresence_policy" class="summary-sig-name" onclick="show_private();">_sk_get_webpresence_policy</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Server-side account property, use SetServerside*Property() to set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="phonenumbers_policy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">phonenumbers_policy</h3>
+  <p>Server-side account property, use SetServerside*Property() to set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_phonenumbers_policy" class="summary-sig-name" onclick="show_private();">_sk_get_phonenumbers_policy</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Server-side account property, use SetServerside*Property() to set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="voicemail_policy"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">voicemail_policy</h3>
+  <p>Server-side account property, use SetServerside*Property() to set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_voicemail_policy" class="summary-sig-name" onclick="show_private();">_sk_get_voicemail_policy</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Server-side account property, use SetServerside*Property() to set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="partner_optedout"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">partner_optedout</h3>
+  <p>Alerts: opted out partner id's, space separated</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_partner_optedout" class="summary-sig-name" onclick="show_private();">_sk_get_partner_optedout</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Alerts: opted out partner id's, space separated
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="service_provider_info"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">service_provider_info</h3>
+  <p>service information if the user is a paid service provider</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_service_provider_info" class="summary-sig-name" onclick="show_private();">_sk_get_service_provider_info</a>(<span class="summary-sig-arg">self</span>)</span>
+        - service information if the user is a paid service provider
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="registration_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">registration_timestamp</h3>
+  <p>NB! Unlike your common UNIX timestamps, the registration_timestamp is 
+  special, as it counts MINUTES rather than seconds, from Epoch (January 1,
+  1970)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_registration_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_registration_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - NB! Unlike your common UNIX timestamps, the registration_timestamp is 
+special, as it counts MINUTES rather than seconds, from Epoch (January 1, 
+1970)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="nr_of_other_instances"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">nr_of_other_instances</h3>
+  <p>number of times this user is logged in from other computers</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_nr_of_other_instances" class="summary-sig-name" onclick="show_private();">_sk_get_nr_of_other_instances</a>(<span class="summary-sig-arg">self</span>)</span>
+        - number of times this user is logged in from other computers
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="skypename"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">skypename</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_skypename" class="summary-sig-name" onclick="show_private();">_sk_get_skypename</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="fullname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">fullname</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_fullname" class="summary-sig-name" onclick="show_private();">_sk_get_fullname</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="birthday"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">birthday</h3>
+  <p>YYYYMMDD</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_birthday" class="summary-sig-name" onclick="show_private();">_sk_get_birthday</a>(<span class="summary-sig-arg">self</span>)</span>
+        - YYYYMMDD
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="gender"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">gender</h3>
+  <p>1-male, 2-female</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_gender" class="summary-sig-name" onclick="show_private();">_sk_get_gender</a>(<span class="summary-sig-arg">self</span>)</span>
+        - 1-male, 2-female
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="languages"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">languages</h3>
+  <p>ISO language codes, space-separated</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_languages" class="summary-sig-name" onclick="show_private();">_sk_get_languages</a>(<span class="summary-sig-arg">self</span>)</span>
+        - ISO language codes, space-separated
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="country"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">country</h3>
+  <p>ISO country code</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_country" class="summary-sig-name" onclick="show_private();">_sk_get_country</a>(<span class="summary-sig-arg">self</span>)</span>
+        - ISO country code
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="province"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">province</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_province" class="summary-sig-name" onclick="show_private();">_sk_get_province</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="city"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">city</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_city" class="summary-sig-name" onclick="show_private();">_sk_get_city</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="phone_home"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">phone_home</h3>
+  <p>NB! string not integer</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_phone_home" class="summary-sig-name" onclick="show_private();">_sk_get_phone_home</a>(<span class="summary-sig-arg">self</span>)</span>
+        - NB! string not integer
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="phone_office"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">phone_office</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_phone_office" class="summary-sig-name" onclick="show_private();">_sk_get_phone_office</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="phone_mobile"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">phone_mobile</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_phone_mobile" class="summary-sig-name" onclick="show_private();">_sk_get_phone_mobile</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="emails"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">emails</h3>
+  <p>Space separated</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_emails" class="summary-sig-name" onclick="show_private();">_sk_get_emails</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Space separated
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="homepage"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">homepage</h3>
+  
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_homepage" class="summary-sig-name" onclick="show_private();">_sk_get_homepage</a>(<span class="summary-sig-arg">self</span>)</span>
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="about"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">about</h3>
+  <p>arbitrary introductory text</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_about" class="summary-sig-name" onclick="show_private();">_sk_get_about</a>(<span class="summary-sig-arg">self</span>)</span>
+        - arbitrary introductory text
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="profile_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">profile_timestamp</h3>
+  <p>UNIX timestamp of last profile change</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_profile_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_profile_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - UNIX timestamp of last profile change
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="mood_text"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">mood_text</h3>
+  <p>Personal mood text (visible to authorised users only). Max length 300 
+  bytes.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_mood_text" class="summary-sig-name" onclick="show_private();">_sk_get_mood_text</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Personal mood text (visible to authorised users only).
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="timezone"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">timezone</h3>
+  <p>24*3600+diff_to_UTC_in_seconds. nb! changes with DST</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_timezone" class="summary-sig-name" onclick="show_private();">_sk_get_timezone</a>(<span class="summary-sig-arg">self</span>)</span>
+        - 24*3600+diff_to_UTC_in_seconds.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="nrof_authed_buddies"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">nrof_authed_buddies</h3>
+  <p>Count of this user's authorized contacts.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_nrof_authed_buddies" class="summary-sig-name" onclick="show_private();">_sk_get_nrof_authed_buddies</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Count of this user's authorized contacts.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="availability"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">availability</h3>
+  <p>Contact::AVAILABILITY</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_availability" class="summary-sig-name" onclick="show_private();">_sk_get_availability</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Contact::AVAILABILITY
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="avatar_image"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">avatar_image</h3>
+  <p>Account avatar picture can be set with Account::SetBinProperty method.
+  The contact avatar picture is limited to max 96x96 pixels and 32000 
+  bytes. If the submitted avatar picture exceeds either of these size 
+  limits, it is the responsibility of your client to scale the image down 
+  to appropriate size.</p>
+  <p>The avatar pictures have to be in JPG format. A SkypeKit client can 
+  enable the user to set the Account avatar in other picture formats, in 
+  which case the picture should be converted to JPG before submitting 
+  it.</p>
+  <p>In any case, the avatar picture should be pre-validated with the 
+  Skype::ValidateAvatar method.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_avatar_image" class="summary-sig-name" onclick="show_private();">_sk_get_avatar_image</a>(<span class="summary-sig-arg">self</span>)</span>
+        - Account avatar picture can be set with Account::SetBinProperty method.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="avatar_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">avatar_timestamp</h3>
+  <p>UNIX timestamp of when current avatar was set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_avatar_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_avatar_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - UNIX timestamp of when current avatar was set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="mood_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">mood_timestamp</h3>
+  <p>UNIX timestamp of when current mood was set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_mood_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_mood_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - UNIX timestamp of when current mood was set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="rich_mood_text"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">rich_mood_text</h3>
+  <p>XML version of CONTACT_MOOD_TEXT. Max length 1000 bytes.</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Account-class.html#_sk_get_rich_mood_text" class="summary-sig-name" onclick="show_private();">_sk_get_rich_mood_text</a>(<span class="summary-sig-arg">self</span>)</span>
+        - XML version of CONTACT_MOOD_TEXT.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:39 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

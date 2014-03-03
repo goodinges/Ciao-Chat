@@ -1,0 +1,17 @@
+Building:
+make - Build 
+build options: 
+	TARGET_ARCH=(default i686, see sid/buildfiles/arch directory for other TARGET_ARCH options) - build for specific architecture
+	verbose=(0 | 1, default 0) - be verbose
+	MINIMAL_MODE=(0 | 1, default 0) - build minimal mode of the test program which is not doing real capturing/encoding/decoding/rendering
+make clean - clean build
+
+* If you compile with MINIMAL_MODE=0 then you need to install following packages on ubuntu:
+ - libx264-dev
+ - libXV-dev
+ - libavcodec-dev
+
+To run the application:
+  - in a terminal window, run ./videortphost-test
+  - in a terminal window, run ./linux-x86-skypekit-videortp
+  - in a terminal window, run ./skypekitclient -t pemfile

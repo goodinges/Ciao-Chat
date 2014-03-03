@@ -1,0 +1,6 @@
+
+The content of this directory and its subdirectories (unless specified othwerise) is labelled as Skype Platform Source Code.
+
+As per Skype Platform SDK Licence Agreement, chapter 2. You have agreed to:
+
+"install, use, and compile into binary form the Skype Platform Source Code for purposes of developing, testing, and incorporating the executable, binary form of the Skype Platform Source Code into your Platform Products (not in source code form or as standalone software);"

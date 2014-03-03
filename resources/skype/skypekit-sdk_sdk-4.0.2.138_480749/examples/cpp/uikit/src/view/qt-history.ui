@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>HistoryView</class>
+ <widget class="QWidget" name="HistoryView">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>300</width>
+    <height>428</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>History</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout">
+   <item>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <item>
+      <widget class="QLabel" name="label">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Sort by:</string>
+       </property>
+       <property name="buddy">
+        <cstring>sortComboBox</cstring>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QComboBox" name="sortComboBox">
+       <item>
+        <property name="text">
+         <string>Unread</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Date</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Name</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Type</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="markReadButton">
+       <property name="enabled">
+        <bool>false</bool>
+       </property>
+       <property name="toolTip">
+        <string>Mark all items read</string>
+       </property>
+       <property name="text">
+        <string>Mark Read</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
+    <widget class="QListView" name="historyListView">
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAlwaysOff</enum>
+     </property>
+     <property name="alternatingRowColors">
+      <bool>true</bool>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <tabstops>
+  <tabstop>sortComboBox</tabstop>
+  <tabstop>historyListView</tabstop>
+ </tabstops>
+ <resources/>
+ <connections/>
+</ui>

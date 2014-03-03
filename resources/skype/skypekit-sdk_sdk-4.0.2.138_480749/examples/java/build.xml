@@ -1,0 +1,115 @@
+<project name="SkypekitTutorials" basedir="." default="main">
+
+    <!-- source locations -->
+    <property name="tutorial.src" location="${basedir}" />
+    <property name="api.src"    location="${basedir}/../../interfaces/skype/java/api" />
+    <property name="wrapper.dir"    location="${api.src}" />
+    <property name="ipc.src"    location="${basedir}/../../ipc/java/" />
+
+    <!-- target directory for building -->
+    <property name="build.dir"   location="${basedir}/bin"/>
+
+	<path id="project.classpath">
+		<fileset dir="${wrapper.dir}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+    <target name="clean-all">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="make-build-dir">
+        <mkdir dir="${build.dir}"/>
+	</target>
+	
+    <target name="compile">
+		<property name="main-class"  value="com.skype.tutorial.step${step_number}.Tutorial_${step_number}" />
+        <javac destdir="${build.dir}" includeAntRuntime="false" classpathref="project.classpath">
+            <src path="${tutorial.src}"/>
+			<include name="**/step${step_number}/*.java"/>
+            <include name="**/apptoken/*.java"/>
+            <include name="**/util/*.java"/>
+        </javac>
+    </target>
+
+    <target name="1" depends="make-build-dir">
+		<property name="step_number" value="1" />
+		<antcall target="compile"/>
+    </target>
+
+    <target name="2" depends="make-build-dir">
+		<property name="step_number" value="2" />
+		<antcall target="compile"/>
+    </target>
+
+    <target name="3" depends="make-build-dir">
+		<property name="step_number" value="3" />
+		<antcall target="compile"/>
+    </target>
+
+    <target name="4" depends="make-build-dir">
+		<property name="step_number" value="4" />
+		<antcall target="compile"/>
+    </target>
+
+    <target name="5" depends="make-build-dir">
+		<property name="step_number" value="5" />
+		<antcall target="compile"/>
+    </target>
+
+    <target name="6" depends="make-build-dir">
+		<property name="step_number" value="6" />
+		<antcall target="compile"/>
+    </target>
+
+    <target name="7" depends="make-build-dir">
+		<property name="step_number" value="7" />
+		<antcall target="compile"/>
+    </target>
+
+    <target name="8" depends="make-build-dir">
+		<property name="step_number" value="8" />
+		<antcall target="compile"/>
+    </target>
+
+    <target name="9" depends="make-build-dir">
+		<property name="step_number" value="9" />
+		<antcall target="compile"/>
+    </target>
+
+    <target name="10" depends="make-build-dir">
+		<property name="step_number" value="10" />
+		<antcall target="compile"/>
+    </target>
+
+    <target name="11" depends="make-build-dir">
+		<property name="step_number" value="11" />
+		<antcall target="compile"/>
+    </target>
+
+    <target name="12" depends="make-build-dir">
+		<property name="step_number" value="12" />
+		<antcall target="compile"/>
+    </target>
+	
+	<target name="build-all" >
+		<ant target="1"/>
+		<ant target="2"/>
+		<ant target="3"/>
+		<ant target="4"/>
+		<ant target="5"/>
+		<ant target="6"/>
+		<ant target="7"/>
+		<ant target="8"/>
+		<ant target="9"/>
+		<ant target="10"/>
+		<ant target="11"/>
+		<ant target="12"/>
+    </target>
+	
+    <target name="all" depends="clean-all,build-all"/>
+
+    <target name="main" depends="all"/>
+
+</project>

@@ -1,0 +1,6 @@
+
+The content of this directory and its subdirectories (unless specified othwerise) is labelled as Skype Platform Object Code.
+
+As per Skype Platform SDK Licence Agreement, chapter 2. You have agreed to:
+
+"install and use the Skype Platform Object Code solely in its executable, binary form for the purpose of developing and testing Platform Products;"

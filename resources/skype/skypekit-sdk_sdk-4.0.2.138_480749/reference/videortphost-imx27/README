@@ -1,0 +1,12 @@
+SkypeKit reference VideoHost for Freescale i.MX27ADS and i.MX27PDK
+
+Installing:
+Copy i.MX27 VPU firmware version 2.2.5 (11/04/2009) to folder src/lib/vpu and apply patch file lib_vpu.patch. Default target is i.MX27PDK. For i.MX27ADS, replace IMX27PDK with IMX27ADS in build files.
+
+Building:
+make - Build
+build options:
+	verbose=(0 | 1, default 0) - be verbose
+	MINIMAL_MODE=(0 | 1, default 0) - build minimal mode of the test program which is not doing real capturing/encoding/decoding/rendering
+make loopback - build test program, which loops back video locally
+make clean - clean build

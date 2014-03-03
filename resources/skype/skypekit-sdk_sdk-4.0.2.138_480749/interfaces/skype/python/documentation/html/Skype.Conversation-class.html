@@ -1,0 +1,4169 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>Skype.Conversation</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        <a href="Skype-module.html">Module&nbsp;Skype</a> ::
+        Class&nbsp;Conversation
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS DESCRIPTION ==================== -->
+<h1 class="epydoc">Class Conversation</h1><p class="nomargin-top"><span class="codelink"><a href="Skype-pysrc.html#Conversation">source&nbsp;code</a></span></p>
+<pre class="base-tree">
+     object --+        
+              |        
+<a href="skypekit.Cached-class.html">skypekit.Cached</a> --+    
+                  |    
+    <a href="skypekit.Object-class.html">skypekit.Object</a> --+
+                      |
+                     <strong class="uidshort">Conversation</strong>
+</pre>
+
+<hr />
+<p>The Conversation class encapsulates all types of communication 
+  possible with Skype client. Instant messaging, calls, video calls, file 
+  transfers, SMS, screen sharing - all take place within the context of a 
+  Conversation. Contacts are represented in Conversation as Participant 
+  objects. This also applies to contacts of PSTN type. All events in a 
+  conversation are represented as Message objects.</p>
+
+<!-- ==================== INSTANCE METHODS ==================== -->
+<a name="section-InstanceMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_init_" class="summary-sig-name">_sk_init_</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">object_id</span>,
+        <span class="summary-sig-arg">transport</span>)</span><br />
+      actual constructor</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation._sk_init_">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#__str__" class="summary-sig-name">__str__</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      str(x)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.__str__">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnPropertyChange"></a><span class="summary-sig-name">OnPropertyChange</span>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">property_name</span>)</span><br />
+      notifies from a property change</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.OnPropertyChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#SetOption" class="summary-sig-name">SetOption</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">prop_key</span>,
+        <span class="summary-sig-arg">value</span>)</span><br />
+      Setter method for Conversation option properties.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.SetOption">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#SetTopic" class="summary-sig-name">SetTopic</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">topic</span>,
+        <span class="summary-sig-arg">is_xml</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Setter for Conversation class META_TOPIC.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.SetTopic">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#SetGuidelines" class="summary-sig-name">SetGuidelines</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">guidelines</span>,
+        <span class="summary-sig-arg">is_xml</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Setter for Conversation META_GUIDELINES.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.SetGuidelines">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#SetPicture" class="summary-sig-name">SetPicture</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">jpeg</span>)</span><br />
+      Sets the conversation's avatar to the specified JPEG image, which is 
+      propagated to both local and remote participants.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.SetPicture">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#SpawnConference" class="summary-sig-name">SpawnConference</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">identities_to_add</span>)</span><br />
+      When called from dialog conversation, this spawns a new conversation,
+      with existing two dialog participants plus new contact identities 
+      given in the identitiesToAdd list.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.SpawnConference">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#AddConsumers" class="summary-sig-name">AddConsumers</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">identities</span>)</span><br />
+      Takes one or more Contact identities and creates corresponding 
+      Participant objects within the context of this Conversation, which 
+      must be of type CONFERENCE.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.AddConsumers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#Assimilate" class="summary-sig-name">Assimilate</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">other_conversation</span>)</span><br />
+      Merges two live conversations.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.Assimilate">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#JoinLiveSession" class="summary-sig-name">JoinLiveSession</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">access_token</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      starts, answers or joins a live session (first one to join becomes 
+      LIVE_HOST)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.JoinLiveSession">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#RingOthers" class="summary-sig-name">RingOthers</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">identities</span>=<span class="summary-sig-default"><code class="variable-group">[</code><code class="variable-group">]</code></span>,
+        <span class="summary-sig-arg">video_call</span>=<span class="summary-sig-default">False</span>,
+        <span class="summary-sig-arg">origin</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      This is an alternative to calling Ring method for each Participant 
+      individually.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.RingOthers">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#MuteMyMicrophone" class="summary-sig-name">MuteMyMicrophone</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Sets VOICE_STATUS to LISTENING in the Participant instance associated
+      with us, causing any input from our microphone to be ignored.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.MuteMyMicrophone">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#UnmuteMyMicrophone" class="summary-sig-name">UnmuteMyMicrophone</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Sets VOICE_STATUS to SPEAKING in the Participant instance associated 
+      with us, causing any input from our microphone to be sent to the call
+      host.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.UnmuteMyMicrophone">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="HoldMyLiveSession"></a><span class="summary-sig-name">HoldMyLiveSession</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Puts the conversation on hold - Conversation LOCAL_LIVESTATUS changes
+      to ON_HOLD_LOCALLY and to ON_HOLD_REMOTELY for remote participants.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.HoldMyLiveSession">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="ResumeMyLiveSession"></a><span class="summary-sig-name">ResumeMyLiveSession</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Resumes call from local hold.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.ResumeMyLiveSession">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#LeaveLiveSession" class="summary-sig-name">LeaveLiveSession</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">post_voice_autoresponse</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Hang up or refuse to answer an incoming call.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.LeaveLiveSession">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#StartVoiceMessage" class="summary-sig-name">StartVoiceMessage</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Begin recording a voice mail for this conversation's remote 
+      participant.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.StartVoiceMessage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#TransferLiveSession" class="summary-sig-name">TransferLiveSession</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">identities</span>,
+        <span class="summary-sig-arg">transfer_topic</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      This method is for doing call transfers.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.TransferLiveSession">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#CanTransferLiveSession" class="summary-sig-name">CanTransferLiveSession</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">identity</span>)</span><br />
+      Checks if the identity is available for receiving a transferred live 
+      session.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.CanTransferLiveSession">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#SendDTMF" class="summary-sig-name">SendDTMF</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">dtmf</span>,
+        <span class="summary-sig-arg">length_in_ms</span>=<span class="summary-sig-default">260</span>)</span><br />
+      Sends DTMF tone to a live conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.SendDTMF">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#StopSendDTMF" class="summary-sig-name">StopSendDTMF</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Stops the current DTMF tone being played into conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.StopSendDTMF">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#SetMyTextStatusTo" class="summary-sig-name">SetMyTextStatusTo</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">status</span>)</span><br />
+      Sets local user typing indicator in the Conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.SetMyTextStatusTo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#PostText" class="summary-sig-name">PostText</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">is_xml</span>=<span class="summary-sig-default">False</span>)</span><br />
+      Posts the specified text the conversation, and populates message with
+      a reference to the corresponding Message object (if no error occurred
+      during execution).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.PostText">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#PostContacts" class="summary-sig-name">PostContacts</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">contacts</span>)</span><br />
+      Takes a list of Contacts as an argument and posts the list into the 
+      Conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.PostContacts">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#PostFiles" class="summary-sig-name">PostFiles</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">paths</span>,
+        <span class="summary-sig-arg">body</span>)</span><br />
+      Takes a list of fully-qualified filenames and initiates corresponding
+      file transfers in the conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.PostFiles">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#PostVoiceMessage" class="summary-sig-name">PostVoiceMessage</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">voicemail</span>,
+        <span class="summary-sig-arg">body</span>)</span><br />
+      Stops the active voicemail recording and sends it (dialog only)</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.PostVoiceMessage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#PostSMS" class="summary-sig-name">PostSMS</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">sms</span>,
+        <span class="summary-sig-arg">body</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span><br />
+      Takes an SMS instance created by Skype::CreateOutgoingSms and posts 
+      it in the conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.PostSMS">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#GetJoinBlob" class="summary-sig-name">GetJoinBlob</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Retrieves a binary join blob for joining public conversations, which 
+      are always of type CONFERENCE.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.GetJoinBlob">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#Join" class="summary-sig-name">Join</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Tries to join a public conversation (aka public chat).</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.Join">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#EnterPassword" class="summary-sig-name">EnterPassword</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">password</span>)</span><br />
+      Submits password for joining password-protected conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.EnterPassword">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#SetPassword" class="summary-sig-name">SetPassword</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">password</span>,
+        <span class="summary-sig-arg">hint</span>)</span><br />
+      Sets password protection/new password for the conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.SetPassword">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#RetireFrom" class="summary-sig-name">RetireFrom</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Leaves the conference.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.RetireFrom">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#Delete" class="summary-sig-name">Delete</a>(<span class="summary-sig-arg">self</span>)</span><br />
+      Deletes this conversation, which must be of type CONFERENCE - dialogs
+      between local user and any of his contacts are always persistant.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.Delete">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#RenameTo" class="summary-sig-name">RenameTo</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">name</span>)</span><br />
+      Changes the META_NAME property of the conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.RenameTo">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#SetBookmark" class="summary-sig-name">SetBookmark</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">bookmark</span>)</span><br />
+      Setter for Conversation class IS_BOOKMARKED.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.SetBookmark">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#SetAlertString" class="summary-sig-name">SetAlertString</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">alert_string</span>)</span><br />
+      Setter for Conversation class ALERT_STRING property.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.SetAlertString">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="RemoveFromInbox"></a><span class="summary-sig-name">RemoveFromInbox</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      Removes conversation from Inbox.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.RemoveFromInbox">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#AddToInbox" class="summary-sig-name">AddToInbox</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">timestamp</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Sets Conversation inbox_timestamp property.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.AddToInbox">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#SetConsumedHorizon" class="summary-sig-name">SetConsumedHorizon</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">timestamp</span>,
+        <span class="summary-sig-arg">also_unconsume</span>=<span class="summary-sig-default">False</span>)</span><br />
+      This method can be used to set the consumption (read) status of 
+      messages in the conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.SetConsumedHorizon">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="MarkUnread"></a><span class="summary-sig-name">MarkUnread</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      sets consumption horizon to last inbox message id timestamp</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.MarkUnread">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#IsMemberOf" class="summary-sig-name">IsMemberOf</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">group</span>)</span><br />
+      Checks if the conversation is a member of the given ContactGroup</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.IsMemberOf">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#GetParticipants" class="summary-sig-name">GetParticipants</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">filter</span>=<span class="summary-sig-default"><code class="variable-quote">'</code><code class="variable-string">ALL</code><code class="variable-quote">'</code></span>)</span><br />
+      Retrieves the list of this conversation's current participants, which
+      you can optionally request to be filtered.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.GetParticipants">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#GetLastMessages" class="summary-sig-name">GetLastMessages</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">require_timestamp</span>=<span class="summary-sig-default">0</span>)</span><br />
+      Returns recent messages.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.GetLastMessages">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#FindMessage" class="summary-sig-name">FindMessage</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">text</span>,
+        <span class="summary-sig-arg">from_timestamp_up</span>=<span class="summary-sig-default">4294967295</span>)</span><br />
+      Finds the most recent Message object in the conversation that 
+      contains the substring specified by the text argument.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.FindMessage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="OnParticipantListChange"></a><span class="summary-sig-name">OnParticipantListChange</span>(<span class="summary-sig-arg">self</span>)</span><br />
+      This callback gets fired when participants join or leave the 
+      conversation.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.OnParticipantListChange">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#OnMessage" class="summary-sig-name">OnMessage</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">message</span>)</span><br />
+      Called for each message in currently loaded conversations</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.OnMessage">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a href="Skype.Conversation-class.html#OnSpawnConference" class="summary-sig-name">OnSpawnConference</a>(<span class="summary-sig-arg">self</span>,
+        <span class="summary-sig-arg">spawned</span>)</span><br />
+      This callback gets fired when a new Conversation is created using 
+      SpawnConference.</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.OnSpawnConference">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#multiget">multiget</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__copy__">__copy__</a></code>
+      </p>
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__delattr__</code>,
+      <code>__format__</code>,
+      <code>__getattribute__</code>,
+      <code>__hash__</code>,
+      <code>__init__</code>,
+      <code>__reduce__</code>,
+      <code>__reduce_ex__</code>,
+      <code>__repr__</code>,
+      <code>__setattr__</code>,
+      <code>__sizeof__</code>,
+      <code>__subclasshook__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== STATIC METHODS ==================== -->
+<a name="section-StaticMethods"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Static Methods</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+      <table width="100%" cellpadding="0" cellspacing="0" border="0">
+        <tr>
+          <td><span class="summary-sig"><a name="propid"></a><span class="summary-sig-name">propid</span>(<span class="summary-sig-arg">propname</span>)</span><br />
+      convert a property name to the enum of the property</td>
+          <td align="right" valign="top">
+            <span class="codelink"><a href="Skype-pysrc.html#Conversation.propid">source&nbsp;code</a></span>
+            
+          </td>
+        </tr>
+      </table>
+      
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Cached-class.html">skypekit.Cached</a></code></b>:
+      <code><a href="skypekit.Cached-class.html#__new__">__new__</a></code>,
+      <code><a href="skypekit.Cached-class.html#sk_exists">sk_exists</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== CLASS VARIABLES ==================== -->
+<a name="section-ClassVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variables</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#event_handlers" class="summary-name">event_handlers</a> = <code title="{1: '_sk_on_participant_list_change',
+ 2: '_sk_on_message',
+ 3: '_sk_on_spawn_conference'}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk_on_participant_list_change</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#propid2label" class="summary-name">propid2label</a> = <code title="{902: 'type',
+ 903: 'creator',
+ 904: 'creation_timestamp',
+ 906: 'opt_entry_level_rank',
+ 907: 'opt_disclose_history',
+ 909: 'opt_admin_only_activities',
+ 910: 'meta_name',
+ 911: 'meta_topic',
+..."><code class="variable-group">{</code>902<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">type</code><code class="variable-quote">'</code><code class="variable-op">, </code>903<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">creator</code><code class="variable-quote">'</code><code class="variable-op">, </code>904<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">creation_ti</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="module_id"></a><span class="summary-name">module_id</span> = <code title="18">18</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#TYPE" class="summary-name">TYPE</a> = <code title="{1: 'DIALOG',
+ 2: 'CONFERENCE',
+ 3: 'TERMINATED_CONFERENCE',
+ 4: 'LEGACY_VOICE_CONFERENCE',
+ 5: 'LEGACY_SHAREDGROUP',
+ 'CONFERENCE': 2,
+ 'DIALOG': 1,
+ 'LEGACY_SHAREDGROUP': 5,
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DIALOG</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONFERENCE</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TERMINATED_CONFERENC</code><code class="variable-ellipsis">...</code></code><br />
+      DIALOG - 1:1 conversations, there is a one dialog per identity
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#MY_STATUS" class="summary-name">MY_STATUS</a> = <code title="{1: 'CONNECTING',
+ 2: 'RETRY_CONNECTING',
+ 3: 'DOWNLOADING_MESSAGES',
+ 4: 'QUEUED_TO_ENTER',
+ 5: 'APPLICANT',
+ 6: 'APPLICATION_DENIED',
+ 7: 'INVALID_ACCESS_TOKEN',
+ 8: 'CONSUMER',
+..."><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONNECTING</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RETRY_CONNECTING</code><code class="variable-quote">'</code><code class="variable-op">, </code>3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DOWNL</code><code class="variable-ellipsis">...</code></code><br />
+      CONNECTING - connecting to conference
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#LOCAL_LIVESTATUS" class="summary-name">LOCAL_LIVESTATUS</a> = <code title="{0: 'NONE',
+ 1: 'STARTING',
+ 2: 'RINGING_FOR_ME',
+ 3: 'IM_LIVE',
+ 5: 'ON_HOLD_LOCALLY',
+ 6: 'ON_HOLD_REMOTELY',
+ 7: 'OTHERS_ARE_LIVE',
+ 8: 'PLAYING_VOICE_MESSAGE',
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NONE</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">STARTING</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RINGING_FOR_</code><code class="variable-ellipsis">...</code></code><br />
+      NONE - there isn't a live session
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#ALLOWED_ACTIVITY" class="summary-name">ALLOWED_ACTIVITY</a> = <code title="{1: 'SET_META',
+ 2: 'ADD_CONSUMERS',
+ 4: 'SPEAK',
+ 8: 'SPEAK_AND_WRITE',
+ 'ADD_CONSUMERS': 2,
+ 'SET_META': 1,
+ 'SPEAK': 4,
+ 'SPEAK_AND_WRITE': 8}"><code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SET_META</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ADD_CONSUMERS</code><code class="variable-quote">'</code><code class="variable-op">, </code>4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SPE</code><code class="variable-ellipsis">...</code></code><br />
+      values for opt_admin_only_activities property
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#PARTICIPANTFILTER" class="summary-name">PARTICIPANTFILTER</a> = <code title="{0: 'ALL',
+ 1: 'CONSUMERS',
+ 2: 'APPLICANTS',
+ 3: 'CONSUMERS_AND_APPLICANTS',
+ 4: 'MYSELF',
+ 5: 'OTHER_CONSUMERS',
+ 'ALL': 0,
+ 'APPLICANTS': 2,
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ALL</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONSUMERS</code><code class="variable-quote">'</code><code class="variable-op">, </code>2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">APPLICANTS</code><code class="variable-quote">'</code><code class="variable-ellipsis">...</code></code><br />
+      ALL - All participants (may included some that are RETIRED or OUTLAW,
+      but not all of them)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#LIST_TYPE" class="summary-name">LIST_TYPE</a> = <code title="{0: 'ALL_CONVERSATIONS',
+ 1: 'INBOX_CONVERSATIONS',
+ 2: 'BOOKMARKED_CONVERSATIONS',
+ 3: 'LIVE_CONVERSATIONS',
+ 5: 'REALLY_ALL_CONVERSATIONS',
+ 'ALL_CONVERSATIONS': 0,
+ 'BOOKMARKED_CONVERSATIONS': 2,
+ 'INBOX_CONVERSATIONS': 1,
+..."><code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ALL_CONVERSATIONS</code><code class="variable-quote">'</code><code class="variable-op">, </code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INBOX_CONVERSATIONS</code><code class="variable-quote">'</code><code class="variable-op">,</code><code class="variable-ellipsis">...</code></code><br />
+      ALL_CONVERSATIONS - bookmarked or in_inbox or live or with_meta_info 
+      or activity in last 30 days
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_IDENTITY"></a><span class="summary-name">P_IDENTITY</span> = <code title="972">972</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_TYPE"></a><span class="summary-name">P_TYPE</span> = <code title="902">902</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LIVE_HOST"></a><span class="summary-name">P_LIVE_HOST</span> = <code title="918">918</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LIVE_START_TIMESTAMP"></a><span class="summary-name">P_LIVE_START_TIMESTAMP</span> = <code title="974">974</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LIVE_IS_MUTED"></a><span class="summary-name">P_LIVE_IS_MUTED</span> = <code title="996">996</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ALERT_STRING"></a><span class="summary-name">P_ALERT_STRING</span> = <code title="920">920</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_IS_BOOKMARKED"></a><span class="summary-name">P_IS_BOOKMARKED</span> = <code title="921">921</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_GIVEN_DISPLAYNAME"></a><span class="summary-name">P_GIVEN_DISPLAYNAME</span> = <code title="925">925</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_DISPLAYNAME"></a><span class="summary-name">P_DISPLAYNAME</span> = <code title="924">924</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LOCAL_LIVESTATUS"></a><span class="summary-name">P_LOCAL_LIVESTATUS</span> = <code title="927">927</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_INBOX_TIMESTAMP"></a><span class="summary-name">P_INBOX_TIMESTAMP</span> = <code title="928">928</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_INBOX_MESSAGE_ID"></a><span class="summary-name">P_INBOX_MESSAGE_ID</span> = <code title="973">973</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_UNCONSUMED_SUPPRESSED_MESSAGES"></a><span class="summary-name">P_UNCONSUMED_SUPPRESSED_MESSAGES</span> = <code title="975">975</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_UNCONSUMED_NORMAL_MESSAGES"></a><span class="summary-name">P_UNCONSUMED_NORMAL_MESSAGES</span> = <code title="976">976</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_UNCONSUMED_ELEVATED_MESSAGES"></a><span class="summary-name">P_UNCONSUMED_ELEVATED_MESSAGES</span> = <code title="977">977</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_UNCONSUMED_MESSAGES_VOICE"></a><span class="summary-name">P_UNCONSUMED_MESSAGES_VOICE</span> = <code title="970">970</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_ACTIVE_VM_ID"></a><span class="summary-name">P_ACTIVE_VM_ID</span> = <code title="971">971</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CONSUMPTION_HORIZON"></a><span class="summary-name">P_CONSUMPTION_HORIZON</span> = <code title="979">979</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_LAST_ACTIVITY_TIMESTAMP"></a><span class="summary-name">P_LAST_ACTIVITY_TIMESTAMP</span> = <code title="981">981</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_SPAWNED_FROM_CONVO_ID"></a><span class="summary-name">P_SPAWNED_FROM_CONVO_ID</span> = <code title="915">915</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CREATOR"></a><span class="summary-name">P_CREATOR</span> = <code title="903">903</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_CREATION_TIMESTAMP"></a><span class="summary-name">P_CREATION_TIMESTAMP</span> = <code title="904">904</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_MY_STATUS"></a><span class="summary-name">P_MY_STATUS</span> = <code title="919">919</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_OPT_JOINING_ENABLED"></a><span class="summary-name">P_OPT_JOINING_ENABLED</span> = <code title="922">922</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_OPT_ENTRY_LEVEL_RANK"></a><span class="summary-name">P_OPT_ENTRY_LEVEL_RANK</span> = <code title="906">906</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_OPT_DISCLOSE_HISTORY"></a><span class="summary-name">P_OPT_DISCLOSE_HISTORY</span> = <code title="907">907</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_OPT_ADMIN_ONLY_ACTIVITIES"></a><span class="summary-name">P_OPT_ADMIN_ONLY_ACTIVITIES</span> = <code title="909">909</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_PASSWORDHINT"></a><span class="summary-name">P_PASSWORDHINT</span> = <code title="980">980</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_META_NAME"></a><span class="summary-name">P_META_NAME</span> = <code title="910">910</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_META_TOPIC"></a><span class="summary-name">P_META_TOPIC</span> = <code title="911">911</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_META_GUIDELINES"></a><span class="summary-name">P_META_GUIDELINES</span> = <code title="913">913</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="P_META_PICTURE"></a><span class="summary-name">P_META_PICTURE</span> = <code title="914">914</code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#SETUPKEY_ENABLE_BIRTHDAY_NOTIFICATION" class="summary-name">SETUPKEY_ENABLE_BIRTHDAY_NOTIFICATION</a> = <code title="'Lib/Conversation/EnableBirthday'"><code class="variable-quote">'</code><code class="variable-string">Lib/Conversation/Enab</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#SETUPKEY_INBOX_UPDATE_TIMEOUT" class="summary-name">SETUPKEY_INBOX_UPDATE_TIMEOUT</a> = <code title="'Lib/Conversation/InboxUpdateTimeout'"><code class="variable-quote">'</code><code class="variable-string">Lib/Conversation/InboxUpdateT</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#SETUPKEY_RECENTLY_LIVE_TIMEOUT" class="summary-name">SETUPKEY_RECENTLY_LIVE_TIMEOUT</a> = <code title="'Lib/Conversation/RecentlyLiveTimeout'"><code class="variable-quote">'</code><code class="variable-string">Lib/Conversation/RecentlyLiv</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_DISABLE_CHAT"></a><span class="summary-name">SETUPKEY_DISABLE_CHAT</span> = <code title="'Lib/Chat/DisableChat'"><code class="variable-quote">'</code><code class="variable-string">Lib/Chat/DisableChat</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_DISABLE_CHAT_HISTORY"></a><span class="summary-name">SETUPKEY_DISABLE_CHAT_HISTORY</span> = <code title="'Lib/Message/DisableHistory'"><code class="variable-quote">'</code><code class="variable-string">Lib/Message/DisableHistory</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_CHAT_HISTORY_DAYS"></a><span class="summary-name">SETUPKEY_CHAT_HISTORY_DAYS</span> = <code title="'Lib/Chat/HistoryDays'"><code class="variable-quote">'</code><code class="variable-string">Lib/Chat/HistoryDays</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_CHATDB_LIMIT_KB"></a><span class="summary-name">SETUPKEY_CHATDB_LIMIT_KB</span> = <code title="'Lib/Chat/ChatDBLimitKb'"><code class="variable-quote">'</code><code class="variable-string">Lib/Chat/ChatDBLimitKb</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#SETUPKEY_DISABLE_CHAT_ACTIVITY_INDICATION" class="summary-name">SETUPKEY_DISABLE_CHAT_ACTIVITY_INDICATION</a> = <code title="'Lib/Chat/DisableActivityIndication'"><code class="variable-quote">'</code><code class="variable-string">Lib/Chat/DisableA</code><code class="variable-ellipsis">...</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_CALL_NOANSWER_TIMEOUT"></a><span class="summary-name">SETUPKEY_CALL_NOANSWER_TIMEOUT</span> = <code title="'Lib/Call/NoAnswerTimeout'"><code class="variable-quote">'</code><code class="variable-string">Lib/Call/NoAnswerTimeout</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_CALL_SEND_TO_VM"></a><span class="summary-name">SETUPKEY_CALL_SEND_TO_VM</span> = <code title="'Lib/Call/SendToVM'"><code class="variable-quote">'</code><code class="variable-string">Lib/Call/SendToVM</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_CALL_APPLY_CF"></a><span class="summary-name">SETUPKEY_CALL_APPLY_CF</span> = <code title="'Lib/Call/ApplyCF'"><code class="variable-quote">'</code><code class="variable-string">Lib/Call/ApplyCF</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a name="SETUPKEY_CALL_EMERGENCY_COUNTRY"></a><span class="summary-name">SETUPKEY_CALL_EMERGENCY_COUNTRY</span> = <code title="'Lib/Call/EmergencyCountry'"><code class="variable-quote">'</code><code class="variable-string">Lib/Call/EmergencyCountry</code><code class="variable-quote">'</code></code>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#rwlock">rwlock</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== INSTANCE VARIABLES ==================== -->
+<a name="section-InstanceVariables"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Instance Variables</span></td>
+</tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code><a href="skypekit.Object-class.html">skypekit.Object</a></code></b>:
+      <code><a href="skypekit.Object-class.html#properties">properties</a></code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== PROPERTIES ==================== -->
+<a name="section-Properties"></a>
+<table class="summary" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Properties</span></td>
+</tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#identity" class="summary-name">identity</a><br />
+      contact identity in case of dialogs, chat name in case of conferences
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#type" class="summary-name">type</a><br />
+      type of the conversation
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#live_host" class="summary-name">live_host</a><br />
+      host of current live session.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#live_start_timestamp" class="summary-name">live_start_timestamp</a><br />
+      moment when first participant other than host joined the current or 
+      last live session
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#live_is_muted" class="summary-name">live_is_muted</a><br />
+      if live session is muted
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#alert_string" class="summary-name">alert_string</a><br />
+      '' everything matches, '=' nothing matches, '=string' string matches
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#is_bookmarked" class="summary-name">is_bookmarked</a><br />
+      if conversation is bookmarked/flagged
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#given_displayname" class="summary-name">given_displayname</a><br />
+      name assigned via GiveDisplayname
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#displayname" class="summary-name">displayname</a><br />
+      resulting display name of the conversation (based on given name, 
+      topic, participant list, etc)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#local_livestatus" class="summary-name">local_livestatus</a><br />
+      if the conversation is live and in which status it is then
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#inbox_timestamp" class="summary-name">inbox_timestamp</a><br />
+      timestamp to sort the conversations in inbox by.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#inbox_message_id" class="summary-name">inbox_message_id</a><br />
+      ID of the message that caused INBOX_TIMESTAMP to be set
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#unconsumed_suppressed_messages" class="summary-name">unconsumed_suppressed_messages</a><br />
+      number of messages in UNCONSUMED_SUPPRESSED consumption status
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#unconsumed_normal_messages" class="summary-name">unconsumed_normal_messages</a><br />
+      number of messages in UNCONSUMED_NORMAL consumption status
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#unconsumed_elevated_messages" class="summary-name">unconsumed_elevated_messages</a><br />
+      DEPRECATED, not set anymore
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#unconsumed_messages_voice" class="summary-name">unconsumed_messages_voice</a><br />
+      if there are unconsumed voice or call messages in the conversation
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#active_vm_id" class="summary-name">active_vm_id</a><br />
+      ID of voice message that is being played or recorded in this 
+      conversation
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#consumption_horizon" class="summary-name">consumption_horizon</a><br />
+      consumption cutoff timestamp: messages after (but not including) this
+      are considered unconsumed
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#last_activity_timestamp" class="summary-name">last_activity_timestamp</a><br />
+      timestamp of last activity in conversation
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#spawned_from_convo_id" class="summary-name">spawned_from_convo_id</a><br />
+      dialog this conference was spawned from
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#creator" class="summary-name">creator</a><br />
+      identity of conversation creator (doesn't apply to dialogs)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#creation_timestamp" class="summary-name">creation_timestamp</a><br />
+      timestamp of creation, tells you how far you can retrieve messages
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#my_status" class="summary-name">my_status</a><br />
+      my status in this conversation (connecting, participating, retired, 
+      etc) (doesn't apply to dialogs)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#opt_joining_enabled" class="summary-name">opt_joining_enabled</a><br />
+      if it's a public conversation (doesn't apply to dialogs)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#opt_entry_level_rank" class="summary-name">opt_entry_level_rank</a><br />
+      rank that is auto-assigned at join (doesn't apply to dialogs)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#opt_disclose_history" class="summary-name">opt_disclose_history</a><br />
+      if history visible to new consumers (doesn't apply to dialogs)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#opt_admin_only_activities" class="summary-name">opt_admin_only_activities</a><br />
+      activities that only ADMIN can do.
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#passwordhint" class="summary-name">passwordhint</a><br />
+      public conversation password hint, use SetPassword to set (doesn't 
+      apply to dialogs)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#meta_name" class="summary-name">meta_name</a><br />
+      user-set name, separate from topic (doesn't apply to dialogs)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#meta_topic" class="summary-name">meta_topic</a><br />
+      conversation topic (doesn't apply to dialogs)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#meta_guidelines" class="summary-name">meta_guidelines</a><br />
+      guidelines (doesn't apply to dialogs)
+    </td>
+  </tr>
+<tr>
+    <td width="15%" align="right" valign="top" class="summary">
+      <span class="summary-type">&nbsp;</span>
+    </td><td class="summary">
+        <a href="Skype.Conversation-class.html#meta_picture" class="summary-name">meta_picture</a><br />
+      conversation picture, in jpeg format (doesn't apply to dialogs)
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2" class="summary">
+    <p class="indent-wrapped-lines"><b>Inherited from <code>object</code></b>:
+      <code>__class__</code>
+      </p>
+    </td>
+  </tr>
+</table>
+<!-- ==================== METHOD DETAILS ==================== -->
+<a name="section-MethodDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Method Details</span></td>
+</tr>
+</table>
+<a name="_sk_init_"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">_sk_init_</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">object_id</span>,
+        <span class="sig-arg">transport</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation._sk_init_">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>actual constructor</p>
+  <dl class="fields">
+    <dt>Overrides:
+        <a href="skypekit.Object-class.html#_sk_init_">skypekit.Object._sk_init_</a>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="__str__"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">__str__</span>(<span class="sig-arg">self</span>)</span>
+    <br /><em class="fname">(Informal representation operator)</em>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.__str__">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>str(x)</p>
+  <dl class="fields">
+    <dt>Overrides:
+        object.__str__
+        <dd><em class="note">(inherited documentation)</em></dd>
+    </dt>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetOption"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetOption</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">prop_key</span>,
+        <span class="sig-arg">value</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.SetOption">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setter method for Conversation option properties. Option properties 
+  are all Conversation properties starting with OPT_ prefix.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>prop_key</b> - Conversation property key, for example: 
+      Conversation::OPT_JOINING_ENABLED
+    </li>
+    <li>
+      <b>value</b> - New value for the option property.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetTopic"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetTopic</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">topic</span>,
+        <span class="sig-arg">is_xml</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.SetTopic">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setter for Conversation class META_TOPIC. This topic will be set for 
+  remote participants as well.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>topic</b> - New conversation topic.
+    </li>
+    <li>
+      <b>is_xml</b> - Notifies remote UIs that the new topic contains xml 
+      tags.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetGuidelines"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetGuidelines</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">guidelines</span>,
+        <span class="sig-arg">is_xml</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.SetGuidelines">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setter for Conversation META_GUIDELINES. This property will be visible
+  to remote participants of the conversation.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>guidelines</b> - New value for the META_GUIDELINES property.
+    </li>
+    <li>
+      <b>is_xml</b> - Set true to notify remote UIs that the new guideline 
+      contains XML tags.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetPicture"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetPicture</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">jpeg</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.SetPicture">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets the conversation's avatar to the specified JPEG image, which is 
+  propagated to both local and remote participants. Before calling this 
+  method, you should use Skype::ValidateAvatar to verify that jpeg 
+  references a valid JPEG image.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>jpeg</b> - Conversation avatar binary.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SpawnConference"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SpawnConference</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">identities_to_add</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.SpawnConference">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>When called from dialog conversation, this spawns a new conversation, 
+  with existing two dialog participants plus new contact identities given 
+  in the identitiesToAdd list. You do not need to add existing dialog 
+  participants to the string list. In fact, passing only the existing 
+  participants in the identities list will cause the method call to fail 
+  (return false), the same as if the list was empty. This method will also 
+  return false if the original conversation was not a dialog (contained 
+  more than two participants). Also note that this method always creates a 
+  new Conversation - even if a conversation with exactly the same 
+  participant list existed before.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>identities_to_add</b> - String list of additional participant 
+      identities. You do not need to add existing two participants from the
+      original dialog to this list.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>conference</b> - Returns the resulting conversation or 0 if the 
+      method call failed.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AddConsumers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AddConsumers</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">identities</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.AddConsumers">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Takes one or more Contact identities and creates corresponding 
+  Participant objects within the context of this Conversation, which must 
+  be of type CONFERENCE. If you have an existing dialog conversation, use 
+  SpawnConference instead.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>identities</b> - Contact identities to be added to the 
+      Conversation.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Assimilate"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Assimilate</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">other_conversation</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.Assimilate">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Merges two live conversations. For example, if the user already has a 
+  live conversation up - let's call it conversation A. Then a new incoming 
+  call occurs - another conversation obtains LOCAL_LIVESTATUS == 
+  Conversation::RINGING_FOR_ME, let's call it conversation B. The user 
+  wishes to pick up the new incoming call and add it to the existing one. 
+  For this you can first call B-&gt;JoinLiveSession and then merge two 
+  calls with A-&gt;Assimilate(B, A). The second argument will return the 
+  merged conversation. Note that there are actually three conversation 
+  objects involved: A (before merge), B and C (after the merge). Normally 
+  it would make sense to have the first conversation (A) as the second 
+  argument, so that it gets overwritten with the assimilation result.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>other_conversation</b> - The new conversation to be merged with 
+      the one already in live state.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>conversation</b> - Returns a 3rd live conversation, result of 
+      merging two existing ones.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="JoinLiveSession"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">JoinLiveSession</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">access_token</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.JoinLiveSession">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>starts, answers or joins a live session (first one to join becomes 
+  LIVE_HOST)</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>access_token</b> - if starting a live session, allows to set a 
+      custom access token
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="RingOthers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RingOthers</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">identities</span>=<span class="sig-default"><code class="variable-group">[</code><code class="variable-group">]</code></span>,
+        <span class="sig-arg">video_call</span>=<span class="sig-default">False</span>,
+        <span class="sig-arg">origin</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.RingOthers">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This is an alternative to calling Ring method for each Participant 
+  individually. This also works with dialogs (with identities containing 
+  only one item).</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>identities</b> - List of Participants to ring. Leaving the list 
+      empty will result in ringing all participants of at least speaker 
+      level.
+    </li>
+    <li>
+      <b>video_call</b> - If true, indicates that we want to do a video 
+      call (video still needs to be separately enabled)
+    </li>
+    <li>
+      <b>origin</b> - When call is initiated from web link, this argument 
+      must contain the URI that was used
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="MuteMyMicrophone"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">MuteMyMicrophone</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.MuteMyMicrophone">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets VOICE_STATUS to LISTENING in the Participant instance associated 
+  with us, causing any input from our microphone to be ignored. This is a 
+  Conversation class method, rather than Participant class, because this 
+  only applies to local participant.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="UnmuteMyMicrophone"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">UnmuteMyMicrophone</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.UnmuteMyMicrophone">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets VOICE_STATUS to SPEAKING in the Participant instance associated 
+  with us, causing any input from our microphone to be sent to the call 
+  host. This is a Conversation class method, rather than Participant class,
+  because this only applies to local participant.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="LeaveLiveSession"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">LeaveLiveSession</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">post_voice_autoresponse</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.LeaveLiveSession">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Hang up or refuse to answer an incoming call. Set 
+  postVoiceAutoresponse to true to enable a caller to leave a voicemail 
+  message.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>post_voice_autoresponse</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="StartVoiceMessage"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">StartVoiceMessage</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.StartVoiceMessage">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Begin recording a voice mail for this conversation's remote 
+  participant. Applies to conversations of type DIALOG only.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="TransferLiveSession"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">TransferLiveSession</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">identities</span>,
+        <span class="sig-arg">transfer_topic</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.TransferLiveSession">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method is for doing call transfers. NB! Call transfers only work 
+  in one-on-one conversations (dialogs). Before attempting call transfer, 
+  you should check availability of transfer recipients with Conversation 
+  class CanTransferLiveSession method. If the current conversation has a 
+  live session up, that session (call) will be transferred to targets 
+  specified in the identities list. Note that identities is a string list -
+  all identities in that list will get incoming calls. The first one of 
+  them to pick up the call - wins, and rest of the transfer targets will 
+  stop ringing.</p>
+  <p>Let's take a closer look how this works in practice. We have three 
+  call participants involved in the process, and two separate 
+  conversations. Let there be three callers: Caller A (call originator), 
+  Caller B (transferor) and Caller C (recipient of transfer).</p>
+  <ul>
+    <li>
+      Caller A - calls Caller B; Caller B picks up the call - live 
+      conversation C1 is now up with A and B in it.
+    </li>
+    <li>
+      After awhile, Caller B initiates call transfers to Caller C (and 
+      optionally to Callers D, E, F.. ). LOCAL_LIVESTATUS of C1 will get 
+      set to TRANSFERRING for both A and B.
+    </li>
+    <li>
+      Caller C picks up the call. Conversation C1 will go off live status. 
+      For Caller B, conversation C1 LOCAL_LIVESTATUS will change to 
+      RECENTLY_LIVE. Another live conversation - C2 gets spawned, with 
+      Caller A and Caller C in it. For caller C, participant object 
+      representing caller A will have TRANSFERRED_BY property set to 
+      identity of caller A. For Caller B (in now no longer live 
+      conversation C1), participant object representing caller A gets its 
+      TRANSFERRED_TO property set to identity of caller C.
+    </li>
+  </ul>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>identities</b> - String list of transfer target identities. As 
+      soon as first one in this list picks up the call, others will stop 
+      ringing.
+    </li>
+    <li>
+      <b>transfer_topic</b> - Optional conversation topic. This value will 
+      get set as META_TOPIC property of the conversation at the transferee 
+      end. Note that this is the only case where META_TOPIC field is used 
+      in context of dialog conversations. Thus assumption that remote UI 
+      will display topic field in case of dialogs may not be 100% correct.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="CanTransferLiveSession"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">CanTransferLiveSession</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">identity</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.CanTransferLiveSession">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks if the identity is available for receiving a transferred live 
+  session. If you are going to attempt to go for multiple transfer targets,
+  you should use this check for all the target identities.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>identity</b> - Target identity.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b> - Returns true if call transfer to given target is 
+      possible.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SendDTMF"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SendDTMF</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">dtmf</span>,
+        <span class="sig-arg">length_in_ms</span>=<span class="sig-default">260</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.SendDTMF">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sends DTMF tone to a live conversation.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>dtmf</b> - Outgoing dtmf tone, possible values come from 
+      Participant::DTMF enumerator.
+    </li>
+    <li>
+      <b>length_in_ms</b> - Duration in milliseconds. Defaults to 260 ms. 
+      Note that the DTMF tone can be also cancelled with 
+      Conversation::StopSendDTMF method.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="StopSendDTMF"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">StopSendDTMF</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.StopSendDTMF">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Stops the current DTMF tone being played into conversation. For 
+  example, use this method to cancel DTMF signals started with 
+  Conversation::SendDTMF before the duration given in lengthInMS runs 
+  out.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetMyTextStatusTo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetMyTextStatusTo</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">status</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.SetMyTextStatusTo">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets local user typing indicator in the Conversation. Remote 
+  Participants can display these in their UI.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>status</b> - Typing indicator status value - 
+      Participant::TEXT_STATUS
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="PostText"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">PostText</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">text</span>,
+        <span class="sig-arg">is_xml</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.PostText">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Posts the specified text the conversation, and populates message with 
+  a reference to the corresponding Message object (if no error occurred 
+  during execution). The isXML argument can be used if the client UI has 
+  already taken care of converting message text to xml (for example, your 
+  UI might enable users to use bold tags in text messages.)</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>text</b> - Text value of the outgoing message (gets set as 
+      BODY_XML property of the Message object).
+    </li>
+    <li>
+      <b>is_xml</b> - For cases where the text argument was already encoded
+      as xml message.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>message</b> - Returns the Message object created as a result of 
+      this method (if successful).
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="PostContacts"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">PostContacts</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">contacts</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.PostContacts">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Takes a list of Contacts as an argument and posts the list into the 
+  Conversation. The purpose of this feature is to enable sharing contacts 
+  between users, without resorting to contact search. Instead, if user A 
+  has contacts B and C, he can post contact C into chat with contact B. At 
+  this point, Contact B can add contact C to his contact list. From remote 
+  side, the posted contacts will appear as messages with type 
+  Message::POSTED_CONTACTS appearing in the conversation. The UI should 
+  allow adding these contacts from messages with this type into the contact
+  list.</p>
+  <p>The list of posted contacts can be retrieved with the 
+  Message::GetContacts method.</p>
+  <p>Additionally, the UI then can parse the posted Contact data out of the
+  Message::P_BODY_XML property. The list of contacts is wrapped between 
+  &lt;contacts ..&gt; &lt;/contacts&gt; tags. Each contact item in the xml 
+  has following format:</p>
+  <ul>
+    <li>
+      t - contact type. &quot;s&quot; - skype contact; &quot;p&quot; - 
+      phone number;
+    </li>
+    <li>
+      s - skypename, present only in skypename contacts (t=&quot;s&quot;)
+    </li>
+    <li>
+      p - phone number, present only in phone number contacts 
+      (t=&quot;p&quot;)
+    </li>
+    <li>
+      f - contact's full name, if available
+    </li>
+    <li>
+      d - contact's display name, if available
+    </li>
+  </ul>
+  <p>Note that only the type (t) field is mandatory. Depending on type, 
+  either skypename (s) or phone number (p) fields are always present. Full 
+  name and display name fields are optional.</p>
+  <p>Example BODY_XML with skypname contact: :</p>
+<pre class="literalblock">
+ &lt;contacts alt=&quot;alt text&quot;&gt;&lt;c t=&quot;s&quot; s=&quot;skypename&quot; f=&quot;full name&quot;/&gt;&lt;/contacts&gt; 
+</pre>
+  <p>Example BODY_XML with PSTN contact: :</p>
+<pre class="literalblock">
+ &lt;contacts alt=&quot;alt text&quot;&gt;&lt;c t=&quot;p&quot; p=&quot;+37212345678&quot; d=&quot;Some PSTN number&quot;/&gt;&lt;/contacts&gt; 
+</pre>
+  <p>Example BODY_XML with multiple contacts: :</p>
+<pre class="literalblock">
+ &lt;contacts alt=&quot;alt text&quot;&gt;&lt;c t=&quot;p&quot; p=&quot;+37212345678&quot; d=&quot;Some PSTN number&quot;/&gt;&lt;c t=&quot;s&quot; s=&quot;someskypename&quot;/&gt;&lt;/contacts&gt; 
+</pre>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>contacts</b> - List of Contact objects, to be posted in the 
+      conversation.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="PostFiles"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">PostFiles</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">paths</span>,
+        <span class="sig-arg">body</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.PostFiles">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Takes a list of fully-qualified filenames and initiates corresponding 
+  file transfers in the conversation. From the remote side, incoming file 
+  transfers will appear as a conversation message with type POSTED_FILES. 
+  Once such a message is detected, the list of file transfer objects can be
+  retrieved with Message::GetTransfers. At that point, remote participants 
+  will need to accept or decline those transfers.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>paths</b> - list of fully-qualified filenames to be transferred
+    </li>
+    <li>
+      <b>body</b> - Optional BODY_XML property for POSTED_FILES type 
+      messages that show up in remote UI.
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>error_code</b> - Error code, possible values come from the 
+      TRANSFER_SENDFILE_ERROR enumerator. This will be set for the first 
+      failed fail. The failed file is identified in the error_file return 
+      argument.
+    </li>
+    <li>
+      <b>error_file</b> - Filename of the file that triggered error.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="PostVoiceMessage"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">PostVoiceMessage</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">voicemail</span>,
+        <span class="sig-arg">body</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.PostVoiceMessage">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Stops the active voicemail recording and sends it (dialog only)</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>voicemail</b> - This argument is deprecated as of SDK version 3.2.
+      Instead of manually constructing Voicemail object, you can call 
+      Conversation::StartVoiceMessage method to start recording a voicemail
+      in context of a dialog. PostVoiceMessage will stop recording this 
+      voicemail and post it in the dialog. If instead of sending Voicemail,
+      the user decides to cancel it, you should use 
+      Conversation::LeaveLiveSession method (Voicemail::Cancel is 
+      deprecated).
+    </li>
+    <li>
+      <b>body</b> - Optional text message that remote UI can display in 
+      conversation, to notify the user of a new voicemail.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="PostSMS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">PostSMS</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">sms</span>,
+        <span class="sig-arg">body</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string"></code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.PostSMS">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Takes an SMS instance created by Skype::CreateOutgoingSms and posts it
+  in the conversation. Note that you will need to set both Sms body text 
+  (Sms::SetBody) and recipient list (Sms::SetTargets) before you can post 
+  the object.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>sms</b> - SMS object.
+    </li>
+    <li>
+      <b>body</b> - This argument is currently ignored. The message text 
+      needs to be set with Sms::SetBody method, prior to passing the Sms 
+      object to this method
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetJoinBlob"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetJoinBlob</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.GetJoinBlob">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieves a binary join blob for joining public conversations, which 
+  are always of type CONFERENCE. If called for a dialog, the blob argument 
+  will contain the empty string. The best way to create a Public Chat is to
+  first create a fresh conversation with Skype class CreateConference, then
+  minimally apply the public chat options OPT_JOINING_ENABLED and 
+  OPT_ENTRY_LEVEL_RANK - options, like this (C++): :</p>
+<pre class="literalblock">
+ C-&gt;SetOption(Conversation::OPT_JOINING_ENABLED, true); 
+</pre>
+  <p>When that is done, you can call GetJoinBlob to retrieve the blob 
+  string. Use the blob string to generate and post an HTML link whose href 
+  attribute looks like this: 
+  href=&quot;skype:?chat&amp;blob=_BLOB_GOES_HERE&quot; A person running 
+  Skype desktop client can click this link to join the conversation and 
+  have that conversation opened in his UI. Note that the conversation host 
+  (creator) needs to be online for new joiners-via-link to start 
+  participating in the Public Chat.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>blob</b> - Returns the public conversation join blob.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Join"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Join</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.Join">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Tries to join a public conversation (aka public chat). This method is 
+  only useful if you have used Skype::GetConversationByBlob method with 
+  alsoJoin argument set to false.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="EnterPassword"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">EnterPassword</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">password</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.EnterPassword">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Submits password for joining password-protected conversation.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>password</b> - Password string.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetPassword"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetPassword</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">password</span>,
+        <span class="sig-arg">hint</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.SetPassword">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets password protection/new password for the conversation.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>password</b> - New password.
+    </li>
+    <li>
+      <b>hint</b> - Password hint.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="RetireFrom"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RetireFrom</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.RetireFrom">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Leaves the conference. Not applicable to dialogs.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="Delete"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">Delete</span>(<span class="sig-arg">self</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.Delete">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Deletes this conversation, which must be of type CONFERENCE - dialogs 
+  between local user and any of his contacts are always persistant. Note 
+  that this also removes corresponding Message and Participant objects.</p>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="RenameTo"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">RenameTo</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">name</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.RenameTo">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Changes the META_NAME property of the conversation. Note that unlike 
+  topic and guidelines, this rename is just local - remote participants can
+  have their own private names for conversations.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>name</b> - New name for the conversation. Passing an empty string 
+      in this argument causes the META_NAME to unset.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetBookmark"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetBookmark</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">bookmark</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.SetBookmark">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setter for Conversation class IS_BOOKMARKED.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>bookmark</b> - Set true to set the bookmark, false to remove the 
+      bookmark.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetAlertString"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetAlertString</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">alert_string</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.SetAlertString">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Setter for Conversation class ALERT_STRING property. The main use of 
+  this property is checking bodies of incoming messages in the conversation
+  for the alert string and producing notifications in UI for the user, when
+  appropriate.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>alert_string</b> - Substring to check in BODY_XML property of 
+      incoming messages.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="AddToInbox"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">AddToInbox</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">timestamp</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.AddToInbox">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Sets Conversation inbox_timestamp property. If the timestamp argument 
+  is left empty or is greater than conversation consumption horizon, then 
+  the conversation will be restored to the inbox.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>timestamp</b> - If left empty or set to 0, the inbox_timestamp 
+      property is set to current time.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="SetConsumedHorizon"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">SetConsumedHorizon</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">timestamp</span>,
+        <span class="sig-arg">also_unconsume</span>=<span class="sig-default">False</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.SetConsumedHorizon">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This method can be used to set the consumption (read) status of 
+  messages in the conversation. It sets Message::CONSUMPTION_STATUS to 
+  Message::CONSUMED for all messages in the conversation, older than the 
+  given timestamp. If the second argument is set to true, it also modifies 
+  messages more recent than the timestamp, by marking them as 
+  unconsumed.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>timestamp</b> - Consumption cutoff timestamp. Setting this to 
+      current time will mark all messages in the conversation as consumed.
+    </li>
+    <li>
+      <b>also_unconsume</b> - If set to true, this also marks messages 
+      newer than the cutoff timestamp as unconsumed. For example, setting 
+      timestamp to 0 and also_unconsumed to true, will unconsume all 
+      messages in the conversation.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="IsMemberOf"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">IsMemberOf</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">group</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.IsMemberOf">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Checks if the conversation is a member of the given ContactGroup</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>group</b> - ContactGroup
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>result</b> - True if this conversation is a member of the 
+      ContactGroup specified by the group argument contains the 
+      conversation
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetParticipants"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetParticipants</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">filter</span>=<span class="sig-default"><code class="variable-quote">'</code><code class="variable-string">ALL</code><code class="variable-quote">'</code></span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.GetParticipants">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Retrieves the list of this conversation's current participants, which 
+  you can optionally request to be filtered. If no Participants pass the 
+  filter, an empty list will be returned (the method itself still returns 
+  true).</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>filter</b> - Conversation::PARTICIPANTFILTER - defaults to 
+      Conversation::ALL
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>participants</b> - List of conversation Participant objects that 
+      passed the filter.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="GetLastMessages"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">GetLastMessages</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">require_timestamp</span>=<span class="sig-default">0</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.GetLastMessages">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Returns recent messages. The messages are returned in two lists - new 
+  messages (unconsumed) and recent message history (context messages). The 
+  context message list contains messages that are already above the 
+  consumption horizon but are fairly recent, making it likely that 
+  displaying them in UI would be good default behaviour.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>require_timestamp</b> - If set to a non-zero value, includes 
+      messages no earlier than this timestamp, if not, includes messages 
+      from the last 24 hours only
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>context_messages</b> - Already consumed messages, provided for 
+      context
+    </li>
+    <li>
+      <b>unconsumed_messages</b> - Unconsumed messages
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="FindMessage"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">FindMessage</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">text</span>,
+        <span class="sig-arg">from_timestamp_up</span>=<span class="sig-default">4294967295</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.FindMessage">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Finds the most recent Message object in the conversation that contains
+  the substring specified by the text argument. If no matching messages are
+  found, this method will return false. The search proceeds backwards in 
+  time, starting from the timestamp argument. To continue searching, you 
+  can start with timestamp=MAX_UINT, retrieve the TIMESTAMP property of the
+  matching message, decrement it by one, and submit it as timestamp for the
+  next FindMessage call.</p>
+  <p><b>Arguments:</b></p>
+  <ul>
+    <li>
+      <b>text</b> - Substring to search for.
+    </li>
+    <li>
+      <b>from_timestamp_up</b>
+    </li>
+  </ul>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>message</b> - Returns matching message or 0 if there was no match.
+      As the likelihood of this object being invalid is quite high, you 
+      should always check for method return value before you start calling 
+      methods of this object.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="OnMessage"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OnMessage</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">message</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.OnMessage">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>Called for each message in currently loaded conversations</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>message</b>
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<a name="OnSpawnConference"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <table width="100%" cellpadding="0" cellspacing="0" border="0">
+  <tr valign="top"><td>
+  <h3 class="epydoc"><span class="sig"><span class="sig-name">OnSpawnConference</span>(<span class="sig-arg">self</span>,
+        <span class="sig-arg">spawned</span>)</span>
+  </h3>
+  </td><td align="right" valign="top"
+    ><span class="codelink"><a href="Skype-pysrc.html#Conversation.OnSpawnConference">source&nbsp;code</a></span>&nbsp;
+    </td>
+  </tr></table>
+  
+  <p>This callback gets fired when a new Conversation is created using 
+  SpawnConference.</p>
+  <p><b>Return values:</b></p>
+  <ul>
+    <li>
+      <b>spawned</b> - Conversation object that got created.
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== CLASS VARIABLE DETAILS ==================== -->
+<a name="section-ClassVariableDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Class Variable Details</span></td>
+</tr>
+</table>
+<a name="event_handlers"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">event_handlers</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk_on_participant_list_change</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk_on_message</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">_sk_on_spawn_conference</code><code class="variable-quote">'</code><code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="propid2label"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">propid2label</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>902<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">type</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 903<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">creator</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 904<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">creation_timestamp</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 906<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">opt_entry_level_rank</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 907<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">opt_disclose_history</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 909<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">opt_admin_only_activities</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 910<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">meta_name</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 911<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">meta_topic</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="TYPE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">TYPE</h3>
+  <ul>
+    <li>
+      DIALOG - 1:1 conversations, there is a one dialog per identity
+    </li>
+    <li>
+      CONFERENCE - equivalent of a multichat
+    </li>
+    <li>
+      TERMINATED_CONFERENCE - a conference that has been terminated 
+      (disbanded chat)
+    </li>
+    <li>
+      LEGACY_VOICE_CONFERENCE - voice-only conference, when host is using a
+      legacy non-conversation client
+    </li>
+    <li>
+      LEGACY_SHAREDGROUP - chat used for legacy shared groups, can be 
+      ignored
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DIALOG</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONFERENCE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">TERMINATED_CONFERENCE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LEGACY_VOICE_CONFERENCE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LEGACY_SHAREDGROUP</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">CONFERENCE</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">DIALOG</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">LEGACY_SHAREDGROUP</code><code class="variable-quote">'</code><code class="variable-op">: </code>5<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="MY_STATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">MY_STATUS</h3>
+  <ul>
+    <li>
+      CONNECTING - connecting to conference
+    </li>
+    <li>
+      RETRY_CONNECTING
+    </li>
+    <li>
+      DOWNLOADING_MESSAGES - unused
+    </li>
+    <li>
+      QUEUED_TO_ENTER - conference is full for now, being queued
+    </li>
+    <li>
+      APPLICANT - I'm applying to join the conference
+    </li>
+    <li>
+      APPLICATION_DENIED - My application to join the conference was denied
+    </li>
+    <li>
+      INVALID_ACCESS_TOKEN - The password I provided is incorrect
+    </li>
+    <li>
+      CONSUMER - I'm part of the conference, I can participate
+    </li>
+    <li>
+      RETIRED_FORCEFULLY - I was kicked from the conference
+    </li>
+    <li>
+      RETIRED_VOLUNTARILY - I left the conference
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONNECTING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RETRY_CONNECTING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">DOWNLOADING_MESSAGES</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">QUEUED_TO_ENTER</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">APPLICANT</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">APPLICATION_DENIED</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INVALID_ACCESS_TOKEN</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONSUMER</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="LOCAL_LIVESTATUS"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">LOCAL_LIVESTATUS</h3>
+  <ul>
+    <li>
+      NONE - there isn't a live session
+    </li>
+    <li>
+      STARTING - trying to start or join a live session
+    </li>
+    <li>
+      RINGING_FOR_ME - there is a live session ringing
+    </li>
+    <li>
+      IM_LIVE - the conference is live for me
+    </li>
+    <li>
+      ON_HOLD_LOCALLY - I put the live session on hold
+    </li>
+    <li>
+      ON_HOLD_REMOTELY - the live session was put on hold by someone else
+    </li>
+    <li>
+      OTHERS_ARE_LIVE - there is a live session on-going, I'm not 
+      participating but I could join
+    </li>
+    <li>
+      OTHERS_ARE_LIVE_FULL - there is a live session on-going without me, 
+      but I can't join because it's full
+    </li>
+    <li>
+      PLAYING_VOICE_MESSAGE - playing a voicemail (dialog only)
+    </li>
+    <li>
+      RECORDING_VOICE_MESSAGE - recording a voicemail (dialog only)
+    </li>
+    <li>
+      RECENTLY_LIVE - a live session just finished, we stay in this state 
+      for RECENTLY_LIVE_TIMEOUT setup key
+    </li>
+    <li>
+      TRANSFERRING - call is being transferred
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">NONE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">STARTING</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">RINGING_FOR_ME</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">IM_LIVE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ON_HOLD_LOCALLY</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 6<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ON_HOLD_REMOTELY</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 7<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">OTHERS_ARE_LIVE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">PLAYING_VOICE_MESSAGE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="ALLOWED_ACTIVITY"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">ALLOWED_ACTIVITY</h3>
+  <p>values for opt_admin_only_activities property</p>
+  <ul>
+    <li>
+      SET_META - allowed to set the CONVERSATION_META properties
+    </li>
+    <li>
+      ADD_CONSUMERS - allowed to add participants to the conference
+    </li>
+    <li>
+      SPEAK - allowed to speak, but not write
+    </li>
+    <li>
+      SPEAK_AND_WRITE - allowed to speak and write
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SET_META</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ADD_CONSUMERS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SPEAK</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 8<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">SPEAK_AND_WRITE</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ADD_CONSUMERS</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">SET_META</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">SPEAK</code><code class="variable-quote">'</code><code class="variable-op">: </code>4<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">SPEAK_AND_WRITE</code><code class="variable-quote">'</code><code class="variable-op">: </code>8<code class="variable-group">}</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="PARTICIPANTFILTER"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">PARTICIPANTFILTER</h3>
+  <ul>
+    <li>
+      ALL - All participants (may included some that are RETIRED or OUTLAW,
+      but not all of them)
+    </li>
+    <li>
+      CONSUMERS - Participants that can receive messages, including myself
+    </li>
+    <li>
+      APPLICANTS - Only people who are applying to join the conversation
+    </li>
+    <li>
+      CONSUMERS_AND_APPLICANTS - Consumers and applicants
+    </li>
+    <li>
+      MYSELF - Myself
+    </li>
+    <li>
+      OTHER_CONSUMERS - All consumers except myself
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ALL</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONSUMERS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">APPLICANTS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">CONSUMERS_AND_APPLICANTS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 4<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">MYSELF</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">OTHER_CONSUMERS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ALL</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">APPLICANTS</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="LIST_TYPE"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">LIST_TYPE</h3>
+  <ul>
+    <li>
+      ALL_CONVERSATIONS - bookmarked or in_inbox or live or with_meta_info 
+      or activity in last 30 days
+    </li>
+    <li>
+      INBOX_CONVERSATIONS - only last 6 months conversations are kept there
+    </li>
+    <li>
+      BOOKMARKED_CONVERSATIONS - is_bookmarked is set
+    </li>
+    <li>
+      LIVE_CONVERSATIONS - local_livestatus is different from NONE
+    </li>
+    <li>
+      REALLY_ALL_CONVERSATIONS - all conversations, without any of the 
+      limits of ALL_CONVERSATIONS
+    </li>
+  </ul>
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-group">{</code>0<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">ALL_CONVERSATIONS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 1<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">INBOX_CONVERSATIONS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 2<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">BOOKMARKED_CONVERSATIONS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 3<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">LIVE_CONVERSATIONS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ 5<code class="variable-op">: </code><code class="variable-quote">'</code><code class="variable-string">REALLY_ALL_CONVERSATIONS</code><code class="variable-quote">'</code><code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">ALL_CONVERSATIONS</code><code class="variable-quote">'</code><code class="variable-op">: </code>0<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">BOOKMARKED_CONVERSATIONS</code><code class="variable-quote">'</code><code class="variable-op">: </code>2<code class="variable-op">,</code>
+ <code class="variable-quote">'</code><code class="variable-string">INBOX_CONVERSATIONS</code><code class="variable-quote">'</code><code class="variable-op">: </code>1<code class="variable-op">,</code>
+<code class="variable-ellipsis">...</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SETUPKEY_ENABLE_BIRTHDAY_NOTIFICATION"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">SETUPKEY_ENABLE_BIRTHDAY_NOTIFICATION</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'</code><code class="variable-string">Lib/Conversation/EnableBirthday</code><code class="variable-quote">'</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SETUPKEY_INBOX_UPDATE_TIMEOUT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">SETUPKEY_INBOX_UPDATE_TIMEOUT</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'</code><code class="variable-string">Lib/Conversation/InboxUpdateTimeout</code><code class="variable-quote">'</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SETUPKEY_RECENTLY_LIVE_TIMEOUT"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">SETUPKEY_RECENTLY_LIVE_TIMEOUT</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'</code><code class="variable-string">Lib/Conversation/RecentlyLiveTimeout</code><code class="variable-quote">'</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="SETUPKEY_DISABLE_CHAT_ACTIVITY_INDICATION"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">SETUPKEY_DISABLE_CHAT_ACTIVITY_INDICATION</h3>
+  
+  <dl class="fields">
+  </dl>
+  <dl class="fields">
+    <dt>Value:</dt>
+      <dd><table><tr><td><pre class="variable">
+<code class="variable-quote">'</code><code class="variable-string">Lib/Chat/DisableActivityIndication</code><code class="variable-quote">'</code>
+</pre></td></tr></table>
+</dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== PROPERTY DETAILS ==================== -->
+<a name="section-PropertyDetails"></a>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr bgcolor="#70b0f0" class="table-header">
+  <td align="left" colspan="2" class="table-header">
+    <span class="table-header">Property Details</span></td>
+</tr>
+</table>
+<a name="identity"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">identity</h3>
+  <p>contact identity in case of dialogs, chat name in case of 
+  conferences</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_identity" class="summary-sig-name" onclick="show_private();">_sk_get_identity</a>(<span class="summary-sig-arg">self</span>)</span>
+        - contact identity in case of dialogs, chat name in case of conferences
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="type"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">type</h3>
+  <p>type of the conversation</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_type" class="summary-sig-name" onclick="show_private();">_sk_get_type</a>(<span class="summary-sig-arg">self</span>)</span>
+        - type of the conversation
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="live_host"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">live_host</h3>
+  <p>host of current live session. none =&gt; no session. myself in case of
+  1:1 calls</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_live_host" class="summary-sig-name" onclick="show_private();">_sk_get_live_host</a>(<span class="summary-sig-arg">self</span>)</span>
+        - host of current live session.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="live_start_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">live_start_timestamp</h3>
+  <p>moment when first participant other than host joined the current or 
+  last live session</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_live_start_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_live_start_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - moment when first participant other than host joined the current or last 
+live session
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="live_is_muted"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">live_is_muted</h3>
+  <p>if live session is muted</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_live_is_muted" class="summary-sig-name" onclick="show_private();">_sk_get_live_is_muted</a>(<span class="summary-sig-arg">self</span>)</span>
+        - if live session is muted
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="alert_string"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">alert_string</h3>
+  <p>'' everything matches, '=' nothing matches, '=string' string 
+  matches</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_alert_string" class="summary-sig-name" onclick="show_private();">_sk_get_alert_string</a>(<span class="summary-sig-arg">self</span>)</span>
+        - '' everything matches, '=' nothing matches, '=string' string matches
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="is_bookmarked"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">is_bookmarked</h3>
+  <p>if conversation is bookmarked/flagged</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_is_bookmarked" class="summary-sig-name" onclick="show_private();">_sk_get_is_bookmarked</a>(<span class="summary-sig-arg">self</span>)</span>
+        - if conversation is bookmarked/flagged
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="given_displayname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">given_displayname</h3>
+  <p>name assigned via GiveDisplayname</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_given_displayname" class="summary-sig-name" onclick="show_private();">_sk_get_given_displayname</a>(<span class="summary-sig-arg">self</span>)</span>
+        - name assigned via GiveDisplayname
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="displayname"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">displayname</h3>
+  <p>resulting display name of the conversation (based on given name, 
+  topic, participant list, etc)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_displayname" class="summary-sig-name" onclick="show_private();">_sk_get_displayname</a>(<span class="summary-sig-arg">self</span>)</span>
+        - resulting display name of the conversation (based on given name, topic, 
+participant list, etc)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="local_livestatus"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">local_livestatus</h3>
+  <p>if the conversation is live and in which status it is then</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_local_livestatus" class="summary-sig-name" onclick="show_private();">_sk_get_local_livestatus</a>(<span class="summary-sig-arg">self</span>)</span>
+        - if the conversation is live and in which status it is then
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="inbox_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">inbox_timestamp</h3>
+  <p>timestamp to sort the conversations in inbox by. 0 means not in 
+  inbox</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_inbox_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_inbox_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - timestamp to sort the conversations in inbox by.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="inbox_message_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">inbox_message_id</h3>
+  <p>ID of the message that caused INBOX_TIMESTAMP to be set</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_inbox_message_id" class="summary-sig-name" onclick="show_private();">_sk_get_inbox_message_id</a>(<span class="summary-sig-arg">self</span>)</span>
+        - ID of the message that caused INBOX_TIMESTAMP to be set
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="unconsumed_suppressed_messages"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">unconsumed_suppressed_messages</h3>
+  <p>number of messages in UNCONSUMED_SUPPRESSED consumption status</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_unconsumed_suppressed_messages" class="summary-sig-name" onclick="show_private();">_sk_get_unconsumed_suppressed_messages</a>(<span class="summary-sig-arg">self</span>)</span>
+        - number of messages in UNCONSUMED_SUPPRESSED consumption status
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="unconsumed_normal_messages"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">unconsumed_normal_messages</h3>
+  <p>number of messages in UNCONSUMED_NORMAL consumption status</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_unconsumed_normal_messages" class="summary-sig-name" onclick="show_private();">_sk_get_unconsumed_normal_messages</a>(<span class="summary-sig-arg">self</span>)</span>
+        - number of messages in UNCONSUMED_NORMAL consumption status
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="unconsumed_elevated_messages"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">unconsumed_elevated_messages</h3>
+  <p>DEPRECATED, not set anymore</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_unconsumed_elevated_messages" class="summary-sig-name" onclick="show_private();">_sk_get_unconsumed_elevated_messages</a>(<span class="summary-sig-arg">self</span>)</span>
+        - DEPRECATED, not set anymore
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="unconsumed_messages_voice"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">unconsumed_messages_voice</h3>
+  <p>if there are unconsumed voice or call messages in the conversation</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_unconsumed_messages_voice" class="summary-sig-name" onclick="show_private();">_sk_get_unconsumed_messages_voice</a>(<span class="summary-sig-arg">self</span>)</span>
+        - if there are unconsumed voice or call messages in the conversation
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="active_vm_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">active_vm_id</h3>
+  <p>ID of voice message that is being played or recorded in this 
+  conversation</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_active_vm_id" class="summary-sig-name" onclick="show_private();">_sk_get_active_vm_id</a>(<span class="summary-sig-arg">self</span>)</span>
+        - ID of voice message that is being played or recorded in this conversation
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="consumption_horizon"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">consumption_horizon</h3>
+  <p>consumption cutoff timestamp: messages after (but not including) this 
+  are considered unconsumed</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_consumption_horizon" class="summary-sig-name" onclick="show_private();">_sk_get_consumption_horizon</a>(<span class="summary-sig-arg">self</span>)</span>
+        - consumption cutoff timestamp: messages after (but not including) this are 
+considered unconsumed
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="last_activity_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">last_activity_timestamp</h3>
+  <p>timestamp of last activity in conversation</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_last_activity_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_last_activity_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - timestamp of last activity in conversation
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="spawned_from_convo_id"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">spawned_from_convo_id</h3>
+  <p>dialog this conference was spawned from</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_spawned_from_convo_id" class="summary-sig-name" onclick="show_private();">_sk_get_spawned_from_convo_id</a>(<span class="summary-sig-arg">self</span>)</span>
+        - dialog this conference was spawned from
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="creator"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">creator</h3>
+  <p>identity of conversation creator (doesn't apply to dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_creator" class="summary-sig-name" onclick="show_private();">_sk_get_creator</a>(<span class="summary-sig-arg">self</span>)</span>
+        - identity of conversation creator (doesn't apply to dialogs)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="creation_timestamp"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">creation_timestamp</h3>
+  <p>timestamp of creation, tells you how far you can retrieve messages</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_creation_timestamp" class="summary-sig-name" onclick="show_private();">_sk_get_creation_timestamp</a>(<span class="summary-sig-arg">self</span>)</span>
+        - timestamp of creation, tells you how far you can retrieve messages
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="my_status"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">my_status</h3>
+  <p>my status in this conversation (connecting, participating, retired, 
+  etc) (doesn't apply to dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_my_status" class="summary-sig-name" onclick="show_private();">_sk_get_my_status</a>(<span class="summary-sig-arg">self</span>)</span>
+        - my status in this conversation (connecting, participating, retired, etc) 
+(doesn't apply to dialogs)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="opt_joining_enabled"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">opt_joining_enabled</h3>
+  <p>if it's a public conversation (doesn't apply to dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_opt_joining_enabled" class="summary-sig-name" onclick="show_private();">_sk_get_opt_joining_enabled</a>(<span class="summary-sig-arg">self</span>)</span>
+        - if it's a public conversation (doesn't apply to dialogs)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="opt_entry_level_rank"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">opt_entry_level_rank</h3>
+  <p>rank that is auto-assigned at join (doesn't apply to dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_opt_entry_level_rank" class="summary-sig-name" onclick="show_private();">_sk_get_opt_entry_level_rank</a>(<span class="summary-sig-arg">self</span>)</span>
+        - rank that is auto-assigned at join (doesn't apply to dialogs)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="opt_disclose_history"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">opt_disclose_history</h3>
+  <p>if history visible to new consumers (doesn't apply to dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_opt_disclose_history" class="summary-sig-name" onclick="show_private();">_sk_get_opt_disclose_history</a>(<span class="summary-sig-arg">self</span>)</span>
+        - if history visible to new consumers (doesn't apply to dialogs)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="opt_admin_only_activities"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">opt_admin_only_activities</h3>
+  <p>activities that only ADMIN can do. Bitmap of ALLOWED_ACTIVITY values 
+  (doesn't apply to dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_opt_admin_only_activities" class="summary-sig-name" onclick="show_private();">_sk_get_opt_admin_only_activities</a>(<span class="summary-sig-arg">self</span>)</span>
+        - activities that only ADMIN can do.
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="passwordhint"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">passwordhint</h3>
+  <p>public conversation password hint, use SetPassword to set (doesn't 
+  apply to dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_passwordhint" class="summary-sig-name" onclick="show_private();">_sk_get_passwordhint</a>(<span class="summary-sig-arg">self</span>)</span>
+        - public conversation password hint, use SetPassword to set (doesn't apply to
+dialogs)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="meta_name"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">meta_name</h3>
+  <p>user-set name, separate from topic (doesn't apply to dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_meta_name" class="summary-sig-name" onclick="show_private();">_sk_get_meta_name</a>(<span class="summary-sig-arg">self</span>)</span>
+        - user-set name, separate from topic (doesn't apply to dialogs)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="meta_topic"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">meta_topic</h3>
+  <p>conversation topic (doesn't apply to dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_meta_topic" class="summary-sig-name" onclick="show_private();">_sk_get_meta_topic</a>(<span class="summary-sig-arg">self</span>)</span>
+        - conversation topic (doesn't apply to dialogs)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="meta_guidelines"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">meta_guidelines</h3>
+  <p>guidelines (doesn't apply to dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_meta_guidelines" class="summary-sig-name" onclick="show_private();">_sk_get_meta_guidelines</a>(<span class="summary-sig-arg">self</span>)</span>
+        - guidelines (doesn't apply to dialogs)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<a name="meta_picture"></a>
+<div>
+<table class="details" border="1" cellpadding="3"
+       cellspacing="0" width="100%" bgcolor="white">
+<tr><td>
+  <h3 class="epydoc">meta_picture</h3>
+  <p>conversation picture, in jpeg format (doesn't apply to dialogs)</p>
+  <dl class="fields">
+    <dt>Get Method:</dt>
+    <dd class="value"><span class="summary-sig"><a href="Skype.Conversation-class.html#_sk_get_meta_picture" class="summary-sig-name" onclick="show_private();">_sk_get_meta_picture</a>(<span class="summary-sig-arg">self</span>)</span>
+        - conversation picture, in jpeg format (doesn't apply to dialogs)
+    </dd>
+  </dl>
+</td></tr></table>
+</div>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:40 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

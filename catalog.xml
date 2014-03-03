@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+    <system systemId="http://localhost:8080/AuthenticationWS/AuthenticationWS?wsdl" uri="xml-resources/web-service-references/AuthenticationWS/wsdl/localhost_8080/AuthenticationWS/AuthenticationWS.wsdl"/>
+    <system systemId="http://localhost:8080/AuthenticationWS/AuthenticationWS?xsd=1" uri="xml-resources/web-service-references/AuthenticationWS/wsdl/localhost_8080/AuthenticationWS/AuthenticationWS.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/ChatWS/ChatWS?wsdl" uri="xml-resources/web-service-references/ChatWS/wsdl/localhost_8080/ChatWS/ChatWS.wsdl"/>
+    <system systemId="http://localhost:8080/ChatWS/ChatWS?xsd=1" uri="xml-resources/web-service-references/ChatWS/wsdl/localhost_8080/ChatWS/ChatWS.xsd_1.xsd"/>
+</catalog>

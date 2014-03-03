@@ -1,0 +1,7 @@
+SkypeKit distro skypekit-sdk_sdk-4.0.2.138_480749
+
+Builds included in this package:
+linux-x86-netlogger_sdk-4.0.2.140_480752
+mac-x86-netlogger_sdk-4.0.2.139_480750
+windows-x86-netlogger_sdk-4.0.2.142_480754
+sid-sdk_sdk-4.0.2.141_480753

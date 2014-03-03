@@ -1,0 +1,4 @@
+<map id="G" name="G">
+<area shape="rect" id="node1" href="$class_s_e_string.html" title="SEString is basic char* based string class." alt="" coords="5,5,83,35"/>
+<area shape="rect" id="node3" href="$class_s_e_filename.html" title="SEFilename Represents a file name. Currently not too much different from SEString." alt="" coords="131,5,227,35"/>
+</map>

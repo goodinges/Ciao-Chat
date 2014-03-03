@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="ascii"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <title>contactsearch</title>
+  <link rel="stylesheet" href="epydoc.css" type="text/css" />
+  <script type="text/javascript" src="epydoc.js"></script>
+</head>
+
+<body bgcolor="white" text="black" link="blue" vlink="#204080"
+      alink="#204080">
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table width="100%" cellpadding="0" cellspacing="0">
+  <tr valign="top">
+    <td width="100%">
+      <span class="breadcrumbs">
+        Module&nbsp;contactsearch
+      </span>
+    </td>
+    <td>
+      <table cellpadding="0" cellspacing="0">
+        <!-- hide/show private -->
+      </table>
+    </td>
+  </tr>
+</table>
+<h1 class="epydoc">Source Code for <a href="contactsearch-module.html">Module contactsearch</a></h1>
+<pre class="py-src">
+<a name="L1"></a><tt class="py-lineno">  1</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'****************************************************************************'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L2"></a><tt class="py-lineno">  2</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'SkypeKit Python Wrapper Tutorial: Contact search.'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L3"></a><tt class="py-lineno">  3</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'****************************************************************************'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L4"></a><tt class="py-lineno">  4</tt>  <tt class="py-line"> </tt>
+<a name="L5"></a><tt class="py-lineno">  5</tt>  <tt class="py-line"><tt class="py-comment"># This example demonstrates, how to:</tt> </tt>
+<a name="L6"></a><tt class="py-lineno">  6</tt>  <tt class="py-line"><tt class="py-comment"># 1. Perform simple asynchronous contact search.</tt> </tt>
+<a name="L7"></a><tt class="py-lineno">  7</tt>  <tt class="py-line"><tt class="py-comment"># 1. Perform complex asynchronous contact search.</tt> </tt>
+<a name="L8"></a><tt class="py-lineno">  8</tt>  <tt class="py-line"> </tt>
+<a name="L9"></a><tt class="py-lineno">  9</tt>  <tt class="py-line"><tt class="py-comment"># NB! You will need to launch the SkypeKit runtime before running this example.</tt> </tt>
+<a name="L10"></a><tt class="py-lineno"> 10</tt>  <tt class="py-line"> </tt>
+<a name="L11"></a><tt class="py-lineno"> 11</tt>  <tt class="py-line"><tt class="py-comment"># As the contact search over P2P network is somewhat slow, it cannot really</tt> </tt>
+<a name="L12"></a><tt class="py-lineno"> 12</tt>  <tt class="py-line"><tt class="py-comment"># be implemented as a blocking function. Instead, you can create a search record </tt> </tt>
+<a name="L13"></a><tt class="py-lineno"> 13</tt>  <tt class="py-line"><tt class="py-comment"># (ContactSearch object), add multiple search filters to it and then start the search</tt> </tt>
+<a name="L14"></a><tt class="py-lineno"> 14</tt>  <tt class="py-line"><tt class="py-comment"># with ContactSearch.Submit method.</tt> </tt>
+<a name="L15"></a><tt class="py-lineno"> 15</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L16"></a><tt class="py-lineno"> 16</tt>  <tt class="py-line"><tt class="py-comment"># Each time the search process finds a matching contact ContactSearch.OnNewResult</tt> </tt>
+<a name="L17"></a><tt class="py-lineno"> 17</tt>  <tt class="py-line"><tt class="py-comment"># event will get fired.</tt> </tt>
+<a name="L18"></a><tt class="py-lineno"> 18</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L19"></a><tt class="py-lineno"> 19</tt>  <tt class="py-line"><tt class="py-comment"># When no more matches are found, ContactSearch.contact_search_status will change</tt> </tt>
+<a name="L20"></a><tt class="py-lineno"> 20</tt>  <tt class="py-line"><tt class="py-comment"># to 'FINISHED'.</tt> </tt>
+<a name="L21"></a><tt class="py-lineno"> 21</tt>  <tt class="py-line"><tt class="py-comment"># </tt> </tt>
+<a name="L22"></a><tt class="py-lineno"> 22</tt>  <tt class="py-line"><tt class="py-comment"># The list of collected contacts can be compiled either in the OnNewResult callback,</tt> </tt>
+<a name="L23"></a><tt class="py-lineno"> 23</tt>  <tt class="py-line"><tt class="py-comment"># if you want your UI to respond to matches in real time. Alternatively you can </tt> </tt>
+<a name="L24"></a><tt class="py-lineno"> 24</tt>  <tt class="py-line"><tt class="py-comment"># wait until the search finishes and then yse ContactSearch.GetResults method.</tt> </tt>
+<a name="L25"></a><tt class="py-lineno"> 25</tt>  <tt class="py-line"> </tt>
+<a name="L26"></a><tt class="py-lineno"> 26</tt>  <tt class="py-line"><tt class="py-comment">#----------------------------------------------------------------------------------</tt> </tt>
+<a name="L27"></a><tt class="py-lineno"> 27</tt>  <tt class="py-line"><tt class="py-comment"># Importing necessary libraries. Note that you will need to set the keyFileName value</tt> </tt>
+<a name="L28"></a><tt class="py-lineno"> 28</tt>  <tt class="py-line"><tt class="py-comment"># in the keypair.py file.</tt> </tt>
+<a name="L29"></a><tt class="py-lineno"> 29</tt>  <tt class="py-line"> </tt>
+<a name="L30"></a><tt class="py-lineno"> 30</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt class="py-name">sys</tt><tt class="py-op">;</tt> </tt>
+<a name="L31"></a><tt class="py-lineno"> 31</tt>  <tt class="py-line"><tt class="py-keyword">import</tt> <tt id="link-0" class="py-name" targets="Module keypair=keypair-module.html"><a title="keypair" class="py-name" href="#" onclick="return doclink('link-0', 'keypair', 'link-0');">keypair</a></tt><tt class="py-op">;</tt> </tt>
+<a name="L32"></a><tt class="py-lineno"> 32</tt>  <tt class="py-line"><tt class="py-keyword">from</tt> <tt class="py-name">time</tt> <tt class="py-keyword">import</tt> <tt class="py-name">sleep</tt><tt class="py-op">;</tt> </tt>
+<a name="L33"></a><tt class="py-lineno"> 33</tt>  <tt class="py-line"> </tt>
+<a name="L34"></a><tt class="py-lineno"> 34</tt>  <tt class="py-line"><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-1" class="py-name"><a title="keypair" class="py-name" href="#" onclick="return doclink('link-1', 'keypair', 'link-0');">keypair</a></tt><tt class="py-op">.</tt><tt id="link-2" class="py-name" targets="Variable keypair.distroRoot=keypair-module.html#distroRoot,Variable token.distroRoot=token-module.html#distroRoot"><a title="keypair.distroRoot
+token.distroRoot" class="py-name" href="#" onclick="return doclink('link-2', 'distroRoot', 'link-2');">distroRoot</a></tt> <tt class="py-op">+</tt> <tt class="py-string">'/ipc/python'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L35"></a><tt class="py-lineno"> 35</tt>  <tt class="py-line"><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">path</tt><tt class="py-op">.</tt><tt class="py-name">append</tt><tt class="py-op">(</tt><tt id="link-3" class="py-name"><a title="keypair" class="py-name" href="#" onclick="return doclink('link-3', 'keypair', 'link-0');">keypair</a></tt><tt class="py-op">.</tt><tt id="link-4" class="py-name"><a title="keypair.distroRoot
+token.distroRoot" class="py-name" href="#" onclick="return doclink('link-4', 'distroRoot', 'link-2');">distroRoot</a></tt> <tt class="py-op">+</tt> <tt class="py-string">'/interfaces/skype/python'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L36"></a><tt class="py-lineno"> 36</tt>  <tt class="py-line"> </tt>
+<a name="L37"></a><tt class="py-lineno"> 37</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L38"></a><tt class="py-lineno"> 38</tt>  <tt class="py-line">        <tt class="py-keyword">import</tt> <tt id="link-5" class="py-name" targets="Module Skype=Skype-module.html,Class Skype.Skype=Skype.Skype-class.html"><a title="Skype
+Skype.Skype" class="py-name" href="#" onclick="return doclink('link-5', 'Skype', 'link-5');">Skype</a></tt><tt class="py-op">;</tt>    </tt>
+<a name="L39"></a><tt class="py-lineno"> 39</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">ImportError</tt><tt class="py-op">:</tt> </tt>
+<a name="L40"></a><tt class="py-lineno"> 40</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">SystemExit</tt><tt class="py-op">(</tt><tt class="py-string">'Program requires Skype and skypekit modules'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L41"></a><tt class="py-lineno"> 41</tt>  <tt class="py-line"> </tt>
+<a name="L42"></a><tt class="py-lineno"> 42</tt>  <tt class="py-line"><tt class="py-comment">#----------------------------------------------------------------------------------</tt> </tt>
+<a name="L43"></a><tt class="py-lineno"> 43</tt>  <tt class="py-line"><tt class="py-comment"># Taking skypename and password arguments from command-line.</tt> </tt>
+<a name="L44"></a><tt class="py-lineno"> 44</tt>  <tt class="py-line"> </tt>
+<a name="L45"></a><tt class="py-lineno"> 45</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt class="py-name">len</tt><tt class="py-op">(</tt><tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">)</tt> <tt class="py-op">&lt;</tt> <tt class="py-number">4</tt><tt class="py-op">:</tt> </tt>
+<a name="L46"></a><tt class="py-lineno"> 46</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Usage: python contactsearch.py &lt;skypename&gt; &lt;password&gt; &lt;searchstring&gt;'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L47"></a><tt class="py-lineno"> 47</tt>  <tt class="py-line">        <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">exit</tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L48"></a><tt class="py-lineno"> 48</tt>  <tt class="py-line"> </tt>
+<a name="L49"></a><tt class="py-lineno"> 49</tt>  <tt class="py-line"><tt id="link-6" class="py-name" targets="Variable autoanswer.accountName=autoanswer-module.html#accountName,Variable call.accountName=call-module.html#accountName,Variable chat.accountName=chat-module.html#accountName,Variable contacts.accountName=contacts-module.html#accountName,Variable contactsearch.accountName=contactsearch-module.html#accountName,Variable conversations.accountName=conversations-module.html#accountName,Variable login.accountName=login-module.html#accountName"><a title="autoanswer.accountName
+call.accountName
+chat.accountName
+contacts.accountName
+contactsearch.accountName
+conversations.accountName
+login.accountName" class="py-name" href="#" onclick="return doclink('link-6', 'accountName', 'link-6');">accountName</a></tt> <tt class="py-op">=</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">[</tt><tt class="py-number">1</tt><tt class="py-op">]</tt><tt class="py-op">;</tt> </tt>
+<a name="L50"></a><tt class="py-lineno"> 50</tt>  <tt class="py-line"><tt id="link-7" class="py-name" targets="Variable autoanswer.accountPsw=autoanswer-module.html#accountPsw,Variable call.accountPsw=call-module.html#accountPsw,Variable chat.accountPsw=chat-module.html#accountPsw,Variable contacts.accountPsw=contacts-module.html#accountPsw,Variable contactsearch.accountPsw=contactsearch-module.html#accountPsw,Variable conversations.accountPsw=conversations-module.html#accountPsw,Variable login.accountPsw=login-module.html#accountPsw"><a title="autoanswer.accountPsw
+call.accountPsw
+chat.accountPsw
+contacts.accountPsw
+contactsearch.accountPsw
+conversations.accountPsw
+login.accountPsw" class="py-name" href="#" onclick="return doclink('link-7', 'accountPsw', 'link-7');">accountPsw</a></tt>  <tt class="py-op">=</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">[</tt><tt class="py-number">2</tt><tt class="py-op">]</tt><tt class="py-op">;</tt> </tt>
+<a name="L51"></a><tt class="py-lineno"> 51</tt>  <tt class="py-line"><tt id="link-8" class="py-name" targets="Variable contactsearch.searchFor=contactsearch-module.html#searchFor"><a title="contactsearch.searchFor" class="py-name" href="#" onclick="return doclink('link-8', 'searchFor', 'link-8');">searchFor</a></tt>       <tt class="py-op">=</tt> <tt class="py-name">sys</tt><tt class="py-op">.</tt><tt class="py-name">argv</tt><tt class="py-op">[</tt><tt class="py-number">3</tt><tt class="py-op">]</tt><tt class="py-op">;</tt> </tt>
+<a name="L52"></a><tt class="py-lineno"> 52</tt>  <tt class="py-line"> </tt>
+<a name="L53"></a><tt class="py-lineno"> 53</tt>  <tt class="py-line"><tt id="link-9" class="py-name" targets="Variable autoanswer.loggedIn=autoanswer-module.html#loggedIn,Variable call.loggedIn=call-module.html#loggedIn,Variable chat.loggedIn=chat-module.html#loggedIn,Variable contacts.loggedIn=contacts-module.html#loggedIn,Variable contactsearch.loggedIn=contactsearch-module.html#loggedIn,Variable conversations.loggedIn=conversations-module.html#loggedIn,Variable login.loggedIn=login-module.html#loggedIn"><a title="autoanswer.loggedIn
+call.loggedIn
+chat.loggedIn
+contacts.loggedIn
+contactsearch.loggedIn
+conversations.loggedIn
+login.loggedIn" class="py-name" href="#" onclick="return doclink('link-9', 'loggedIn', 'link-9');">loggedIn</a></tt>                <tt class="py-op">=</tt> <tt class="py-name">False</tt><tt class="py-op">;</tt> </tt>
+<a name="L54"></a><tt class="py-lineno"> 54</tt>  <tt class="py-line"> </tt>
+<a name="L55"></a><tt class="py-lineno"> 55</tt>  <tt class="py-line"><tt class="py-comment">#----------------------------------------------------------------------------------</tt> </tt>
+<a name="L56"></a><tt class="py-lineno"> 56</tt>  <tt class="py-line"><tt class="py-comment"># Defining our own Account property change callback and assigning it to the</tt> </tt>
+<a name="L57"></a><tt class="py-lineno"> 57</tt>  <tt class="py-line"><tt class="py-comment"># SkyLib.Account class.</tt> </tt>
+<a name="L58"></a><tt class="py-lineno"> 58</tt>  <tt class="py-line"> </tt>
+<a name="AccountOnChange"></a><div id="AccountOnChange-def"><a name="L59"></a><tt class="py-lineno"> 59</tt> <a class="py-toggle" href="#" id="AccountOnChange-toggle" onclick="return toggle('AccountOnChange');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="contactsearch-module.html#AccountOnChange">AccountOnChange</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">property_name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="AccountOnChange-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="AccountOnChange-expanded"><a name="L60"></a><tt class="py-lineno"> 60</tt>  <tt class="py-line">        <tt class="py-keyword">global</tt> <tt id="link-10" class="py-name"><a title="autoanswer.loggedIn
+call.loggedIn
+chat.loggedIn
+contacts.loggedIn
+contactsearch.loggedIn
+conversations.loggedIn
+login.loggedIn" class="py-name" href="#" onclick="return doclink('link-10', 'loggedIn', 'link-9');">loggedIn</a></tt><tt class="py-op">;</tt> </tt>
+<a name="L61"></a><tt class="py-lineno"> 61</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">property_name</tt> <tt class="py-op">==</tt> <tt class="py-string">'status'</tt><tt class="py-op">:</tt> </tt>
+<a name="L62"></a><tt class="py-lineno"> 62</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-11" class="py-name" targets="Variable Skype.Account.status=Skype.Account-class.html#status,Variable Skype.Sms.status=Skype.Sms-class.html#status,Variable Skype.Transfer.status=Skype.Transfer-class.html#status,Variable Skype.Video.status=Skype.Video-class.html#status,Variable Skype.Voicemail.status=Skype.Voicemail-class.html#status"><a title="Skype.Account.status
+Skype.Sms.status
+Skype.Transfer.status
+Skype.Video.status
+Skype.Voicemail.status" class="py-name" href="#" onclick="return doclink('link-11', 'status', 'link-11');">status</a></tt> <tt class="py-op">==</tt> <tt class="py-string">'LOGGED_IN'</tt><tt class="py-op">:</tt> </tt>
+<a name="L63"></a><tt class="py-lineno"> 63</tt>  <tt class="py-line">                        <tt id="link-12" class="py-name"><a title="autoanswer.loggedIn
+call.loggedIn
+chat.loggedIn
+contacts.loggedIn
+contactsearch.loggedIn
+conversations.loggedIn
+login.loggedIn" class="py-name" href="#" onclick="return doclink('link-12', 'loggedIn', 'link-9');">loggedIn</a></tt> <tt class="py-op">=</tt> <tt class="py-name">True</tt><tt class="py-op">;</tt> </tt>
+<a name="L64"></a><tt class="py-lineno"> 64</tt>  <tt class="py-line">                        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Login complete.'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+</div><a name="L65"></a><tt class="py-lineno"> 65</tt>  <tt class="py-line"> </tt>
+<a name="L66"></a><tt class="py-lineno"> 66</tt>  <tt class="py-line"><tt id="link-13" class="py-name"><a title="Skype
+Skype.Skype" class="py-name" href="#" onclick="return doclink('link-13', 'Skype', 'link-5');">Skype</a></tt><tt class="py-op">.</tt><tt id="link-14" class="py-name" targets="Class Skype.Account=Skype.Account-class.html"><a title="Skype.Account" class="py-name" href="#" onclick="return doclink('link-14', 'Account', 'link-14');">Account</a></tt><tt class="py-op">.</tt><tt id="link-15" class="py-name" targets="Method Skype.Account.OnPropertyChange()=Skype.Account-class.html#OnPropertyChange,Method Skype.Contact.OnPropertyChange()=Skype.Contact-class.html#OnPropertyChange,Method Skype.ContactGroup.OnPropertyChange()=Skype.ContactGroup-class.html#OnPropertyChange,Method Skype.ContactSearch.OnPropertyChange()=Skype.ContactSearch-class.html#OnPropertyChange,Method Skype.Conversation.OnPropertyChange()=Skype.Conversation-class.html#OnPropertyChange,Method Skype.Message.OnPropertyChange()=Skype.Message-class.html#OnPropertyChange,Method Skype.Participant.OnPropertyChange()=Skype.Participant-class.html#OnPropertyChange,Method Skype.Sms.OnPropertyChange()=Skype.Sms-class.html#OnPropertyChange,Method Skype.Transfer.OnPropertyChange()=Skype.Transfer-class.html#OnPropertyChange,Method Skype.Video.OnPropertyChange()=Skype.Video-class.html#OnPropertyChange,Method Skype.Voicemail.OnPropertyChange()=Skype.Voicemail-class.html#OnPropertyChange"><a title="Skype.Account.OnPropertyChange
+Skype.Contact.OnPropertyChange
+Skype.ContactGroup.OnPropertyChange
+Skype.ContactSearch.OnPropertyChange
+Skype.Conversation.OnPropertyChange
+Skype.Message.OnPropertyChange
+Skype.Participant.OnPropertyChange
+Skype.Sms.OnPropertyChange
+Skype.Transfer.OnPropertyChange
+Skype.Video.OnPropertyChange
+Skype.Voicemail.OnPropertyChange" class="py-name" href="#" onclick="return doclink('link-15', 'OnPropertyChange', 'link-15');">OnPropertyChange</a></tt> <tt class="py-op">=</tt> <tt id="link-16" class="py-name" targets="Function autoanswer.AccountOnChange()=autoanswer-module.html#AccountOnChange,Function call.AccountOnChange()=call-module.html#AccountOnChange,Function chat.AccountOnChange()=chat-module.html#AccountOnChange,Function contacts.AccountOnChange()=contacts-module.html#AccountOnChange,Function contactsearch.AccountOnChange()=contactsearch-module.html#AccountOnChange,Function conversations.AccountOnChange()=conversations-module.html#AccountOnChange,Function login.AccountOnChange()=login-module.html#AccountOnChange"><a title="autoanswer.AccountOnChange
+call.AccountOnChange
+chat.AccountOnChange
+contacts.AccountOnChange
+contactsearch.AccountOnChange
+conversations.AccountOnChange
+login.AccountOnChange" class="py-name" href="#" onclick="return doclink('link-16', 'AccountOnChange', 'link-16');">AccountOnChange</a></tt><tt class="py-op">;</tt> </tt>
+<a name="L67"></a><tt class="py-lineno"> 67</tt>  <tt class="py-line"> </tt>
+<a name="L68"></a><tt class="py-lineno"> 68</tt>  <tt class="py-line"> </tt>
+<a name="L69"></a><tt class="py-lineno"> 69</tt>  <tt class="py-line"><tt class="py-comment">#----------------------------------------------------------------------------------</tt> </tt>
+<a name="L70"></a><tt class="py-lineno"> 70</tt>  <tt class="py-line"><tt class="py-comment"># ContactSearch class.</tt> </tt>
+<a name="L71"></a><tt class="py-lineno"> 71</tt>  <tt class="py-line"><tt class="py-comment"># ContactSearch.OnPropertyChange - to catch when the search has stopped or finished.</tt> </tt>
+<a name="L72"></a><tt class="py-lineno"> 72</tt>  <tt class="py-line"><tt class="py-comment"># ContactSearch.OnNewResult - to retrieve matching contacts in real-time, as they</tt> </tt>
+<a name="L73"></a><tt class="py-lineno"> 73</tt>  <tt class="py-line"><tt class="py-comment"># get found by the search process.</tt> </tt>
+<a name="L74"></a><tt class="py-lineno"> 74</tt>  <tt class="py-line"> </tt>
+<a name="ContactSearchOnChange"></a><div id="ContactSearchOnChange-def"><a name="L75"></a><tt class="py-lineno"> 75</tt> <a class="py-toggle" href="#" id="ContactSearchOnChange-toggle" onclick="return toggle('ContactSearchOnChange');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="contactsearch-module.html#ContactSearchOnChange">ContactSearchOnChange</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">property_name</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ContactSearchOnChange-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ContactSearchOnChange-expanded"><a name="L76"></a><tt class="py-lineno"> 76</tt>  <tt class="py-line">        <tt class="py-keyword">if</tt> <tt class="py-name">property_name</tt> <tt class="py-op">==</tt> <tt class="py-string">'contact_search_status'</tt><tt class="py-op">:</tt> </tt>
+<a name="L77"></a><tt class="py-lineno"> 77</tt>  <tt class="py-line">                <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'search status: '</tt> <tt class="py-op">+</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-17" class="py-name" targets="Variable Skype.ContactSearch.contact_search_status=Skype.ContactSearch-class.html#contact_search_status"><a title="Skype.ContactSearch.contact_search_status" class="py-name" href="#" onclick="return doclink('link-17', 'contact_search_status', 'link-17');">contact_search_status</a></tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L78"></a><tt class="py-lineno"> 78</tt>  <tt class="py-line"> </tt>
+<a name="L79"></a><tt class="py-lineno"> 79</tt>  <tt class="py-line">                <tt class="py-comment"># When there is a large number of matches (conceivably you could get hundreds </tt> </tt>
+<a name="L80"></a><tt class="py-lineno"> 80</tt>  <tt class="py-line">                <tt class="py-comment"># of matches) the result list is terminated by 'page breaks'. In that case</tt> </tt>
+<a name="L81"></a><tt class="py-lineno"> 81</tt>  <tt class="py-line">                <tt class="py-comment"># the search will stop and object's contact_search_status changes to 'EXTENDABLE'</tt> </tt>
+<a name="L82"></a><tt class="py-lineno"> 82</tt>  <tt class="py-line">                <tt class="py-comment"># You can then choos to continue the search with Extend method.</tt> </tt>
+<a name="L83"></a><tt class="py-lineno"> 83</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-18" class="py-name"><a title="Skype.ContactSearch.contact_search_status" class="py-name" href="#" onclick="return doclink('link-18', 'contact_search_status', 'link-17');">contact_search_status</a></tt> <tt class="py-op">==</tt> <tt class="py-string">'EXTENDABLE'</tt><tt class="py-op">:</tt> </tt>
+<a name="L84"></a><tt class="py-lineno"> 84</tt>  <tt class="py-line">                        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Auto-extending the search..'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L85"></a><tt class="py-lineno"> 85</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-19" class="py-name" targets="Method Skype.ContactSearch.Extend()=Skype.ContactSearch-class.html#Extend"><a title="Skype.ContactSearch.Extend" class="py-name" href="#" onclick="return doclink('link-19', 'Extend', 'link-19');">Extend</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L86"></a><tt class="py-lineno"> 86</tt>  <tt class="py-line">                 </tt>
+<a name="L87"></a><tt class="py-lineno"> 87</tt>  <tt class="py-line">                <tt class="py-keyword">if</tt> <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-20" class="py-name"><a title="Skype.ContactSearch.contact_search_status" class="py-name" href="#" onclick="return doclink('link-20', 'contact_search_status', 'link-17');">contact_search_status</a></tt> <tt class="py-op">==</tt> <tt class="py-string">'FINISHED'</tt><tt class="py-op">:</tt>             </tt>
+<a name="L88"></a><tt class="py-lineno"> 88</tt>  <tt class="py-line">                        <tt class="py-name">self</tt><tt class="py-op">.</tt><tt id="link-21" class="py-name" targets="Method Skype.ContactSearch.Release()=Skype.ContactSearch-class.html#Release"><a title="Skype.ContactSearch.Release" class="py-name" href="#" onclick="return doclink('link-21', 'Release', 'link-21');">Release</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L89"></a><tt class="py-lineno"> 89</tt>  <tt class="py-line">                        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Press ENTER to exit'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+</div><a name="L90"></a><tt class="py-lineno"> 90</tt>  <tt class="py-line">                         </tt>
+<a name="L91"></a><tt class="py-lineno"> 91</tt>  <tt class="py-line"><tt id="link-22" class="py-name"><a title="Skype
+Skype.Skype" class="py-name" href="#" onclick="return doclink('link-22', 'Skype', 'link-5');">Skype</a></tt><tt class="py-op">.</tt><tt id="link-23" class="py-name" targets="Class Skype.ContactSearch=Skype.ContactSearch-class.html"><a title="Skype.ContactSearch" class="py-name" href="#" onclick="return doclink('link-23', 'ContactSearch', 'link-23');">ContactSearch</a></tt><tt class="py-op">.</tt><tt id="link-24" class="py-name"><a title="Skype.Account.OnPropertyChange
+Skype.Contact.OnPropertyChange
+Skype.ContactGroup.OnPropertyChange
+Skype.ContactSearch.OnPropertyChange
+Skype.Conversation.OnPropertyChange
+Skype.Message.OnPropertyChange
+Skype.Participant.OnPropertyChange
+Skype.Sms.OnPropertyChange
+Skype.Transfer.OnPropertyChange
+Skype.Video.OnPropertyChange
+Skype.Voicemail.OnPropertyChange" class="py-name" href="#" onclick="return doclink('link-24', 'OnPropertyChange', 'link-15');">OnPropertyChange</a></tt> <tt class="py-op">=</tt> <tt id="link-25" class="py-name" targets="Function contactsearch.ContactSearchOnChange()=contactsearch-module.html#ContactSearchOnChange"><a title="contactsearch.ContactSearchOnChange" class="py-name" href="#" onclick="return doclink('link-25', 'ContactSearchOnChange', 'link-25');">ContactSearchOnChange</a></tt><tt class="py-op">;</tt> </tt>
+<a name="L92"></a><tt class="py-lineno"> 92</tt>  <tt class="py-line"> </tt>
+<a name="ContactSearchOnNewResult"></a><div id="ContactSearchOnNewResult-def"><a name="L93"></a><tt class="py-lineno"> 93</tt> <a class="py-toggle" href="#" id="ContactSearchOnNewResult-toggle" onclick="return toggle('ContactSearchOnNewResult');">-</a><tt class="py-line"><tt class="py-keyword">def</tt> <a class="py-def-name" href="contactsearch-module.html#ContactSearchOnNewResult">ContactSearchOnNewResult</a> <tt class="py-op">(</tt><tt class="py-param">self</tt><tt class="py-op">,</tt> <tt class="py-param">contact</tt><tt class="py-op">,</tt> <tt class="py-param">rankValue</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+</div><div id="ContactSearchOnNewResult-collapsed" style="display:none;" pad="+++" indent="++++"></div><div id="ContactSearchOnNewResult-expanded"><a name="L94"></a><tt class="py-lineno"> 94</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-name">str</tt><tt class="py-op">(</tt><tt class="py-name">rankValue</tt> <tt class="py-op">+</tt> <tt class="py-number">1</tt><tt class="py-op">)</tt> <tt class="py-op">+</tt> <tt class="py-string">'. '</tt> <tt class="py-op">+</tt> <tt class="py-name">contact</tt><tt class="py-op">.</tt><tt id="link-26" class="py-name" targets="Variable Skype.Account.skypename=Skype.Account-class.html#skypename,Variable Skype.Contact.skypename=Skype.Contact-class.html#skypename"><a title="Skype.Account.skypename
+Skype.Contact.skypename" class="py-name" href="#" onclick="return doclink('link-26', 'skypename', 'link-26');">skypename</a></tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+</div><a name="L95"></a><tt class="py-lineno"> 95</tt>  <tt class="py-line"> </tt>
+<a name="L96"></a><tt class="py-lineno"> 96</tt>  <tt class="py-line"><tt id="link-27" class="py-name"><a title="Skype
+Skype.Skype" class="py-name" href="#" onclick="return doclink('link-27', 'Skype', 'link-5');">Skype</a></tt><tt class="py-op">.</tt><tt id="link-28" class="py-name"><a title="Skype.ContactSearch" class="py-name" href="#" onclick="return doclink('link-28', 'ContactSearch', 'link-23');">ContactSearch</a></tt><tt class="py-op">.</tt><tt id="link-29" class="py-name" targets="Method Skype.ContactSearch.OnNewResult()=Skype.ContactSearch-class.html#OnNewResult"><a title="Skype.ContactSearch.OnNewResult" class="py-name" href="#" onclick="return doclink('link-29', 'OnNewResult', 'link-29');">OnNewResult</a></tt> <tt class="py-op">=</tt> <tt id="link-30" class="py-name" targets="Function contactsearch.ContactSearchOnNewResult()=contactsearch-module.html#ContactSearchOnNewResult"><a title="contactsearch.ContactSearchOnNewResult" class="py-name" href="#" onclick="return doclink('link-30', 'ContactSearchOnNewResult', 'link-30');">ContactSearchOnNewResult</a></tt><tt class="py-op">;</tt> </tt>
+<a name="L97"></a><tt class="py-lineno"> 97</tt>  <tt class="py-line">         </tt>
+<a name="L98"></a><tt class="py-lineno"> 98</tt>  <tt class="py-line"><tt class="py-comment">#----------------------------------------------------------------------------------</tt> </tt>
+<a name="L99"></a><tt class="py-lineno"> 99</tt>  <tt class="py-line"><tt class="py-comment"># Creating our main Skype object</tt> </tt>
+<a name="L100"></a><tt class="py-lineno">100</tt>  <tt class="py-line"> </tt>
+<a name="L101"></a><tt class="py-lineno">101</tt>  <tt class="py-line"><tt class="py-keyword">try</tt><tt class="py-op">:</tt> </tt>
+<a name="L102"></a><tt class="py-lineno">102</tt>  <tt class="py-line">        <tt id="link-31" class="py-name" targets="Variable autoanswer.MySkype=autoanswer-module.html#MySkype,Variable call.MySkype=call-module.html#MySkype,Variable chat.MySkype=chat-module.html#MySkype,Variable contacts.MySkype=contacts-module.html#MySkype,Variable contactsearch.MySkype=contactsearch-module.html#MySkype,Variable conversations.MySkype=conversations-module.html#MySkype,Variable login.MySkype=login-module.html#MySkype"><a title="autoanswer.MySkype
+call.MySkype
+chat.MySkype
+contacts.MySkype
+contactsearch.MySkype
+conversations.MySkype
+login.MySkype" class="py-name" href="#" onclick="return doclink('link-31', 'MySkype', 'link-31');">MySkype</a></tt> <tt class="py-op">=</tt> <tt id="link-32" class="py-name"><a title="Skype
+Skype.Skype" class="py-name" href="#" onclick="return doclink('link-32', 'Skype', 'link-5');">Skype</a></tt><tt class="py-op">.</tt><tt id="link-33" class="py-name" targets="Function Skype.GetSkype()=Skype-module.html#GetSkype"><a title="Skype.GetSkype" class="py-name" href="#" onclick="return doclink('link-33', 'GetSkype', 'link-33');">GetSkype</a></tt><tt class="py-op">(</tt><tt id="link-34" class="py-name"><a title="keypair" class="py-name" href="#" onclick="return doclink('link-34', 'keypair', 'link-0');">keypair</a></tt><tt class="py-op">.</tt><tt id="link-35" class="py-name" targets="Variable keypair.keyFileName=keypair-module.html#keyFileName,Variable token.keyFileName=token-module.html#keyFileName"><a title="keypair.keyFileName
+token.keyFileName" class="py-name" href="#" onclick="return doclink('link-35', 'keyFileName', 'link-35');">keyFileName</a></tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L103"></a><tt class="py-lineno">103</tt>  <tt class="py-line"><tt class="py-keyword">except</tt> <tt class="py-name">Exception</tt><tt class="py-op">:</tt> </tt>
+<a name="L104"></a><tt class="py-lineno">104</tt>  <tt class="py-line">        <tt class="py-keyword">raise</tt> <tt class="py-name">SystemExit</tt><tt class="py-op">(</tt><tt class="py-string">'Unable to create Skype instance'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L105"></a><tt class="py-lineno">105</tt>  <tt class="py-line"> </tt>
+<a name="L106"></a><tt class="py-lineno">106</tt>  <tt class="py-line"><tt class="py-comment">#----------------------------------------------------------------------------------</tt> </tt>
+<a name="L107"></a><tt class="py-lineno">107</tt>  <tt class="py-line"><tt class="py-comment"># Retrieving account and logging in with it. Then waiting in loop.</tt> </tt>
+<a name="L108"></a><tt class="py-lineno">108</tt>  <tt class="py-line"> </tt>
+<a name="L109"></a><tt class="py-lineno">109</tt>  <tt class="py-line"><tt id="link-36" class="py-name" targets="Variable autoanswer.account=autoanswer-module.html#account,Variable call.account=call-module.html#account,Variable chat.account=chat-module.html#account,Variable contacts.account=contacts-module.html#account,Variable contactsearch.account=contactsearch-module.html#account,Variable conversations.account=conversations-module.html#account,Variable login.account=login-module.html#account"><a title="autoanswer.account
+call.account
+chat.account
+contacts.account
+contactsearch.account
+conversations.account
+login.account" class="py-name" href="#" onclick="return doclink('link-36', 'account', 'link-36');">account</a></tt> <tt class="py-op">=</tt> <tt id="link-37" class="py-name"><a title="autoanswer.MySkype
+call.MySkype
+chat.MySkype
+contacts.MySkype
+contactsearch.MySkype
+conversations.MySkype
+login.MySkype" class="py-name" href="#" onclick="return doclink('link-37', 'MySkype', 'link-31');">MySkype</a></tt><tt class="py-op">.</tt><tt id="link-38" class="py-name" targets="Method Skype.Skype.GetAccount()=Skype.Skype-class.html#GetAccount"><a title="Skype.Skype.GetAccount" class="py-name" href="#" onclick="return doclink('link-38', 'GetAccount', 'link-38');">GetAccount</a></tt><tt class="py-op">(</tt><tt id="link-39" class="py-name"><a title="autoanswer.accountName
+call.accountName
+chat.accountName
+contacts.accountName
+contactsearch.accountName
+conversations.accountName
+login.accountName" class="py-name" href="#" onclick="return doclink('link-39', 'accountName', 'link-6');">accountName</a></tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L110"></a><tt class="py-lineno">110</tt>  <tt class="py-line"> </tt>
+<a name="L111"></a><tt class="py-lineno">111</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Logging in with '</tt> <tt class="py-op">+</tt> <tt id="link-40" class="py-name"><a title="autoanswer.accountName
+call.accountName
+chat.accountName
+contacts.accountName
+contactsearch.accountName
+conversations.accountName
+login.accountName" class="py-name" href="#" onclick="return doclink('link-40', 'accountName', 'link-6');">accountName</a></tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L112"></a><tt class="py-lineno">112</tt>  <tt class="py-line"><tt id="link-41" class="py-name"><a title="autoanswer.account
+call.account
+chat.account
+contacts.account
+contactsearch.account
+conversations.account
+login.account" class="py-name" href="#" onclick="return doclink('link-41', 'account', 'link-36');">account</a></tt><tt class="py-op">.</tt><tt id="link-42" class="py-name" targets="Method Skype.Account.LoginWithPassword()=Skype.Account-class.html#LoginWithPassword"><a title="Skype.Account.LoginWithPassword" class="py-name" href="#" onclick="return doclink('link-42', 'LoginWithPassword', 'link-42');">LoginWithPassword</a></tt><tt class="py-op">(</tt><tt id="link-43" class="py-name"><a title="autoanswer.accountPsw
+call.accountPsw
+chat.accountPsw
+contacts.accountPsw
+contactsearch.accountPsw
+conversations.accountPsw
+login.accountPsw" class="py-name" href="#" onclick="return doclink('link-43', 'accountPsw', 'link-7');">accountPsw</a></tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">,</tt> <tt class="py-name">False</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L113"></a><tt class="py-lineno">113</tt>  <tt class="py-line"> </tt>
+<a name="L114"></a><tt class="py-lineno">114</tt>  <tt class="py-line"><tt class="py-keyword">while</tt> <tt id="link-44" class="py-name"><a title="autoanswer.loggedIn
+call.loggedIn
+chat.loggedIn
+contacts.loggedIn
+contactsearch.loggedIn
+conversations.loggedIn
+login.loggedIn" class="py-name" href="#" onclick="return doclink('link-44', 'loggedIn', 'link-9');">loggedIn</a></tt> <tt class="py-op">==</tt> <tt class="py-name">False</tt><tt class="py-op">:</tt> </tt>
+<a name="L115"></a><tt class="py-lineno">115</tt>  <tt class="py-line">        <tt class="py-name">sleep</tt><tt class="py-op">(</tt><tt class="py-number">1</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L116"></a><tt class="py-lineno">116</tt>  <tt class="py-line"> </tt>
+<a name="L117"></a><tt class="py-lineno">117</tt>  <tt class="py-line"><tt class="py-comment">#----------------------------------------------------------------------------------</tt> </tt>
+<a name="L118"></a><tt class="py-lineno">118</tt>  <tt class="py-line"><tt class="py-comment"># Simple contact search, just by skypename string:</tt> </tt>
+<a name="L119"></a><tt class="py-lineno">119</tt>  <tt class="py-line"> </tt>
+<a name="L120"></a><tt class="py-lineno">120</tt>  <tt class="py-line"><tt id="link-45" class="py-name" targets="Variable contactsearch.SearchRec=contactsearch-module.html#SearchRec"><a title="contactsearch.SearchRec" class="py-name" href="#" onclick="return doclink('link-45', 'SearchRec', 'link-45');">SearchRec</a></tt> <tt class="py-op">=</tt> <tt id="link-46" class="py-name"><a title="autoanswer.MySkype
+call.MySkype
+chat.MySkype
+contacts.MySkype
+contactsearch.MySkype
+conversations.MySkype
+login.MySkype" class="py-name" href="#" onclick="return doclink('link-46', 'MySkype', 'link-31');">MySkype</a></tt><tt class="py-op">.</tt><tt id="link-47" class="py-name" targets="Method Skype.Skype.CreateBasicContactSearch()=Skype.Skype-class.html#CreateBasicContactSearch"><a title="Skype.Skype.CreateBasicContactSearch" class="py-name" href="#" onclick="return doclink('link-47', 'CreateBasicContactSearch', 'link-47');">CreateBasicContactSearch</a></tt><tt class="py-op">(</tt><tt id="link-48" class="py-name"><a title="contactsearch.searchFor" class="py-name" href="#" onclick="return doclink('link-48', 'searchFor', 'link-8');">searchFor</a></tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L121"></a><tt class="py-lineno">121</tt>  <tt class="py-line"> </tt>
+<a name="L122"></a><tt class="py-lineno">122</tt>  <tt class="py-line"><tt class="py-comment">#----------------------------------------------------------------------------------</tt> </tt>
+<a name="L123"></a><tt class="py-lineno">123</tt>  <tt class="py-line"><tt class="py-comment"># More complex contact search, by skypename and language.</tt> </tt>
+<a name="L124"></a><tt class="py-lineno">124</tt>  <tt class="py-line"><tt class="py-comment"># Note that the AddStrTerm method takes proprty ID as it's first argument, rather </tt> </tt>
+<a name="L125"></a><tt class="py-lineno">125</tt>  <tt class="py-line"><tt class="py-comment"># than property name string.</tt> </tt>
+<a name="L126"></a><tt class="py-lineno">126</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L127"></a><tt class="py-lineno">127</tt>  <tt class="py-line"><tt class="py-comment"># By default, filters criteria are added (filter1 AND filter2 AND ..)</tt> </tt>
+<a name="L128"></a><tt class="py-lineno">128</tt>  <tt class="py-line"><tt class="py-comment"># To get multiple groups of match criteria you can insert an OR between them</tt> </tt>
+<a name="L129"></a><tt class="py-lineno">129</tt>  <tt class="py-line"><tt class="py-comment"># with ContactSearch.AddOr method.</tt> </tt>
+<a name="L130"></a><tt class="py-lineno">130</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L131"></a><tt class="py-lineno">131</tt>  <tt class="py-line"><tt class="py-comment"># Complete list of comparison operators between property value and pattern:</tt> </tt>
+<a name="L132"></a><tt class="py-lineno">132</tt>  <tt class="py-line"><tt class="py-comment"># 'EQ' - equal</tt> </tt>
+<a name="L133"></a><tt class="py-lineno">133</tt>  <tt class="py-line"><tt class="py-comment"># 'GT' - greater than</tt> </tt>
+<a name="L134"></a><tt class="py-lineno">134</tt>  <tt class="py-line"><tt class="py-comment"># 'GE' - greater or equal</tt> </tt>
+<a name="L135"></a><tt class="py-lineno">135</tt>  <tt class="py-line"><tt class="py-comment"># 'LT' - less than</tt> </tt>
+<a name="L136"></a><tt class="py-lineno">136</tt>  <tt class="py-line"><tt class="py-comment"># 'LE' - less or equal</tt> </tt>
+<a name="L137"></a><tt class="py-lineno">137</tt>  <tt class="py-line"><tt class="py-comment"># 'PREFIX_EQ' - starts with equal</tt> </tt>
+<a name="L138"></a><tt class="py-lineno">138</tt>  <tt class="py-line"><tt class="py-comment"># 'PREFIX_GE' - starts with greater or equal</tt> </tt>
+<a name="L139"></a><tt class="py-lineno">139</tt>  <tt class="py-line"><tt class="py-comment"># 'PREFIX_LE' - starts with less or equal</tt> </tt>
+<a name="L140"></a><tt class="py-lineno">140</tt>  <tt class="py-line"><tt class="py-comment"># 'CONTAINS_WORDS' - contains words</tt> </tt>
+<a name="L141"></a><tt class="py-lineno">141</tt>  <tt class="py-line"><tt class="py-comment"># 'CONTAINS_WORD_PREFIXES' - contains words that start with pattern</tt> </tt>
+<a name="L142"></a><tt class="py-lineno">142</tt>  <tt class="py-line"><tt class="py-comment">#</tt> </tt>
+<a name="L143"></a><tt class="py-lineno">143</tt>  <tt class="py-line"><tt class="py-comment"># Comment the simple search example above and uncomment the three codelines below</tt> </tt>
+<a name="L144"></a><tt class="py-lineno">144</tt>  <tt class="py-line"><tt class="py-comment"># to try out the complex search.</tt> </tt>
+<a name="L145"></a><tt class="py-lineno">145</tt>  <tt class="py-line"> </tt>
+<a name="L146"></a><tt class="py-lineno">146</tt>  <tt class="py-line"><tt class="py-comment">#SearchRec = MySkype.CreateContactSearch();</tt> </tt>
+<a name="L147"></a><tt class="py-lineno">147</tt>  <tt class="py-line"><tt class="py-comment">#SearchRec.AddStrTerm(Skype.Contact.P_SKYPENAME, 'EQ', searchFor, False);</tt> </tt>
+<a name="L148"></a><tt class="py-lineno">148</tt>  <tt class="py-line"><tt class="py-comment">#SearchRec.AddLanguageTerm('en', False);</tt> </tt>
+<a name="L149"></a><tt class="py-lineno">149</tt>  <tt class="py-line"> </tt>
+<a name="L150"></a><tt class="py-lineno">150</tt>  <tt class="py-line"><tt class="py-keyword">if</tt> <tt id="link-49" class="py-name"><a title="contactsearch.SearchRec" class="py-name" href="#" onclick="return doclink('link-49', 'SearchRec', 'link-45');">SearchRec</a></tt><tt class="py-op">.</tt><tt id="link-50" class="py-name" targets="Method Skype.ContactSearch.IsValid()=Skype.ContactSearch-class.html#IsValid"><a title="Skype.ContactSearch.IsValid" class="py-name" href="#" onclick="return doclink('link-50', 'IsValid', 'link-50');">IsValid</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">:</tt> </tt>
+<a name="L151"></a><tt class="py-lineno">151</tt>  <tt class="py-line">        <tt id="link-51" class="py-name"><a title="contactsearch.SearchRec" class="py-name" href="#" onclick="return doclink('link-51', 'SearchRec', 'link-45');">SearchRec</a></tt><tt class="py-op">.</tt><tt id="link-52" class="py-name" targets="Method Skype.ContactSearch.Submit()=Skype.ContactSearch-class.html#Submit"><a title="Skype.ContactSearch.Submit" class="py-name" href="#" onclick="return doclink('link-52', 'Submit', 'link-52');">Submit</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L152"></a><tt class="py-lineno">152</tt>  <tt class="py-line"><tt class="py-keyword">else</tt><tt class="py-op">:</tt> </tt>
+<a name="L153"></a><tt class="py-lineno">153</tt>  <tt class="py-line">        <tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Invalid search record.'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L154"></a><tt class="py-lineno">154</tt>  <tt class="py-line"> </tt>
+<a name="L155"></a><tt class="py-lineno">155</tt>  <tt class="py-line"><tt class="py-name">raw_input</tt><tt class="py-op">(</tt><tt class="py-string">''</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L156"></a><tt class="py-lineno">156</tt>  <tt class="py-line"> </tt>
+<a name="L157"></a><tt class="py-lineno">157</tt>  <tt class="py-line"><tt class="py-keyword">print</tt><tt class="py-op">(</tt><tt class="py-string">'Exiting..'</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L158"></a><tt class="py-lineno">158</tt>  <tt class="py-line"><tt id="link-53" class="py-name"><a title="contactsearch.SearchRec" class="py-name" href="#" onclick="return doclink('link-53', 'SearchRec', 'link-45');">SearchRec</a></tt><tt class="py-op">.</tt><tt id="link-54" class="py-name"><a title="Skype.ContactSearch.Release" class="py-name" href="#" onclick="return doclink('link-54', 'Release', 'link-21');">Release</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L159"></a><tt class="py-lineno">159</tt>  <tt class="py-line"><tt id="link-55" class="py-name"><a title="autoanswer.MySkype
+call.MySkype
+chat.MySkype
+contacts.MySkype
+contactsearch.MySkype
+conversations.MySkype
+login.MySkype" class="py-name" href="#" onclick="return doclink('link-55', 'MySkype', 'link-31');">MySkype</a></tt><tt class="py-op">.</tt><tt id="link-56" class="py-name" targets="Method Skype.Skype.stop()=Skype.Skype-class.html#stop,Method skypekit.SkypeKit.stop()=skypekit.SkypeKit-class.html#stop"><a title="Skype.Skype.stop
+skypekit.SkypeKit.stop" class="py-name" href="#" onclick="return doclink('link-56', 'stop', 'link-56');">stop</a></tt><tt class="py-op">(</tt><tt class="py-op">)</tt><tt class="py-op">;</tt> </tt>
+<a name="L160"></a><tt class="py-lineno">160</tt>  <tt class="py-line"> </tt><script type="text/javascript">
+<!--
+expandto(location.href);
+// -->
+</script>
+</pre>
+<br />
+<!-- ==================== NAVIGATION BAR ==================== -->
+<table class="navbar" border="0" width="100%" cellpadding="0"
+       bgcolor="#a0c0ff" cellspacing="0">
+  <tr valign="middle">
+  <!-- Home link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="Skype-module.html">Home</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Tree link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="module-tree.html">Trees</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Index link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="identifier-index.html">Indices</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Help link -->
+      <th>&nbsp;&nbsp;&nbsp;<a
+        href="help.html">Help</a>&nbsp;&nbsp;&nbsp;</th>
+
+  <!-- Project homepage -->
+      <th class="navbar" align="right" width="100%">
+        <table border="0" cellpadding="0" cellspacing="0">
+          <tr><th class="navbar" align="center"
+            >SkypeKit Python Wrapper Reference</th>
+          </tr></table></th>
+  </tr>
+</table>
+<table border="0" cellpadding="0" cellspacing="0" width="100%%">
+  <tr>
+    <td align="left" class="footer">
+    Generated by Epydoc 3.0.1 on Fri Oct  7 04:48:40 2011
+    </td>
+    <td align="right" class="footer">
+      <a target="mainFrame" href="http://epydoc.sourceforge.net"
+        >http://epydoc.sourceforge.net</a>
+    </td>
+  </tr>
+</table>
+
+<script type="text/javascript">
+  <!--
+  // Private objects are initially displayed (because if
+  // javascript is turned off then we want them to be
+  // visible); but by default, we want to hide them.  So hide
+  // them unless we have a cookie that says to show them.
+  checkCookie();
+  // -->
+</script>
+</body>
+</html>

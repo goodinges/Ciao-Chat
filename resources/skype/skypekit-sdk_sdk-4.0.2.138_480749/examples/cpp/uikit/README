@@ -1,0 +1,219 @@
+Skype Reference Client (SkypeUiKit)
+===================================
+
+This project provides a basic reference client implementation, which will
+illustrate how to implement the main SkypeKit API level interaction flows.  The
+focus of this project is to establish a clean Model, Presenter, View
+architecture based on the SkypeKit API.  The architecture is described in the
+doxygen API documentation which can be generated using the instructions below.
+
+The reference client and the View namespace classes are implemented using the Qt
+framework.  However, the Model and Presenter namespaces do not have any
+dependency on Qt, and the View interface employs abstract classes and a class
+factory that should facilitate use of the Model and Presenter namespaces on
+projects that are not able to or choose not to use Qt.
+
+NOTE: This project is a work in progress that is released in Skypekit 3.2 as a
+technology preview.  MPV classes for a select set of core operations have been
+implemented - calls, chats, SMS, and file transfers.  Many operations are not
+yet implemented.  We fully expect these classes to evolve and change as the
+implementation matures.  Feel free to adopt and extend these classes to suit
+your needs.  Feedback and bug reports are welcome.
+
+
+[1] - How to build and install from source:
+
+[1.1] - Building the Skypekit cpp wrapper library
+
+After installing SkypeKit, follow the instructions on the "Quick Start Guide:
+C++" page on the Skype developer site and build the cpp wrapper library.
+
+[1.2] - Installing Required C++ Libraries
+
+Two packages are required for SkypeUiKit, Poco C++ Libraries and Google
+Framework for Mocking classes. We provide two approaches to satisfying these
+requirements, one suitable for Linux desktops using package managers and another
+for building directly from source on other platforms.
+
+[1.2.1] - Using Linux package managers
+
+You can obtain both packages directly from your Linux distribution repository:
+
+I.e: Debian Sid
+$ sudo apt-get install libpoco-dev
+$ sudo apt-get install google-mock libgtest-dev
+
+[1.2.2] - Building from source
+
+The source for each package can be downloaded from:
+
+https://sourceforge.net/projects/poco/files/sources/poco-1.3.6/poco-1.3.6p2-all.tar.gz/download
+http://code.google.com/p/googlemock/downloads/detail?name=gmock-1.5.0.tar.gz
+
+You can follow the build instructions provided by each package to install both
+in your system.
+
+[1.2.2.1] - Building poco from source on mac
+
+./configure --no-tests --nosamples --omit=Data/ODBC,Data/MySQL (no tests/samples or unneeded mysql modules)
+gmake -s 
+sudo gmake -s install
+
+[1.3] - Qt UI Framework
+
+The reference client, and the view classes in the Mvp::View namespace, require
+that the Qt Framework be installed.  The minimum version is Qt4.6.  If Qt is not
+found by the build scripts, only the Model and View libraries will be built.
+
+[1.3.1] - Qt on Windows
+
+On Windows, the UI Kit has been developed and tested against Qt 4.7.1 LGPL
+libraries compiled using VS 2008 and the corresponding CMake generators.
+(http://qt.nokia.com/downloads/windows-cpp-vs2008)  Other combinations should
+work equally well, but they have not been verified for this release.
+
+[1.3.2] - Qt on Linux
+
+You can install QT with the command:
+
+    sudo apt-get install libqt4-dev
+
+[1.3.3] - Qt on Mac
+
+You can install QT with the command:
+    
+    sudo port install qt4-mac-devel
+
+[1.4] - Install CMake
+
+SkypeUIKit uses the CMake build management system.  You must install CMake,
+using either linux packages, mac ports, or binary distributions from CMake.  See
+http://cmake.org/ for details.
+
+We require CMake version 2.8.  Older versions such as 2.6 may be sufficient for
+most targets and platforms, however 2.8 improvements and fixes are relevant to
+the package target described below.
+
+[1.5] - Selecting an appropriate SkypeKit runtime
+
+By default, the CMake build scripts in ./qtsimpleclient/CMakeLists.txt select
+the following SkypeKit runtimes to use with the reference client:
+
+Mac:      ${SKT_DIR}/bin/mac-x86/mac-x86-skypekit
+Linux:    ${SKT_DIR}/bin/linux-x86/linux-x86-skypekit
+Windows:  ${SKT_DIR}/bin/windows-x86/windows-x86-skypekit.exe
+
+The chosen runtime is copied to a platform appropriate path where the client can
+find it and run it automatically.  The copy is renamed skypekit-uikit-runtime.
+
+These defaults are easily modified by customizing the CMake instructions.
+
+[1.6] - Building The Skype Reference Client
+
+Finally, the MPV libraries, GTest test executables, and client can be built.  On
+Linux, starting from the Skypekit installation directory:
+
+$ cd ./examples/cpp/uikit
+$ mkdir build
+$ cd build
+$ cmake ..
+$ make
+
+If you have Qt installed, make will build the qtsimpleclient client executable.
+Provided you have manually configured a skypekit runtime as described below, the
+client can be run from the build directory as follows:
+
+$ cd qtsimpleclient
+$ ./qtsimpleclient -t [skypekit.pem] -f [dbpath]
+
+Similar steps can be followed on Mac and Windows, using the appropriate cmake
+generators and compilers for your platform.
+
+[1.7] - Running Unit Tests
+
+The project also provides a set of Unit tests with its code. There are two kind
+of tests: Automated and Manual.
+
+Automated: These tests can be ran without any user interaction and in one single
+shot. To run them on Linux do the following:
+
+$ cd build/src/presenter/tests
+$ make test
+
+Manual: These tests need to be ran one by one, since the normally needs some
+user interaction, like passing a valid username and password. Its also needed to
+manually run the Skype Runtime before executing the tests. To run them do the
+following:
+
+$ cd build/src/model/tests
+$ ./the_test_you_want_to_run
+
+
+[2] - Running the Reference Client
+
+To run the qtsimpleclient executable, you will need to identify a valid SkypeKit
+application token.  We provide two methods for doing this.  Both of them are
+extremely simple and are not well suited for an actual application deployment
+since no attempt is being made to obfuscate the application token.
+
+[2.1] - Command Line Arguments
+
+On Windows and Linux, a simple command line option can be used to specify the
+path to the application token:
+
+$qtsimpleclient -t /path/to/apptoken.pem
+
+The -f option can be used to provide an alternate database path.  This will
+prevent the client from writing data to the default ~/.Skype directory.  Since
+this is an alpha version of the client, providing an a non-default database path
+is recommended:
+
+$qtsimpleclient -f /path/for/skype.datastore
+
+
+[2.2] - Certificate File in Executable Directory
+
+On OS X, when the applicaton is deployed as a bundle, command line arguments are
+problematic.  So we also look for a file with the .pem extension in the same
+directory as the qtsimpleclient executable.  Do not install more than one .pem
+certificate in that directory since the resulting client actions will arbitrary.
+
+[2.3] - Running the client in a debugging environment
+
+In order to run the client directly after building it, the skypekit runtime must
+be installed manually in the expected location.  The selected runtime should be
+copied to the executable directory and renamed skypekit-uikit-runtime.  Note
+that you may also create a shell script of the same name that invokes the
+runtime with the desired arguments, possibly in a terminal window, to help with
+debugging tasks.
+
+[3] - Packaging and Installing the Reference Client
+
+Build instructions are provided for packaging the reference client on Linux, Mac
+OS X, and Windows.  These build targets depend on the full client build target,
+so they only apply to builds where Qt is installed and detected.
+
+The installable package will be generated via the 'package' target.
+Alternatively, the cpack packaging instructions which are invoked via make can
+be run directly by running cpack.  See the CMake / CPack documentation for
+details.  On Linux, the package target can be built with either 'make package'
+or 'cpack'.  The latter provides a more verbose log of packaging progress.
+
+The resulting installable packages will be found in the build directory.  On
+Linux a Debian package is generated that depends on the Qt and Poco packages
+references above.  On Mac OS X a complete drag & drop .dmg package is generated
+that includes all required Qt and Poco libraries.
+
+[4] - Generating Documentation
+
+Documentation is generated using Doxygen (http://www.doxygen.org), and requires
+that Doxygen be installed on your system prior to running cmake.  Installing
+GraphViz is optional, but highly recommended.  A Doxygen configuration file has
+been supplied with this project.  Feel free to modify this configuraiton to
+suite your needs and documentation preferences.
+
+To generate documentation, build the 'doc' target:
+
+$ cd build
+$ make doc
+$ open ../html/index.html

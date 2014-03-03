@@ -1,0 +1,41 @@
+
+DOWNLOAD, INSTALLATION OR USE OF THE SKYPEKIT IS SUBJECT TO THE TERMS OF THE SKYPEKIT LICENSE AGREEMENT. 
+IF YOU HAVE NOT AGREED TO THE TERMS OF THE SKYPEKIT LICENSE AGREEMENT YOU HAVE NO RIGHTS TO USE THE
+SKYPEKIT AND YOU SHOULD IMMEDIATELY DELETE THE SKYPEKIT.
+
+Welcome to the SkypeKit Beta
+---------------------------------------------
+
+NB! As of SDK version 3.2, the SDK itself no longer contains SkypeKit runtimes - entire content of the /bin directory is no longer present in the SDK distros. You will now need to trigger and download platform-specific runtime builds separately from the main SDK distribution, from the developer.skype.com website.
+
+Visit http://developer.skype.com/skypekit
+  - Skype Kit Overview
+  - Kickstart Guides
+  - Tutorials 
+and more. 
+
+Skype Kit ships with three wrapper libraries:
+ C++    - located in interfaces/skype/cpp_embedded
+ Python - located in interfaces/skype/python
+ Java   - located in interfaces/skype/java
+
+Visit http://developer.skype.com/skypekit/quickstart for instructions on how to build and work with these libraries. 
+
+SkypeKit API Reference Manuals are located in the /documentation direcory of each wrapper library.
+  C++    - /interfaces/skype/cpp_embedded/documentation/index.html
+  Python - /interfaces/skype/python/documentation/index.html
+  Java   - /interfaces/skype/java/documentation/index.html
+
+Example code for wrapper libraries can be found in /examples/<language>/tutorial directories.
+
+NB! You will need to supply a valid key pair to run the examples. To get an application token, visit:
+http://developer.skype.com/skypekit/development-guide/general/application-token
+
+The SDK distribution package also contains a SkypeKit-enabled demo application called "skypekitclient." 
+Sources for C++ version is located at /interfaces/skype/cpp_embedded/src/client
+
+For more information about the demo client, visit http://developer.skype.com/skypekit
+
+SkypeKit runtimes come pre-built, with the distro package. They are located in the bin/<platform> directory. There is no need (nor is it possible) for you to rebuild these runtimes.
+
+However, if you choose to use the C++ wrapper, you will need to rebuild the library before you can start experimenting with either example projects or command-line demo client (skypekitclient). Project files for rebuilding the C++ wrapper are located in the /interfaces/skype/cpp_embedded/build directory.
