@@ -10,3 +10,5 @@ Chat with any XMPP system.
 Fetch your Facebook and Twitter timeline.
 
 This project uses Java FX fot it's UI.
+
+This repository is migrated from http://sourceforge.net/projects/chiochat/
